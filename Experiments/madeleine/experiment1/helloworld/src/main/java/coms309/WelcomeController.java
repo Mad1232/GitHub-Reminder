@@ -3,6 +3,8 @@ package coms309;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @RestController
 class WelcomeController {
@@ -12,8 +14,13 @@ class WelcomeController {
         return "Hello and welcome to COMS 309";
     }
 
-    @GetMapping("/{name}")
+    @GetMapping("/{name}/{greeting}")
+    public String welcome(@PathVariable String name, @PathVariable String greeting) {
+        return greeting + " and welcome to COMS 309: " + name;
+    }
+
+    @GetMapping("/cat/{name}")
     public String welcome(@PathVariable String name) {
-        return "Hello and welcome to COMS 309: " + name;
+        return name + "\n catcatcatcatcatcatcat\n";
     }
 }
