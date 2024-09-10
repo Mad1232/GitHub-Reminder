@@ -13,9 +13,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 class ExceptionController {
 
-    @RequestMapping(method = RequestMethod.GET, path = "/oops")
+    @RequestMapping(method = RequestMethod.GET, path = "/error")
     public String triggerException() {
         throw new RuntimeException("Check to see what happens when an exception is thrown");
     }
-
+// this is what happens when springboot receives an error without any customer error message way.
 }
+

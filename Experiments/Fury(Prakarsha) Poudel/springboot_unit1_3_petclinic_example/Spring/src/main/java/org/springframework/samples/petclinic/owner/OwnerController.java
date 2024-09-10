@@ -18,10 +18,7 @@ package org.springframework.samples.petclinic.owner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -35,6 +32,7 @@ import java.util.Optional;
  * @Modified By Vivek Bengre
  */
 @RestController
+//first do http://localhost:8080/owner/create and then, http://localhost:8080/owners
 class OwnerController {
 
     @Autowired
@@ -42,23 +40,27 @@ class OwnerController {
 
     private final Logger logger = LoggerFactory.getLogger(OwnerController.class);
 
-    @RequestMapping(method = RequestMethod.POST, path = "/owners/new")
-    public String saveOwner(Owners owner) {
-        ownersRepository.save(owner);
-        return "New Owner "+ owner.getFirstName() + " Saved";
-    }
-     // function just to create dummy data
+//    @RequestMapping(method = RequestMethod.POST, path = "/owners/new")
+//    public String saveOwner(Owners owner) {
+//        ownersRepository.save(owner);
+//        return "New Owner "+ owner.getFirstName() + " Saved";
+//    }
+
+    // function just to create dummy data
     @RequestMapping(method = RequestMethod.GET, path = "/owner/create")
     public String createDummyData() {
-        Owners o1 = new Owners(1, "John", "Doe", "404 Not found", "some numbers");
-        Owners o2 = new Owners(2, "Jane", "Doe", "Its a secret", "you wish");
-        Owners o3 = new Owners(3, "Some", "Pleb", "Right next to the Library", "515-345-41213");
-        Owners o4 = new Owners(4, "Chad", "Champion", "Reddit memes corner", "420-420-4200");
+        Owners o1 = new Owners(1, "Jonny", "Amin", "404 Not found", "some numbers");
+        Owners o2 = new Owners(2, "Fury", "Poudel", "Its a secret", "you wish");
+        Owners o3 = new Owners(3, "Madison", "Pleb", "Right next to the Library", "515-345-41213");
+        Owners o4 = new Owners(4, "Madelene", "Champion", "Reddit memes corner", "420-420-4200");
+        Owners o5 = new Owners(5,"Niraj", "Amgai","He doesn't know","515-450-4699");
         ownersRepository.save(o1);
         ownersRepository.save(o2);
         ownersRepository.save(o3);
         ownersRepository.save(o4);
-        return "Successfully created dummy data";
+        ownersRepository.save(o5);
+
+        return "Successfully added all the new entries";
     }
 
     @RequestMapping(method = RequestMethod.GET, path = "/owners")

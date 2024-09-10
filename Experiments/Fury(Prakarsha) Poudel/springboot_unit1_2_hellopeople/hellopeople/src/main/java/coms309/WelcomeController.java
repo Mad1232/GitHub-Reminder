@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 class WelcomeController {
 
-    @GetMapping("/")
+    @GetMapping("/welcome")
     public String welcome() {
-        return "Hello and welcome to COMS 309";
+        return "The port is changed to 8081, this is Se309, springboot_unit2";
     }
 }
