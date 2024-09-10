@@ -17,6 +17,11 @@ class ExceptionController {
     public String triggerException() {
         throw new RuntimeException("Check to see what happens when an exception is thrown");
     }
+
+//    @RequestMapping(method = RequestMethod.GET, path = "/error")
+//    public String triggerException() {
+//        throw new RuntimeException("Check to see what happens when an exception is thrown");
+//    }
 // this is what happens when springboot receives an error without any customer error message way.
 }
 
