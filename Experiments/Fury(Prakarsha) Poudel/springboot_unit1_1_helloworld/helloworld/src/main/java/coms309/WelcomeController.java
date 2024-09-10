@@ -7,9 +7,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 @RestController
 class WelcomeController {
 
-    @GetMapping("/")
+    @GetMapping("/se309")
     public String welcome() {
-        return "Hello and welcome to COMS 309";
+        return "This is a 309 class, so welcome everyone";
+    }
+
+    @GetMapping("/fury")
+    public String fury() {
+        return "This is the fury endpoint, showing some extra functionality!";
     }
 
     @GetMapping("/{name}")
