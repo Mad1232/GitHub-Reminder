@@ -13,6 +13,7 @@ import org.w3c.dom.Text;
 public class MainActivity extends AppCompatActivity {
 
     private TextView messageText;   // define message textview variable
+    private TextView messageSubtext;    //define message for subtext
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +22,10 @@ public class MainActivity extends AppCompatActivity {
 
         /* initialize UI elements */
         messageText = findViewById(R.id.main_msg_txt);      // link to message textview in the Main activity XML
-        messageText.setText("Hello World");
+        messageText.setText("Hello Team");
+
+        messageSubtext = findViewById(R.id.main_msg_subtext);      // subtext in blue, small font size
+        messageSubtext.setText("My name is Madison");
+
     }
 }
