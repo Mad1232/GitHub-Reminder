@@ -3,6 +3,7 @@ package com.example.androidexample;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -14,6 +15,9 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView messageText;   // define message textview variable
     private TextView messageSubtext;    //define message for subtext
+    private TextView messageEndtext;   //define message for endtext
+
+    int grey = Color.parseColor("#C0C0C0"); //define background color for endtext
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,5 +31,8 @@ public class MainActivity extends AppCompatActivity {
         messageSubtext = findViewById(R.id.main_msg_subtext);      // subtext in blue, small font size
         messageSubtext.setText("My name is Madison");
 
+        messageEndtext = findViewById(R.id.main_msg_endtext);      // bottom text in orange, medium font size
+        messageEndtext.setText("Welcome to COMS309");
+        messageEndtext.setBackgroundColor(grey);                    //grey box around text
     }
 }
