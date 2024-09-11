@@ -14,6 +14,7 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView messageText;     // define message textview variable
     private Button counterButton;     // define counter button variable
+    private TextView messageText2;      //define new fun message
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,13 +25,17 @@ public class MainActivity extends AppCompatActivity {
         messageText = findViewById(R.id.main_msg_txt);      // link to message textview in the Main activity XML
         counterButton = findViewById(R.id.main_counter_btn);// link to counter button in the Main activity XML
 
+        messageText2 = findViewById(R.id.fun_msg);      //link to new message textview on main page
+
         /* extract data passed into this activity from another activity */
         Bundle extras = getIntent().getExtras();
         if(extras == null) {
-            messageText.setText("Counter App");     //changed name of example
+            messageText.setText("Counter App");     //changed name of title
+            messageText2.setText("Fun to Add and Subtract!");    //added new message
         } else {
             String number = extras.getString("NUM");  // this will come from LoginActivity
             messageText.setText("The number was " + number);
+            messageText2.setText("Thanks for playing!");        //added new message
         }
 
         /* click listener on counter button pressed */

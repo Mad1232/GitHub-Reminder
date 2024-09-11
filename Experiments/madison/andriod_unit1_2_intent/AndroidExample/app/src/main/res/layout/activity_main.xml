@@ -12,7 +12,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="200dp"
-        android:text="Counter App"
         android:textColor="#9C27B0"
         android:textSize="30dp"></TextView>
 
@@ -26,5 +25,15 @@
         android:text="To the Counter Activity"
         android:textColor="#ffffff"
         android:textSize="20sp"></Button>
+
+    <TextView
+        android:id="@+id/fun_msg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="100dp"
+        android:rotationX="36"
+        android:textColor="#009688"
+        android:textSize="24sp" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>
