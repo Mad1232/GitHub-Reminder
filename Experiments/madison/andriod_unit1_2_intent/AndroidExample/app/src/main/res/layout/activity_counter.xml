@@ -11,12 +11,11 @@
         android:id="@+id/number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
         android:layout_gravity="center"
-        android:textSize="150sp"
-        android:textColor="#E91E63"
-        android:text="0" >
-    </TextView>
+        android:layout_marginTop="100dp"
+        android:text="0"
+        android:textColor="#9C27B0"
+        android:textSize="150sp"></TextView>
 
     <Button
         android:id="@+id/counter_increase_btn"
@@ -24,8 +23,8 @@
         android:layout_height="80dp"
         android:layout_gravity="center"
         android:layout_marginTop="100dp"
-        android:text="Increase">
-    </Button>
+        android:backgroundTint="#FF5722"
+        android:text="Increase"></Button>
 
     <Button
         android:id="@+id/counter_decrease_btn"
@@ -33,8 +32,8 @@
         android:layout_height="80dp"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
-        android:text="Decrease">
-    </Button>
+        android:backgroundTint="#FF5722"
+        android:text="Decrease"></Button>
 
     <Button
         android:id="@+id/counter_back_btn"
@@ -42,7 +41,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="50dp"
-        android:text="Back to Main" >
+        android:backgroundTint="#4CAF50"
+        android:text="Back to Main">
 
     </Button>
 
