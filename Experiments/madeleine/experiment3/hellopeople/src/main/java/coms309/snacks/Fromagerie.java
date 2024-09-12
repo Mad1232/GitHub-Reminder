@@ -6,7 +6,7 @@ package coms309.snacks;
  * @author Vivek Bengre
  */
 
-public class Bakery {
+public class Fromagerie {
 
     private String name;
 
@@ -16,18 +16,18 @@ public class Bakery {
 
     private String telephone;
 
-    private String hasViennoise;
+    private String[] winePairings;
 
-    public Bakery() {
+    public Fromagerie() {
 
     }
 
-    public Bakery(String name, String location, String[] inventory, String telephone, String hasViennoise) {
+    public Fromagerie(String name, String location, String[] inventory, String telephone, String[] winePairings) {
         this.name = name;
         this.location = location;
         this.inventory = inventory;
         this.telephone = telephone;
-        this.hasViennoise = hasViennoise;
+        this.winePairings = winePairings;
     }
 
     public String getName() {
@@ -62,12 +62,12 @@ public class Bakery {
         this.telephone = telephone;
     }
 
-    public String getHasViennoise() {
-        return this.hasViennoise;
+    public String[] getWinePairings() {
+        return this.winePairings;
     }
 
-    public void setHasViennoise(String hasViennoise) {
-        this.hasViennoise = hasViennoise;
+    public void setWinePairings(String[] winePairings) {
+        this.winePairings = winePairings;
     }
 
     @Override
@@ -75,6 +75,6 @@ public class Bakery {
         return name + " "
                 + location + " "
                 + inventory + " "
-                + telephone + " " + hasViennoise;
+                + telephone + " " + winePairings;
     }
 }
