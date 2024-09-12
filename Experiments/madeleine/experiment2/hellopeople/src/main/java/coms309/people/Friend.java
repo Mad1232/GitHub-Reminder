@@ -16,6 +16,8 @@ public class Friend {
 
     private String pet;
 
+    private String allergy;
+    
     public Friend() {
 
     }
@@ -59,11 +61,19 @@ public class Friend {
         this.pet = pet;
     }
 
+    public String getAllergy() {
+        return this.allergy;
+    }
+
+    public void setAllergy(String allergy) {
+        this.allergy = allergy;
+    }
+
     @Override
     public String toString() {
         return firstName + " "
                 + lastName + " "
                 + handle + " "
-                + pet;
+                + pet + " " + allergy;
     }
 }
