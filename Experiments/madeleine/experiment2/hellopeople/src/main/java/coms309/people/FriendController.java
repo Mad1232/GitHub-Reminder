@@ -19,11 +19,11 @@ import java.util.HashMap;
  */
 
 @RestController
-public class PeopleController {
+public class FriendController {
 
-    // Note that there is only ONE instance of PeopleController in 
+    // Note that there is only ONE instance of FriendController in 
     // Springboot system.
-    HashMap<String, Person> peopleList = new  HashMap<>();
+    HashMap<String, Friend> friendList = new  HashMap<>();
 
     //CRUDL (create/read/update/delete/list)
     // use POST, GET, PUT, DELETE, GET methods for CRUDL
@@ -34,9 +34,9 @@ public class PeopleController {
     // Springboot automatically converts the list to JSON format 
     // in this case because of @ResponseBody
     // Note: To LIST, we use the GET method
-    @GetMapping("/people")
-    public  HashMap<String,Person> getAllPersons() {
-        return peopleList;
+    @GetMapping("/friend")
+    public  HashMap<String,Friend> getAllFriends() {
+        return friendList;
     }
 
     // THIS IS THE CREATE OPERATION
