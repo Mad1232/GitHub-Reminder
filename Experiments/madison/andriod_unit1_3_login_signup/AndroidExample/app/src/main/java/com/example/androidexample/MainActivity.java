@@ -17,6 +17,8 @@ public class MainActivity extends AppCompatActivity {
     private Button loginButton;     // define login button variable
     private Button signupButton;    // define signup button variable
 
+    private TextView messageText2;      //define new message
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,16 +30,20 @@ public class MainActivity extends AppCompatActivity {
         loginButton = findViewById(R.id.main_login_btn);    // link to login button in the Main activity XML
         signupButton = findViewById(R.id.main_signup_btn);  // link to signup button in the Main activity XML
 
+        messageText2 = findViewById(R.id.msg_txt2);     //link to new textview
+
         /* extract data passed into this activity from another activity */
         Bundle extras = getIntent().getExtras();
         if(extras == null) {
-            messageText.setText("Home Page");
+            messageText.setText("Home");
             usernameText.setVisibility(View.INVISIBLE);             // set username text invisible initially
+            messageText2.setText("Log in or sign up for free today!");       //add new user message
         } else {
             messageText.setText("Welcome");
             usernameText.setText(extras.getString("USERNAME")); // this will come from LoginActivity
             loginButton.setVisibility(View.INVISIBLE);              // set login button invisible
             signupButton.setVisibility(View.INVISIBLE);             // set signup button invisible
+            messageText2.setText("Congrats, you're logged in!");       //add new user message
         }
 
         /* click listener on login button pressed */
