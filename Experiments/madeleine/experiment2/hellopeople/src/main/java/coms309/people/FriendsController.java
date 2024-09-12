@@ -19,7 +19,7 @@ import java.util.HashMap;
  */
 
 @RestController
-public class FriendController {
+public class FriendsController {
 
     // Note that there is only ONE instance of FriendController in 
     // Springboot system.
@@ -34,7 +34,7 @@ public class FriendController {
     // Springboot automatically converts the list to JSON format 
     // in this case because of @ResponseBody
     // Note: To LIST, we use the GET method
-    @GetMapping("/friend")
+    @GetMapping("/friends")
     public  HashMap<String,Friend> getAllFriends() {
         return friendList;
     }
@@ -45,7 +45,7 @@ public class FriendController {
     // It returns a string message in THIS example.
     // in this case because of @ResponseBody
     // Note: To CREATE we use POST method
-    @PostMapping("/people")
+    @PostMapping("/friends")
     public  String createPerson(@RequestBody Person person) {
         System.out.println(person);
         peopleList.put(person.getFirstName(), person);
@@ -58,7 +58,7 @@ public class FriendController {
     // springboot automatically converts Person to JSON format when we return it
     // in this case because of @ResponseBody
     // Note: To READ we use GET method
-    @GetMapping("/people/{firstName}")
+    @GetMapping("/friends/{firstName}")
     public Person getPerson(@PathVariable String firstName) {
         Person p = peopleList.get(firstName);
         return p;

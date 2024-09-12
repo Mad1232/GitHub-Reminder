@@ -1,12 +1,12 @@
 package coms309.people;
 
 /**
- * Provides the Definition/Structure for the people row
+ * Provides the Definition/Structure for the friend row
  *
  * @author Vivek Bengre
  */
 
-public class Friend {
+public class Friends {
 
     private String firstName;
 
@@ -17,12 +17,12 @@ public class Friend {
     private String pet;
 
     private String allergy;
-    
-    public Friend() {
+
+    public Friends() {
 
     }
 
-    public Friend(String firstName, String lastName, String handle, String pet) {
+    public Friends(String firstName, String lastName, String handle, String pet) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.handle = handle;
