@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
@@ -47,8 +48,9 @@ public class MainActivity extends AppCompatActivity {
             usernameText.setText(extras.getString("USERNAME")); // this will come from LoginActivity
             loginButton.setVisibility(View.INVISIBLE);              // set login button invisible
             signupButton.setVisibility(View.INVISIBLE);             // set signup button invisible
-            messageText2.setText("Congrats, you're logged in!");       //add new user message
+            messageText2.setVisibility(View.INVISIBLE);             //set new user message invisible
             avatarPic.setVisibility(View.VISIBLE);                  //add new profile pic
+            Toast.makeText(getApplicationContext(), "Congrats, you're logged in!", Toast.LENGTH_LONG).show();
         }
 
         /* click listener on login button pressed */
