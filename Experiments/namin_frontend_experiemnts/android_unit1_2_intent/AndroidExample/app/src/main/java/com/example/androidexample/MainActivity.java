@@ -15,6 +15,8 @@ public class MainActivity extends AppCompatActivity {
     private TextView messageText;     // define message textview variable
     private Button counterButton;     // define counter button variable
 
+    private TextView alertText;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,7 +32,11 @@ public class MainActivity extends AppCompatActivity {
             messageText.setText("Intent Example");
         } else {
             String number = extras.getString("NUM");  // this will come from LoginActivity
-            messageText.setText("The number was " + number);
+            String alertCounter = extras.getString("alertCounter");
+
+            messageText.setText("The final counter number was " + number +
+                    "!\nThe number of alerts seen was " + alertCounter + "/7!" +
+                    "\nTry to find them all!");
         }
 
         /* click listener on counter button pressed */
