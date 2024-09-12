@@ -10,12 +10,17 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
 
     private TextView messageText;   // define message textview variable
     private TextView usernameText;  // define username textview variable
     private Button loginButton;     // define login button variable
     private Button signupButton;    // define signup button variable
+
+    private ArrayList<String> users;
+    private ArrayList<String> passwords;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +45,15 @@ public class MainActivity extends AppCompatActivity {
             signupButton.setVisibility(View.INVISIBLE);             // set signup button invisible
         }
 
+        // read users and passwords
+        try {
+            users = extras.getStringArrayList("users");
+            passwords = extras.getStringArrayList("passwords");
+        } catch (Exception e) {
+            users = new ArrayList<>();
+            passwords = new ArrayList<>();
+        }
+
         /* click listener on login button pressed */
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,6 +61,8 @@ public class MainActivity extends AppCompatActivity {
 
                 /* when login button is pressed, use intent to switch to Login Activity */
                 Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                intent.putExtra("users", users);
+                intent.putExtra("passwords", passwords);
                 startActivity(intent);
             }
         });
@@ -58,6 +74,8 @@ public class MainActivity extends AppCompatActivity {
 
                 /* when signup button is pressed, use intent to switch to Signup Activity */
                 Intent intent = new Intent(MainActivity.this, SignupActivity.class);
+                intent.putExtra("users", users);
+                intent.putExtra("passwords", passwords);
                 startActivity(intent);
             }
         });
