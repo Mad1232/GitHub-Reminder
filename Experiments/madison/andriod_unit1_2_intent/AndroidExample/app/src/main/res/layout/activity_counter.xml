@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    tools:context=".MainActivity"
-    android:layout_height="match_parent"
     android:layout_width="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent"
+    android:background="#4000BCD4"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
 
     <TextView
         android:id="@+id/number"
@@ -24,7 +24,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="100dp"
         android:backgroundTint="#FF5722"
-        android:text="Increase"></Button>
+        android:text="Add 1"></Button>
 
     <Button
         android:id="@+id/counter_decrease_btn"
@@ -33,7 +33,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
         android:backgroundTint="#FF5722"
-        android:text="Decrease"></Button>
+        android:text="Subtract 1"></Button>
 
     <Button
         android:id="@+id/counter_back_btn"
@@ -42,7 +42,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="50dp"
         android:backgroundTint="#4CAF50"
-        android:text="Back to Main">
+        android:text="Done!">
 
     </Button>
 

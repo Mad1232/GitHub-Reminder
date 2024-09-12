@@ -30,11 +30,11 @@ public class MainActivity extends AppCompatActivity {
         /* extract data passed into this activity from another activity */
         Bundle extras = getIntent().getExtras();
         if(extras == null) {
-            messageText.setText("Counter App");     //changed name of title
+            messageText.setText("Math App");     //changed name of title
             messageText2.setText("Fun to Add and Subtract!");    //added new message
         } else {
             String number = extras.getString("NUM");  // this will come from LoginActivity
-            messageText.setText("The number was " + number);
+            messageText.setText("The total was " + number);
             messageText2.setText("Thanks for playing!");        //added new message
         }
 
