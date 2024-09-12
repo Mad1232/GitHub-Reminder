@@ -48,7 +48,7 @@ public class FriendsController {
     public String createPerson(@RequestBody Friend friend) {
         System.out.println(friend);
         friendsList.put(friend.getFirstName(), friend);
-        return "New person " + friend.getFirstName() + " Saved";
+        return "New friend " + friend.getFirstName() + " Saved";
     }
 
     // THIS IS THE READ OPERATION
@@ -70,7 +70,7 @@ public class FriendsController {
     // Here we are returning what we sent to the method
     // in this case because of @ResponseBody
     // Note: To UPDATE we use PUT method
-    @PutMapping("/people/{firstName}")
+    @PutMapping("/friends/{firstName}")
     public Friend updateFriend(@PathVariable String firstName, @RequestBody Friend f) {
         friendsList.replace(firstName, f);
         return friendsList.get(firstName);
@@ -82,7 +82,7 @@ public class FriendsController {
     // in this case because of @ResponseBody
     // Note: To DELETE we use delete method
 
-    @DeleteMapping("/people/{firstName}")
+    @DeleteMapping("/friends/{firstName}")
     public HashMap<String, Friend> deleteFriend(@PathVariable String firstName) {
         friendsList.remove(firstName);
         return friendsList;
