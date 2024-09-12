@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.PathVariable;
 
-
 import java.util.HashMap;
 
 /**
@@ -21,35 +20,35 @@ import java.util.HashMap;
 @RestController
 public class FriendsController {
 
-    // Note that there is only ONE instance of FriendController in 
+    // Note that there is only ONE instance of FriendController in
     // Springboot system.
-    HashMap<String, Friend> friendList = new  HashMap<>();
+    HashMap<String, Friend> friendsList = new HashMap<>();
 
-    //CRUDL (create/read/update/delete/list)
+    // CRUDL (create/read/update/delete/list)
     // use POST, GET, PUT, DELETE, GET methods for CRUDL
 
     // THIS IS THE LIST OPERATION
     // gets all the people in the list and returns it in JSON format
-    // This controller takes no input. 
-    // Springboot automatically converts the list to JSON format 
+    // This controller takes no input.
+    // Springboot automatically converts the list to JSON format
     // in this case because of @ResponseBody
     // Note: To LIST, we use the GET method
     @GetMapping("/friends")
-    public  HashMap<String,Friend> getAllFriends() {
-        return friendList;
+    public HashMap<String, Friend> getAllFriends() {
+        return friendsList;
     }
 
     // THIS IS THE CREATE OPERATION
-    // springboot automatically converts JSON input into a person object and 
+    // springboot automatically converts JSON input into a person object and
     // the method below enters it into the list.
     // It returns a string message in THIS example.
     // in this case because of @ResponseBody
     // Note: To CREATE we use POST method
     @PostMapping("/friends")
-    public  String createPerson(@RequestBody Person person) {
-        System.out.println(person);
-        peopleList.put(person.getFirstName(), person);
-        return "New person "+ person.getFirstName() + " Saved";
+    public String createPerson(@RequestBody Friend friend) {
+        System.out.println(friend);
+        friendsList.put(friend.getFirstName(), friend);
+        return "New person " + friend.getFirstName() + " Saved";
     }
 
     // THIS IS THE READ OPERATION
@@ -59,9 +58,9 @@ public class FriendsController {
     // in this case because of @ResponseBody
     // Note: To READ we use GET method
     @GetMapping("/friends/{firstName}")
-    public Person getPerson(@PathVariable String firstName) {
-        Person p = peopleList.get(firstName);
-        return p;
+    public Friend getPerson(@PathVariable String firstName) {
+        Friend f = friendsList.get(firstName);
+        return f;
     }
 
     // THIS IS THE UPDATE OPERATION
@@ -72,9 +71,9 @@ public class FriendsController {
     // in this case because of @ResponseBody
     // Note: To UPDATE we use PUT method
     @PutMapping("/people/{firstName}")
-    public Person updatePerson(@PathVariable String firstName, @RequestBody Person p) {
-        peopleList.replace(firstName, p);
-        return peopleList.get(firstName);
+    public Friend updateFriend(@PathVariable String firstName, @RequestBody Friend f) {
+        friendsList.replace(firstName, f);
+        return friendsList.get(firstName);
     }
 
     // THIS IS THE DELETE OPERATION
@@ -82,11 +81,11 @@ public class FriendsController {
     // We return the entire list -- converted to JSON
     // in this case because of @ResponseBody
     // Note: To DELETE we use delete method
-    
+
     @DeleteMapping("/people/{firstName}")
-    public HashMap<String, Person> deletePerson(@PathVariable String firstName) {
-        peopleList.remove(firstName);
-        return peopleList;
+    public HashMap<String, Friend> deleteFriend(@PathVariable String firstName) {
+        friendsList.remove(firstName);
+        return friendsList;
     }
 }
 

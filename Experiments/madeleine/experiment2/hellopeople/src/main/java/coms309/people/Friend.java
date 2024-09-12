@@ -6,7 +6,7 @@ package coms309.people;
  * @author Vivek Bengre
  */
 
-public class Friends {
+public class Friend {
 
     private String firstName;
 
@@ -18,11 +18,11 @@ public class Friends {
 
     private String allergy;
 
-    public Friends() {
+    public Friend() {
 
     }
 
-    public Friends(String firstName, String lastName, String handle, String pet) {
+    public Friend(String firstName, String lastName, String handle, String pet) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.handle = handle;
