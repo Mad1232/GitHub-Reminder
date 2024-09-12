@@ -3,10 +3,13 @@ package coms309.snacks;
 /**
  * Provides the Definition/Structure for the bakery row
  *
- * @author Vivek Bengre
+ * @author Madeleine Carydis
  */
 
 public class Bakery extends SnackPlace{
+
+    public Bakery() {
+    }
 
     private String hasViennoise;
 

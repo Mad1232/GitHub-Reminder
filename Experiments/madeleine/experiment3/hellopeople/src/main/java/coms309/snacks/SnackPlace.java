@@ -1,9 +1,9 @@
 package coms309.snacks;
 
 /**
- * Provides the Definition/Structure for the bakery row
+ * Provides the Definition/Structure for the SnackPlace row
  *
- * @author Vivek Bengre
+ * @author Madeleine Carydis
  */
 
 public abstract class SnackPlace {
@@ -16,6 +16,8 @@ public abstract class SnackPlace {
 
     private String telephone;
 
+    public SnackPlace() {
+    }
 
     public SnackPlace(String name, String location, String[] inventory, String telephone) {
         this.name = name;
@@ -55,7 +57,6 @@ public abstract class SnackPlace {
     public void setTelephone(String telephone) {
         this.telephone = telephone;
     }
-
 
     @Override
     public String toString() {

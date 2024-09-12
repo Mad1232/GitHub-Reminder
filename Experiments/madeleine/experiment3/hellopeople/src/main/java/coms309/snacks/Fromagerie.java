@@ -1,14 +1,17 @@
 package coms309.snacks;
 
 /**
- * Provides the Definition/Structure for the bakery row
+ * Provides the Definition/Structure for the Fromagerie row
  *
- * @author Vivek Bengre
+ * @author Madeleine Carydis
  */
 
 public class Fromagerie extends SnackPlace {
 
     private String[] winePairings;
+
+    public Fromagerie() {
+    }
 
     public Fromagerie(String name, String location, String[] inventory, String telephone, String[] winePairings) {
         super(name, location, inventory, telephone);

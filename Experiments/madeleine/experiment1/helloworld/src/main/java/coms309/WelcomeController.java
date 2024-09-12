@@ -4,8 +4,9 @@ package coms309;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PathVariable;
-
-
+/** 
+/@author Madeleine Carydis
+*/
 @RestController
 class WelcomeController {
 
