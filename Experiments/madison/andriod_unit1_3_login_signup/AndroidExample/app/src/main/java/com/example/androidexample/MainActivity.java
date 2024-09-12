@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
@@ -18,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
     private Button signupButton;    // define signup button variable
 
     private TextView messageText2;      //define new message
+    private ImageView avatarPic;        //define new picture
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,19 +33,22 @@ public class MainActivity extends AppCompatActivity {
         signupButton = findViewById(R.id.main_signup_btn);  // link to signup button in the Main activity XML
 
         messageText2 = findViewById(R.id.msg_txt2);     //link to new textview
+        avatarPic = findViewById(R.id.profile_pic);     //link to new picture
 
         /* extract data passed into this activity from another activity */
         Bundle extras = getIntent().getExtras();
         if(extras == null) {
             messageText.setText("Home");
             usernameText.setVisibility(View.INVISIBLE);             // set username text invisible initially
-            messageText2.setText("Log in or sign up for free today!");       //add new user message
+            messageText2.setText("Log in or sign up to start connecting!");       //add new user message
+            avatarPic.setVisibility(View.INVISIBLE);                //set profile pic to invisible initially
         } else {
             messageText.setText("Welcome");
             usernameText.setText(extras.getString("USERNAME")); // this will come from LoginActivity
             loginButton.setVisibility(View.INVISIBLE);              // set login button invisible
             signupButton.setVisibility(View.INVISIBLE);             // set signup button invisible
             messageText2.setText("Congrats, you're logged in!");       //add new user message
+            avatarPic.setVisibility(View.VISIBLE);                  //add new profile pic
         }
 
         /* click listener on login button pressed */
