@@ -20,6 +20,16 @@
             "projectName": "experiment3",
             "args": "",
             "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-Application<experiment1>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "coms309.Application",
+            "projectName": "experiment1",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
         }
     ]
 }
