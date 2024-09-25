@@ -24,7 +24,7 @@ public class JsonArrReqActivity extends AppCompatActivity {
     private Button btnJsonArrReq;
     private TextView msgResponse;
 
-    private static final String URL_JSON_ARRAY = "https://jsonplaceholder.typicode.com/users";
+    private static final String URL_JSON_ARRAY = "https://e72fccaf-685d-41b3-9d5e-81c1a7ca7f98.mock.pstmn.io/users";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
