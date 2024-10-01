@@ -13,11 +13,8 @@
         android:theme="@style/Theme.CyDropFrontend"
         tools:targetApi="31">
         <activity
-            android:name=".BottomNavbarMainActivity"
-            android:exported="false" />
-        <activity
-            android:name=".BottomNavbarActivity"
-            android:exported="false"
+            android:name=".ClientNavbarMainActivity"
+            android:exported="true"
             android:label="@string/title_activity_bottom_navbar"
             android:theme="@style/Theme.CyDropFrontend" />
         <activity
