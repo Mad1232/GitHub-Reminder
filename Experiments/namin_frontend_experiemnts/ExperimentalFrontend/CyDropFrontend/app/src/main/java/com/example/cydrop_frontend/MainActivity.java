@@ -22,7 +22,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        Log.d("TAG", "on click running ");
 
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
@@ -37,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
         simulateClientLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("TAG", "on click running ");
                 Intent intent = new Intent(MainActivity.this, ClientNavbarMainActivity.class);
                 intent.putExtra("USERID",1); // Sample client is userid 0
                 startActivity(intent);
