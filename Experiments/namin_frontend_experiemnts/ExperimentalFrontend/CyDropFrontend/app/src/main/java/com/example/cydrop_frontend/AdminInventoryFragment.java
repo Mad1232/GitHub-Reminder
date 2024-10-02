@@ -20,6 +20,7 @@ import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
@@ -50,7 +51,6 @@ public class AdminInventoryFragment extends Fragment {
         // Test array
         String[] arr = new String[]{"test1", "test2"};
         TextView dataText = view.findViewById(R.id.data_text);
-        //LinearLayout layout = getActivity().getWindow().getDecorView().getRootView().findViewById(R.id.admin_inventory_linearlayout);
 
         GetJSONData(dataText);
 
@@ -58,7 +58,6 @@ public class AdminInventoryFragment extends Fragment {
     }
 
     private void GetJSONData(TextView dataText) {
-        dataText.setText("goofy");
         JsonArrayRequest jsonArrReq = new JsonArrayRequest(
                 Request.Method.GET,
                 URL_JSON_ARRAY,
@@ -66,7 +65,18 @@ public class AdminInventoryFragment extends Fragment {
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        dataText.setText(response.toString());
+                        try {
+                            JSONArray jsonArr = response;
+                            for (int i = 0; i < jsonArr.length(); i++){
+                                JSONObject jObj = jsonArr.getJSONObject(i);
+                                String newLine = "ID: " + jObj.getString("id") +
+                                        " | Product name: " + jObj.getString("product-name") +
+                                        " | Quantity: " + jObj.getInt("quantity") + "\n";
+                                dataText.setText(dataText.getText() + newLine);
+                            }
+                        } catch (Exception e) {
+                            throw new RuntimeException(e);
+                        }
                     }
                 },
                 new Response.ErrorListener() {

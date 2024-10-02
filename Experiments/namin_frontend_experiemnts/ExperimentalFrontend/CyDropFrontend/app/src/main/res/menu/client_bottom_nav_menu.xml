@@ -9,7 +9,7 @@
 
     <item
         android:icon="@drawable/baseline_pets_24"
-        android:title="Home"
+        android:title="Pets"
         android:id="@+id/home"
         />
 
