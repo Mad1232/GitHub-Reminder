@@ -1,7 +1,11 @@
 package com.example.cydrop_frontend;
 
 import android.os.Bundle;
+import android.os.Debug;
+import android.util.Log;
+
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -10,14 +14,15 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.cydrop_frontend.databinding.ActivityAdminNavbarMainBinding;
 import com.example.cydrop_frontend.databinding.ActivityClientNavbarMainBinding;
 
 
-public class ClientNavbarMainActivity extends AppCompatActivity {
+public class AdminNavbarMainActivity extends AppCompatActivity {
 
     private int userid = -1;
 
-    ActivityClientNavbarMainBinding binding;
+    @NonNull ActivityAdminNavbarMainBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,14 +30,14 @@ public class ClientNavbarMainActivity extends AppCompatActivity {
 
 
         EdgeToEdge.enable(this);
-        binding = ActivityClientNavbarMainBinding.inflate(getLayoutInflater());
+        binding = ActivityAdminNavbarMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        replaceFragment(new ClientRemindersFragment());
+        replaceFragment(new AdminInventoryFragment());
 
         // extract data passed into this activity from another activity
         Bundle extras = getIntent().getExtras();
@@ -42,12 +47,12 @@ public class ClientNavbarMainActivity extends AppCompatActivity {
         // Switch fragments when an icon is selected
         binding.bottomNavigationView.setOnItemSelectedListener(item -> {
             int itemId = item.getItemId();
-            if (itemId == R.id.reminders){
-                replaceFragment(new ClientRemindersFragment());
-            } else if (itemId == R.id.home) {
-                replaceFragment(new ClientHomeFragment());
+            if (itemId == R.id.inventory){
+                replaceFragment(new AdminInventoryFragment());
+            } else if (itemId == R.id.users) {
+                replaceFragment(new AdminUsersFragment());
             } else { // itemId == questions
-                replaceFragment(new ClientQuestionsFragment());
+                replaceFragment(new AdminQuestionsFragment());
             }
 
             return true;
@@ -60,5 +65,7 @@ public class ClientNavbarMainActivity extends AppCompatActivity {
         fragmentTransaction.replace(R.id.frame_layout, fragment);
         fragmentTransaction.commit();
     }
+
+
 }
 

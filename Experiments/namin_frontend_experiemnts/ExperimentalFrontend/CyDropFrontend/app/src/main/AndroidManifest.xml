@@ -15,7 +15,12 @@
         <activity
             android:name=".ClientNavbarMainActivity"
             android:exported="true"
-            android:label="@string/title_activity_bottom_navbar"
+            android:label="ClientNavbarView"
+            android:theme="@style/Theme.CyDropFrontend" />
+        <activity
+            android:name=".AdminNavbarMainActivity"
+            android:exported="true"
+            android:label="AdminNavbarView"
             android:theme="@style/Theme.CyDropFrontend" />
         <activity
             android:name=".MainActivity"

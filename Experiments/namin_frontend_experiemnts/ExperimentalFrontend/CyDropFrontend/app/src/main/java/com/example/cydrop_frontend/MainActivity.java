@@ -22,7 +22,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
@@ -47,8 +46,8 @@ public class MainActivity extends AppCompatActivity {
         simulateAdminLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, ClientNavbarMainActivity.class);
-                intent.putExtra("USERID",0); // Sample admin is userid 0
+                Intent intent = new Intent(MainActivity.this, AdminNavbarMainActivity.class);
+                intent.putExtra("USERID",1); // Sample client is userid 0
                 startActivity(intent);
             }
         });
