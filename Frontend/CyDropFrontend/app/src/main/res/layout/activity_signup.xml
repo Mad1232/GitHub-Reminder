@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
-    tools:context=".MainActivity"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#9ABF0612"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".MainActivity">
 
     <TextView
         android:layout_width="wrap_content"
@@ -69,7 +70,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="70sp"
-            android:text="User Type:"
+            android:text="Type: "
             android:textColor="#000000"
             android:textSize="20dp"></TextView>
 
@@ -77,7 +78,7 @@
             android:id="@+id/signup_confirm_edt"
             android:layout_width="wrap_content"
             android:layout_height="70dp"
-            android:hint="Enter Password Here"
+            android:hint="Enter Type Here"
             android:inputType="textPassword"></EditText>
 
     </LinearLayout>
@@ -108,5 +109,6 @@
             android:textSize="20sp"></Button>
 
     </LinearLayout>
+
 
 </androidx.appcompat.widget.LinearLayoutCompat>
