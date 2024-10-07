@@ -10,6 +10,10 @@ import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
 
 public class VolleySingleton {
+    // Testing url, should not make prod
+    public static String backendURL = "";
+    // Production url
+    //private static String backendURL = "";
 
     private static VolleySingleton instance;
     private RequestQueue requestQueue;
