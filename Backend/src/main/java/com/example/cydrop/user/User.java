@@ -1,5 +1,7 @@
 package com.example.cydrop.user;
 
+import java.util.List;
+
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,18 +21,16 @@ public class User {
     @Setter
     String password;
 
-    @Getter
-    @Setter
-    String name;
-
+   // @OneToMany
+   // private List<Pet> pets;
+    
     // TODO: add user type
 
     // Used by Jakarta
     protected User() {}
 
-    public User(String username, String password, String name) {
+    public User(String username, String password) {
         this.username = username;
         this.password = password;
-        this.name = name;
     }
 }

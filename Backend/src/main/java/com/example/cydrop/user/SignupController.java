@@ -46,10 +46,9 @@ public class SignupController {
         return users;
     }
 
-    @PutMapping("/users/{id}/name")
-    public String changeName(@PathVariable Long id, @RequestBody String name) {
+    @PutMapping("/users/{id}/username")
+    public String changeUsername(@PathVariable Long id, @RequestBody String username) {
         User user = repository.findById(id).get();
-        user.name = name;
         user = repository.save(user);
         return "Ok";
     }
