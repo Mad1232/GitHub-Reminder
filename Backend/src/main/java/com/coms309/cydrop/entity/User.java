@@ -1,4 +1,4 @@
-package com.example.cydrop.user;
+package com.coms309.cydrop.entity;
 
 import java.util.List;
 
