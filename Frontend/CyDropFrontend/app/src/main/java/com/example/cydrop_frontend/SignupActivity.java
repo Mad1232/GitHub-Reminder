@@ -54,7 +54,8 @@ public class SignupActivity extends AppCompatActivity{
             public void onClick(View v) {
 
                 /* when login button is pressed, use intent to switch to Login Activity */
-                Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
+              //  Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
+                Intent intent = new Intent(SignupActivity.this, VetDetails.class);  //only for testing demo2
                 startActivity(intent);  // go to LoginActivity
             }
         });
@@ -81,8 +82,7 @@ public class SignupActivity extends AppCompatActivity{
                 executorService.execute(new Runnable() {
                     @Override
                     public void run() {
-//                        sendPostRequest("http://coms-3090-000.class.las.iastate.edu:8080/students", json.toString());
-                        sendPostRequest(VolleySingleton.backendURL + "/user", json.toString());
+                        sendPostRequest("http://coms-3090-038.class.las.iastate.edu:8080/user", json.toString());
                     }
                 });
             }
