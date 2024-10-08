@@ -28,6 +28,11 @@ public class Pet {
     @Column(name = "pet_gender")
     private String pet_gender;
 
+    // Many-to-one relationship to User (owner)
+    @ManyToOne
+    @JoinColumn(name = "owner_id", nullable = false)
+    private User owner;
+
     // Getters and setters
     public int getPet_id() {
         return pet_id;
@@ -83,5 +88,14 @@ public class Pet {
 
     public void setPet_gender(String pet_gender) {
         this.pet_gender = pet_gender;
+    }
+
+    // for getting the users(owners)
+    public User getOwner() {
+        return owner;
+    }
+
+    public void setOwner(User owner) {
+        this.owner = owner;
     }
 }
