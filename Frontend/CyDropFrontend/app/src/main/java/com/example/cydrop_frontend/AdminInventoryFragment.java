@@ -48,8 +48,6 @@ public class AdminInventoryFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_admin_inventory, container, false);
 
-        // Test array
-        String[] arr = new String[]{"test1", "test2"};
         TextView dataText = view.findViewById(R.id.data_text);
 
         GetJSONData(dataText);

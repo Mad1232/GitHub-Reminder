@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -34,7 +35,6 @@ public class PetCardFragment extends Fragment {
     public static PetCardFragment newInstance(String petName, String petBreed) {
         PetCardFragment fragment = new PetCardFragment();
         Bundle args = new Bundle();
-
         args.putString(ARG_PETNAME, petName);
         args.putString(ARG_PETBREED, petBreed);
         fragment.setArguments(args);
@@ -53,7 +53,15 @@ public class PetCardFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_pet_card, container, false);
+//
+//        TextView petNameText = view.findViewById(R.id.petName);
+//        petNameText.setText("Pet name: " + petName);
+//
+//        TextView petBreedText = view.findViewById(R.id.petBreed);
+//        petNameText.setText("Pet breed: " + petBreed);
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_pet_card, container, false);
+        return view;
     }
 }

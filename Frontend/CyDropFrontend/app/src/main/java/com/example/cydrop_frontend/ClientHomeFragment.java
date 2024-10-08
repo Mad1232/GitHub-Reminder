@@ -3,6 +3,8 @@ package com.example.cydrop_frontend;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,11 +24,7 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link ClientHomeFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class ClientHomeFragment extends Fragment {
 
     public ClientHomeFragment() {
@@ -41,8 +39,14 @@ public class ClientHomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_client_home, container, false);
+
+        LinearLayout layout = view.findViewById(R.id.petListLinearLayout);
+        GetJSONData(layout);
+
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_client_home, container, false);
+        return view;
     }
 
 
@@ -60,9 +64,18 @@ public class ClientHomeFragment extends Fragment {
                             JSONArray jsonArr = response;
                             for (int i = 0; i < jsonArr.length(); i++){
                                 JSONObject json = jsonArr.getJSONObject(i);
-                                PetCardFragment frag = PetCardFragment.newInstance(
-                                        json.getString("pet_name"),
-                                        json.getString("pet_breed"));
+
+
+                                FragmentManager fragmentManager = getParentFragmentManager();
+                                FragmentTransaction fragTransaction = fragmentManager.beginTransaction();
+
+                                PetCardFragment frag = new PetCardFragment();
+//                                PetCardFragment frag = PetCardFragment.newInstance(
+//                                        json.getString("pet_name"),
+//                                        json.getString("pet_breed"));
+
+                                fragTransaction.add(layout.getId(), frag , "fragment" + i);
+                                fragTransaction.commit();
                                 layout.addView(frag.getView());
                             }
                         } catch (Exception e) {
@@ -91,5 +104,6 @@ public class ClientHomeFragment extends Fragment {
 
         VolleySingleton.getInstance(getContext().getApplicationContext()).addToRequestQueue(jsonArrReq);
     }
+
 
 }
