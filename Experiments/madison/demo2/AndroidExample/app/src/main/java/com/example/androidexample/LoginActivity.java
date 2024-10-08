@@ -1,4 +1,4 @@
-package com.example.cydrop_frontend;
+package com.example.androidexample;
 
 import androidx.appcompat.app.AppCompatActivity;
 
