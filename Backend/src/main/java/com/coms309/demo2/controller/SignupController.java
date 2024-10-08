@@ -1,4 +1,8 @@
+<<<<<<<< HEAD:Backend/src/main/java/com/coms309/cydrop/controller/SignupController.java
+package com.coms309.cydrop.controller;
+========
 package com.coms309.demo2.controller;
+>>>>>>>> fury-branch:Backend/src/main/java/com/coms309/demo2/controller/SignupController.java
 
 import java.util.List;
 
@@ -10,8 +14,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+<<<<<<<< HEAD:Backend/src/main/java/com/coms309/cydrop/controller/SignupController.java
+import com.coms309.cydrop.entity.User;
+import com.coms309.cydrop.repository.UserRepository;
+========
 import com.coms309.demo2.entity.User;
 import com.coms309.demo2.repository.UserRepository;
+>>>>>>>> fury-branch:Backend/src/main/java/com/coms309/demo2/controller/SignupController.java
 
 import org.springframework.web.bind.annotation.PutMapping;
 
