@@ -1,4 +1,4 @@
-package com.example.cydrop.user;
+package com.coms309.cydrop.controller;
 
 import java.util.List;
 
@@ -9,6 +9,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.coms309.cydrop.entity.User;
+import com.coms309.cydrop.repository.UserRepository;
+
 import org.springframework.web.bind.annotation.PutMapping;
 
 @RestController
@@ -20,7 +24,7 @@ public class SignupController {
     public String signup(@RequestBody User user) {
         List<User> allUsers = repository.findAll();
         for (User checkUser : allUsers) {
-            if (checkUser.username.equals(user.username)) {
+            if (checkUser.getUsername().equals(user.getUsername())) {
                 return "User already exists";
             }
         }
@@ -32,7 +36,7 @@ public class SignupController {
     @GetMapping("/users/{id}")
     public User getUser(@PathVariable Long id) {
         User user = repository.findById(id).get();
-        user.password = null;
+        user.setPassword(null);
         // that way someone's password is hidden
         return user;
     }
@@ -41,7 +45,7 @@ public class SignupController {
     public List<User> getAllUsers() {
         List<User> users = repository.findAll();
         for (User cUser : users) {
-            cUser.password = null;
+            cUser.setPassword(null);
         }
         return users;
     }
