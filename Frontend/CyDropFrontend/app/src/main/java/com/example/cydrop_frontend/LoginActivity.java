@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -29,9 +30,9 @@ public class LoginActivity extends AppCompatActivity {
     private EditText passwordEditText;  // define password edittext variable
     private Button loginButton;         // define login button variable
     private Button signupButton;        // define signup button variable
-    ExecutorService executorService;
+  //  ExecutorService executorService;
 
-    TextView textGetResponse;
+ //   TextView textGetResponse;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,40 +47,40 @@ public class LoginActivity extends AppCompatActivity {
 
 
         // Initialize the ExecutorService with a single thread pool
-        executorService = Executors.newSingleThreadExecutor();
+ //       executorService = Executors.newSingleThreadExecutor();
 
         /* click listener on login button pressed */
+//        loginButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                /* grab strings from user inputs */
+//                String username = usernameEditText.getText().toString();
+//                String password = passwordEditText.getText().toString();
+//
+//                /* when login button is pressed, use intent to switch to Login Activity */
+//                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+//                intent.putExtra("USERNAME", username);  // key-value to pass to the MainActivity
+//                intent.putExtra("PASSWORD", password);  // key-value to pass to the MainActivity
+//                startActivity(intent);  // go to MainActivity with the key-value data
+//            }
+//        });
+
+        // Button to send GET request
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                /* grab strings from user inputs */
-                String username = usernameEditText.getText().toString();
-                String password = passwordEditText.getText().toString();
-
-                /* when login button is pressed, use intent to switch to Login Activity */
-                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                intent.putExtra("USERNAME", username);  // key-value to pass to the MainActivity
-                intent.putExtra("PASSWORD", password);  // key-value to pass to the MainActivity
-                startActivity(intent);  // go to MainActivity with the key-value data
-            }
-        });
-
-//        // Button to send GET request
-//        buttonGet.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
 //                executorService.execute(new Runnable() {
 //                    @Override
 //                    public void run() {
-////                        sendGetRequest("http://coms-3090-000.class.las.iastate.edu:8080/mytestapi");
-////                        sendGetRequest("http://b47ca2e2-53b9-4bc0-9ee7-82cd4859c4ee.mock.pstmn.io/mytestapi");
-//                        sendGetRequest("https://299bd559-c933-4117-94f5-64bf37935b18.mock.pstmn.io/mytestapi");
-//
-//                    }
-//                });
-//            }
-//        });
+//                        sendGetRequest(VolleySingleton.backendURL + "/user");
+
+                String username = usernameEditText.getText().toString();
+                String password = passwordEditText.getText().toString();
+                verifyLogin(username, password);
+                    }
+                });
+
 
         /* click listener on signup button pressed */
         signupButton.setOnClickListener(new View.OnClickListener() {
@@ -93,6 +94,10 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    private void verifyLogin(String username, String password){
+        String url = VolleySingleton.backendURL + "/user" + "?username=" + username + "&password=" + password;
+        sendGetRequest(url);
+    }
 
     // Method to send GET Request
     private void sendGetRequest(String urlString) {
@@ -118,7 +123,13 @@ public class LoginActivity extends AppCompatActivity {
             new Handler(Looper.getMainLooper()).post(new Runnable() {
                 @Override
                 public void run() {
-                    textGetResponse.setText(result);
+
+ //                   textGetResponse.setText(result);
+                    if (result.equals("success")) {
+                        Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(LoginActivity.this, "Invalid username or password", Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
 

@@ -71,10 +71,9 @@ public class SignupActivity extends AppCompatActivity{
                 // Create JSON object for POST request
                 JSONObject json = new JSONObject();
                 try {
-                    //  json.put("id", 13); // Example static ID
                     json.put("username", username);
                     json.put("password", password);
-                    //  json.put("email", email);
+                    //  json.put("type", type);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -83,7 +82,7 @@ public class SignupActivity extends AppCompatActivity{
                     @Override
                     public void run() {
 //                        sendPostRequest("http://coms-3090-000.class.las.iastate.edu:8080/students", json.toString());
-                        sendPostRequest("http://10.0.2.2:8080/user", json.toString());
+                        sendPostRequest(VolleySingleton.backendURL + "/user", json.toString());
                     }
                 });
             }
