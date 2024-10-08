@@ -17,7 +17,7 @@ public class LoginController {
 
     @GetMapping("/user/pass")
     public String user_password() {
-        return "The API works well";
+        return "This  API alos does indeed works well";
     }
 
 
