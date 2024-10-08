@@ -55,7 +55,7 @@ public class SignupActivity extends AppCompatActivity{
 
                 /* when login button is pressed, use intent to switch to Login Activity */
               //  Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
-                Intent intent = new Intent(SignupActivity.this, VetDetails.class);  //only for testing demo2
+                Intent intent = new Intent(SignupActivity.this, VetDetailsActivity.class);  //only for testing demo2
                 startActivity(intent);  // go to LoginActivity
             }
         });

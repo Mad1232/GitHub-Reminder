@@ -37,7 +37,7 @@
             android:label="Login"
             android:theme="@style/Theme.CyDropFrontend" />
         <activity
-            android:name=".VetDetails"
+            android:name=".VetDetailsActivity"
             android:exported="true"
             android:label="VetDetails"
             android:theme="@style/Theme.CyDropFrontend" />
