@@ -16,5 +16,5 @@ public class Medication {
 
     @Getter
     @Setter
-    int stock;
+    Integer stock;
 }
