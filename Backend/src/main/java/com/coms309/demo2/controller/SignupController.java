@@ -1,74 +1,78 @@
-<<<<<<<< HEAD:Backend/src/main/java/com/coms309/cydrop/controller/SignupController.java
-package com.coms309.cydrop.controller;
-========
 package com.coms309.demo2.controller;
->>>>>>>> fury-branch:Backend/src/main/java/com/coms309/demo2/controller/SignupController.java
 
 import java.util.List;
+import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
-
-<<<<<<<< HEAD:Backend/src/main/java/com/coms309/cydrop/controller/SignupController.java
-import com.coms309.cydrop.entity.User;
-import com.coms309.cydrop.repository.UserRepository;
-========
 import com.coms309.demo2.entity.User;
 import com.coms309.demo2.repository.UserRepository;
->>>>>>>> fury-branch:Backend/src/main/java/com/coms309/demo2/controller/SignupController.java
-
-import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class SignupController {
+
     @Autowired
     UserRepository repository;
 
+    // Signup method with email uniqueness check
     @PostMapping("/signup")
     public String signup(@RequestBody User user) {
-        List<User> allUsers = repository.findAll();
-        for (User checkUser : allUsers) {
-            if (checkUser.getUsername().equals(user.getUsername())) {
-                return "User already exists";
-            }
+        // Find user by email to avoid loading all users into memory
+        Optional<User> existingUser = repository.findByEmail(user.getEmail());
+        if (existingUser.isPresent()) {
+            return "User already exists";
         }
-        user = repository.save(user);
-        // save is our Create mapping
+        repository.save(user); // save new user
         return "OK";
     }
 
+    // Get user by ID, handling case if user is not found
     @GetMapping("/users/{id}")
     public User getUser(@PathVariable Long id) {
-        User user = repository.findById(id).get();
-        user.setPassword(null);
-        // that way someone's password is hidden
-        return user;
+        Optional<User> user = repository.findById(id);
+        if (user.isPresent()) {
+            User foundUser = user.get();
+            foundUser.setPassword(null); // Hide password
+            return foundUser;
+        } else {
+            throw new RuntimeException("User not found");
+        }
     }
 
+    // Get all users, hiding their passwords
     @GetMapping("/users")
     public List<User> getAllUsers() {
         List<User> users = repository.findAll();
         for (User cUser : users) {
-            cUser.setPassword(null);
+            cUser.setPassword(null); // Hide passwords
         }
         return users;
     }
 
-    @PutMapping("/users/{id}/username")
-    public String changeUsername(@PathVariable Long id, @RequestBody String username) {
-        User user = repository.findById(id).get();
-        user = repository.save(user);
-        return "Ok";
+    // Change email
+    @PutMapping("/users/{id}/email")
+    public String changeEmail(@PathVariable Long id, @RequestBody String email) {
+        Optional<User> userOpt = repository.findById(id);
+        if (userOpt.isPresent()) {
+            User user = userOpt.get();
+            // Set the new email
+            user.setEmail(email);
+            // Save the updated user back to the repository
+            repository.save(user);
+            return "Email updated successfully";
+        } else {
+            return "User not found";
+        }
     }
 
+    // Delete user by ID
     @DeleteMapping("/users/{id}")
     public String removeUser(@PathVariable Long id) {
-        repository.deleteById(id);
-        return "OK";
+        if (repository.existsById(id)) {
+            repository.deleteById(id); // Delete user
+            return "OK";
+        } else {
+            return "User not found";
+        }
     }
 }
