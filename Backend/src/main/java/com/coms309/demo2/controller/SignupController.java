@@ -16,14 +16,14 @@ public class SignupController {
 
     // Signup method with email uniqueness check
     @PostMapping("/signup")
-    public String signup(@RequestBody User user) {
+    public User signup(@RequestBody User user) {
         // Find user by email to avoid loading all users into memory
         Optional<User> existingUser = repository.findByEmail(user.getEmail());
         if (existingUser.isPresent()) {
-            return "User already exists";
+            throw new RuntimeException("User already exists");
         }
-        repository.save(user); // save new user
-        return "OK";
+        user = repository.save(user); // save new user, get new ID
+        return user; // Per REST standards, we return the new object
     }
 
     // Get user by ID, handling case if user is not found

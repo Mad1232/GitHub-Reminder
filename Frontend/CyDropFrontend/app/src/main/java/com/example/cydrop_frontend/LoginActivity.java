@@ -30,9 +30,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText passwordEditText;  // define password edittext variable
     private Button loginButton;         // define login button variable
     private Button signupButton;        // define signup button variable
-  //  ExecutorService executorService;
 
- //   TextView textGetResponse;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,26 +44,6 @@ public class LoginActivity extends AppCompatActivity {
         signupButton = findViewById(R.id.login_signup_btn);  // link to signup button in the Login activity XML
 
 
-        // Initialize the ExecutorService with a single thread pool
- //       executorService = Executors.newSingleThreadExecutor();
-
-        /* click listener on login button pressed */
-//        loginButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                /* grab strings from user inputs */
-//                String username = usernameEditText.getText().toString();
-//                String password = passwordEditText.getText().toString();
-//
-//                /* when login button is pressed, use intent to switch to Login Activity */
-//                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-//                intent.putExtra("USERNAME", username);  // key-value to pass to the MainActivity
-//                intent.putExtra("PASSWORD", password);  // key-value to pass to the MainActivity
-//                startActivity(intent);  // go to MainActivity with the key-value data
-//            }
-//        });
-
         // Button to send GET request
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,9 +53,14 @@ public class LoginActivity extends AppCompatActivity {
 //                    public void run() {
 //                        sendGetRequest(VolleySingleton.backendURL + "/user");
 
-                String username = usernameEditText.getText().toString();
-                String password = passwordEditText.getText().toString();
-                verifyLogin(username, password);
+   //             String username = usernameEditText.getText().toString();
+    //            String password = passwordEditText.getText().toString();
+     //           verifyLogin(username, password);
+
+
+                Intent intent = new Intent(LoginActivity.this, VetDetailsActivity.class);  //only for testing demo2
+                startActivity(intent);  // go to LoginActivity
+
                     }
                 });
 
