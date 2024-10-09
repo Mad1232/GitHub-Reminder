@@ -8,107 +8,10 @@
     tools:context=".ClientHomeFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/addPetOverlay"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white">
-
-        <TextView
-            android:id="@+id/addPetTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Add Pet"
-            app:layout_constraintBottom_toTopOf="@+id/petId"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:textSize="30sp"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <EditText
-            android:id="@+id/petTypeInput"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="83dp"
-            android:layout_marginEnd="119dp"
-            android:ems="10"
-            android:inputType="text"
-            android:text="Pet Type"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="206dp" />
-
-        <EditText
-            android:id="@+id/petId"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="text"
-            android:text="ID"
-            tools:layout_editor_absoluteX="82dp"
-            tools:layout_editor_absoluteY="147dp" />
-
-        <EditText
-            android:id="@+id/petBreedInput"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="text"
-            android:text="Breed"
-            tools:layout_editor_absoluteX="82dp"
-            tools:layout_editor_absoluteY="322dp" />
-
-        <EditText
-            android:id="@+id/petDiagnosis"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="text"
-            android:text="Diagnosis"
-            tools:layout_editor_absoluteX="82dp"
-            tools:layout_editor_absoluteY="453dp" />
-
-        <EditText
-            android:id="@+id/Age"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="text"
-            android:text="Age"
-            tools:layout_editor_absoluteX="82dp"
-            tools:layout_editor_absoluteY="385dp" />
-
-        <EditText
-            android:id="@+id/editTextText5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="text"
-            android:text="Name"
-            tools:layout_editor_absoluteX="80dp"
-            tools:layout_editor_absoluteY="267dp" />
-
-        <Button
-            android:id="@+id/submitButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Submit"
-            tools:layout_editor_absoluteX="153dp"
-            tools:layout_editor_absoluteY="531dp" />
-
-        <Button
-            android:id="@+id/backButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Back"
-            tools:layout_editor_absoluteX="3dp"
-            tools:layout_editor_absoluteY="4dp" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/regularView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="visible">
+        android:visibility="invisible">
 
         <Button
             android:id="@+id/addButton"
@@ -125,6 +28,7 @@
             android:text="Pets view"
             android:textColor="@color/black"
             android:textSize="40dp"
+            app:layout_constraintEnd_toEndOf="@+id/addButton"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -149,4 +53,106 @@
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/addPetOverlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:visibility="visible">
+
+        <TextView
+            android:id="@+id/addPetTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add Pet"
+            android:textSize="30sp"
+            app:layout_constraintBottom_toTopOf="@+id/petId"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/petTypeInput"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="text"
+            android:text="Pet Type"
+            tools:layout_editor_absoluteX="102dp"
+            tools:layout_editor_absoluteY="220dp" />
+
+        <EditText
+            android:id="@+id/petBreedInput"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="text"
+            android:text="Breed"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="322dp" />
+
+        <EditText
+            android:id="@+id/petDiagnosis"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="text"
+            android:text="Diagnosis"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/Age" />
+
+        <EditText
+            android:id="@+id/Age"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="text"
+            android:text="Age"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/petBreedInput" />
+
+        <EditText
+            android:id="@+id/editTextText5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="text"
+            android:text="Name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="267dp" />
+
+        <EditText
+            android:id="@+id/petId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="text"
+            android:text="ID"
+            tools:layout_editor_absoluteX="101dp"
+            tools:layout_editor_absoluteY="173dp" />
+
+        <Button
+            android:id="@+id/submitButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Submit"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/petDiagnosis"
+            tools:layout_editor_absoluteX="153dp" />
+
+        <Button
+            android:id="@+id/backButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Back"
+            tools:layout_editor_absoluteX="3dp"
+            tools:layout_editor_absoluteY="4dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </FrameLayout>
