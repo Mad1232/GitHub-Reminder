@@ -42,7 +42,8 @@ public class ClientHomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_client_home, container, false);
 
         LinearLayout layout = view.findViewById(R.id.petListLinearLayout);
-        GetJSONData(layout);
+        TextView textView = view.findViewById(R.id.textView2);
+        GetJSONData(layout, textView);
 
 
         // Inflate the layout for this fragment
@@ -52,7 +53,7 @@ public class ClientHomeFragment extends Fragment {
 
 
 
-    private void GetJSONData(LinearLayout layout) {
+    private void GetJSONData(LinearLayout layout, TextView textView) {
         JsonArrayRequest jsonArrReq = new JsonArrayRequest(
                 Request.Method.GET,
                 "http://coms-3090-038.class.las.iastate.edu:8080/pets",
@@ -65,18 +66,21 @@ public class ClientHomeFragment extends Fragment {
                             for (int i = 0; i < jsonArr.length(); i++){
                                 JSONObject json = jsonArr.getJSONObject(i);
 
+                                String newText = "Pet name: " + json.getString("pet_name") +
+                                        "\nPet breed: " + json.getString("pet_breed") + "\n\n";
+                                textView.setText(textView.getText() + newText);
 
-                                FragmentManager fragmentManager = getParentFragmentManager();
-                                FragmentTransaction fragTransaction = fragmentManager.beginTransaction();
-
-                                PetCardFragment frag = new PetCardFragment();
-//                                PetCardFragment frag = PetCardFragment.newInstance(
-//                                        json.getString("pet_name"),
-//                                        json.getString("pet_breed"));
-
-                                fragTransaction.add(layout.getId(), frag , "fragment" + i);
-                                fragTransaction.commit();
-                                layout.addView(frag.getView());
+//                                FragmentManager fragmentManager = getParentFragmentManager();
+//                                FragmentTransaction fragTransaction = fragmentManager.beginTransaction();
+//
+//                                PetCardFragment frag = new PetCardFragment();
+////                                PetCardFragment frag = PetCardFragment.newInstance(
+////                                        json.getString("pet_name"),
+////                                        json.getString("pet_breed"));
+//
+//                                fragTransaction.add(layout.getId(), frag , "fragment" + i);
+//                                fragTransaction.commit();
+//                                layout.addView(frag.getView());
                             }
                         } catch (Exception e) {
                             throw new RuntimeException(e);

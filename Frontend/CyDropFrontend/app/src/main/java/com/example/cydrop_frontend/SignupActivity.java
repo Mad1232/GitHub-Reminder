@@ -4,13 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -55,7 +52,7 @@ public class SignupActivity extends AppCompatActivity{
 
                 /* when login button is pressed, use intent to switch to Login Activity */
               //  Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
-                Intent intent = new Intent(SignupActivity.this, VetDetails.class);  //only for testing demo2
+                Intent intent = new Intent(SignupActivity.this, VetDetailsActivity.class);  //only for testing demo2
                 startActivity(intent);  // go to LoginActivity
             }
         });
