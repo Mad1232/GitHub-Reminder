@@ -16,14 +16,14 @@ public class SignupController {
 
     // Signup method with email uniqueness check
     @PostMapping("/signup")
-    public String signup(@RequestBody User user) {
+    public User signup(@RequestBody User user) {
         // Find user by email to avoid loading all users into memory
         Optional<User> existingUser = repository.findByEmail(user.getEmail());
         if (existingUser.isPresent()) {
-            return "User already exists";
+            throw new RuntimeException("User already exists");
         }
-        repository.save(user); // save new user
-        return "OK";
+        user = repository.save(user); // save new user, get new ID
+        return user; // Per REST standards, we return the new object
     }
 
     // Get user by ID, handling case if user is not found
@@ -51,28 +51,27 @@ public class SignupController {
 
     // Change email
     @PutMapping("/users/{id}/email")
-    public String changeEmail(@PathVariable Long id, @RequestBody String email) {
+    public User changeEmail(@PathVariable Long id, @RequestBody String email) {
         Optional<User> userOpt = repository.findById(id);
         if (userOpt.isPresent()) {
             User user = userOpt.get();
             // Set the new email
             user.setEmail(email);
             // Save the updated user back to the repository
-            repository.save(user);
-            return "Email updated successfully";
+            user = repository.save(user);
+            return user; // Per REST standards, we return the updated object
         } else {
-            return "User not found";
+            throw new RuntimeException("User not found");
         }
     }
 
     // Delete user by ID
     @DeleteMapping("/users/{id}")
-    public String removeUser(@PathVariable Long id) {
+    public void removeUser(@PathVariable Long id) {
         if (repository.existsById(id)) {
             repository.deleteById(id); // Delete user
-            return "OK";
         } else {
-            return "User not found";
+            throw new RuntimeException("User not found");
         }
     }
 }
