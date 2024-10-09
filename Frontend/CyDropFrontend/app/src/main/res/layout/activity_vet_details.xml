@@ -1,0 +1,17 @@
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:tools="http://schemas.android.com/tools" xmlns:android="http://schemas.android.com/apk/res/android" tools:context=".MainActivity" android:layout_height="match_parent" android:layout_width="match_parent" android:orientation="vertical">
+    <Button android:id="@+id/btnJsonObj"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Get Vet Details"/>
+    <TextView android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textSize="30sp"
+        android:text="Vet Details: "/>
+    <TextView android:id="@+id/msgResponse"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:text=""/>
+</androidx.appcompat.widget.LinearLayoutCompat>

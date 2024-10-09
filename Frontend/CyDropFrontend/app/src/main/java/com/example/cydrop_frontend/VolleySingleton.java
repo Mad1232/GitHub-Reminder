@@ -15,6 +15,7 @@ public class VolleySingleton {
     private RequestQueue requestQueue;
     private ImageLoader imageLoader;
     private static Context ctx;
+    public static String backendURL = "http://coms-3090-038.class.las.iastate.edu:8080";
 
     private VolleySingleton(Context context) {
         ctx = context;

@@ -3,16 +3,28 @@ package com.example.cydrop_frontend;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link ClientHomeFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
+
+
 public class ClientHomeFragment extends Fragment {
 
     public ClientHomeFragment() {
@@ -27,7 +39,71 @@ public class ClientHomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_client_home, container, false);
+
+        LinearLayout layout = view.findViewById(R.id.petListLinearLayout);
+        GetJSONData(layout);
+
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_client_home, container, false);
+        return view;
     }
+
+
+
+
+    private void GetJSONData(LinearLayout layout) {
+        JsonArrayRequest jsonArrReq = new JsonArrayRequest(
+                Request.Method.GET,
+                "http://coms-3090-038.class.las.iastate.edu:8080/pets",
+                null, // Pass null as the request body since it's a GET request
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        try {
+                            JSONArray jsonArr = response;
+                            for (int i = 0; i < jsonArr.length(); i++){
+                                JSONObject json = jsonArr.getJSONObject(i);
+
+
+                                FragmentManager fragmentManager = getParentFragmentManager();
+                                FragmentTransaction fragTransaction = fragmentManager.beginTransaction();
+
+                                PetCardFragment frag = new PetCardFragment();
+//                                PetCardFragment frag = PetCardFragment.newInstance(
+//                                        json.getString("pet_name"),
+//                                        json.getString("pet_breed"));
+
+                                fragTransaction.add(layout.getId(), frag , "fragment" + i);
+                                fragTransaction.commit();
+                                layout.addView(frag.getView());
+                            }
+                        } catch (Exception e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                }) {
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String> headers = new HashMap<>();
+                return headers;
+            }
+
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                return params;
+            }
+        };
+
+        VolleySingleton.getInstance(getContext().getApplicationContext()).addToRequestQueue(jsonArrReq);
+    }
+
+
 }

@@ -18,6 +18,8 @@ import java.io.Console;
 public class MainActivity extends AppCompatActivity {
 
     private Button simulateAdminLogin;
+    private Button simulateClientLogin;
+    private Button signupButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,18 +33,19 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-        Button simulateClientLogin = findViewById(R.id.button_simulate_client_login);
+        simulateClientLogin = findViewById(R.id.button_simulate_client_login);
         simulateClientLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, ClientNavbarMainActivity.class);
+               // Intent intent = new Intent(MainActivity.this, SignupActivity.class);
                 intent.putExtra("USERID",1); // Sample client is userid 0
                 startActivity(intent);
             }
         });
 
 
-        Button simulateAdminLogin = findViewById(R.id.button_simulate_admin_login);
+        simulateAdminLogin = findViewById(R.id.button_simulate_admin_login);
         simulateAdminLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -51,5 +54,19 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
+        signupButton = findViewById(R.id.main_signup_btn);  // link to signup button in the Main activity XML
+        signupButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                /* when signup button is pressed, use intent to switch to Signup Activity */
+                Intent intent = new Intent(MainActivity.this, SignupActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
     }
 }

@@ -9,6 +9,26 @@
             "projectName": "coms309-helloworld",
             "args": "",
             "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-Main<onetoone>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "onetoone.Main",
+            "projectName": "onetoone",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-Main<coms309-onetoone>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "onetoone.Main",
+            "projectName": "coms309-onetoone",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
         }
     ]
 }
