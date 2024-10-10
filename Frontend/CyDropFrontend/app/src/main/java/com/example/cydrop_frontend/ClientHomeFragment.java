@@ -12,12 +12,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.JsonRequest;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -31,6 +33,8 @@ public class ClientHomeFragment extends Fragment {
 
     private View overlayView;
     private View regularView;
+    private View petDeleteView;
+    private View petEditView;
 
     private EditText petId;
     private EditText petType;
@@ -39,6 +43,8 @@ public class ClientHomeFragment extends Fragment {
     private EditText petDiagnosis;
     private EditText petAge;
     private EditText petGender;
+
+    private EditText petDeleteId;
 
     LinearLayout linearLayout;
     TextView petsViewTextView;
@@ -58,13 +64,15 @@ public class ClientHomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_client_home, container, false);
         regularView = view.findViewById(R.id.regularView);
         overlayView = view.findViewById(R.id.addPetOverlay);
+        petDeleteView = view.findViewById(R.id.deletePetOverlay);
+        petEditView = view.findViewById(R.id.editPetById);
 
         linearLayout = view.findViewById(R.id.petListLinearLayout);
         petsViewTextView = view.findViewById(R.id.textView2);
 
         GetJSONData();
 
-        Button addButton = view.findViewById(R.id.adminInventoryAddButton);
+        Button addButton = view.findViewById(R.id.addPetButton);
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -72,7 +80,7 @@ public class ClientHomeFragment extends Fragment {
             }
         });
 
-        Button backButton = view.findViewById(R.id.backButton);
+        Button backButton = view.findViewById(R.id.adminCloseOverlayButton);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -80,9 +88,26 @@ public class ClientHomeFragment extends Fragment {
             }
         });
 
+        Button deletePetButton = view.findViewById(R.id.removePetByID);
+        deletePetButton.setOnClickListener(view2 -> {
+            TogglePetDelete(true);
+        });
+
+        Button editPetButton = view.findViewById(R.id.editPetById);
+        editPetButton.setOnClickListener(view2 -> {
+            TogglePetEdit(true);
+        });
+
         Button submit = view.findViewById(R.id.adminInventorySubmitButton);
         submit.setOnClickListener(view2 -> {
             PostNewPet();
+        });
+
+        Button deleteSubmit = view.findViewById(R.id.deletePetSubmitButton);
+        deleteSubmit.setOnClickListener(view2 -> {
+            DeletePet();
+            TogglePetDelete(false);
+            GetJSONData();
         });
 
         Button logout = view.findViewById(R.id.adminLogoutButton);
@@ -98,6 +123,7 @@ public class ClientHomeFragment extends Fragment {
         petName = view.findViewById(R.id.petNameInput);
         petDiagnosis = view.findViewById(R.id.petDiagnosis);
         petGender = view.findViewById(R.id.petGender);
+        petDeleteId = view.findViewById(R.id.petIdToDelete);
 
         ToggleAddPetOverlay(false);
 
@@ -116,6 +142,26 @@ public class ClientHomeFragment extends Fragment {
         }
     }
 
+    private void TogglePetEdit(boolean addOverlay){
+        if (addOverlay){
+            regularView.setVisibility(View.INVISIBLE);
+            petEditView.setVisibility(View.VISIBLE);
+        } else {
+            regularView.setVisibility(View.VISIBLE);
+            petEditView.setVisibility(View.INVISIBLE);
+        }
+    }
+
+    private void TogglePetDelete(boolean addOverlay){
+        if (addOverlay){
+            regularView.setVisibility(View.INVISIBLE);
+            petDeleteView.setVisibility(View.VISIBLE);
+        } else {
+            regularView.setVisibility(View.VISIBLE);
+            petDeleteView.setVisibility(View.INVISIBLE);
+        }
+    }
+
     private void GetJSONData() {
         JsonArrayRequest jsonArrReq = new JsonArrayRequest(
                 Request.Method.GET,
@@ -130,21 +176,10 @@ public class ClientHomeFragment extends Fragment {
                             for (int i = 0; i < jsonArr.length(); i++){
                                 JSONObject json = jsonArr.getJSONObject(i);
 
-                                String newText = "Pet name: " + json.getString("pet_name") +
-                                        "\nPet breed: " + json.getString("pet_breed") + "\n\n";
+                                String newText =  "Pet ID: "+ json.getString("pet_id") +
+                                        "Pet name: " + json.getString("pet_name") +
+                                        "\nPet Pet type: " + json.getString("pet_type") + "\n\n";
                                 petsViewTextView.setText(petsViewTextView.getText() + newText);
-
-//                                FragmentManager fragmentManager = getParentFragmentManager();
-//                                FragmentTransaction fragTransaction = fragmentManager.beginTransaction();
-//
-//                                PetCardFragment frag = new PetCardFragment();
-////                                PetCardFragment frag = PetCardFragment.newInstance(
-////                                        json.getString("pet_name"),
-////                                        json.getString("pet_breed"));
-//
-//                                fragTransaction.add(layout.getId(), frag , "fragment" + i);
-//                                fragTransaction.commit();
-//                                layout.addView(frag.getView());
                             }
                         } catch (Exception e) {
                             throw new RuntimeException(e);
@@ -191,6 +226,7 @@ public class ClientHomeFragment extends Fragment {
             pet.put("pet_gender", petGender.getText().toString());
         } catch (JSONException e){
             // Unable to create json object
+            Toast.makeText(getActivity(), "Error creating JSON", Toast.LENGTH_LONG);
             return;
         }
 
@@ -202,19 +238,37 @@ public class ClientHomeFragment extends Fragment {
                     @Override
                     public void onResponse(JSONObject response) {
                         // Victory! i think
-                        GetJSONData();
                         ToggleAddPetOverlay(false);
+                        GetJSONData();
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         // Oopsie
+                        Toast.makeText(getActivity(), "Error POSTing pet", Toast.LENGTH_LONG);
                     }
                 }
         );
 
         VolleySingleton.getInstance(getContext().getApplicationContext()).addToRequestQueue(postReq);
+    }
+
+    void DeletePet(){
+        JsonArrayRequest petDeleteRequest = new JsonArrayRequest(
+                Request.Method.DELETE,
+                "http://coms-3090-038.class.las.iastate.edu:8080/pet/" + petDeleteId.getText().toString().trim(),
+                null, // Pass null as the request body since it's a GET request
+                response -> {
+                    TogglePetDelete(false);
+                    Toast.makeText(getActivity(), "Pet delete works!", Toast.LENGTH_LONG);
+                },
+                error -> {
+
+                }
+        );
+
+        VolleySingleton.getInstance(getContext().getApplicationContext()).addToRequestQueue(petDeleteRequest);
     }
 
 
