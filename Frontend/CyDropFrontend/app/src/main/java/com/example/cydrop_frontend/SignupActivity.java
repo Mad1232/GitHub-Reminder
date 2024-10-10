@@ -32,6 +32,8 @@ public class SignupActivity extends AppCompatActivity{
     //  private EditText typeEditText;   // define type edittext variable
     private Button loginButton;         // define login button variable
     private Button signupButton;
+    private Button deleteButton;
+    private Button updateButton;
 
 
     @Override
@@ -45,6 +47,8 @@ public class SignupActivity extends AppCompatActivity{
         //  typeEditText = findViewById(R.id.signup_confirm_edt);    // link to confirm edtext in the Signup activity XML
         loginButton = findViewById(R.id.signup_login_btn);    // link to login button in the Signup activity XML
         signupButton = findViewById(R.id.signup_signup_btn);  // link to signup button in the Signup activity XML
+        deleteButton = findViewById(R.id.del_btn);
+        updateButton = findViewById(R.id.pass_btn);
 
         /* click listener on login button pressed */
         loginButton.setOnClickListener(new View.OnClickListener() {
@@ -70,6 +74,25 @@ public class SignupActivity extends AppCompatActivity{
                 postRequest("http://coms-3090-038.class.las.iastate.edu:8080/signup", username, password);
             }
         });
+        //delete button
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                delRequest("http://coms-3090-038.class.las.iastate.edu:8080/users/8");
+            }
+        });
+
+        updateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String password = passwordEditText.getText().toString();
+
+                putRequest("http://coms-3090-038.class.las.iastate.edu:8080/users/8", password);
+            }
+        });
+
     }
 
 
@@ -124,6 +147,53 @@ public class SignupActivity extends AppCompatActivity{
         // Adding request to request queue
         VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(request);
     }
+
+    private void delRequest(String deleteAccountURL){
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.DELETE, deleteAccountURL, null, new Response.Listener<JSONObject>() {
+            public void onResponse(JSONObject response) {
+                Toast.makeText(getApplicationContext(), "Deleted User!", Toast.LENGTH_LONG).show();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                throw new RuntimeException(error);
+            }
+        });
+
+        VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(request);
+    }
+
+
+    private void putRequest(String updateSettingsURL, String password){
+
+        JSONObject json = new JSONObject();
+        try {
+            json.put("password", password);
+            //  json.put("type", type);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.PUT, updateSettingsURL, json, new Response.Listener<JSONObject>() {
+
+            @Override
+            public void onResponse(JSONObject response) {
+                Toast.makeText(getApplicationContext(), "Updated Password!", Toast.LENGTH_LONG).show();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                throw new RuntimeException(error);
+            }
+        });
+
+
+        VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(request);
+
+    }
+
+
 
 }
 
