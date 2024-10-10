@@ -32,7 +32,7 @@ public class ClientNavbarMainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        replaceFragment(new ClientRemindersFragment());
+        replaceFragment(new ClientHomeFragment());
 
         // extract data passed into this activity from another activity
         Bundle extras = getIntent().getExtras();

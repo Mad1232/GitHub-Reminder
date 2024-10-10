@@ -28,7 +28,8 @@ import java.util.Map;
 
 
 public class AdminInventoryFragment extends Fragment {
-    private static final String URL_JSON_ARRAY = "http://coms-3090-038.class.las.iastate.edu:8080/pets";
+    private static final String URL_JSON_ARRAY = "http://coms-3090-038.class.las.iastate.edu:8080/inventory";
+    TextView dataText;
 
     public AdminInventoryFragment() {
         // Required empty public constructor
@@ -48,39 +49,38 @@ public class AdminInventoryFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_admin_inventory, container, false);
 
-        TextView dataText = view.findViewById(R.id.data_text);
+        dataText = view.findViewById(R.id.data_text);
 
-        GetJSONData(dataText);
+        GetJSONData();
 
         return view;
     }
 
-    private void GetJSONData(TextView dataText) {
+    private void GetJSONData() {
         JsonArrayRequest jsonArrReq = new JsonArrayRequest(
                 Request.Method.GET,
                 URL_JSON_ARRAY,
                 null, // Pass null as the request body since it's a GET request
-                new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        try {
-                            JSONArray jsonArr = response;
-                            for (int i = 0; i < jsonArr.length(); i++){
-                                JSONObject jObj = jsonArr.getJSONObject(i);
-                                String newLine = "ID: " + jObj.getString("pet_name");
-                                dataText.setText(dataText.getText() + newLine);
-                            }
-                        } catch (Exception e) {
-                            throw new RuntimeException(e);
+                response -> {
+                    dataText.setText("");
+                    try {
+                        JSONArray jsonArr = response;
+                        for (int i = 0; i < jsonArr.length(); i++){
+                            JSONObject obj = jsonArr.getJSONObject(i);
+
+
+
+                            String newLine = "Medication name: " + obj.getString("???") + "\n"
+                                    + "Medication quantity: " + obj.getString("???") + "\n";
+
+
+                            dataText.setText(dataText.getText() + newLine + "\n\n");
                         }
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
                     }
                 },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        dataText.setText("Volley error: " + error.toString());
-                    }
-                }) {
+                error -> dataText.setText("Volley error: " + error.toString())) {
             @Override
             public Map<String, String> getHeaders() {
                 Map<String, String> headers = new HashMap<>();

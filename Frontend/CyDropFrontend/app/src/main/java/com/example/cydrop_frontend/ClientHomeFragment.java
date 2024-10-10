@@ -1,5 +1,6 @@
 package com.example.cydrop_frontend;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -80,11 +81,14 @@ public class ClientHomeFragment extends Fragment {
         });
 
         Button submit = view.findViewById(R.id.submitButton);
-        submit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        submit.setOnClickListener(view2 -> {
+            PostNewPet();
+        });
 
-            }
+        Button logout = view.findViewById(R.id.clientHomeLogout);
+        logout.setOnClickListener(view1 -> {
+            Intent intent = new Intent(MainActivity.class.toString());
+            startActivity(intent);
         });
 
         petId = view.findViewById(R.id.petId);
