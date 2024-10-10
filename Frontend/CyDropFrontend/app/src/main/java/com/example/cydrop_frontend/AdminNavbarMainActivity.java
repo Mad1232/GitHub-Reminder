@@ -28,18 +28,23 @@ public class AdminNavbarMainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
+        binding = ActivityAdminNavbarMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
         EdgeToEdge.enable(this);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+
         replaceFragment(new AdminInventoryFragment());
 
         // extract data passed into this activity from another activity
         Bundle extras = getIntent().getExtras();
         userid = extras.getInt("USERID");  // this will come from LoginActivity
+
+
 
 
         // Switch fragments when an icon is selected

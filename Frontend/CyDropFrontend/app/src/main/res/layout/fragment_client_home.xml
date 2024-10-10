@@ -8,6 +8,55 @@
     tools:context=".ClientHomeFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/editPetOverlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/deletePetOverlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <Button
+            android:id="@+id/deletePetBackButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="Back"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/petIdToDelete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Pet ID to delete"
+            android:inputType="text"
+            app:layout_constraintBottom_toTopOf="@+id/deletePetSubmitButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/deletePetSubmitButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="163dp"
+            android:layout_marginEnd="157dp"
+            android:text="Confirm Delete"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.566"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/addPetOverlay"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -136,14 +185,15 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/regularView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="visible">
+        android:layout_height="match_parent">
 
         <Button
-            android:id="@+id/adminInventoryAddButton"
+            android:id="@+id/addPetButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
             android:text="Add pet"
+            app:layout_constraintBottom_toTopOf="@+id/petListLinearLayout"
             app:layout_constraintEnd_toEndOf="parent" />
 
         <Button
@@ -151,6 +201,22 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Logout"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/editPetById"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Edit pet"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <Button
+            android:id="@+id/removePetByID"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Delete pet"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
@@ -161,7 +227,7 @@
             android:text="Pets view"
             android:textColor="@color/black"
             android:textSize="40dp"
-            app:layout_constraintEnd_toEndOf="@+id/adminInventoryAddButton"
+            app:layout_constraintEnd_toEndOf="@id/addPetButton"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -182,7 +248,7 @@
                 android:background="@color/white"
                 android:text="TextView"
                 android:textColor="@color/black"
-                android:textSize="30sp" />
+                android:textSize="20sp" />
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

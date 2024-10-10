@@ -70,7 +70,7 @@ public class AdminInventoryFragment extends Fragment {
             startActivity(intent);
         });
 
-        Button addInventoryButton = view.findViewById(R.id.adminInventoryAddButton);
+        Button addInventoryButton = view.findViewById(R.id.deletePetButton);
         addInventoryButton.setOnClickListener(view2 -> {
             ToggleAddPetOverlay(true);
         });
