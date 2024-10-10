@@ -1,16 +1,15 @@
 package com.example.cydrop_frontend;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.FrameLayout;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -18,8 +17,10 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
@@ -30,6 +31,17 @@ public class ClientHomeFragment extends Fragment {
 
     private View overlayView;
     private View regularView;
+
+    private EditText petId;
+    private EditText petType;
+    private EditText petBreed;
+    private EditText petName;
+    private EditText petDiagnosis;
+    private EditText petAge;
+    private EditText petGender;
+
+    LinearLayout linearLayout;
+    TextView petsViewTextView;
 
     public ClientHomeFragment() {
         // Required empty public constructor
@@ -47,11 +59,12 @@ public class ClientHomeFragment extends Fragment {
         regularView = view.findViewById(R.id.regularView);
         overlayView = view.findViewById(R.id.addPetOverlay);
 
-        LinearLayout layout = view.findViewById(R.id.petListLinearLayout);
-        TextView textView = view.findViewById(R.id.textView2);
-        GetJSONData(layout, textView);
+        linearLayout = view.findViewById(R.id.petListLinearLayout);
+        petsViewTextView = view.findViewById(R.id.textView2);
 
-        Button addButton = view.findViewById(R.id.addButton);
+        GetJSONData();
+
+        Button addButton = view.findViewById(R.id.adminInventoryAddButton);
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -67,13 +80,26 @@ public class ClientHomeFragment extends Fragment {
             }
         });
 
-        Button submit = view.findViewById(R.id.submitButton);
-        submit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
+        Button submit = view.findViewById(R.id.adminInventorySubmitButton);
+        submit.setOnClickListener(view2 -> {
+            PostNewPet();
         });
+
+        Button logout = view.findViewById(R.id.adminLogoutButton);
+        logout.setOnClickListener(view1 -> {
+            Intent intent = new Intent(MainActivity.class.toString());
+            startActivity(intent);
+        });
+
+        petId = view.findViewById(R.id.petId);
+        petType = view.findViewById(R.id.petType);
+        petBreed = view.findViewById(R.id.petBreed);
+        petAge = view.findViewById(R.id.petAge);
+        petName = view.findViewById(R.id.petNameInput);
+        petDiagnosis = view.findViewById(R.id.petDiagnosis);
+        petGender = view.findViewById(R.id.petGender);
+
+        ToggleAddPetOverlay(false);
 
         // Inflate the layout for this fragment
         return view;
@@ -90,7 +116,7 @@ public class ClientHomeFragment extends Fragment {
         }
     }
 
-    private void GetJSONData(LinearLayout layout, TextView textView) {
+    private void GetJSONData() {
         JsonArrayRequest jsonArrReq = new JsonArrayRequest(
                 Request.Method.GET,
                 "http://coms-3090-038.class.las.iastate.edu:8080/pets",
@@ -99,13 +125,14 @@ public class ClientHomeFragment extends Fragment {
                     @Override
                     public void onResponse(JSONArray response) {
                         try {
+                            petsViewTextView.setText("");
                             JSONArray jsonArr = response;
                             for (int i = 0; i < jsonArr.length(); i++){
                                 JSONObject json = jsonArr.getJSONObject(i);
 
                                 String newText = "Pet name: " + json.getString("pet_name") +
                                         "\nPet breed: " + json.getString("pet_breed") + "\n\n";
-                                textView.setText(textView.getText() + newText);
+                                petsViewTextView.setText(petsViewTextView.getText() + newText);
 
 //                                FragmentManager fragmentManager = getParentFragmentManager();
 //                                FragmentTransaction fragTransaction = fragmentManager.beginTransaction();
@@ -144,6 +171,50 @@ public class ClientHomeFragment extends Fragment {
         };
 
         VolleySingleton.getInstance(getContext().getApplicationContext()).addToRequestQueue(jsonArrReq);
+    }
+
+    private void PostNewPet(){
+        JSONObject pet = new JSONObject();
+
+        try{
+            // TEMPORARY OWNER ID. ALWAYS SET TO 1 HERE
+            JSONObject ownerInfo = new JSONObject();
+            ownerInfo.put("id", 1);
+            pet.put("owner", ownerInfo);
+
+            pet.put("pet_id", petId.getText().toString());
+            pet.put("pet_name", petName.getText().toString());
+            pet.put("pet_type", petType.getText().toString());
+            pet.put("pet_breed", petBreed.getText().toString());
+            pet.put("pet_diagnosis", petDiagnosis.getText().toString());
+            pet.put("pet_age", Integer.parseInt(petAge.getText().toString()) );
+            pet.put("pet_gender", petGender.getText().toString());
+        } catch (JSONException e){
+            // Unable to create json object
+            return;
+        }
+
+        JsonObjectRequest postReq = new JsonObjectRequest(
+                Request.Method.POST,
+                "http://coms-3090-038.class.las.iastate.edu:8080/pet",
+                pet,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        // Victory! i think
+                        GetJSONData();
+                        ToggleAddPetOverlay(false);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // Oopsie
+                    }
+                }
+        );
+
+        VolleySingleton.getInstance(getContext().getApplicationContext()).addToRequestQueue(postReq);
     }
 
 

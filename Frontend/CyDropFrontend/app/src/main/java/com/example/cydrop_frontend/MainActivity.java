@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, ClientNavbarMainActivity.class);
                // Intent intent = new Intent(MainActivity.this, SignupActivity.class);
-                intent.putExtra("USERID",1); // Sample client is userid 0
+                intent.putExtra("USERID",1); // Sample client is userid 1
                 startActivity(intent);
             }
         });
@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, AdminNavbarMainActivity.class);
-                intent.putExtra("USERID",1); // Sample client is userid 0
+                intent.putExtra("USERID",1); // Sample client is userid 1
                 startActivity(intent);
             }
         });
