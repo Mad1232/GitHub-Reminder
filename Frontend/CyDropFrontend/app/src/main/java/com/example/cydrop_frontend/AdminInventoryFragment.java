@@ -5,25 +5,19 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
-import android.view.FrameMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -81,7 +75,7 @@ public class AdminInventoryFragment extends Fragment {
             ToggleAddPetOverlay(true);
         });
 
-        Button closeOverlay = view.findViewById(R.id.adminInventoryCloseOverlayButton);
+        Button closeOverlay = view.findViewById(R.id.adminCloseOverlayButton);
         closeOverlay.setOnClickListener(view3 -> {
             ToggleAddPetOverlay(false);
         });

@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -72,7 +73,7 @@ public class ClientHomeFragment extends Fragment {
             }
         });
 
-        Button backButton = view.findViewById(R.id.backButton);
+        Button backButton = view.findViewById(R.id.adminCloseOverlayButton);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -82,6 +83,9 @@ public class ClientHomeFragment extends Fragment {
 
         Button submit = view.findViewById(R.id.adminInventorySubmitButton);
         submit.setOnClickListener(view2 -> {
+
+
+
             PostNewPet();
         });
 
@@ -191,6 +195,7 @@ public class ClientHomeFragment extends Fragment {
             pet.put("pet_gender", petGender.getText().toString());
         } catch (JSONException e){
             // Unable to create json object
+            Toast.makeText(getActivity(), "Error creating JSON", Toast.LENGTH_LONG);
             return;
         }
 
@@ -202,14 +207,15 @@ public class ClientHomeFragment extends Fragment {
                     @Override
                     public void onResponse(JSONObject response) {
                         // Victory! i think
-                        GetJSONData();
                         ToggleAddPetOverlay(false);
+                        GetJSONData();
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         // Oopsie
+                        Toast.makeText(getActivity(), "Error POSTing pet", Toast.LENGTH_LONG);
                     }
                 }
         );
