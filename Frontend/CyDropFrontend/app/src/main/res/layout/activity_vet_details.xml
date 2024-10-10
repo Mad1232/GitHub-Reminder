@@ -1,17 +1,43 @@
-<androidx.appcompat.widget.LinearLayoutCompat xmlns:tools="http://schemas.android.com/tools" xmlns:android="http://schemas.android.com/apk/res/android" tools:context=".MainActivity" android:layout_height="match_parent" android:layout_width="match_parent" android:orientation="vertical">
-    <Button android:id="@+id/btnJsonObj"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <Button
+        android:id="@+id/btnJsonObj"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="Get Vet Details"/>
-    <TextView android:layout_width="fill_parent"
+        android:text="Get Vet Details"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:text="Vet Details: "
         android:textSize="30sp"
-        android:text="Vet Details: "/>
-    <TextView android:id="@+id/msgResponse"
+        app:layout_constraintTop_toBottomOf="@+id/btnJsonObj"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <TextView
+        android:id="@+id/msgResponse"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:text=""/>
-</androidx.appcompat.widget.LinearLayoutCompat>
+        android:text=""
+        app:layout_constraintTop_toBottomOf="@+id/textView3"
+        tools:layout_editor_absoluteX="-16dp" />
+
+    <Button
+        android:id="@+id/vetDetailsLogout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="logout"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

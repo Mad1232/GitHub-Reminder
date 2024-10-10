@@ -1,5 +1,6 @@
 package com.example.cydrop_frontend;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -42,6 +43,11 @@ public class VetDetailsActivity extends AppCompatActivity {
                 getJSONData();
             }
         });
+
+        findViewById(R.id.vetDetailsLogout).setOnClickListener(view1 -> {
+            Intent intent = new Intent(VetDetailsActivity.this, MainActivity.class);
+            startActivity(intent);
+        });
     }
 
     //get method
@@ -53,6 +59,7 @@ public class VetDetailsActivity extends AppCompatActivity {
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
+                        msgResponse.setText(""); // reset the msg text
                         try{
                             JSONArray jsonArr = response;
                             for (int i = 0; i < jsonArr.length(); i++) {
