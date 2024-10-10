@@ -9,12 +9,14 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -102,6 +104,39 @@ public class VetDetailsActivity extends AppCompatActivity {
 
         // Adding request to request queue
         VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(jsonObjReq);
+    }
+
+    private void putRequest(String updateSettingsURL){
+
+      //  putRequest("http://coms-3090-038.class.las.iastate.edu:8080/vet")     //use this to call function
+
+
+        String vet_name = "Madison";
+
+        JSONObject json = new JSONObject();
+        try {
+            json.put("vet_name", vet_name);
+            //  json.put("type", type);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.PUT, updateSettingsURL, json, new Response.Listener<JSONObject>() {
+
+            @Override
+            public void onResponse(JSONObject response) {
+                Toast.makeText(getApplicationContext(), "Updated Password!", Toast.LENGTH_LONG).show();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                throw new RuntimeException(error);
+            }
+        });
+
+
+        VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(request);
+
     }
 
 
