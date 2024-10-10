@@ -75,6 +75,8 @@ public class ClientHomeFragment extends Fragment {
             }
         });
 
+        //ToggleAddPetOverlay(true);
+
         // Inflate the layout for this fragment
         return view;
     }
