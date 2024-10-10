@@ -1,5 +1,6 @@
 package com.example.cydrop_frontend;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -9,6 +10,7 @@ import android.view.FrameMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -29,6 +31,7 @@ import java.util.Map;
 
 public class AdminInventoryFragment extends Fragment {
     private static final String URL_JSON_ARRAY = "http://coms-3090-038.class.las.iastate.edu:8080/inventory";
+
     TextView dataText;
 
     public AdminInventoryFragment() {
@@ -45,14 +48,23 @@ public class AdminInventoryFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_admin_inventory, container, false);
-
         dataText = view.findViewById(R.id.data_text);
 
-        GetJSONData();
+        Button addInventory = view.findViewById(R.id.adminInventoryAddButton);
+        addInventory.setOnClickListener(view1 -> {
 
+        });
+
+        Button logout = view.findViewById(R.id.adminLogoutButton);
+        logout.setOnClickListener(view1 -> {
+            Intent intent = new Intent(MainActivity.class.toString());
+            startActivity(intent);
+        });
+
+
+        GetJSONData();
         return view;
     }
 

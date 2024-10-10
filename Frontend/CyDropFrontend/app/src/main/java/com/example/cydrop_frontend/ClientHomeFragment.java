@@ -64,7 +64,7 @@ public class ClientHomeFragment extends Fragment {
 
         GetJSONData();
 
-        Button addButton = view.findViewById(R.id.addButton);
+        Button addButton = view.findViewById(R.id.adminInventoryAddButton);
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -85,7 +85,7 @@ public class ClientHomeFragment extends Fragment {
             PostNewPet();
         });
 
-        Button logout = view.findViewById(R.id.clientHomeLogout);
+        Button logout = view.findViewById(R.id.adminLogoutButton);
         logout.setOnClickListener(view1 -> {
             Intent intent = new Intent(MainActivity.class.toString());
             startActivity(intent);
