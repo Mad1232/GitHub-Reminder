@@ -80,7 +80,7 @@ public class ClientHomeFragment extends Fragment {
             }
         });
 
-        Button submit = view.findViewById(R.id.submitButton);
+        Button submit = view.findViewById(R.id.adminInventorySubmitButton);
         submit.setOnClickListener(view2 -> {
             PostNewPet();
         });
