@@ -32,41 +32,68 @@
             android:layout_marginTop="56dp"
             android:ems="10"
             android:inputType="text"
-            android:text="ID"
+            android:hint="[PLACEHOLDER] petId"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/addPetTextView" />
 
         <EditText
-            android:id="@+id/petTypeInput"
+            android:id="@+id/petType"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="text"
-            android:text="Pet Type"
+            android:hint="Pet type"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.502"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/petNameInput" />
+
+        <EditText
+            android:id="@+id/petNameInput"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="text"
+            android:hint="Pet name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.502"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/petId" />
 
         <EditText
-            android:id="@+id/petBreedInput"
+            android:id="@+id/petBreed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="text"
-            android:text="Breed"
+            android:hint="pet breed"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.502"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/petTypeInput" />
+            app:layout_constraintTop_toBottomOf="@+id/petType" />
 
         <EditText
             android:id="@+id/petDiagnosis"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:hint="Pet diagnosis"
             android:inputType="text"
-            android:text="Diagnosis"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.502"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/petGender" />
+
+        <EditText
+            android:id="@+id/petGender"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Pet gender"
+            android:inputType="text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.502"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/petAge" />
 
@@ -85,8 +112,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Back"
-            tools:layout_editor_absoluteX="3dp"
-            tools:layout_editor_absoluteY="4dp" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.049"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.023" />
 
         <EditText
             android:id="@+id/petAge"
@@ -94,10 +125,11 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="text"
-            android:text="Age"
+            android:hint="Pet age"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.502"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/petBreedInput" />
+            app:layout_constraintTop_toBottomOf="@+id/petBreed" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
