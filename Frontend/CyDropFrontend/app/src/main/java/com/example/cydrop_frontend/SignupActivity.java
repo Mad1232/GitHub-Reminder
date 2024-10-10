@@ -79,17 +79,7 @@ public class SignupActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
 
-                delRequest("http://coms-3090-038.class.las.iastate.edu:8080/users/8");
-            }
-        });
-
-        updateButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                String password = passwordEditText.getText().toString();
-
-                putRequest("http://coms-3090-038.class.las.iastate.edu:8080/users/8", password);
+                delRequest("http://coms-3090-038.class.las.iastate.edu:8080/users/10");
             }
         });
 
@@ -151,6 +141,7 @@ public class SignupActivity extends AppCompatActivity{
     private void delRequest(String deleteAccountURL){
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.DELETE, deleteAccountURL, null, new Response.Listener<JSONObject>() {
+            @Override
             public void onResponse(JSONObject response) {
                 Toast.makeText(getApplicationContext(), "Deleted User!", Toast.LENGTH_LONG).show();
             }
@@ -165,33 +156,6 @@ public class SignupActivity extends AppCompatActivity{
     }
 
 
-    private void putRequest(String updateSettingsURL, String password){
-
-        JSONObject json = new JSONObject();
-        try {
-            json.put("password", password);
-            //  json.put("type", type);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.PUT, updateSettingsURL, json, new Response.Listener<JSONObject>() {
-
-            @Override
-            public void onResponse(JSONObject response) {
-                Toast.makeText(getApplicationContext(), "Updated Password!", Toast.LENGTH_LONG).show();
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                throw new RuntimeException(error);
-            }
-        });
-
-
-        VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(request);
-
-    }
 
 
 
