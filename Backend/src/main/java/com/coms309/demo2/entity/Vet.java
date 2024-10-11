@@ -16,6 +16,9 @@ public class Vet {
     @Column(name = "specialization")
     private String specialization;
 
+    @Column(name = "vet_email")
+    private String vetEmail;
+
     // Getters and setters
     public int getVet_id() {
         return vet_id;
@@ -40,4 +43,8 @@ public class Vet {
     public void setSpecialization(String specialization) {
         this.specialization = specialization;
     }
+
+    public String getVetEmail() {return vetEmail;}
+
+    public void setVetEmail(String vetEmail) {this.vetEmail = vetEmail;}
 }
