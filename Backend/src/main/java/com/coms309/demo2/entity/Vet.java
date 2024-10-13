@@ -19,6 +19,15 @@ public class Vet {
     @Column(name = "vet_email")
     private String vetEmail;
 
+    @Column(name = "license_num")
+    private String licenseNum;
+
+    @Column(name = "clinic_address")
+    private String clinicAddress;
+
+    @Column(name = "phone")
+    private String phone;
+
     // Getters and setters
     public int getVet_id() {
         return vet_id;
@@ -47,4 +56,18 @@ public class Vet {
     public String getVetEmail() {return vetEmail;}
 
     public void setVetEmail(String vetEmail) {this.vetEmail = vetEmail;}
+
+    public String getLicenseNum() {return licenseNum;}
+
+    public void setLicenseNum(String licenseNum) {this.licenseNum = licenseNum;}
+
+    public String getClinicAddress() {return clinicAddress;}
+
+    public void setClinicAddress(String clinicAddress) {this.clinicAddress = clinicAddress;}
+
+    public String getPhone() {return phone;}
+
+    public void setPhone(String phone) {this.phone = phone;}
+
+
 }
