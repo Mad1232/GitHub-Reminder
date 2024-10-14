@@ -56,6 +56,13 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+        Button loginButton = findViewById(R.id.main_login_button);
+        loginButton.setOnClickListener(view2 -> {
+            /* when signup button is pressed, use intent to switch to Signup Activity */
+            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+            startActivity(intent);
+        });
+
         signupButton = findViewById(R.id.main_signup_btn);  // link to signup button in the Main activity XML
         signupButton.setOnClickListener(new View.OnClickListener() {
             @Override

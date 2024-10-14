@@ -48,7 +48,7 @@ public class SignupActivity extends AppCompatActivity{
         loginButton = findViewById(R.id.signup_login_btn);    // link to login button in the Signup activity XML
         signupButton = findViewById(R.id.signup_signup_btn);  // link to signup button in the Signup activity XML
         deleteButton = findViewById(R.id.del_btn);
-        updateButton = findViewById(R.id.pass_btn);
+//        updateButton = findViewById(R.id.pass_btn);
 
         /* click listener on login button pressed */
         loginButton.setOnClickListener(new View.OnClickListener() {

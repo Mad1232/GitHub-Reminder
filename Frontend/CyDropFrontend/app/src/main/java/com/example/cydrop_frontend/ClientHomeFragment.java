@@ -177,7 +177,7 @@ public class ClientHomeFragment extends Fragment {
                                 JSONObject json = jsonArr.getJSONObject(i);
 
                                 String newText =  "Pet ID: "+ json.getString("pet_id") +
-                                        "Pet name: " + json.getString("pet_name") +
+                                        "\nPet name: " + json.getString("pet_name") +
                                         "\nPet Pet type: " + json.getString("pet_type") + "\n\n";
                                 petsViewTextView.setText(petsViewTextView.getText() + newText);
                             }
