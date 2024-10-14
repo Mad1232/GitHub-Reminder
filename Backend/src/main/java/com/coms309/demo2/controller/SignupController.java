@@ -49,21 +49,21 @@ public class SignupController {
         return users;
     }
 
-    // Change email
-    @PutMapping("/users/{id}/email")
-    public String changeEmail(@PathVariable Long id, @RequestBody String email) {
-        Optional<User> userOpt = repository.findById(id);
-        if (userOpt.isPresent()) {
-            User user = userOpt.get();
-            // Set the new email
-            user.setEmail(email);
-            // Save the updated user back to the repository
-            repository.save(user);
-            return "Email updated successfully";
-        } else {
-            return "User not found";
-        }
-    }
+    // // Change email
+    // @PutMapping("/users/{id}/email")
+    // public String changeEmail(@PathVariable Long id, @RequestBody String email) {
+    //     Optional<User> userOpt = repository.findById(id);
+    //     if (userOpt.isPresent()) {
+    //         User user = userOpt.get();
+    //         // Set the new email
+    //         user.setEmail(email);
+    //         // Save the updated user back to the repository
+    //         repository.save(user);
+    //         return "Email updated successfully";
+    //     } else {
+    //         return "User not found";
+    //     }
+    // }
 
     // Delete user by ID
     @DeleteMapping("/users/{id}")
