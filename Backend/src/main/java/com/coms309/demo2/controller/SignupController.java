@@ -75,4 +75,10 @@ public class SignupController {
             return "User not found";
         }
     }
+
+    @DeleteMapping("/users")
+    public String removeUsers() {
+      repository.deleteAll();
+      return "all users deleted";
+    }
 }
