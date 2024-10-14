@@ -9,6 +9,7 @@
     tools:context=".MainActivity">
 
     <TextView
+        android:id="@+id/login_display_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -36,7 +37,8 @@
             android:id="@+id/login_username_edt"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:hint="Enter Email Here"></EditText>
+            android:hint="Enter Email Here"
+            android:text="sophia.williams4@example.com"></EditText>
 
     </LinearLayout>
 
@@ -58,7 +60,8 @@
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:hint="Enter Password Here"
-            android:inputType="textPassword"></EditText>
+            android:inputType="textPassword"
+            android:text="mynameisSophia4"></EditText>
 
     </LinearLayout>
 

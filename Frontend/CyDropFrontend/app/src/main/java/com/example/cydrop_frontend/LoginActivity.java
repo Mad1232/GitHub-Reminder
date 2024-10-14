@@ -13,6 +13,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -30,6 +36,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText passwordEditText;  // define password edittext variable
     private Button loginButton;         // define login button variable
     private Button signupButton;        // define signup button variable
+    private TextView loginDisplay;
 
 
     @Override
@@ -42,7 +49,7 @@ public class LoginActivity extends AppCompatActivity {
         passwordEditText = findViewById(R.id.login_password_edt);
         loginButton = findViewById(R.id.login_login_btn);    // link to login button in the Login activity XML
         signupButton = findViewById(R.id.login_signup_btn);  // link to signup button in the Login activity XML
-
+        loginDisplay = findViewById(R.id.login_display_text);
 
         // Button to send GET request
         loginButton.setOnClickListener(new View.OnClickListener() {
@@ -58,9 +65,11 @@ public class LoginActivity extends AppCompatActivity {
      //           verifyLogin(username, password);
 
 
-                Intent intent = new Intent(LoginActivity.this, VetDetailsActivity.class);  //only for testing demo2
-                startActivity(intent);  // go to LoginActivity
+//                Intent intent = new Intent(LoginActivity.this, VetDetailsActivity.class);  //only for testing demo2
+//                startActivity(intent);  // go to LoginActivity
+//
 
+                SendLoginRequest();
                     }
                 });
 
@@ -78,8 +87,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void verifyLogin(String username, String password){
-        String url = VolleySingleton.backendURL + "/user" + "?username=" + username + "&password=" + password;
-        sendGetRequest(url);
+        //String url = VolleySingleton.backendURL + "/user" + "?username=" + username + "&password=" + password;
+        //sendGetRequest(url);
     }
 
     // Method to send GET Request
@@ -122,6 +131,38 @@ public class LoginActivity extends AppCompatActivity {
             Log.e("GET ERROR", e.getMessage(), e); // Log any errors
             e.printStackTrace();
         }
+    }
+
+    private void SendLoginRequest(){
+        loginDisplay.setText("Sending req");
+
+        JSONObject userLogin = new JSONObject();
+        try {
+//            userLogin.put("email", usernameEditText.getText().toString());
+//            userLogin.put("password", passwordEditText.getText().toString());
+
+            userLogin.put("email", "sophia.williams4@example.com");
+            userLogin.put("password", "mynameisSophia4");
+        } catch (Exception e) {
+            loginDisplay.setText("Error creating JSON object");
+            return;
+        }
+
+        JsonObjectRequest postReq = new JsonObjectRequest(
+                Request.Method.POST,
+                "http://coms-3090-038.class.las.iastate.edu:8080/login",
+                userLogin,
+                response -> {
+                    // Victory! i think
+                    loginDisplay.setText(response.toString());
+                },
+                error -> {
+                    // Oopsie
+                    loginDisplay.setText(error.toString());
+                }
+        );
+
+        VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(postReq);
     }
 
 
