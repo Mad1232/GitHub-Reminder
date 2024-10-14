@@ -13,11 +13,16 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.JsonRequest;
+import com.android.volley.toolbox.StringRequest;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -25,6 +30,7 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.concurrent.ExecutorService;
@@ -148,13 +154,20 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
-        JsonObjectRequest postReq = new JsonObjectRequest(
+        JsonRequest postReq = new JsonObjectRequest(
                 Request.Method.POST,
                 "http://coms-3090-038.class.las.iastate.edu:8080/login",
                 userLogin,
-                response -> {
-                    // Victory! i think
-                    loginDisplay.setText(response.toString());
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+
+                    }
+
+                    public void onResponse(String response) {
+
+                    }
+
                 },
                 error -> {
                     // Oopsie
@@ -162,7 +175,34 @@ public class LoginActivity extends AppCompatActivity {
                 }
         );
 
-        VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(postReq);
+        StringRequest testReq = new StringRequest(
+                Request.Method.POST,
+                "http://coms-3090-038.class.las.iastate.edu:8080/login",
+                response -> {
+                    loginDisplay.setText(response.toString());
+                },
+                error -> {
+                    loginDisplay.setText("Error: " + error.toString());
+                }
+        ) {
+            @Override
+            public String getBodyContentType() {
+                return "application/json; charset=utf-8";
+            }
+
+            @Override
+            public byte[] getBody() throws AuthFailureError {
+                try {
+                    return userLogin.toString() == null ? null : userLogin.toString().getBytes("utf-8");
+                } catch (UnsupportedEncodingException uee) {
+                    VolleyLog.wtf("Unsupported Encoding while trying to get the bytes of %s using %s", userLogin.toString(), "utf-8");
+                    return null;
+                }
+            }
+        };
+
+
+        VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(testReq);
     }
 
 
