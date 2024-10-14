@@ -19,6 +19,7 @@ public class LoginController {
     @Autowired
     private VetsRepo vetsRepo;
 
+
     @PostMapping
     public String login(@RequestBody LoginRequest loginRequest) {
         // Retrieve user by email
@@ -32,16 +33,16 @@ public class LoginController {
 
                 // Check if the user is an Admin
                 if (loginRequest.getEmail().startsWith("admin")) {
-                    return "admin_view";  // Admin View
+                    return "admin_view" + "," + user.getId();  // Admin View
                 }
 
                 // Check if the user is a Vet
                 Optional<Vet> vetOptional = vetsRepo.findByVetEmail(user.getEmail()); // Update method call
                 if (vetOptional.isPresent()) {
-                    return "vet_view";  // Vet View
+                    return "vet_view" + "," + user.getId();  // Vet View
                 }
 
-                return "client_view";  // Client View (default for non-vets, non-admins)
+                return "client_view" + "," + user.getId();  // Client View (default for non-vets, non-admins)
 
             } else {
                 return "Username or password is incorrect";
