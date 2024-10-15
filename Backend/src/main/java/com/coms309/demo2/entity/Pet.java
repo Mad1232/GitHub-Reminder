@@ -33,6 +33,11 @@ public class Pet {
     @JoinColumn(name = "owner_id", nullable = false)
     private User owner;
 
+    //One-to-One relationship to Medications(medicine)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "medication_id",referencedColumnName = "medication_id", nullable = true)
+    private Medication medication;
+
     // Getters and setters
     public int getPet_id() {
         return pet_id;
@@ -98,4 +103,15 @@ public class Pet {
     public void setOwner(User owner) {
         this.owner = owner;
     }
+
+    public Medication getMedication(){
+        return medication;
+    }
+
+    public void setMedication(Medication medication){
+        this.medication = medication;
+    }
+
 }
+
+
