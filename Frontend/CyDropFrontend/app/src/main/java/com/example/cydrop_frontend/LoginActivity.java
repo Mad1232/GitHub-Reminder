@@ -177,6 +177,8 @@ public class LoginActivity extends AppCompatActivity {
                             startActivity(intent);  // go to SignupActivity
                             break;
                         case "vet_view":
+                            intent = new Intent(LoginActivity.this, VetDetailsActivity.class);
+                            startActivity(intent);  // go to SignupActivity
                             break;
                     }
 
