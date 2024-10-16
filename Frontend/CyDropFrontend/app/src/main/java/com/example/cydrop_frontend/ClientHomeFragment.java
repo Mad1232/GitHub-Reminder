@@ -116,7 +116,6 @@ public class ClientHomeFragment extends Fragment {
             startActivity(intent);
         });
 
-        petId = view.findViewById(R.id.petId);
         petType = view.findViewById(R.id.petType);
         petBreed = view.findViewById(R.id.petBreed);
         petAge = view.findViewById(R.id.petAge);
@@ -212,12 +211,13 @@ public class ClientHomeFragment extends Fragment {
         JSONObject pet = new JSONObject();
 
         try{
-            // TEMPORARY OWNER ID. ALWAYS SET TO 1 HERE
             JSONObject ownerInfo = new JSONObject();
-            ownerInfo.put("id", 1);
+            ownerInfo.put("id", VolleySingleton.userId);
             pet.put("owner", ownerInfo);
 
-            pet.put("pet_id", petId.getText().toString());
+//            JSONObject medicationInfo = new JSONObject();
+//            pet.put("medication", medicationInfo);
+
             pet.put("pet_name", petName.getText().toString());
             pet.put("pet_type", petType.getText().toString());
             pet.put("pet_breed", petBreed.getText().toString());
