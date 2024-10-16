@@ -144,42 +144,44 @@ public class LoginActivity extends AppCompatActivity {
 
         JSONObject userLogin = new JSONObject();
         try {
-//            userLogin.put("email", usernameEditText.getText().toString());
-//            userLogin.put("password", passwordEditText.getText().toString());
-
-            userLogin.put("email", "sophia.williams4@example.com");
-            userLogin.put("password", "mynameisSophia4");
+            userLogin.put("email", usernameEditText.getText().toString());
+            userLogin.put("password", passwordEditText.getText().toString());
         } catch (Exception e) {
             loginDisplay.setText("Error creating JSON object");
             return;
         }
-
-        JsonRequest postReq = new JsonObjectRequest(
-                Request.Method.POST,
-                "http://coms-3090-038.class.las.iastate.edu:8080/login",
-                userLogin,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-
-                    }
-
-                    public void onResponse(String response) {
-
-                    }
-
-                },
-                error -> {
-                    // Oopsie
-                    loginDisplay.setText(error.toString());
-                }
-        );
 
         StringRequest testReq = new StringRequest(
                 Request.Method.POST,
                 "http://coms-3090-038.class.las.iastate.edu:8080/login",
                 response -> {
                     loginDisplay.setText(response.toString());
+                    if (response.equals("User not found") || response.equals("Username or password is incorrect")) {
+                        Toast errorMsg = Toast.makeText(getApplicationContext(), "Error, user not found", Toast.LENGTH_LONG);
+                        errorMsg.show();
+                    }
+
+
+                    // We have a valid user
+                    VolleySingleton.userId = response.split(",")[1];
+                    String userType = response.split(",")[0];
+
+                    Intent intent = new Intent(LoginActivity.this, ClientNavbarMainActivity.class);
+                    switch (userType){
+                        case "client_view":
+                            intent = new Intent(LoginActivity.this, ClientNavbarMainActivity.class);
+                            startActivity(intent);  // go to SignupActivity
+                            break;
+                        case "admin_view":
+                             intent = new Intent(LoginActivity.this, AdminNavbarMainActivity.class);
+                            startActivity(intent);  // go to SignupActivity
+                            break;
+                        case "vet_view":
+                            break;
+                    }
+
+
+
                 },
                 error -> {
                     loginDisplay.setText("Error: " + error.toString());
@@ -189,7 +191,6 @@ public class LoginActivity extends AppCompatActivity {
             public String getBodyContentType() {
                 return "application/json; charset=utf-8";
             }
-
             @Override
             public byte[] getBody() throws AuthFailureError {
                 try {
