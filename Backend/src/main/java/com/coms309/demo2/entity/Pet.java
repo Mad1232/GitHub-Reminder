@@ -1,5 +1,6 @@
 package com.coms309.demo2.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 @Entity
@@ -7,6 +8,7 @@ import jakarta.persistence.*;
 public class Pet {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY) //had to do this to make it work
     @Column(name = "pet_id")
     private int pet_id;
 
@@ -34,8 +36,9 @@ public class Pet {
     private User owner;
 
     //One-to-One relationship to Medications(medicine)
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "medication_id",referencedColumnName = "medication_id", nullable = true)
+    @JsonBackReference
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "medication_id", referencedColumnName = "id", nullable = true)
     private Medication medication;
 
     // Getters and setters

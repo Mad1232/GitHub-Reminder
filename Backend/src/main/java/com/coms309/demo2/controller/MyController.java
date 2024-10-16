@@ -3,8 +3,10 @@ package com.coms309.demo2.controller;
 import com.coms309.demo2.entity.Pet;
 import com.coms309.demo2.repository.PetsRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+import com.coms309.demo2.entity.Medication;
+import com.coms309.demo2.repository.MedicationRepository;
 import java.util.List;
 
 
@@ -14,15 +16,45 @@ public class MyController {
     @Autowired
     PetsRepo petsRepo;
 
+    @Autowired
+    MedicationRepository medicationRepo;
+
     @GetMapping("/mytestapi")
     public String testMyAPI() {
         return "The API works well";
     }
 
     @PostMapping("/pet")
-    public Pet savePet(@RequestBody Pet pet) {
-        return petsRepo.save(pet); // Save the pet object to the repository
+    public ResponseEntity<Pet> savePet(@RequestBody Pet pet) {
+
+        // Check if the Medication object is included
+        if (pet.getMedication() != null && pet.getMedication().getId() != null) {
+            // Retrieve existing Medication by ID
+            Medication medication = medicationRepo.findById(pet.getMedication().getId())
+                    .orElseThrow(() -> new RuntimeException("Medication not found"));
+
+            // Set the retrieved Medication object in the Pet entity
+            pet.setMedication(medication);
+        }
+
+        // Save the pet object
+        Pet savedPet = petsRepo.save(pet);
+
+        // Return a ResponseEntity with the saved pet and 200 OK status
+        return ResponseEntity.ok(savedPet);
     }
+
+//    @PostMapping("/pets")
+//    public ResponseEntity<Pet> addPet(@RequestBody Pet petRequest) {
+//        Medication medication = MedicationRepository.findById(petRequest.getMedication().getMedicationId())
+//                .orElseThrow(() -> new RuntimeException("Medication not found"));
+//
+//        petRequest.setMedication(medication);
+//        Pet savedPet = PetsRepo.save(petRequest);
+//
+//        return ResponseEntity.ok(savedPet);
+//    }
+
 
     @GetMapping("/pets")
     public List<Pet> getAllPets(){
