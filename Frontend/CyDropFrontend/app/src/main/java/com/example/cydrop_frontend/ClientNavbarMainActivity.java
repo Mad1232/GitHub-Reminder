@@ -15,8 +15,6 @@ import com.example.cydrop_frontend.databinding.ActivityClientNavbarMainBinding;
 
 public class ClientNavbarMainActivity extends AppCompatActivity {
 
-    private int userid = -1;
-
     ActivityClientNavbarMainBinding binding;
 
     @Override
@@ -33,10 +31,6 @@ public class ClientNavbarMainActivity extends AppCompatActivity {
             return insets;
         });
         replaceFragment(new ClientHomeFragment());
-
-        // extract data passed into this activity from another activity
-        Bundle extras = getIntent().getExtras();
-        userid = extras.getInt("USERID");  // this will come from LoginActivity
 
 
         // Switch fragments when an icon is selected
