@@ -6,26 +6,18 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background_red"
     tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/button_simulate_client_login"
+    <TextView
+        android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="simulate client login"
-        app:layout_constraintBottom_toTopOf="@+id/button_simulate_admin_login"
+        android:layout_marginTop="80dp"
+        android:text="CyDrop"
+        android:textColor="@color/black"
+        android:textSize="50dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/button_simulate_admin_login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="simulate admin login"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -49,5 +41,6 @@
         app:layout_constraintBottom_toTopOf="@+id/main_signup_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
