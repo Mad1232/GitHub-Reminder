@@ -10,6 +10,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -171,7 +172,7 @@ public class LoginActivity extends AppCompatActivity {
                     String userType = response.split(",")[0];
 
                     // Save the user info
-                    SharedPreferences sharedPref =  getPreferences(Context.MODE_PRIVATE);
+                    SharedPreferences sharedPref =  PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                     SharedPreferences.Editor editor = sharedPref.edit();
                     editor.putString("userId", VolleySingleton.userId);
                     editor.putString("userType", userType);
