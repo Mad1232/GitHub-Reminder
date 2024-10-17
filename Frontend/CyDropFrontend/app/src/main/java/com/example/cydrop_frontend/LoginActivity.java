@@ -1,8 +1,12 @@
 package com.example.cydrop_frontend;
 
+import static android.app.PendingIntent.getActivity;
+
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -159,12 +163,19 @@ public class LoginActivity extends AppCompatActivity {
                     if (response.equals("User not found") || response.equals("Username or password is incorrect")) {
                         Toast errorMsg = Toast.makeText(getApplicationContext(), "Error, user not found", Toast.LENGTH_LONG);
                         errorMsg.show();
+                        return;
                     }
-
 
                     // We have a valid user
                     VolleySingleton.userId = response.split(",")[1];
                     String userType = response.split(",")[0];
+
+                    // Save the user info
+                    SharedPreferences sharedPref =  getPreferences(Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPref.edit();
+                    editor.putString("userId", VolleySingleton.userId);
+                    editor.putString("userType", userType);
+                    editor.apply();
 
                     Intent intent = new Intent(LoginActivity.this, ClientNavbarMainActivity.class);
                     switch (userType){
