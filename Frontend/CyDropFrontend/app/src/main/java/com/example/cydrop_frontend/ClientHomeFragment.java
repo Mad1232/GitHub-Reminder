@@ -1,10 +1,12 @@
 package com.example.cydrop_frontend;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -112,6 +114,13 @@ public class ClientHomeFragment extends Fragment {
 
         Button logout = view.findViewById(R.id.adminLogoutButton);
         logout.setOnClickListener(view1 -> {
+
+            SharedPreferences sharedPref =  PreferenceManager.getDefaultSharedPreferences(getContext().getApplicationContext());
+            SharedPreferences.Editor editor = sharedPref.edit();
+            editor.putString("userId", "-1");
+            editor.putString("userType", "none");
+            editor.apply();
+
             Intent intent = new Intent(MainActivity.class.toString());
             startActivity(intent);
         });

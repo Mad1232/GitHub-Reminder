@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(intent);  // go to SignupActivity
                         break;
                     case "admin_view":
-                        intent = new Intent(MainActivity.this, AdminNavbarMainActivity.class);
+                        intent = new Intent(this, AdminNavbarMainActivity.class);
                         startActivity(intent);  // go to SignupActivity
                         break;
                     case "vet_view":
