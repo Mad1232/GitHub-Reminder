@@ -9,14 +9,12 @@ import com.coms309.demo2.entity.ConversationKey;
 import com.coms309.demo2.entity.User;
 import com.coms309.demo2.entity.Vet;
 import com.coms309.demo2.repository.ConversationRepository;
-import com.coms309.demo2.repository.MessageRepository;
 import com.coms309.demo2.repository.UserRepository;
 import com.coms309.demo2.repository.VetsRepo;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
 
 
 @RestController
