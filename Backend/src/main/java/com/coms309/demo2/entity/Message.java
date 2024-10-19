@@ -2,7 +2,6 @@ package com.coms309.demo2.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,17 +19,11 @@ public class Message {
 
     @Getter
     @Setter
-    @ManyToOne
-    @JoinColumn(nullable = false)
-    User user;
-
-    @Getter
-    @Setter
-    @ManyToOne
-    @JoinColumn(nullable = false)
-    Vet vet;
-
-    @Getter
-    @Setter
+    //true = vet, false = user
     boolean vetOrUser;
+
+    //many messages to one conversation
+    @ManyToOne
+    @Getter
+    Conversation conversation;
 }

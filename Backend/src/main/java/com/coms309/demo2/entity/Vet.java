@@ -1,5 +1,6 @@
 package com.coms309.demo2.entity;
 
+import java.util.List;
 import jakarta.persistence.*;
 
 @Entity
@@ -27,6 +28,11 @@ public class Vet {
 
     @Column(name = "phone")
     private String phone;
+
+    //One-to-many relationship with conversations with users
+    //vet is in conversation.java
+    @OneToMany(mappedBy = "vet", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Conversation> conversations;
 
     // Getters and setters
     public int getVet_id() {

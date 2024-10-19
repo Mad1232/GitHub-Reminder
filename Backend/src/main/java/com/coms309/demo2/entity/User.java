@@ -30,6 +30,11 @@ public class User {
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Pet> pets;
 
+    //One-to-many relationship with conversations with vets
+    //user is in conversation.java
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Conversation> conversations;
+
     // Getters and Setters
     public Long getId() {
         return id;
