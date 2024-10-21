@@ -1,0 +1,35 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-Application<experiment2>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "coms309.Application",
+            "projectName": "experiment2",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env",
+            "vmArgs": " -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=53872 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dspring.jmx.enabled=true -Djava.rmi.server.hostname=localhost -Dspring.application.admin.enabled=true -Dspring.boot.project.name=experiment2"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-Application<experiment3>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "coms309.Application",
+            "projectName": "experiment3",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-Application<experiment1>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "coms309.Application",
+            "projectName": "experiment1",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
