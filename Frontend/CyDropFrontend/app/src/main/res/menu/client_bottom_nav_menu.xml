@@ -14,9 +14,8 @@
         />
 
     <item
-        android:icon="@drawable/baseline_question_answer_24"
-        android:title="Questions"
         android:id="@+id/questions"
-        />
+        android:icon="@drawable/baseline_question_answer_24"
+        android:title="Chat" />
 
 </menu>

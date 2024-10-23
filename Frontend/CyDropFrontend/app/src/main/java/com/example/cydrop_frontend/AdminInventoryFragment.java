@@ -66,7 +66,7 @@ public class AdminInventoryFragment extends Fragment {
 
         Button logout = view.findViewById(R.id.adminLogoutButton);
         logout.setOnClickListener(view1 -> {
-            Intent intent = new Intent(MainActivity.class.toString());
+            Intent intent = new Intent(getActivity(), MainActivity.class);
             startActivity(intent);
         });
 
