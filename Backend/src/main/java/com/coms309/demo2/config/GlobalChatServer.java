@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.util.Hashtable;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -71,10 +72,20 @@ public class GlobalChatServer {
             sessionUsernameMap.put(session, username);
             usernameSessionMap.put(username, session);
 
+            // Send a welcome message
             sendMessageToPArticularUser(username, "Welcome to the chat, " + username);
+
+            // Broadcast to all users that a new user has joined
             broadcast("User " + username + " has joined the chat.");
+
+            // Retrieve and send chat history to the newly connected user
+            List<GlobalChatMessage> chatHistory = chatMessageRepo.findAllByOrderByTimestampAsc();
+            for (GlobalChatMessage chatMessage : chatHistory) {
+                sendMessageToPArticularUser(username, chatMessage.getSender() + ": " + chatMessage.getMessage());
+            }
         }
     }
+
 
     @OnMessage
     public void onMessage(Session session, String message) throws IOException {

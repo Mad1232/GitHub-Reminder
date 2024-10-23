@@ -41,4 +41,18 @@ public class GlobalChatMessage {
     public void setMessage(String message) {
         this.message = message;}
 
+    public String getSender() {
+        return sender; // Added getter for sender
+    }
+    public void setSender(String sender) {
+        this.sender = sender;
+    }
+    public LocalDateTime getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(LocalDateTime timestamp) {
+        this.timestamp = timestamp;
+    }
+
 }
