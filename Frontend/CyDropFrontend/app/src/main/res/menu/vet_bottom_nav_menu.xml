@@ -8,10 +8,9 @@
         />
 
     <item
+        android:id="@+id/customers"
         android:icon="@drawable/baseline_pets_24"
-        android:title="Home"
-        android:id="@+id/home"
-        />
+        android:title="Customers" />
 
     <item
         android:icon="@drawable/baseline_question_answer_24"

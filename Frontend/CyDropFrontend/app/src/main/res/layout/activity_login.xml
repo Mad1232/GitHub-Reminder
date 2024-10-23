@@ -38,7 +38,7 @@
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:hint="Enter Email Here"
-            android:text="sophia.williams4@example.com"></EditText>
+            android:text="sophia@gmail.com"></EditText>
 
     </LinearLayout>
 
@@ -61,7 +61,7 @@
             android:layout_height="50dp"
             android:hint="Enter Password Here"
             android:inputType="textPassword"
-            android:text="mynameisSophia4"></EditText>
+            android:text="sophia"></EditText>
 
     </LinearLayout>
 
