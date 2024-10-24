@@ -1,11 +1,16 @@
 package com.example.cydrop_frontend;
 
+import static android.app.PendingIntent.getActivity;
+
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -13,12 +18,24 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkResponse;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.JsonRequest;
+import com.android.volley.toolbox.StringRequest;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.concurrent.ExecutorService;
@@ -30,6 +47,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText passwordEditText;  // define password edittext variable
     private Button loginButton;         // define login button variable
     private Button signupButton;        // define signup button variable
+    private TextView loginDisplay;
 
 
     @Override
@@ -42,7 +60,7 @@ public class LoginActivity extends AppCompatActivity {
         passwordEditText = findViewById(R.id.login_password_edt);
         loginButton = findViewById(R.id.login_login_btn);    // link to login button in the Login activity XML
         signupButton = findViewById(R.id.login_signup_btn);  // link to signup button in the Login activity XML
-
+        loginDisplay = findViewById(R.id.login_display_text);
 
         // Button to send GET request
         loginButton.setOnClickListener(new View.OnClickListener() {
@@ -58,9 +76,11 @@ public class LoginActivity extends AppCompatActivity {
      //           verifyLogin(username, password);
 
 
-                Intent intent = new Intent(LoginActivity.this, VetDetailsActivity.class);  //only for testing demo2
-                startActivity(intent);  // go to LoginActivity
+//                Intent intent = new Intent(LoginActivity.this, VetDetailsActivity.class);  //only for testing demo2
+//                startActivity(intent);  // go to LoginActivity
+//
 
+                SendLoginRequest();
                     }
                 });
 
@@ -78,8 +98,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void verifyLogin(String username, String password){
-        String url = VolleySingleton.backendURL + "/user" + "?username=" + username + "&password=" + password;
-        sendGetRequest(url);
+        //String url = VolleySingleton.backendURL + "/user" + "?username=" + username + "&password=" + password;
+        //sendGetRequest(url);
     }
 
     // Method to send GET Request
@@ -122,6 +142,82 @@ public class LoginActivity extends AppCompatActivity {
             Log.e("GET ERROR", e.getMessage(), e); // Log any errors
             e.printStackTrace();
         }
+    }
+
+    private void SendLoginRequest(){
+        loginDisplay.setText("Sending req");
+
+        JSONObject userLogin = new JSONObject();
+        try {
+            userLogin.put("email", usernameEditText.getText().toString());
+            userLogin.put("password", passwordEditText.getText().toString());
+        } catch (Exception e) {
+            loginDisplay.setText("Error creating JSON object");
+            return;
+        }
+
+        StringRequest testReq = new StringRequest(
+                Request.Method.POST,
+                "http://coms-3090-038.class.las.iastate.edu:8080/login",
+                response -> {
+                    loginDisplay.setText(response.toString());
+                    if (response.equals("User not found") || response.equals("Username or password is incorrect")) {
+                        Toast errorMsg = Toast.makeText(getApplicationContext(), "Error, user not found", Toast.LENGTH_LONG);
+                        errorMsg.show();
+                        return;
+                    }
+
+                    // We have a valid user
+                    VolleySingleton.userId = response.split(",")[1];
+                    String userType = response.split(",")[0];
+
+                    // Save the user info
+                    SharedPreferences sharedPref =  PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                    SharedPreferences.Editor editor = sharedPref.edit();
+                    editor.putString("userId", VolleySingleton.userId);
+                    editor.putString("userType", userType);
+                    editor.apply();
+
+                    Intent intent = new Intent(LoginActivity.this, ClientNavbarMainActivity.class);
+                    switch (userType){
+                        case "client_view":
+                            intent = new Intent(LoginActivity.this, ClientNavbarMainActivity.class);
+                            startActivity(intent);  // go to SignupActivity
+                            break;
+                        case "admin_view":
+                             intent = new Intent(LoginActivity.this, AdminNavbarMainActivity.class);
+                            startActivity(intent);  // go to SignupActivity
+                            break;
+                        case "vet_view":
+                            intent = new Intent(LoginActivity.this, VetDetailsActivity.class);
+                            startActivity(intent);  // go to SignupActivity
+                            break;
+                    }
+
+
+
+                },
+                error -> {
+                    loginDisplay.setText("Error: " + error.toString());
+                }
+        ) {
+            @Override
+            public String getBodyContentType() {
+                return "application/json; charset=utf-8";
+            }
+            @Override
+            public byte[] getBody() throws AuthFailureError {
+                try {
+                    return userLogin.toString() == null ? null : userLogin.toString().getBytes("utf-8");
+                } catch (UnsupportedEncodingException uee) {
+                    VolleyLog.wtf("Unsupported Encoding while trying to get the bytes of %s using %s", userLogin.toString(), "utf-8");
+                    return null;
+                }
+            }
+        };
+
+
+        VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(testReq);
     }
 
 

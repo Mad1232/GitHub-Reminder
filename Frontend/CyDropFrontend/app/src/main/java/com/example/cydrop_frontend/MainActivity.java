@@ -1,7 +1,10 @@
 package com.example.cydrop_frontend;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -13,6 +16,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import java.io.Console;
+import java.util.Objects;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -24,6 +28,30 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
+        // Try to see if login is saved
+        try {
+            SharedPreferences sharedPref =  PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+            VolleySingleton.userId = sharedPref.getString("userId", "-1");
+            VolleySingleton.userType = sharedPref.getString("userType", "none");
+            if (!Objects.equals(VolleySingleton.userId, "-1") && !VolleySingleton.userType.equals("none")){
+                Intent intent = new Intent(MainActivity.this, ClientNavbarMainActivity.class);
+                switch (VolleySingleton.userType){
+                    case "client_view":
+                        intent = new Intent(MainActivity.this, ClientNavbarMainActivity.class);
+                        startActivity(intent);  // go to SignupActivity
+                        break;
+                    case "admin_view":
+                        intent = new Intent(this, AdminNavbarMainActivity.class);
+                        startActivity(intent);  // go to SignupActivity
+                        break;
+                    case "vet_view":
+                        intent = new Intent(MainActivity.this, VetDetailsActivity.class);
+                        startActivity(intent);  // go to SignupActivity
+                        break;
+                }
+            }
+        } catch (Exception ignored){}
+
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
@@ -33,27 +61,6 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-        simulateClientLogin = findViewById(R.id.button_simulate_client_login);
-        simulateClientLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, ClientNavbarMainActivity.class);
-               // Intent intent = new Intent(MainActivity.this, SignupActivity.class);
-                intent.putExtra("USERID",1); // Sample client is userid 1
-                startActivity(intent);
-            }
-        });
-
-
-        simulateAdminLogin = findViewById(R.id.button_simulate_admin_login);
-        simulateAdminLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, AdminNavbarMainActivity.class);
-                intent.putExtra("USERID",1); // Sample client is userid 1
-                startActivity(intent);
-            }
-        });
 
 
         Button loginButton = findViewById(R.id.main_login_button);
