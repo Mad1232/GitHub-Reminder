@@ -3,6 +3,8 @@ package com.coms309.demo2.entity;
 import java.util.List;
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "Vet")
 public class Vet {
@@ -33,6 +35,9 @@ public class Vet {
     //vet is in conversation.java
     @OneToMany(mappedBy = "vet", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Conversation> conversations;
+    // Many-to-Many with Pet
+    @ManyToMany(mappedBy = "veterinarians")
+    private List<Pet> pets;
 
     // Getters and setters
     public int getVet_id() {
@@ -74,6 +79,15 @@ public class Vet {
     public String getPhone() {return phone;}
 
     public void setPhone(String phone) {this.phone = phone;}
+
+    // Getter and setter for pets
+    public List<Pet> getPets() {
+        return pets;
+    }
+
+    public void setPets(List<Pet> pets) {
+        this.pets = pets;
+    }
 
 
 }
