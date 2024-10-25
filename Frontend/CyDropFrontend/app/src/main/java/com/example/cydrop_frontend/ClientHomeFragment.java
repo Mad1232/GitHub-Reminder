@@ -173,7 +173,7 @@ public class ClientHomeFragment extends Fragment {
     private void GetJSONData() {
         JsonArrayRequest jsonArrReq = new JsonArrayRequest(
                 Request.Method.GET,
-                "http://coms-3090-038.class.las.iastate.edu:8080/pets",
+                "http://coms-3090-038.class.las.iastate.edu:8080/user-pet/" + VolleySingleton.userId,
                 null, // Pass null as the request body since it's a GET request
                 new Response.Listener<JSONArray>() {
                     @Override
