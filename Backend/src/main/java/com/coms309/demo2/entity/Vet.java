@@ -1,5 +1,6 @@
 package com.coms309.demo2.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -31,6 +32,7 @@ public class Vet {
     private String phone;
 
     // Many-to-Many with Pet
+    @JsonBackReference
     @ManyToMany(mappedBy = "veterinarians")
     private List<Pet> pets;
 
