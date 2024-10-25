@@ -2,6 +2,8 @@ package com.coms309.demo2.entity;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "Vet")
 public class Vet {
@@ -27,6 +29,10 @@ public class Vet {
 
     @Column(name = "phone")
     private String phone;
+
+    // Many-to-Many with Pet
+    @ManyToMany(mappedBy = "veterinarians")
+    private List<Pet> pets;
 
     // Getters and setters
     public int getVet_id() {
@@ -68,6 +74,15 @@ public class Vet {
     public String getPhone() {return phone;}
 
     public void setPhone(String phone) {this.phone = phone;}
+
+    // Getter and setter for pets
+    public List<Pet> getPets() {
+        return pets;
+    }
+
+    public void setPets(List<Pet> pets) {
+        this.pets = pets;
+    }
 
 
 }
