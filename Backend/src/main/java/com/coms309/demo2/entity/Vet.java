@@ -1,6 +1,6 @@
 package com.coms309.demo2.entity;
 
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -36,6 +36,7 @@ public class Vet {
     @OneToMany(mappedBy = "vet", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Conversation> conversations;
     // Many-to-Many with Pet
+    @JsonBackReference
     @ManyToMany(mappedBy = "veterinarians")
     private List<Pet> pets;
 
