@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
             SharedPreferences sharedPref =  PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
             VolleySingleton.userId = sharedPref.getString("userId", "-1");
             VolleySingleton.userType = sharedPref.getString("userType", "none");
+            VolleySingleton.email = sharedPref.getString("userEmail", "none");
             if (!Objects.equals(VolleySingleton.userId, "-1") && !VolleySingleton.userType.equals("none")){
                 Intent intent = new Intent(MainActivity.this, ClientNavbarMainActivity.class);
                 switch (VolleySingleton.userType){

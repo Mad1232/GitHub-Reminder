@@ -17,9 +17,11 @@
 
         <TextView
             android:id="@+id/websockt_testview"
+            android:textSize="30sp"
+            android:textColor="@color/black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="" />
     </FrameLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -63,7 +65,7 @@
         app:layout_constraintBottom_toBottomOf="parent">
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/client_questions_send_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Send"
@@ -79,10 +81,10 @@
             android:hint="Message"
             android:inputType="text"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/button"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintEnd_toStartOf="@+id/client_questions_send_button"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="1.0" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

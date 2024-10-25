@@ -66,23 +66,10 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                executorService.execute(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        sendGetRequest(VolleySingleton.backendURL + "/user");
-
-   //             String username = usernameEditText.getText().toString();
-    //            String password = passwordEditText.getText().toString();
-     //           verifyLogin(username, password);
-
-
-//                Intent intent = new Intent(LoginActivity.this, VetDetailsActivity.class);  //only for testing demo2
-//                startActivity(intent);  // go to LoginActivity
-//
-
+                VolleySingleton.email = usernameEditText.getText().toString();
                 SendLoginRequest();
-                    }
-                });
+            }
+        });
 
 
         /* click listener on signup button pressed */
@@ -176,6 +163,7 @@ public class LoginActivity extends AppCompatActivity {
                     SharedPreferences.Editor editor = sharedPref.edit();
                     editor.putString("userId", VolleySingleton.userId);
                     editor.putString("userType", userType);
+                    editor.putString("userEmail", VolleySingleton.email);
                     editor.apply();
 
                     Intent intent = new Intent(LoginActivity.this, ClientNavbarMainActivity.class);

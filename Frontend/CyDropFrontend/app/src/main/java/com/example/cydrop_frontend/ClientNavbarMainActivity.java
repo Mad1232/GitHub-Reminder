@@ -12,10 +12,13 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.cydrop_frontend.databinding.ActivityClientNavbarMainBinding;
 
+import org.java_websocket.handshake.ServerHandshake;
 
-public class ClientNavbarMainActivity extends AppCompatActivity {
+
+public class ClientNavbarMainActivity extends AppCompatActivity implements WebSocketListener {
 
     ActivityClientNavbarMainBinding binding;
+    ClientQuestionsFragment currentFrag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,18 +44,45 @@ public class ClientNavbarMainActivity extends AppCompatActivity {
             } else if (itemId == R.id.customers) {
                 replaceFragment(new ClientHomeFragment());
             } else { // itemId == questions
-                replaceFragment(new ClientQuestionsFragment());
+                currentFrag = (ClientQuestionsFragment) replaceFragment(new ClientQuestionsFragment());
+                connectToWebsocket();
             }
 
             return true;
         });
     }
 
-    private void replaceFragment(Fragment fragment){
+    private Fragment replaceFragment(Fragment fragment){
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.frame_layout, fragment);
         fragmentTransaction.commit();
+        return fragment;
+    }
+
+    private void connectToWebsocket(){
+        WebSocketManager.getInstance().connectWebSocket(VolleySingleton.backendURL);
+        WebSocketManager.getInstance().setWebSocketListener(ClientNavbarMainActivity.this);
+    }
+
+    @Override
+    public void onWebSocketOpen(ServerHandshake handshakedata) {
+
+    }
+
+    @Override
+    public void onWebSocketMessage(String message) {
+
+    }
+
+    @Override
+    public void onWebSocketClose(int code, String reason, boolean remote) {
+
+    }
+
+    @Override
+    public void onWebSocketError(Exception ex) {
+
     }
 }
 
