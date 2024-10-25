@@ -44,6 +44,7 @@ public class Pet {
     private Medication medication;
 
     // Many-to-Many with Vet
+    @JsonBackReference
     @ManyToMany
     @JoinTable(
             name = "pet_vet",
