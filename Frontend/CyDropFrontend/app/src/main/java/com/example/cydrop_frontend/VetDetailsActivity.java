@@ -1,10 +1,12 @@
 package com.example.cydrop_frontend;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -47,7 +49,13 @@ public class VetDetailsActivity extends AppCompatActivity {
         });
 
         findViewById(R.id.vetDetailsLogout).setOnClickListener(view1 -> {
-            Intent intent = new Intent(VetDetailsActivity.this, MainActivity.class);
+            SharedPreferences sharedPref =  PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+            SharedPreferences.Editor editor = sharedPref.edit();
+            editor.putString("userId", "-1");
+            editor.putString("userType", "none");
+            editor.apply();
+
+            Intent intent = new Intent(LoginActivity.class.toString());
             startActivity(intent);
         });
     }
