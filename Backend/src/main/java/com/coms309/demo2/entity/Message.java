@@ -26,4 +26,11 @@ public class Message {
     @ManyToOne
     @Getter
     Conversation conversation;
+
+    public Message(String content, Long time, boolean vetOrUser, Conversation conversation) {
+        this.content = content;
+        this.time = time;
+        this.vetOrUser = vetOrUser;
+        this.conversation = conversation;
+    }
 }

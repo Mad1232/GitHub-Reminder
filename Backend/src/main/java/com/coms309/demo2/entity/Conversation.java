@@ -6,25 +6,33 @@ import jakarta.persistence.IdClass;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import lombok.Getter;
+
+import java.util.Collections;
 import java.util.List;
 
 @Entity
 @IdClass(ConversationKey.class)
 public class Conversation {
-    //many conversations to one user
+    // many conversations to one user
     @ManyToOne
     @Id
     @Getter
     User user;
 
-    //many conversations to one vet
+    // many conversations to one vet
     @ManyToOne
     @Id
     @Getter
     Vet vet;
 
-    //One conversation to many messages
+    // One conversation to many messages
     @OneToMany
     @Getter
     List<Message> messages;
+
+    public Conversation(ConversationKey key) {
+        user = key.user;
+        vet = key.vet;
+        messages = Collections.emptyList();
+    }
 }
