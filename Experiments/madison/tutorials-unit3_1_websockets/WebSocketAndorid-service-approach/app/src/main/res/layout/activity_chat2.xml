@@ -5,40 +5,52 @@
     tools:context=".ChatActivity2"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="16dp">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <EditText
-            android:layout_height="50dp"
-            android:layout_width="320dp"
-            android:hint="message"
-            android:textSize="20dp"
-            android:id="@+id/msgEdt2" />
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Send"
-            android:id="@+id/sendBtn2" />
-    </LinearLayout>
-
-
-
+    <!-- Conversation Display Area -->
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="650dp">
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:padding="16dp"
+        android:layout_marginBottom="12dp">
 
         <TextView
             android:id="@+id/tx2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:hint="The Conversation will appear here:\n"
-            android:textSize="20dp" />
+            android:hint="The conversation will appear here:\n"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:padding="10dp"/>
     </ScrollView>
 
+    <!-- Message Input and Send Button -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <EditText
+            android:layout_height="50dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:hint="Type a message"
+            android:textSize="16sp"
+            android:padding="12dp"
+            android:id="@+id/msgEdt2" />
+
+        <Button
+            android:id="@+id/sendBtn2"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginStart="8dp"
+            android:padding="12dp"
+            android:text="Send"
+            android:textColor="#FF9800"
+            android:textSize="16sp" />
+    </LinearLayout>
 
 </androidx.appcompat.widget.LinearLayoutCompat>
