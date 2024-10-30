@@ -20,8 +20,6 @@ import com.example.cydrop_frontend.databinding.ActivityClientNavbarMainBinding;
 
 public class AdminNavbarMainActivity extends AppCompatActivity {
 
-    private int userid = -1;
-
     @NonNull ActivityAdminNavbarMainBinding binding;
 
     @Override
@@ -37,15 +35,7 @@ public class AdminNavbarMainActivity extends AppCompatActivity {
             return insets;
         });
 
-
         replaceFragment(new AdminInventoryFragment());
-
-        // extract data passed into this activity from another activity
-        Bundle extras = getIntent().getExtras();
-        userid = extras.getInt("USERID");  // this will come from LoginActivity
-
-
-
 
         // Switch fragments when an icon is selected
         binding.bottomNavigationView.setOnItemSelectedListener(item -> {

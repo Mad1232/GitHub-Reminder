@@ -26,17 +26,21 @@
         android:hint="username"
         android:textSize="20dp"
         android:id="@+id/unameEdt" />
+
     <Button
+        android:id="@+id/connectBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="Connect to chat server#1"
-        android:id="@+id/connectBtn" />
+        android:backgroundTint="#FF9800"
+        android:text="Connect to chat server#1" />
+
     <Button
+        android:id="@+id/backBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Back to chat server#1"
-        android:id="@+id/backBtn" />
+        android:backgroundTint="#FF9800"
+        android:text="Back to chat server#1" />
 
 
 <!--    second chat server -->
@@ -60,16 +64,20 @@
         android:hint="username"
         android:textSize="20dp"
         android:id="@+id/unameEdt2" />
+
     <Button
+        android:id="@+id/connectBtn2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="Connect to chat server#2"
-        android:id="@+id/connectBtn2" />
+        android:backgroundTint="#FF9800"
+        android:text="Connect to chat server#2" />
+
     <Button
+        android:id="@+id/backBtn2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Back to chat server#2"
-        android:id="@+id/backBtn2" />
+        android:backgroundTint="#FF9800"
+        android:text="Back to chat server#2" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>

@@ -76,6 +76,13 @@ public class MyController {
             return "Pet with ID " + id + "does not exist.";
         }
     }
+    // get user's pets list
+    @GetMapping("/user-pet/{id}")
+    public List<Pet> getUserPetsByID(@PathVariable Long id) {
+        // Retrieve pets belonging to the user with the given ID
+        return petsRepo.findByOwner_Id(id);
+    }
+
 
     @DeleteMapping("/pets")
     public String deleteAllUsers() {

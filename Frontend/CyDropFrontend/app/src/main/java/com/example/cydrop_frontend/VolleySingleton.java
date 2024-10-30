@@ -16,6 +16,10 @@ public class VolleySingleton {
     private ImageLoader imageLoader;
     private static Context ctx;
     public static String backendURL = "http://coms-3090-038.class.las.iastate.edu:8080";
+    public static String email = "";
+
+    public static String userId = "-1";
+    public static String userType = "none";
 
     private VolleySingleton(Context context) {
         ctx = context;
@@ -53,6 +57,7 @@ public class VolleySingleton {
         }
         return requestQueue;
     }
+
 
     public <T> void addToRequestQueue(Request<T> req) {
         getRequestQueue().add(req);

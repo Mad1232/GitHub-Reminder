@@ -8,8 +8,17 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-public class ClientQuestionsFragment extends Fragment {
+import android.widget.EditText;
+import android.widget.TextView;
+
+import org.java_websocket.handshake.ServerHandshake;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+public class ClientQuestionsFragment extends Fragment implements WebSocketListener{
+    TextView messageBody;
+    EditText messageInputText;
+
 
     public ClientQuestionsFragment() {
         // Required empty public constructor
@@ -18,20 +27,47 @@ public class ClientQuestionsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_client_questions, container, false);
 
-        Button vet_chat = view.findViewById(R.id.btn_vet_chat);
-        vet_chat.setOnClickListener(view1 -> {
-            Intent intent = new Intent(getActivity(), VetChatActivity.class);
-            startActivity(intent);
+        // Try to connect to websocket
+        WebSocketManager.getInstance().connectWebSocket("ws://coms-3090-038.class.las.iastate.edu:8080/chat/" + VolleySingleton.email);
+        WebSocketManager.getInstance().setWebSocketListener(ClientQuestionsFragment.this);
+
+        messageBody = view.findViewById(R.id.websockt_testview);
+        messageBody.setText("ws://coms-3090-038.class.las.iastate.edu:8080/chat/" + VolleySingleton.email);
+
+        messageInputText = view.findViewById(R.id.client_questions_messagebox);
+
+        view.findViewById(R.id.client_questions_send_button).setOnClickListener(view2 -> {
+            WebSocketManager.getInstance().sendMessage(messageInputText.getText().toString());
         });
 
-        return view;
+        return  view;
+    }
+
+    @Override
+    public void onWebSocketOpen(ServerHandshake handshakedata) {
+
+    }
+
+    @Override
+    public void onWebSocketMessage(String message) {
+        messageBody.setText(message);
+    }
+
+    @Override
+    public void onWebSocketClose(int code, String reason, boolean remote) {
+
+    }
+
+    @Override
+    public void onWebSocketError(Exception ex) {
+
     }
 }
