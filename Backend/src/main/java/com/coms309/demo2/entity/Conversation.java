@@ -1,5 +1,6 @@
 package com.coms309.demo2.entity;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.IdClass;
@@ -14,13 +15,13 @@ import java.util.List;
 @IdClass(ConversationKey.class)
 public class Conversation {
     // many conversations to one user
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     @Id
     @Getter
     User user;
 
     // many conversations to one vet
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     @Id
     @Getter
     Vet vet;
@@ -29,6 +30,8 @@ public class Conversation {
     @OneToMany
     @Getter
     List<Message> messages;
+
+    protected Conversation() {}
 
     public Conversation(ConversationKey key) {
         user = key.user;

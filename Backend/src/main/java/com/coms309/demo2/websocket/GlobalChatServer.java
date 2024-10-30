@@ -1,4 +1,4 @@
-package com.coms309.demo2.config;
+package com.coms309.demo2.websocket;
 
 import com.coms309.demo2.entity.GlobalChatMessage;
 import com.coms309.demo2.repository.GlobalChatMessageRepo;

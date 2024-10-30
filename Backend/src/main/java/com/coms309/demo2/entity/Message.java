@@ -27,6 +27,8 @@ public class Message {
     @Getter
     Conversation conversation;
 
+    protected Message() {}
+
     public Message(String content, Long time, boolean vetOrUser, Conversation conversation) {
         this.content = content;
         this.time = time;

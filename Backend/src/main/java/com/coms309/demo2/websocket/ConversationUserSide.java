@@ -79,6 +79,8 @@ public class ConversationUserSide {
         } else {
             // 1a. Create if it doesn't exist
             Conversation c = new Conversation(key);
+            user.getConversations().add(c);
+            vet.getConversations().add(c);
             conversation = conversationRepository.save(c);
         }
         // 2. Use the conversation key to check with vet side to find an ongoing
