@@ -32,6 +32,9 @@ public class Pet {
     @Column(name = "pet_gender")
     private String pet_gender;
 
+//    @Column(name = "vet_recommendation" , nullable = true)
+//    private String vet_recommendation;
+
     // Many-to-one relationship to User (owner)
     @ManyToOne
     @JoinColumn(name = "owner_id", nullable = false)
@@ -126,6 +129,7 @@ public class Pet {
     public void setMedication(Medication medication){
         this.medication = medication;
     }
+
     // Getter and Setter for Veterinarians
     public List<Vet> getVeterinarians() {
         return veterinarians;
@@ -135,6 +139,9 @@ public class Pet {
         this.veterinarians = veterinarians;
     }
 
+    //public String getVet_recommendation() {return vet_recommendation;}
+
+    //public void setVet_recommendation(String vet_recommendation) {this.vet_recommendation = vet_recommendation;}
 }
 
 
