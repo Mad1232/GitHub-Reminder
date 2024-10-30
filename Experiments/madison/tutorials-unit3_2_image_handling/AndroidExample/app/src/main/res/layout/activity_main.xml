@@ -7,19 +7,23 @@
     android:layout_width="match_parent"
     android:orientation="vertical">
 
-    <Button android:id="@+id/btnUploadImage"
+    <Button
+        android:id="@+id/btnUploadImage"
         android:layout_width="200dp"
         android:layout_height="80dp"
+        android:layout_gravity="center"
         android:layout_marginTop="300dp"
         android:layout_marginBottom="20dp"
-        android:layout_gravity="center"
+        android:backgroundTint="#F44336"
         android:text="Upload Image" />
 
-    <Button android:id="@+id/btnImageRequest"
+    <Button
+        android:id="@+id/btnImageRequest"
         android:layout_width="200dp"
         android:layout_height="80dp"
-        android:layout_marginBottom="20dp"
         android:layout_gravity="center"
+        android:layout_marginBottom="20dp"
+        android:backgroundTint="#F44336"
         android:text="Image Request" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>
