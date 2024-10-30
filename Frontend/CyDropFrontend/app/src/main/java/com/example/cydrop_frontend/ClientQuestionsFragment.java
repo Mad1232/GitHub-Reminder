@@ -3,20 +3,29 @@ package com.example.cydrop_frontend;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import org.java_websocket.handshake.ServerHandshake;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+
 public class ClientQuestionsFragment extends Fragment implements WebSocketListener{
-    TextView messageBody;
     EditText messageInputText;
+    LinearLayout linearLayout;
+    int fragCount = 0;
 
 
     public ClientQuestionsFragment() {
@@ -38,8 +47,8 @@ public class ClientQuestionsFragment extends Fragment implements WebSocketListen
         WebSocketManager.getInstance().connectWebSocket("ws://coms-3090-038.class.las.iastate.edu:8080/chat/" + VolleySingleton.email);
         WebSocketManager.getInstance().setWebSocketListener(ClientQuestionsFragment.this);
 
-        messageBody = view.findViewById(R.id.websockt_testview);
-        messageBody.setText("ws://coms-3090-038.class.las.iastate.edu:8080/chat/" + VolleySingleton.email);
+        linearLayout = view.findViewById(R.id.global_questions_linear_layout);
+        addMessage("test", "test message");
 
         messageInputText = view.findViewById(R.id.client_questions_messagebox);
 
@@ -47,7 +56,16 @@ public class ClientQuestionsFragment extends Fragment implements WebSocketListen
             WebSocketManager.getInstance().sendMessage(messageInputText.getText().toString());
         });
 
+
         return  view;
+    }
+
+    public void addMessage(String username, String content){
+       FragmentManager fragMan = getFragmentManager();
+       FragmentTransaction fragTransaction = fragMan.beginTransaction();
+        Fragment f = MessageFragment.newInstance(username + ": ",content);
+       fragTransaction.add(linearLayout.getId(), f, "frag" + fragCount);
+       fragTransaction.commit();
     }
 
     @Override
@@ -57,7 +75,7 @@ public class ClientQuestionsFragment extends Fragment implements WebSocketListen
 
     @Override
     public void onWebSocketMessage(String message) {
-        messageBody.setText(message);
+        addMessage("System", message);
     }
 
     @Override
