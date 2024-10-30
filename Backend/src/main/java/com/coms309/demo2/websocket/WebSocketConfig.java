@@ -1,4 +1,4 @@
-package com.coms309.demo2.config;
+package com.coms309.demo2.websocket;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
