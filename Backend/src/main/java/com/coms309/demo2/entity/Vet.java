@@ -42,6 +42,7 @@ public class Vet {
 
     //One-to-many relationship with conversations with users
     //vet is in conversation.java
+    @JsonBackReference
     @OneToMany(mappedBy = "vet", orphanRemoval = true, fetch = FetchType.EAGER)
     @Getter
     private Set<Conversation> conversations;
