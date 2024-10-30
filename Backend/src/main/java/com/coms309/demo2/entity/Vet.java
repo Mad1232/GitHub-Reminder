@@ -7,6 +7,8 @@ import lombok.Getter;
 import java.util.List;
 import java.util.Set;
 
+import java.util.List;
+
 @Entity
 @Table(name = "Vet")
 public class Vet {

@@ -1,8 +1,7 @@
 package com.coms309.demo2.repository;
 
+import com.coms309.demo2.config.GlobalChatServer;
 import com.coms309.demo2.repository.UserRepository;
-import com.coms309.demo2.websocket.GlobalChatServer;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
