@@ -32,7 +32,7 @@ public class SignupActivity extends AppCompatActivity{
     //  private EditText typeEditText;   // define type edittext variable
     private Button loginButton;         // define login button variable
     private Button signupButton;
-    private Button deleteButton;
+  //  private Button deleteButton;
     private Button updateButton;
 
 
@@ -47,7 +47,7 @@ public class SignupActivity extends AppCompatActivity{
         //  typeEditText = findViewById(R.id.signup_confirm_edt);    // link to confirm edtext in the Signup activity XML
         loginButton = findViewById(R.id.signup_login_btn);    // link to login button in the Signup activity XML
         signupButton = findViewById(R.id.signup_signup_btn);  // link to signup button in the Signup activity XML
-        deleteButton = findViewById(R.id.del_btn);
+  //      deleteButton = findViewById(R.id.del_btn);
 //        updateButton = findViewById(R.id.pass_btn);
 
         /* click listener on login button pressed */
@@ -75,13 +75,13 @@ public class SignupActivity extends AppCompatActivity{
             }
         });
         //delete button
-        deleteButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                delRequest("http://coms-3090-038.class.las.iastate.edu:8080/users/10");
-            }
-        });
+//        deleteButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                delRequest("http://coms-3090-038.class.las.iastate.edu:8080/users/10");
+//            }
+//        });
 
     }
 
@@ -138,22 +138,22 @@ public class SignupActivity extends AppCompatActivity{
         VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(request);
     }
 
-    private void delRequest(String deleteAccountURL){
-
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.DELETE, deleteAccountURL, null, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                Toast.makeText(getApplicationContext(), "Deleted User!", Toast.LENGTH_LONG).show();
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                throw new RuntimeException(error);
-            }
-        });
-
-        VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(request);
-    }
+//    private void delRequest(String deleteAccountURL){
+//
+//        JsonObjectRequest request = new JsonObjectRequest(Request.Method.DELETE, deleteAccountURL, null, new Response.Listener<JSONObject>() {
+//            @Override
+//            public void onResponse(JSONObject response) {
+//                Toast.makeText(getApplicationContext(), "Deleted User!", Toast.LENGTH_LONG).show();
+//            }
+//        }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//                throw new RuntimeException(error);
+//            }
+//        });
+//
+//        VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(request);
+//    }
 
 
 

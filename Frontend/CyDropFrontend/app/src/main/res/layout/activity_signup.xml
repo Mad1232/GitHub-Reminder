@@ -94,11 +94,5 @@
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/del_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Delete User" />
-
 
 </androidx.appcompat.widget.LinearLayoutCompat>
