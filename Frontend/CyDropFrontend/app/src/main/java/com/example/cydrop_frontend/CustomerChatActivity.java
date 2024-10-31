@@ -12,9 +12,7 @@ import android.widget.TextView;
 
 import org.java_websocket.handshake.ServerHandshake;
 
-
-public class VetChatActivity extends AppCompatActivity implements WebSocketListener{
-
+public class CustomerChatActivity extends AppCompatActivity implements WebSocketListener{
     private Button returnButton;         // define return button variable
     private Button sendBtn;
     private EditText msgEtx;
@@ -24,7 +22,7 @@ public class VetChatActivity extends AppCompatActivity implements WebSocketListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_vet_chat);            // link to Login activity XML
+        setContentView(R.layout.activity_customer_chat);            // link to Login activity XML
 
         /* initialize UI elements */
         returnButton = findViewById(R.id.btn_return);    // link to return button in the Login activity XML
@@ -36,7 +34,7 @@ public class VetChatActivity extends AppCompatActivity implements WebSocketListe
 
         /* connect this activity to the websocket instance */
         WebSocketManager.getInstance().connectWebSocket("ws://coms-3090-038.class.las.iastate.edu:8080/chat/" + VolleySingleton.email);
-        WebSocketManager.getInstance().setWebSocketListener(VetChatActivity.this);
+        WebSocketManager.getInstance().setWebSocketListener(CustomerChatActivity.this);
 
         /* send button listener */
         sendBtn.setOnClickListener(v -> {
@@ -52,7 +50,7 @@ public class VetChatActivity extends AppCompatActivity implements WebSocketListe
         returnButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(VetChatActivity.this, ClientNavbarMainActivity.class);
+                Intent intent = new Intent(CustomerChatActivity.this, ClientNavbarMainActivity.class);
                 startActivity(intent);
             }
         });
@@ -86,5 +84,6 @@ public class VetChatActivity extends AppCompatActivity implements WebSocketListe
 
     @Override
     public void onWebSocketError(Exception ex) {}
+
 
 }

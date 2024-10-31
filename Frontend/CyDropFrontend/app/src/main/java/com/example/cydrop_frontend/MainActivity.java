@@ -67,7 +67,8 @@ public class MainActivity extends AppCompatActivity {
         Button loginButton = findViewById(R.id.main_login_button);
         loginButton.setOnClickListener(view2 -> {
             /* when signup button is pressed, use intent to switch to Signup Activity */
-            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+           // Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+            Intent intent = new Intent(MainActivity.this, ClientNavbarMainActivity.class);
             startActivity(intent);
         });
 
