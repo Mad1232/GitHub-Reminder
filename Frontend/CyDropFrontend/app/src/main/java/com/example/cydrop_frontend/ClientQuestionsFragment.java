@@ -39,7 +39,7 @@ public class ClientQuestionsFragment extends Fragment{
 
         // Button to direct chat
         view.findViewById(R.id.client_questions_direct_chat_button).setOnClickListener(view2 -> {
-            Intent intent = new Intent(getActivity(), VetChatActivity.class);
+            Intent intent = new Intent(getActivity(), CustomerChatActivity.class);
             startActivity(intent);
         });
 

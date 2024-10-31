@@ -7,23 +7,6 @@
     android:background="@color/background_red"
     tools:context=".ClientQuestionsFragment" >
 
-    <FrameLayout
-        android:id="@+id/questions_frame_layout"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/constraintLayout2"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
-        tools:layout_editor_absoluteX="135dp">
-
-        <TextView
-            android:id="@+id/websockt_testview"
-            android:textSize="30sp"
-            android:textColor="@color/black"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="" />
-    </FrameLayout>
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
@@ -62,29 +45,5 @@
         android:id="@+id/constraintLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent">
-
-        <Button
-            android:id="@+id/client_questions_send_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Send"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <EditText
-            android:id="@+id/client_questions_messagebox"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Message"
-            android:inputType="text"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/client_questions_send_button"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        app:layout_constraintBottom_toBottomOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
