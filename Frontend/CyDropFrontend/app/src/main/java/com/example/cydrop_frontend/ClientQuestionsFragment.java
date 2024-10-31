@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -18,7 +19,7 @@ import org.json.JSONObject;
 public class ClientQuestionsFragment extends Fragment implements WebSocketListener{
     TextView messageBody;
     EditText messageInputText;
-
+    private Button client_questions_direct_chat_button;
 
     public ClientQuestionsFragment() {
         // Required empty public constructor
@@ -48,7 +49,14 @@ public class ClientQuestionsFragment extends Fragment implements WebSocketListen
             WebSocketManager.getInstance().sendMessage(messageInputText.getText().toString());
         });
 
+        // Button to direct chat
+        view.findViewById(R.id.client_questions_direct_chat_button).setOnClickListener(view2 -> {
+            Intent intent = new Intent(getActivity(), CustomerChatActivity.class);
+            startActivity(intent);
+        });
+
         return  view;
+
     }
 
     @Override
