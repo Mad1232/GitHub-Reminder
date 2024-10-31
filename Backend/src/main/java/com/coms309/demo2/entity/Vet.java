@@ -36,13 +36,13 @@ public class Vet {
     private String phone;
 
     // Many-to-Many with Pet
-    @JsonBackReference
+    @JsonBackReference("pet-vet")
     @ManyToMany(mappedBy = "veterinarians")
     private List<Pet> pets;
 
     //One-to-many relationship with conversations with users
     //vet is in conversation.java
-    @JsonBackReference
+    @JsonBackReference("conversation-vet")
     @OneToMany(mappedBy = "vet", orphanRemoval = true, fetch = FetchType.EAGER)
     @Getter
     private Set<Conversation> conversations;

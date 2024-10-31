@@ -2,11 +2,12 @@ package com.coms309.demo2.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.List;
 import java.util.Set;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "users")
@@ -36,10 +37,8 @@ public class User {
 
     //One-to-many relationship with conversations with vets
     //user is in conversation.java
-    @JsonBackReference
     @OneToMany(mappedBy = "user", orphanRemoval = true, fetch = FetchType.EAGER)
-    @Getter
-    private Set<Conversation> conversations;
+    private List<Conversation> conversations;
 
     // Getters and Setters
     public Long getId() {
@@ -80,6 +79,11 @@ public class User {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    @JsonManagedReference("conversation-user")
+    public List<Conversation> getConversations() {
+        return conversations;
     }
 
     //does this user equal this other user

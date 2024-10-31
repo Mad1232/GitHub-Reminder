@@ -37,17 +37,18 @@ public class Pet {
 
     // Many-to-one relationship to User (owner)
     @ManyToOne
+    @JsonBackReference("pet-owner")
     @JoinColumn(name = "owner_id", nullable = false)
     private User owner;
 
     //One-to-One relationship to Medications(medicine)
-    @JsonBackReference
+    @JsonBackReference("medication-pet")
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "medication_id", referencedColumnName = "id", nullable = true)
     private Medication medication;
 
     // Many-to-Many with Vet
-    @JsonBackReference
+    @JsonBackReference("vet-pet")
     @ManyToMany
     @JoinTable(
             name = "pet_vet",
