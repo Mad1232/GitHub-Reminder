@@ -48,7 +48,6 @@ public class ClientQuestionsFragment extends Fragment implements WebSocketListen
         WebSocketManager.getInstance().setWebSocketListener(ClientQuestionsFragment.this);
 
         linearLayout = view.findViewById(R.id.global_questions_linear_layout);
-        addMessage("test", "test message");
 
         messageInputText = view.findViewById(R.id.client_questions_messagebox);
 
@@ -63,7 +62,7 @@ public class ClientQuestionsFragment extends Fragment implements WebSocketListen
     public void addMessage(String username, String content){
        FragmentManager fragMan = getFragmentManager();
        FragmentTransaction fragTransaction = fragMan.beginTransaction();
-        Fragment f = MessageFragment.newInstance(username + ": ",content);
+       Fragment f = MessageFragment.newInstance(username + ": ",content);
        fragTransaction.add(linearLayout.getId(), f, "frag" + fragCount);
        fragTransaction.commit();
     }
@@ -75,7 +74,32 @@ public class ClientQuestionsFragment extends Fragment implements WebSocketListen
 
     @Override
     public void onWebSocketMessage(String message) {
-        addMessage("System", message);
+        String[] messageSplit = message.split(":");
+        if (messageSplit.length > 1) {
+            String[] usernameSplit = messageSplit[0].split("@");
+            String finalUsername = usernameSplit[0].substring(0,1).toUpperCase() +
+                    usernameSplit[0].substring(1);
+            addMessage(finalUsername, messageSplit[1].trim());
+        } else {
+
+
+
+
+
+            String[] systemMessageSplit = message.split(" ");
+            String finalMessage = "";
+            for (int i = 0; i < systemMessageSplit.length; i++){
+                String[] tempArr = systemMessageSplit[i].split("@");
+                if (tempArr.length > 1){
+                    String finalUsername = tempArr[0].substring(0,1).toUpperCase() +
+                            tempArr[0].substring(1);
+                    finalMessage += finalUsername + " ";
+                } else {
+                    finalMessage += tempArr[0] + " ";
+                }
+            }
+            addMessage("System", finalMessage.trim());
+        }
     }
 
     @Override
