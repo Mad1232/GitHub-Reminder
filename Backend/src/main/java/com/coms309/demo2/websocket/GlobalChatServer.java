@@ -20,11 +20,10 @@ import com.coms309.demo2.entity.User;
 import com.coms309.demo2.repository.UserRepository;
 
 @ServerEndpoint("/chat/{username}")
-@Component
+//@Component
 public class GlobalChatServer {
     // cannot autowire static directly (instead we do it by the below method
     private static GlobalChatMessageRepo chatMessageRepo;
-
     /*
      * Grabs the MessageRepository singleton from the Spring Application
      * Context.  This works because of the @Controller annotation on this

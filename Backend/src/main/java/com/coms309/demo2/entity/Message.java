@@ -1,5 +1,7 @@
 package com.coms309.demo2.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
@@ -11,21 +13,21 @@ public class Message {
     @Id
     @Getter
     @Setter 
-    Long time;
+    private Long time;
 
     @Getter
     @Setter
-    String content;
+    private String content;
 
     @Getter
     @Setter
     //true = vet, false = user
-    boolean vetOrUser;
+    private boolean vetOrUser;
 
     //many messages to one conversation
     @ManyToOne
-    @Getter
-    Conversation conversation;
+    @Getter(onMethod = @__(@JsonBackReference("conversation-message")))
+    private Conversation conversation;
 
     protected Message() {}
 
