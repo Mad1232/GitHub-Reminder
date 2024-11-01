@@ -1,8 +1,6 @@
 package com.coms309.demo2.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-import lombok.Getter;
 
 import java.time.LocalDateTime;
 
@@ -19,21 +17,21 @@ public class Events {
     @Column(name = "event_id")
     private Long event_id;
 
-    @Column(name = "reminder_time" , nullable = true)
-    private LocalDateTime reminder_time;
+    @Column(name = "reminder_time")
+    private LocalDateTime reminderTime;
 
     @Column(name = "reminder_text")
-    private String reminder_text;
+    private String reminderText;
 
     //One-to-One relationship to Medications(medicine)
-    @JsonBackReference
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    //@JsonBackReference
+    @OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinColumn(name = "medication_id", referencedColumnName = "id", nullable = false)
     private Medication medication;
 
-    //One-to-One relationship to Medications(medicine)
-    @JsonBackReference
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    //One-to-One relationship to Pets
+   // @JsonBackReference
+    @OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinColumn(name = "pet_id", referencedColumnName = "pet_id", nullable = false)
     private Pet pet;
 
@@ -47,19 +45,19 @@ public class Events {
     }
 
     public LocalDateTime getReminderTime() {
-        return reminder_time;
+        return reminderTime;
     }
 
     public void setReminderTime(LocalDateTime reminderTime) {
-        this.reminder_time = reminderTime;
+        this.reminderTime = reminderTime;
     }
 
     public String getReminderText() {
-        return reminder_text;
+        return reminderText;
     }
 
     public void setReminderText(String reminderText) {
-        this.reminder_text = reminderText;
+        this.reminderText = reminderText;
     }
 
     public Pet getPet() {
