@@ -14,6 +14,8 @@
         />
 
     <item
+        android:icon="@drawable/baseline_question_answer_24"
+        android:title="Chat"
         android:id="@+id/questions"
         android:icon="@drawable/baseline_question_answer_24"
         android:title="Chat" />
