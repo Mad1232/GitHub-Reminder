@@ -46,14 +46,21 @@ public class ClientQuestionsFragment extends Fragment implements WebSocketListen
         View view = inflater.inflate(R.layout.fragment_client_questions, container, false);
 
 
-<<<<<<< Frontend/CyDropFrontend/app/src/main/java/com/example/cydrop_frontend/ClientQuestionsFragment.java
-        linearLayout = view.findViewById(R.id.global_questions_linear_layout);
+       linearLayout = view.findViewById(R.id.global_questions_linear_layout);
 
         messageInputText = view.findViewById(R.id.client_questions_messagebox);
 
         view.findViewById(R.id.client_questions_send_button).setOnClickListener(view2 -> {
             WebSocketManager.getInstance().sendMessage(messageInputText.getText().toString());
         });
+
+        // Button to direct chat
+//        view.findViewById(R.id.client_questions_direct_chat_button).setOnClickListener(view2 -> {
+//            Intent intent = new Intent(getActivity(), CustomerChatActivity.class);
+//            startActivity(intent);
+//        });
+//
+//        return view;
 
 
         return  view;
@@ -111,15 +118,5 @@ public class ClientQuestionsFragment extends Fragment implements WebSocketListen
     public void onWebSocketError(Exception ex) {
 
     }
-=======
-        // Button to direct chat
-        view.findViewById(R.id.client_questions_direct_chat_button).setOnClickListener(view2 -> {
-            Intent intent = new Intent(getActivity(), CustomerChatActivity.class);
-            startActivity(intent);
-        });
 
-        return view;
-    }
-
->>>>>>> Frontend/CyDropFrontend/app/src/main/java/com/example/cydrop_frontend/ClientQuestionsFragment.java
 }
