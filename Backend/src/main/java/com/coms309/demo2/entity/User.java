@@ -1,8 +1,13 @@
 package com.coms309.demo2.entity;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.List;
+import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "users")
@@ -29,6 +34,11 @@ public class User {
     //owner is in pet.java
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Pet> pets;
+
+    //One-to-many relationship with conversations with vets
+    //user is in conversation.java
+    @OneToMany(mappedBy = "user", orphanRemoval = true, fetch = FetchType.EAGER)
+    private List<Conversation> conversations;
 
     // Getters and Setters
     public Long getId() {
@@ -69,5 +79,25 @@ public class User {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    @JsonManagedReference("conversation-user")
+    public List<Conversation> getConversations() {
+        return conversations;
+    }
+
+    //does this user equal this other user
+    @Override
+    public boolean equals(Object other) {
+        if (other instanceof User) {
+            return ((User) other).id == this.id;
+        }
+        return false;
+    }
+
+    //override default version
+    @Override
+    public int hashCode() {
+        return Long.hashCode(id);
     }
 }

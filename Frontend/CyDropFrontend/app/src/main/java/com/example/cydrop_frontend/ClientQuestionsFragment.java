@@ -1,5 +1,6 @@
 package com.example.cydrop_frontend;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -13,6 +14,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -26,7 +28,7 @@ public class ClientQuestionsFragment extends Fragment implements WebSocketListen
     EditText messageInputText;
     LinearLayout linearLayout;
     int fragCount = 0;
-
+    private Button client_questions_direct_chat_button;
 
     public ClientQuestionsFragment() {
         // Required empty public constructor
@@ -43,10 +45,8 @@ public class ClientQuestionsFragment extends Fragment implements WebSocketListen
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_client_questions, container, false);
 
-        // Try to connect to websocket
-        WebSocketManager.getInstance().connectWebSocket("ws://coms-3090-038.class.las.iastate.edu:8080/chat/" + VolleySingleton.email);
-        WebSocketManager.getInstance().setWebSocketListener(ClientQuestionsFragment.this);
 
+<<<<<<< Frontend/CyDropFrontend/app/src/main/java/com/example/cydrop_frontend/ClientQuestionsFragment.java
         linearLayout = view.findViewById(R.id.global_questions_linear_layout);
 
         messageInputText = view.findViewById(R.id.client_questions_messagebox);
@@ -111,4 +111,15 @@ public class ClientQuestionsFragment extends Fragment implements WebSocketListen
     public void onWebSocketError(Exception ex) {
 
     }
+=======
+        // Button to direct chat
+        view.findViewById(R.id.client_questions_direct_chat_button).setOnClickListener(view2 -> {
+            Intent intent = new Intent(getActivity(), CustomerChatActivity.class);
+            startActivity(intent);
+        });
+
+        return view;
+    }
+
+>>>>>>> Frontend/CyDropFrontend/app/src/main/java/com/example/cydrop_frontend/ClientQuestionsFragment.java
 }

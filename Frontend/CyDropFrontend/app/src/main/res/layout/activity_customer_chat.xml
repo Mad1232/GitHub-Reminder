@@ -1,13 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
     android:orientation="vertical"
     android:padding="16dp"
-    tools:context=".ChatActivity">
+    tools:context=".CustomerChatActivity">
 
+    <!-- Return Button -->
+    <Button
+        android:id="@+id/btn_return"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="Return"
+        android:backgroundTint="#2196F3"
+        android:textColor="@android:color/white"
+        android:textSize="16sp" />
+
+    <!-- ScrollView for Messages -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -24,6 +37,7 @@
             android:textSize="18sp" />
     </ScrollView>
 
+    <!-- Message Input Area -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -52,5 +66,4 @@
             android:textColor="#2183F3"
             android:textSize="16sp" />
     </LinearLayout>
-
 </androidx.appcompat.widget.LinearLayoutCompat>

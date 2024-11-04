@@ -32,19 +32,23 @@ public class Pet {
     @Column(name = "pet_gender")
     private String pet_gender;
 
+//    @Column(name = "vet_recommendation" , nullable = true)
+//    private String vet_recommendation;
+
     // Many-to-one relationship to User (owner)
     @ManyToOne
+    @JsonBackReference("pet-owner")
     @JoinColumn(name = "owner_id", nullable = false)
     private User owner;
 
     //One-to-One relationship to Medications(medicine)
-    @JsonBackReference
+    @JsonBackReference("medication-pet")
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "medication_id", referencedColumnName = "id", nullable = true)
     private Medication medication;
 
     // Many-to-Many with Vet
-    @JsonBackReference
+    @JsonBackReference("vet-pet")
     @ManyToMany
     @JoinTable(
             name = "pet_vet",
@@ -126,6 +130,7 @@ public class Pet {
     public void setMedication(Medication medication){
         this.medication = medication;
     }
+
     // Getter and Setter for Veterinarians
     public List<Vet> getVeterinarians() {
         return veterinarians;
@@ -135,6 +140,9 @@ public class Pet {
         this.veterinarians = veterinarians;
     }
 
+    //public String getVet_recommendation() {return vet_recommendation;}
+
+    //public void setVet_recommendation(String vet_recommendation) {this.vet_recommendation = vet_recommendation;}
 }
 
 

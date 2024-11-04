@@ -47,6 +47,17 @@
             android:label="VetDetails"
             android:theme="@style/Theme.CyDropFrontend" />
         <activity
+            android:name=".VetChatActivity"
+            android:exported="true"
+            android:label="VetChat"
+            android:theme="@style/Theme.CyDropFrontend" />
+        <activity
+            android:name=".CustomerChatActivity"
+            android:exported="true"
+            android:label="VetChat"
+            android:theme="@style/Theme.CyDropFrontend" />
+
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

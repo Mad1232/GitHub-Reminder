@@ -2,6 +2,10 @@ package com.coms309.demo2.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
+import lombok.Getter;
+
+import java.util.List;
+import java.util.Set;
 
 import java.util.List;
 
@@ -32,9 +36,16 @@ public class Vet {
     private String phone;
 
     // Many-to-Many with Pet
-    @JsonBackReference
+    @JsonBackReference("pet-vet")
     @ManyToMany(mappedBy = "veterinarians")
     private List<Pet> pets;
+
+    //One-to-many relationship with conversations with users
+    //vet is in conversation.java
+    @JsonBackReference("conversation-vet")
+    @OneToMany(mappedBy = "vet", orphanRemoval = true, fetch = FetchType.EAGER)
+    @Getter
+    private Set<Conversation> conversations;
 
     // Getters and setters
     public int getVet_id() {
@@ -86,5 +97,16 @@ public class Vet {
         this.pets = pets;
     }
 
+    @Override
+    public boolean equals(Object other) {
+        if (other instanceof Vet) {
+            return ((Vet) other).vet_id == this.vet_id;
+        }
+        return false;
+    }
 
+    @Override
+    public int hashCode() {
+        return Integer.hashCode(vet_id);
+    }
 }
