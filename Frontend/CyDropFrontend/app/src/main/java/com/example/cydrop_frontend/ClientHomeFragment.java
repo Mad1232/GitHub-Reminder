@@ -91,7 +91,7 @@ public class ClientHomeFragment extends Fragment {
             }
         });
 
-        Button backButton = view.findViewById(R.id.adminCloseOverlayButton);
+        Button backButton = view.findViewById(R.id.client_home_back_button);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -105,12 +105,12 @@ public class ClientHomeFragment extends Fragment {
             TogglePetEdit(true);
         });
 
-        Button submit = view.findViewById(R.id.adminInventorySubmitButton);
+        Button submit = view.findViewById(R.id.client_home_submit_button);
         submit.setOnClickListener(view2 -> {
             PostNewPet();
         });
 
-        Button logout = view.findViewById(R.id.adminLogoutButton);
+        Button logout = view.findViewById(R.id.client_home_logout_button);
         logout.setOnClickListener(view1 -> {
 
             SharedPreferences sharedPref =  PreferenceManager.getDefaultSharedPreferences(getContext().getApplicationContext());

@@ -86,7 +86,7 @@
             app:layout_constraintTop_toBottomOf="@+id/petAge" />
 
         <Button
-            android:id="@+id/adminInventorySubmitButton"
+            android:id="@+id/client_home_submit_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Submit"
@@ -96,7 +96,7 @@
             app:layout_constraintTop_toBottomOf="@+id/petDiagnosis" />
 
         <Button
-            android:id="@+id/adminCloseOverlayButton"
+            android:id="@+id/client_home_back_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Back"
@@ -139,7 +139,7 @@
             app:layout_constraintEnd_toEndOf="parent" />
 
         <Button
-            android:id="@+id/adminLogoutButton"
+            android:id="@+id/client_home_logout_button"
             android:layout_width="wrap_content"
             android:backgroundTint="@color/grey"
             android:layout_marginTop="5dp"
