@@ -33,6 +33,7 @@ public class User {
     // One-to-many relationship with Pet
     //owner is in pet.java
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Getter
     private List<Pet> pets;
 
     //One-to-many relationship with conversations with vets

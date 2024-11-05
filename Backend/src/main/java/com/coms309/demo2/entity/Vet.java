@@ -47,6 +47,11 @@ public class Vet {
     @Getter
     private Set<Conversation> conversations;
 
+    // Many-to-Many with User (customers)
+    @ManyToMany
+    @Getter
+    private List<User> customers;
+
     // Getters and setters
     public int getVet_id() {
         return vet_id;
