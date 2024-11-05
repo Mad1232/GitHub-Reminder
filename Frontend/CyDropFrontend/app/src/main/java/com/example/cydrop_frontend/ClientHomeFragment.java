@@ -21,7 +21,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.JsonRequest;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -126,7 +125,7 @@ public class ClientHomeFragment extends Fragment {
         });
 
         petType = view.findViewById(R.id.petType);
-        petBreed = view.findViewById(R.id.petBreed);
+        petBreed = view.findViewById(R.id.card_pet_type);
         petAge = view.findViewById(R.id.petAge);
         petName = view.findViewById(R.id.petNameInput);
         petDiagnosis = view.findViewById(R.id.petDiagnosis);

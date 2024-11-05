@@ -100,7 +100,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
-            android:id="@+id/petBreed"
+            android:id="@+id/card_pet_type"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -167,7 +167,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.502"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/petBreed" />
+            app:layout_constraintTop_toBottomOf="@+id/card_pet_type" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
