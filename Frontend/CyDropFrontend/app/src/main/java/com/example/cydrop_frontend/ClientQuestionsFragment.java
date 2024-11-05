@@ -45,9 +45,12 @@ public class ClientQuestionsFragment extends Fragment implements WebSocketListen
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_client_questions, container, false);
 
+        // Try to connect to websocket
+        WebSocketManager.getInstance().connectWebSocket("ws://coms-3090-038.class.las.iastate.edu:8080/chat/" + VolleySingleton.email);
+        WebSocketManager.getInstance().setWebSocketListener(ClientQuestionsFragment.this);
+
 
         linearLayout = view.findViewById(R.id.global_questions_linear_layout);
-
         messageInputText = view.findViewById(R.id.client_questions_messagebox);
 
         view.findViewById(R.id.client_questions_send_button).setOnClickListener(view2 -> {
@@ -67,6 +70,7 @@ public class ClientQuestionsFragment extends Fragment implements WebSocketListen
     }
 
     public void addMessage(String username, String content){
+        fragCount++;
        FragmentManager fragMan = getFragmentManager();
        FragmentTransaction fragTransaction = fragMan.beginTransaction();
        Fragment f = MessageFragment.newInstance(username + ": ",content);
@@ -88,11 +92,6 @@ public class ClientQuestionsFragment extends Fragment implements WebSocketListen
                     usernameSplit[0].substring(1);
             addMessage(finalUsername, messageSplit[1].trim());
         } else {
-
-
-
-
-
             String[] systemMessageSplit = message.split(" ");
             String finalMessage = "";
             for (int i = 0; i < systemMessageSplit.length; i++){

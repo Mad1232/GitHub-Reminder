@@ -22,12 +22,11 @@
         android:id="@+id/message_sender_content"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:text="Message"
         android:textColor="@color/black"
         android:textSize="23sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/message_sender_username"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/message_sender_username" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

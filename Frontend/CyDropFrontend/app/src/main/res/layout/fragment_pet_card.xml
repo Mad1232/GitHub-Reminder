@@ -26,8 +26,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="15dp"
+        android:textColor="@color/alpha_grey"
         android:text="petType"
         android:textSize="30sp"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/card_pet_name"
         app:layout_constraintTop_toBottomOf="@+id/card_pet_name" />

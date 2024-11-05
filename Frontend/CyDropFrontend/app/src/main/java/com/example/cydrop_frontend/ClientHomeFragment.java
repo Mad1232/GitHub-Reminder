@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -28,7 +30,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
 import java.util.Map;
 
 
@@ -48,6 +56,8 @@ public class ClientHomeFragment extends Fragment {
     private EditText petGender;
 
     private EditText petDeleteId;
+
+    private ArrayList<Fragment> fragList = new ArrayList<>();
 
     LinearLayout linearLayout;
     TextView petsViewTextView;
@@ -100,13 +110,6 @@ public class ClientHomeFragment extends Fragment {
             PostNewPet();
         });
 
-        Button deleteSubmit = view.findViewById(R.id.deletePetSubmitButton);
-        deleteSubmit.setOnClickListener(view2 -> {
-            DeletePet();
-            TogglePetDelete(false);
-            GetJSONData();
-        });
-
         Button logout = view.findViewById(R.id.adminLogoutButton);
         logout.setOnClickListener(view1 -> {
 
@@ -126,7 +129,6 @@ public class ClientHomeFragment extends Fragment {
         petName = view.findViewById(R.id.petNameInput);
         petDiagnosis = view.findViewById(R.id.petDiagnosis);
         petGender = view.findViewById(R.id.petGender);
-        petDeleteId = view.findViewById(R.id.petIdToDelete);
 
         ToggleAddPetOverlay(false);
 
@@ -139,7 +141,17 @@ public class ClientHomeFragment extends Fragment {
         FragmentManager fragMan = getFragmentManager();
         FragmentTransaction fragTransaction = fragMan.beginTransaction();
         Fragment f = PetCardFragment.newInstance(petName, petType, petId);
+        fragList.add(f);
         fragTransaction.add(linearLayout.getId(), f, "frag");
+        fragTransaction.commit();
+    }
+
+    public void RemoveAllPetFrags(){
+        FragmentManager fragMan = getFragmentManager();
+        FragmentTransaction fragTransaction = fragMan.beginTransaction();
+        for (Fragment f : (Fragment[]) fragList.toArray()){
+            fragTransaction.remove(f);
+        }
         fragTransaction.commit();
     }
 
@@ -162,16 +174,6 @@ public class ClientHomeFragment extends Fragment {
         } else {
             regularView.setVisibility(View.VISIBLE);
             petEditView.setVisibility(View.INVISIBLE);
-        }
-    }
-
-    private void TogglePetDelete(boolean addOverlay){
-        if (addOverlay){
-            regularView.setVisibility(View.INVISIBLE);
-            petDeleteView.setVisibility(View.VISIBLE);
-        } else {
-            regularView.setVisibility(View.VISIBLE);
-            petDeleteView.setVisibility(View.INVISIBLE);
         }
     }
 
@@ -245,6 +247,7 @@ public class ClientHomeFragment extends Fragment {
                     public void onResponse(JSONObject response) {
                         // Victory! i think
                         ToggleAddPetOverlay(false);
+                        RemoveAllPetFrags();
                         GetJSONData();
                     }
                 },
@@ -258,23 +261,6 @@ public class ClientHomeFragment extends Fragment {
         );
 
         VolleySingleton.getInstance(getContext().getApplicationContext()).addToRequestQueue(postReq);
-    }
-
-    void DeletePet(){
-        JsonArrayRequest petDeleteRequest = new JsonArrayRequest(
-                Request.Method.DELETE,
-                "http://coms-3090-038.class.las.iastate.edu:8080/pet/" + petDeleteId.getText().toString().trim(),
-                null, // Pass null as the request body since it's a GET request
-                response -> {
-                    TogglePetDelete(false);
-                    Toast.makeText(getActivity(), "Pet delete works!", Toast.LENGTH_LONG);
-                },
-                error -> {
-
-                }
-        );
-
-        VolleySingleton.getInstance(getContext().getApplicationContext()).addToRequestQueue(petDeleteRequest);
     }
 
 

@@ -39,6 +39,7 @@ public class ClientNavbarMainActivity extends AppCompatActivity implements WebSo
         // Switch fragments when an icon is selected
         binding.bottomNavigationView.setOnItemSelectedListener(item -> {
             int itemId = item.getItemId();
+            WebSocketManager.getInstance().disconnectWebSocket();
             if (itemId == R.id.reminders){
                 replaceFragment(new ClientRemindersFragment());
             } else if (itemId == R.id.customers) {
