@@ -9,34 +9,29 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link PetCardFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class PetCardFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PETNAME = "petName";
     private static final String ARG_PETBREED = "petBreed";
-    //private static final String ARG_ = "petName";
+    private static final String ARG_ID = "petId";
 
 
-    // TODO: Rename and change types of parameters
     private String petName;
     private String petBreed;
+    private String petId;
 
     public PetCardFragment() {
         // Required empty public constructor
     }
 
 
-    public static PetCardFragment newInstance(String petName, String petBreed) {
+    public static PetCardFragment newInstance(String petName, String petBreed, String petId) {
         PetCardFragment fragment = new PetCardFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PETNAME, petName);
         args.putString(ARG_PETBREED, petBreed);
+        args.putString(ARG_ID, petId);
         fragment.setArguments(args);
         return fragment;
     }
@@ -47,6 +42,7 @@ public class PetCardFragment extends Fragment {
         if (getArguments() != null) {
             petBreed = getArguments().getString(ARG_PETBREED);
             petName = getArguments().getString(ARG_PETNAME);
+            petId = getArguments().getString(ARG_ID);
         }
     }
 

@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:background="@drawable/rounded_rectangle"
     android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
     tools:context=".PetCardFragment">
 
 
@@ -13,8 +14,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="15dp"
         android:textSize="30sp"
+        android:text="petName"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -22,20 +24,32 @@
         android:id="@+id/card_pet_type"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="15dp"
+        android:text="petType"
         android:textSize="30sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/card_pet_name"
+        app:layout_constraintTop_toBottomOf="@+id/card_pet_name" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/card_pet_edit_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
         android:text="Edit"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/card_pet_name" />
+        app:layout_constraintTop_toTopOf="@+id/card_pet_name" />
+
+    <Button
+        android:id="@+id/card_pet_delete_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:backgroundTint="@color/background_red"
+        android:text="Delete"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/card_pet_type" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

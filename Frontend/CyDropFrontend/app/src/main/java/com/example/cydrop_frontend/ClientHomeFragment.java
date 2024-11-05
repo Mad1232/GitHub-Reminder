@@ -5,6 +5,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
@@ -63,13 +65,11 @@ public class ClientHomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_client_home, container, false);
+
         regularView = view.findViewById(R.id.regularView);
         overlayView = view.findViewById(R.id.addPetOverlay);
-        petDeleteView = view.findViewById(R.id.deletePetOverlay);
-        petEditView = view.findViewById(R.id.editPetById);
 
         linearLayout = view.findViewById(R.id.petListLinearLayout);
-        petsViewTextView = view.findViewById(R.id.textView2);
 
         GetJSONData();
 
@@ -89,10 +89,6 @@ public class ClientHomeFragment extends Fragment {
             }
         });
 
-        Button deletePetButton = view.findViewById(R.id.removePetByID);
-        deletePetButton.setOnClickListener(view2 -> {
-            TogglePetDelete(true);
-        });
 
         Button editPetButton = view.findViewById(R.id.editPetById);
         editPetButton.setOnClickListener(view2 -> {
@@ -118,7 +114,7 @@ public class ClientHomeFragment extends Fragment {
             SharedPreferences.Editor editor = sharedPref.edit();
             editor.putString("userId", "-1");
             editor.putString("userType", "none");
-            editor.apply();
+            editor.commit();
 
             Intent intent = new Intent(MainActivity.class.toString());
             startActivity(intent);
@@ -137,6 +133,16 @@ public class ClientHomeFragment extends Fragment {
         // Inflate the layout for this fragment
         return view;
     }
+
+
+    public void addNewPetCard(String petName, String petType, String petId){
+        FragmentManager fragMan = getFragmentManager();
+        FragmentTransaction fragTransaction = fragMan.beginTransaction();
+        Fragment f = PetCardFragment.newInstance(petName, petType, petId);
+        fragTransaction.add(linearLayout.getId(), f, "frag");
+        fragTransaction.commit();
+    }
+
 
 
     private void ToggleAddPetOverlay(boolean addOverlay){
@@ -174,23 +180,15 @@ public class ClientHomeFragment extends Fragment {
                 Request.Method.GET,
                 "http://coms-3090-038.class.las.iastate.edu:8080/user-pet/" + VolleySingleton.userId,
                 null, // Pass null as the request body since it's a GET request
-                new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        try {
-                            petsViewTextView.setText("");
-                            JSONArray jsonArr = response;
-                            for (int i = 0; i < jsonArr.length(); i++){
-                                JSONObject json = jsonArr.getJSONObject(i);
-
-                                String newText =  "Pet ID: "+ json.getString("pet_id") +
-                                        "\nPet name: " + json.getString("pet_name") +
-                                        "\nPet Pet type: " + json.getString("pet_type") + "\n\n";
-                                petsViewTextView.setText(petsViewTextView.getText() + newText);
-                            }
-                        } catch (Exception e) {
-                            throw new RuntimeException(e);
+                response -> {
+                    try {
+                        JSONArray jsonArr = response;
+                        for (int i = 0; i < jsonArr.length(); i++){
+                            JSONObject json = jsonArr.getJSONObject(i);
+                            addNewPetCard(json.getString("pet_id"), json.getString("pet_name"), json.getString("pet_type"));
                         }
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
                     }
                 },
                 new Response.ErrorListener() {

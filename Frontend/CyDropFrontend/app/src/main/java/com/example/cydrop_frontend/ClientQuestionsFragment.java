@@ -46,7 +46,7 @@ public class ClientQuestionsFragment extends Fragment implements WebSocketListen
         View view = inflater.inflate(R.layout.fragment_client_questions, container, false);
 
 
-       linearLayout = view.findViewById(R.id.global_questions_linear_layout);
+        linearLayout = view.findViewById(R.id.global_questions_linear_layout);
 
         messageInputText = view.findViewById(R.id.client_questions_messagebox);
 
