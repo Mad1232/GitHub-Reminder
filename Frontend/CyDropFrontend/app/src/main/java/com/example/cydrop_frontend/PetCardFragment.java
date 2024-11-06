@@ -91,7 +91,6 @@ public class PetCardFragment extends Fragment {
                     .setNegativeButton("No", dialogClickListener).show();
         });
 
-
         // Inflate the layout for this fragment
         return view;
     }

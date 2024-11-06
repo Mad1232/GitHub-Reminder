@@ -57,7 +57,7 @@ public class VetChatActivity extends AppCompatActivity implements WebSocketListe
             returnButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(VetChatActivity.this, ClientNavbarMainActivity.class);
+                    Intent intent = new Intent(VetChatActivity.this, VetNavbarMainActivity.class);
                     startActivity(intent);
                 }
             });
