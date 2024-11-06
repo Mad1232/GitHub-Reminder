@@ -27,14 +27,12 @@
         android:layout_weight="1"
         android:padding="16dp">
 
-        <TextView
-            android:id="@+id/tx1"
+        <LinearLayout
+            android:id="@+id/customer_questions_linear_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="The conversation will appear here:"
-            android:padding="10dp"
-            android:textColor="@color/black"
-            android:textSize="18sp" />
+            android:animateLayoutChanges="true"
+            android:orientation="vertical" />
     </ScrollView>
 
     <!-- Message Input Area -->

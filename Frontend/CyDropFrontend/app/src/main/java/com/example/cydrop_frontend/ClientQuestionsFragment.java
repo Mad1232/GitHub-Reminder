@@ -28,7 +28,7 @@ public class ClientQuestionsFragment extends Fragment implements WebSocketListen
     EditText messageInputText;
     LinearLayout linearLayout;
     int fragCount = 0;
-    private Button client_questions_direct_chat_button;
+
 
     public ClientQuestionsFragment() {
         // Required empty public constructor
@@ -58,13 +58,10 @@ public class ClientQuestionsFragment extends Fragment implements WebSocketListen
         });
 
         // Button to direct chat
-//        view.findViewById(R.id.client_questions_direct_chat_button).setOnClickListener(view2 -> {
-//            Intent intent = new Intent(getActivity(), CustomerChatActivity.class);
-//            startActivity(intent);
-//        });
-//
-//        return view;
-
+        view.findViewById(R.id.direct_chat_btn).setOnClickListener(view2 -> {
+            Intent intent = new Intent(getActivity(), CustomerChatActivity.class);
+            startActivity(intent);
+        });
 
         return  view;
     }
