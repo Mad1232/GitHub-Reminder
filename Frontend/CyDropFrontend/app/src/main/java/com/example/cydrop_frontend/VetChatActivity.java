@@ -23,7 +23,6 @@ public class VetChatActivity extends AppCompatActivity implements WebSocketListe
     private Button sendBtn;
     private EditText msgEtx;
     private LinearLayout msgTv;
-   // int fragCount = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +47,19 @@ public class VetChatActivity extends AppCompatActivity implements WebSocketListe
                 try {
                     // send message
                     WebSocketManager2.getInstance().sendMessage(msgEtx.getText().toString());
+
+                    String message = "vet:" + msgEtx.getText().toString();
+
+                    // Create a new TextView and set the message text
+                    TextView messageTextView = new TextView(this);
+                    messageTextView.setText(message);
+
+                    // Add the TextView to the LinearLayout
+                    msgTv.addView(messageTextView);
+
+                    // Clear the EditText after sending
+                    msgEtx.setText("");
+
                 } catch (Exception e) {
                     Log.d("ExceptionSendMessage:", e.getMessage().toString());
                 }
@@ -64,40 +76,6 @@ public class VetChatActivity extends AppCompatActivity implements WebSocketListe
 
         }
 
-//        public void addMessage(String username, String content) {
-//            fragCount++;
-//            FragmentManager fragMan = getSupportFragmentManager();
-//            FragmentTransaction fragTransaction = fragMan.beginTransaction();
-//            Fragment f = MessageFragment.newInstance(username + ": ", content);
-//            fragTransaction.add(msgTv.getId(), f, "frag" + fragCount);
-//            fragTransaction.commit();
-//        }
-
-//        @Override
-//        public void onWebSocketMessage(String message) {
-//            String[] messageSplit = message.split(":");
-//            if (messageSplit.length > 1) {
-//                String[] usernameSplit = messageSplit[0].split("@");
-//                String finalUsername = usernameSplit[0].substring(0, 1).toUpperCase() +
-//                        usernameSplit[0].substring(1);
-//                addMessage(finalUsername, messageSplit[1].trim());
-//            } else {
-//                String[] systemMessageSplit = message.split(" ");
-//                String finalMessage = "";
-//                for (int i = 0; i < systemMessageSplit.length; i++) {
-//                    String[] tempArr = systemMessageSplit[i].split("@");
-//                    if (tempArr.length > 1) {
-//                        String finalUsername = tempArr[0].substring(0, 1).toUpperCase() +
-//                                tempArr[0].substring(1);
-//                        finalMessage += finalUsername + " ";
-//                    } else {
-//                        finalMessage += tempArr[0] + " ";
-//                    }
-//                }
-//                addMessage("System", finalMessage.trim());
-//            }
-//        }
-
     @Override
     public void onWebSocketMessage(String message) {
         /**
@@ -109,9 +87,14 @@ public class VetChatActivity extends AppCompatActivity implements WebSocketListe
         runOnUiThread(() -> {
             // String s = msgTv.getText().toString();
             // msgTv.setText(s + "\n"+message);
-            // Create a new TextView for each incoming message
+            String[] parts = message.split(" ", 3);
+
+            // The second part should be the sender, and the rest is the message
+            String formattedMessage = parts[1] + ": " + parts[2];
+
+            // Create a new TextView for the formatted message
             TextView messageTextView = new TextView(this);
-            messageTextView.setText(message);
+            messageTextView.setText(formattedMessage);
 
             // Add the TextView to the LinearLayout
             msgTv.addView(messageTextView);

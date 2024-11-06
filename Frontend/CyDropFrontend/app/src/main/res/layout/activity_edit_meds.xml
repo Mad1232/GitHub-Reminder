@@ -23,7 +23,7 @@
         android:id="@+id/et_medication_name_prev"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Existing Medication Name"
+        android:hint="ID"
         android:background="#FFFFFF"
         android:padding="16dp"
         android:textSize="16sp"

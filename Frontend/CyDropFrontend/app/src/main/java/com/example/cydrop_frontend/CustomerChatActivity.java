@@ -21,7 +21,6 @@ public class CustomerChatActivity extends AppCompatActivity implements WebSocket
     private Button sendBtn;
     private EditText msgEtx;
     private LinearLayout msgTv;
-   // int fragCount = 0;
 
 
     @Override
@@ -38,7 +37,7 @@ public class CustomerChatActivity extends AppCompatActivity implements WebSocket
         msgTv = (LinearLayout) findViewById(R.id.customer_questions_linear_layout);
 
         /* connect this activity to the websocket instance */
-        WebSocketManager2.getInstance().connectWebSocket("ws://coms-3090-038.class.las.iastate.edu:8080/users/" + "1" + "/conversations/" + "2");
+        WebSocketManager2.getInstance().connectWebSocket("ws://coms-3090-038.class.las.iastate.edu:8080/users/" + "2" + "/conversations/" + "1");
         WebSocketManager2.getInstance().setWebSocketListener(CustomerChatActivity.this);
 
         /* send button listener */
@@ -46,6 +45,19 @@ public class CustomerChatActivity extends AppCompatActivity implements WebSocket
             try {
                 // send message
                 WebSocketManager2.getInstance().sendMessage(msgEtx.getText().toString());
+
+                String message = "user:" + msgEtx.getText().toString();
+
+                // Create a new TextView and set the message text
+                TextView messageTextView = new TextView(this);
+                messageTextView.setText(message);
+
+                // Add the TextView to the LinearLayout
+                msgTv.addView(messageTextView);
+
+                // Clear the EditText after sending
+                msgEtx.setText("");
+
             } catch (Exception e) {
                 Log.d("ExceptionSendMessage:", e.getMessage().toString());
             }
@@ -62,42 +74,6 @@ public class CustomerChatActivity extends AppCompatActivity implements WebSocket
 
     }
 
-//    public void addMessage(String username, String content) {
-//        fragCount++;
-//        FragmentManager fragMan = getSupportFragmentManager();
-//        FragmentTransaction fragTransaction = fragMan.beginTransaction();
-//        //Fragment f = MessageFragment.newInstance(username + ": ", content);
-//         Fragment f = MessageFragment.newInstance(VolleySingleton.email + ": ", content);
-//        fragTransaction.add(msgTv.getId(), f, "frag" + fragCount);
-//        fragTransaction.commit();
-//    }
-
-//    @Override
-//    public void onWebSocketMessage(String message) {
-//       runOnUiThread(()->{
-//            String[] messageSplit = message.split(":");
-//            if (messageSplit.length > 1) {
-//                String[] usernameSplit = messageSplit[0].split("@");
-//                String finalUsername = usernameSplit[0].substring(0, 1).toUpperCase() +
-//                        usernameSplit[0].substring(1);
-//                addMessage(finalUsername, messageSplit[1].trim());
-//            } else {
-//                String[] systemMessageSplit = message.split(" ");
-//                String finalMessage = "";
-//                for (int i = 0; i < systemMessageSplit.length; i++) {
-//                    String[] tempArr = systemMessageSplit[i].split("@");
-//                    if (tempArr.length > 1) {
-//                        String finalUsername = tempArr[0].substring(0, 1).toUpperCase() +
-//                                tempArr[0].substring(1);
-//                        finalMessage += finalUsername + " ";
-//                    } else {
-//                        finalMessage += tempArr[0] + " ";
-//                    }
-//                }
-//                addMessage("System", finalMessage.trim());
-//            }
-//        });
-//    }
 
     @Override
     public void onWebSocketMessage(String message) {
@@ -108,18 +84,21 @@ public class CustomerChatActivity extends AppCompatActivity implements WebSocket
          * to occur safely from a background or non-UI thread.
          */
         runOnUiThread(() -> {
-           // String s = msgTv.getText().toString();
-           // msgTv.setText(s + "\n"+message);
-            // Create a new TextView for each incoming message
+            // String s = msgTv.getText().toString();
+            // msgTv.setText(s + "\n"+message);
+            String[] parts = message.split(" ", 3);
+
+            // The second part should be the sender, and the rest is the message
+            String formattedMessage = parts[1] + ": " + parts[2];
+
+            // Create a new TextView for the formatted message
             TextView messageTextView = new TextView(this);
-            messageTextView.setText(message);
+            messageTextView.setText(formattedMessage);
 
             // Add the TextView to the LinearLayout
             msgTv.addView(messageTextView);
         });
     }
-
-
 
     @Override
     public void onWebSocketClose(int code, String reason, boolean remote) {
