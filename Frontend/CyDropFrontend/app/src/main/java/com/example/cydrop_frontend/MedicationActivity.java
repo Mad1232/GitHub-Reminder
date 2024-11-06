@@ -30,8 +30,6 @@ import java.util.Map;
 public class MedicationActivity extends AppCompatActivity {
     private TextView msgResponse;
     private static final String URL = "http://coms-3090-038.class.las.iastate.edu:8080/inventory";
-
-    private Button btnJsonObjReq;
     private EditText med_input;
 
     @Override
@@ -51,7 +49,7 @@ public class MedicationActivity extends AppCompatActivity {
         });
 
         findViewById(R.id.btn_edit_medication).setOnClickListener(view1 -> {
-            Intent intent = new Intent(EditMedsActivity.class.toString());
+            Intent intent = new Intent(MedicationActivity.this, EditMedsActivity.class);
             startActivity(intent);
         });
 
@@ -60,6 +58,11 @@ public class MedicationActivity extends AppCompatActivity {
             String medicationInput = med_input.getText().toString();
             delRequest(URL, medicationInput);
             getJSONData();
+        });
+
+        findViewById(R.id.btn_return).setOnClickListener(view1 -> {
+            Intent intent = new Intent(MedicationActivity.this, VetNavbarMainActivity.class);
+            startActivity(intent);
         });
     }
 
@@ -137,6 +140,7 @@ public class MedicationActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONObject response) {
                         Toast.makeText(getApplicationContext(), "Medication Added", Toast.LENGTH_LONG).show();
+                        getJSONData();
                     }
                 },
                 new Response.ErrorListener() {
@@ -175,6 +179,7 @@ public class MedicationActivity extends AppCompatActivity {
             public void onResponse(String response) {
                         if ("Ok".equals(response)) {
                             Toast.makeText(getApplicationContext(), "Medication Deleted", Toast.LENGTH_LONG).show();
+                            getJSONData();
                         } else {
                             Toast.makeText(getApplicationContext(), "Unexpected response: " + response, Toast.LENGTH_LONG).show();
                         }
