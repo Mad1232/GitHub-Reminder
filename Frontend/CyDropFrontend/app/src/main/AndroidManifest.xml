@@ -58,6 +58,12 @@
             android:theme="@style/Theme.CyDropFrontend" />
 
         <activity
+            android:name=".MedicationActivity"
+            android:exported="true"
+            android:label="Meds"
+            android:theme="@style/Theme.CyDropFrontend" />
+
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
