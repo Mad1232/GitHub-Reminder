@@ -100,11 +100,6 @@ public class ClientHomeFragment extends Fragment {
         });
 
 
-        Button editPetButton = view.findViewById(R.id.editPetById);
-        editPetButton.setOnClickListener(view2 -> {
-            TogglePetEdit(true);
-        });
-
         Button submit = view.findViewById(R.id.client_home_submit_button);
         submit.setOnClickListener(view2 -> {
             PostNewPet();
@@ -166,16 +161,6 @@ public class ClientHomeFragment extends Fragment {
         } else {
             regularView.setVisibility(View.VISIBLE);
             overlayView.setVisibility(View.INVISIBLE);
-        }
-    }
-
-    private void TogglePetEdit(boolean addOverlay){
-        if (addOverlay){
-            regularView.setVisibility(View.INVISIBLE);
-            petEditView.setVisibility(View.VISIBLE);
-        } else {
-            regularView.setVisibility(View.VISIBLE);
-            petEditView.setVisibility(View.INVISIBLE);
         }
     }
 
