@@ -21,8 +21,6 @@ import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button simulateAdminLogin;
-    private Button simulateClientLogin;
     private Button signupButton;
 
     @Override
@@ -46,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(intent);  // go to SignupActivity
                         break;
                     case "vet_view":
-                        intent = new Intent(MainActivity.this, VetDetailsActivity.class);
+                        intent = new Intent(MainActivity.this, VetNavbarMainActivity.class);
                         startActivity(intent);  // go to SignupActivity
                         break;
                 }
