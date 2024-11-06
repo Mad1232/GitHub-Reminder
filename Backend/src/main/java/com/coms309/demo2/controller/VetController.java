@@ -6,6 +6,9 @@ import com.coms309.demo2.entity.Vet;
 import com.coms309.demo2.repository.PetsRepo;
 import com.coms309.demo2.repository.UserRepository;
 import com.coms309.demo2.repository.VetsRepo;
+
+import lombok.Getter;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -57,16 +60,35 @@ public class VetController {
         return vetsRepo.save(vet); // Save the vet object to the repository
     }
 
+    public static class CustomerID {
+        @Getter
+        private Long id;
+        
+        @Getter
+        private String email;
+    }
+
     // Create link between vet and customer
-    @PostMapping("/vets/{vetID}/customers/{customerID}")
-    public List<User> addCustomer(@PathVariable Integer vetID, @PathVariable Long customerID) {
+    // Valid bodies:
+    // * { "id": 7 }
+    // * { "email": "foo@bar.baz" }
+    @PostMapping("/vets/{vetID}/customers")
+    public List<User> addCustomer(@PathVariable Integer vetID, @RequestBody CustomerID customerID) {
         Optional<Vet> vetOptional = vetsRepo.findById(vetID);
         if (!vetOptional.isPresent()) {
             throw new RuntimeException("Vet does not exist");
         }
         Vet vet = vetOptional.get();
 
-        Optional<User> customerOptional = userRepository.findById(customerID);
+        Optional<User> customerOptional;
+        if (customerID.id != null) {
+            customerOptional = userRepository.findById(customerID.id);
+        } else if (customerID.email != null) {
+            customerOptional = userRepository.findByEmail(customerID.email);
+        } else {
+            throw new RuntimeException("Invalid body");
+        }
+
         if (!customerOptional.isPresent()) {
             throw new RuntimeException("User does not exist");
         }
