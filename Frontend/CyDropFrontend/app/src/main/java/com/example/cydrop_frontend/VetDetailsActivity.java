@@ -52,10 +52,11 @@ public class VetDetailsActivity extends AppCompatActivity {
             SharedPreferences sharedPref =  PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
             SharedPreferences.Editor editor = sharedPref.edit();
             editor.putString("userId", "-1");
+            editor.putString("userEmail", "none");
             editor.putString("userType", "none");
-            editor.apply();
+            editor.commit();
 
-            Intent intent = new Intent(LoginActivity.class.toString());
+            Intent intent = new Intent(MainActivity.class.toString());
             startActivity(intent);
         });
     }

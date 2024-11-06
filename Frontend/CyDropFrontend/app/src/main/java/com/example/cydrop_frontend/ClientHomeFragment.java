@@ -137,10 +137,12 @@ public class ClientHomeFragment extends Fragment {
     }
 
 
-    public void addNewPetCard(String petName, String petType, String petId){
+    public void addNewPetCard(String petId, String petName, String petType, String petBreed,
+                              String petAge, String petGender, String petDiagnosis){
         FragmentManager fragMan = getFragmentManager();
         FragmentTransaction fragTransaction = fragMan.beginTransaction();
-        Fragment f = PetCardFragment.newInstance(petName, petType, petId);
+        Fragment f = PetCardFragment.newInstance(petId, petName, petType,
+                petBreed, petAge, petGender, petDiagnosis );
         fragList.add(f);
         fragTransaction.add(linearLayout.getId(), f, "frag");
         fragTransaction.commit();
@@ -187,7 +189,15 @@ public class ClientHomeFragment extends Fragment {
                         JSONArray jsonArr = response;
                         for (int i = 0; i < jsonArr.length(); i++){
                             JSONObject json = jsonArr.getJSONObject(i);
-                            addNewPetCard(json.getString("pet_id"), json.getString("pet_name"), json.getString("pet_type"));
+                            addNewPetCard(json.getString("pet_id"),
+                                    json.getString("pet_name"),
+                                    json.getString("pet_type"),
+                                    json.getString("pet_breed"),
+                                    json.getString("pet_age"),
+                                    json.getString("pet_gender"),
+                                    json.getString("pet_diagnosis")
+
+                            );
                         }
                     } catch (Exception e) {
                         throw new RuntimeException(e);
