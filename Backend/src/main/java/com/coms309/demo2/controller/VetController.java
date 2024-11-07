@@ -73,7 +73,7 @@ public class VetController {
     // * { "id": 7 }
     // * { "email": "foo@bar.baz" }
     @PostMapping("/vets/{vetID}/customers")
-    public List<User> addCustomer(@PathVariable Integer vetID, @RequestBody CustomerID customerID) {
+    public User addCustomer(@PathVariable Integer vetID, @RequestBody CustomerID customerID) {
         Optional<Vet> vetOptional = vetsRepo.findById(vetID);
         if (!vetOptional.isPresent()) {
             throw new RuntimeException("Vet does not exist");
@@ -100,7 +100,7 @@ public class VetController {
             vetsRepo.save(vet);
         }
 
-        return customers;
+        return customer;
     }
 
     // Remove link between vet and customer
