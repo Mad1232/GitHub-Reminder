@@ -4,183 +4,170 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ClientHomeFragment">
+    tools:context=".VetCustomersFragment">
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/addPetOverlay"
+        android:id="@+id/vet_customers_adding_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white"
-        android:visibility="gone">
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/vet_customer_add_cancel_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginBottom="15dp"
+            android:backgroundTint="@color/background_red"
+            android:text="Cancel"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            </Button>
+
 
         <TextView
-            android:id="@+id/addInventoryTextView"
+            android:id="@+id/vet_customers_adding_text"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_marginTop="52dp"
-            android:text="Add Pet"
+            android:text="@string/AddCustomer"
             android:textSize="30sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <EditText
-            android:id="@+id/petType"
+
+        <TextView
+            android:id="@+id/vet_customers_add_by_id_text"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Pet type"
-            android:inputType="text"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.502"
+            android:layout_height="40dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="120dp"
+            android:text="@string/AddByID"
+            android:textSize="25sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/petNameInput" />
+            app:layout_constraintTop_toTopOf="@id/vet_customers_adding_text" />
+
 
         <EditText
-            android:id="@+id/petNameInput"
+            android:id="@+id/vet_customer_add_id_input"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="175dp"
+            android:layout_marginTop="10dp"
             android:ems="10"
-            android:hint="Pet name"
             android:inputType="text"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.502"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <EditText
-            android:id="@+id/card_pet_type"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="pet breed"
-            android:inputType="text"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.502"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/petType" />
-
-        <EditText
-            android:id="@+id/petDiagnosis"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Pet diagnosis"
-            android:inputType="text"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.502"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/petGender" />
-
-        <EditText
-            android:id="@+id/petGender"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Pet gender"
-            android:inputType="text"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.502"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/petAge" />
+            android:hint="ID"
+            app:layout_constraintStart_toStartOf="@id/vet_customers_add_by_id_text"
+            app:layout_constraintTop_toBottomOf="@id/vet_customers_add_by_id_text" />
 
         <Button
-            android:id="@+id/client_home_submit_button"
+            android:id="@+id/vet_customer_add_by_id_submit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:backgroundTint="#4CAF50"
             android:text="Submit"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/petDiagnosis" />
+            app:layout_constraintBottom_toBottomOf="@+id/vet_customer_add_id_input"
+            app:layout_constraintStart_toEndOf="@+id/vet_customer_add_id_input"
+            app:layout_constraintTop_toTopOf="@+id/vet_customer_add_id_input" />
 
-        <Button
-            android:id="@+id/client_home_back_button"
+
+        <TextView
+            android:id="@+id/vet_customers_add_by_email_text"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Back"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.049"
+            android:layout_height="40dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="200dp"
+            android:text="@string/AddByEmail"
+            android:textSize="25sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.023" />
+            app:layout_constraintTop_toTopOf="@id/vet_customers_add_by_id_text" />
 
         <EditText
-            android:id="@+id/petAge"
+            android:id="@+id/vet_customer_add_email_input"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:ems="10"
-            android:hint="Pet age"
             android:inputType="text"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.502"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/card_pet_type" />
+            android:hint="Email"
+            app:layout_constraintStart_toStartOf="@id/vet_customers_add_by_email_text"
+            app:layout_constraintTop_toBottomOf="@id/vet_customers_add_by_email_text" />
+
+        <Button
+            android:id="@+id/vet_customer_add_by_email_submit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:backgroundTint="#4CAF50"
+            android:text="Submit"
+            app:layout_constraintBottom_toBottomOf="@+id/vet_customer_add_email_input"
+            app:layout_constraintStart_toEndOf="@+id/vet_customer_add_email_input"
+            app:layout_constraintTop_toTopOf="@+id/vet_customer_add_email_input" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+
+
+
+
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/regularView"
+        android:id="@+id/vet_customers_regular_layout"
         android:layout_width="match_parent"
+        android:visibility="visible"
         android:layout_height="match_parent">
 
         <Button
-            android:id="@+id/meds_btn"
+            android:id="@+id/add_new_customer_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
+            android:padding="9dp"
             android:layout_marginEnd="10dp"
             android:backgroundTint="#4CAF50"
-            android:text="Medication"
+            android:text="Add customer"
+            android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/logout_button"
+            android:id="@+id/vet_customers_logout_button"
             android:layout_width="wrap_content"
-            android:backgroundTint="@color/grey"
-            android:layout_marginTop="5dp"
-            android:layout_marginStart="10dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:backgroundTint="@color/grey"
             android:text="Logout"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
-            android:id="@+id/editPetById"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Edit pet"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
-
         <TextView
-            android:id="@+id/customer_text"
+            android:id="@+id/vet_customers_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="2dp"
             android:text="Customers"
             android:textColor="@color/black"
-            android:textSize="30dp"
-            app:layout_constraintEnd_toEndOf="@id/meds_btn"
+            android:textSize="35dp"
+            app:layout_constraintEnd_toEndOf="@id/add_new_customer_button"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ScrollView
-            android:id="@+id/client_home_scrollview"
+            android:id="@+id/vet_customers_scrollview"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/customer_text">
+            app:layout_constraintTop_toBottomOf="@+id/vet_customers_text">
 
             <LinearLayout
-                android:id="@+id/petListLinearLayout"
+                android:id="@+id/vet_customers_linear_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -188,7 +175,7 @@
 
             </LinearLayout>
         </ScrollView>
-
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 </FrameLayout>

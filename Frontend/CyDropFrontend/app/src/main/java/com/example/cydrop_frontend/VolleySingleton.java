@@ -21,6 +21,11 @@ public class VolleySingleton {
     public static String userId = "-1";
     public static String userType = "none";
 
+    // TODO: I NEED TO REMOVE THIS AND REPLACE ALL INSTANCES WITH VETIDS
+    public static final String vetIdTEMP = "1";
+
+
+
     private VolleySingleton(Context context) {
         ctx = context;
         requestQueue = getRequestQueue();

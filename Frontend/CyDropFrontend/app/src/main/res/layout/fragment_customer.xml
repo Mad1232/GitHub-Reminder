@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/rounded_rectangle"
+    android:layout_marginTop="10dp"
+    tools:context=".PetCardFragment">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/card_customer_collapsed_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/card_customer_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:text="customer name"
+            android:textSize="30sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <Button
+            android:id="@+id/card_customer_expand_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="15dp"
+            android:text="Expand"
+            app:layout_constraintBottom_toBottomOf="@id/card_customer_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/card_customer_name" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/card_customer_expanded_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="10dp">
+
+        <TextView
+            android:id="@+id/card_customer_editing_title"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="10dp"
+            android:text="Customer name"
+            android:textSize="30sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <TextView
+            android:id="@+id/card_customer_pet_list_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="13dp"
+            android:paddingLeft="15dp"
+            android:paddingBottom="10dp"
+            android:text="Pets:"
+            android:textSize="30sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/card_customer_editing_title" />
+
+        <LinearLayout
+            android:id="@+id/card_customer_pet_list_linear_layout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="70dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="50dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/card_customer_pet_list_text"
+            app:layout_constraintTop_toTopOf="@id/card_customer_pet_list_text">
+
+            <TextView
+                android:id="@+id/card_customer_pet_list_text_in_linear"
+                android:layout_width="match_parent"
+                android:textSize="25sp"
+                android:layout_height="wrap_content"
+                android:text="TextView" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/card_customer_edit_inspect_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#4CAF50"
+            android:text="inspect"
+            app:layout_constraintBottom_toBottomOf="@id/card_customer_edit_remove_customer_button"
+            app:layout_constraintEnd_toStartOf="@id/card_customer_edit_remove_customer_button"
+            app:layout_constraintStart_toEndOf="@+id/card_customer_edit_collapse_button"
+
+            app:layout_constraintTop_toTopOf="@id/card_customer_edit_remove_customer_button" />
+
+        <Button
+            android:id="@+id/card_customer_edit_remove_customer_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:padding="12dp"
+            android:layout_marginEnd="10dp"
+            android:backgroundTint="@color/background_red"
+            android:text="Remove customer"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/card_customer_pet_list_linear_layout"
+
+            />
+
+        <Button
+            android:id="@+id/card_customer_edit_collapse_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="Collapse"
+            app:layout_constraintBottom_toBottomOf="@id/card_customer_edit_remove_customer_button"
+            app:layout_constraintStart_toEndOf="@id/card_customer_edit_inspect_button"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/card_customer_edit_remove_customer_button" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

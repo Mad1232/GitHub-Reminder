@@ -93,11 +93,6 @@ public class ClientHomeFragment extends Fragment {
         });
 
 
-        Button editPetButton = view.findViewById(R.id.editPetById);
-        editPetButton.setOnClickListener(view2 -> {
-            TogglePetEdit(true);
-        });
-
         Button submit = view.findViewById(R.id.client_home_submit_button);
         submit.setOnClickListener(view2 -> {
             PostNewPet();
@@ -130,10 +125,12 @@ public class ClientHomeFragment extends Fragment {
     }
 
 
-    public void addNewPetCard(String petName, String petType, String petId){
+    public void addNewPetCard(String petId, String petName, String petType, String petBreed,
+                              String petAge, String petGender, String petDiagnosis){
         FragmentManager fragMan = getFragmentManager();
         FragmentTransaction fragTransaction = fragMan.beginTransaction();
-        Fragment f = PetCardFragment.newInstance(petName, petType, petId);
+        Fragment f = PetCardFragment.newInstance(petId, petName, petType,
+                petBreed, petAge, petGender, petDiagnosis );
         fragList.add(f);
         fragTransaction.add(linearLayout.getId(), f, "frag");
         fragTransaction.commit();
@@ -160,16 +157,6 @@ public class ClientHomeFragment extends Fragment {
         }
     }
 
-    private void TogglePetEdit(boolean addOverlay){
-        if (addOverlay){
-            regularView.setVisibility(View.INVISIBLE);
-            petEditView.setVisibility(View.VISIBLE);
-        } else {
-            regularView.setVisibility(View.VISIBLE);
-            petEditView.setVisibility(View.INVISIBLE);
-        }
-    }
-
     private void GetJSONData() {
         JsonArrayRequest jsonArrReq = new JsonArrayRequest(
                 Request.Method.GET,
@@ -180,7 +167,15 @@ public class ClientHomeFragment extends Fragment {
                         JSONArray jsonArr = response;
                         for (int i = 0; i < jsonArr.length(); i++){
                             JSONObject json = jsonArr.getJSONObject(i);
-                            addNewPetCard(json.getString("pet_id"), json.getString("pet_name"), json.getString("pet_type"));
+                            addNewPetCard(json.getString("pet_id"),
+                                    json.getString("pet_name"),
+                                    json.getString("pet_type"),
+                                    json.getString("pet_breed"),
+                                    json.getString("pet_age"),
+                                    json.getString("pet_gender"),
+                                    json.getString("pet_diagnosis")
+
+                            );
                         }
                     } catch (Exception e) {
                         throw new RuntimeException(e);

@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
-        android:visibility="gone">
+        android:visibility="visible">
 
         <TextView
             android:id="@+id/addInventoryTextView"
@@ -90,6 +90,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Submit"
+            android:backgroundTint="#4CAF50"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -124,6 +125,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/regularView"
         android:layout_width="match_parent"
+        android:visibility="gone"
         android:layout_height="match_parent">
 
         <Button
@@ -148,15 +150,6 @@
             android:text="Logout"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
-        <Button
-            android:id="@+id/editPetById"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Edit pet"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
 
         <TextView
             android:id="@+id/customer_text"

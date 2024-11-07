@@ -21,8 +21,6 @@ import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button simulateAdminLogin;
-    private Button simulateClientLogin;
     private Button signupButton;
 
     @Override

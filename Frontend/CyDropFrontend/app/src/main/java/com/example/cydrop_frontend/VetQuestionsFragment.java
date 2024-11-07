@@ -24,6 +24,8 @@ public class VetQuestionsFragment extends Fragment{
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
+
         super.onCreate(savedInstanceState);
     }
 
@@ -37,6 +39,9 @@ public class VetQuestionsFragment extends Fragment{
             Intent intent = new Intent(getActivity(), VetChatActivity.class);
             startActivity(intent);
         });
+
+        Intent intent = new Intent(getActivity(), VetChatActivity.class);
+        startActivity(intent);
 
         return  view;
 
