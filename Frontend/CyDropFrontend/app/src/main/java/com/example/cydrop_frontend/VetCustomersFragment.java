@@ -71,7 +71,7 @@ public class VetCustomersFragment extends Fragment {
             editor.putString("userType", "none");
             editor.commit();
 
-            Intent intent = new Intent(MainActivity.class.toString());
+            Intent intent = new Intent(getActivity(), MainActivity.class);
             startActivity(intent);
         });
 
