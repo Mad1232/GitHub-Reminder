@@ -42,11 +42,6 @@
             android:label="Login"
             android:theme="@style/Theme.CyDropFrontend" />
         <activity
-            android:name=".VetDetailsActivity"
-            android:exported="true"
-            android:label="VetDetails"
-            android:theme="@style/Theme.CyDropFrontend" />
-        <activity
             android:name=".VetChatActivity"
             android:exported="true"
             android:label="VetChat"
@@ -59,6 +54,12 @@
 
         <activity
             android:name=".MedicationActivity"
+            android:exported="true"
+            android:label="Meds"
+            android:theme="@style/Theme.CyDropFrontend" />
+
+        <activity
+            android:name=".EditMedsActivity"
             android:exported="true"
             android:label="Meds"
             android:theme="@style/Theme.CyDropFrontend" />

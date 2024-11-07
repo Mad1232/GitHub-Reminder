@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="#f8f9fa">
+
+    <!-- Header Text -->
+    <TextView
+        android:id="@+id/tv_edit_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Edit Medication"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_gravity="center_horizontal"
+        android:paddingBottom="16dp"/>
+
+    <!-- Medication Name Input -->
+    <EditText
+        android:id="@+id/et_medication_name_prev"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="ID"
+        android:background="#FFFFFF"
+        android:padding="16dp"
+        android:textSize="16sp"
+        android:textColor="#000000"/>
+
+    <!-- Medication Name Input -->
+    <EditText
+        android:id="@+id/et_medication_name_new"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:hint="New Medication Name"
+        android:background="#FFFFFF"
+        android:padding="16dp"
+        android:textSize="16sp"
+        android:textColor="#000000"/>
+
+    <!-- Medication Stock Input -->
+    <EditText
+        android:id="@+id/et_medication_stock"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:hint="New Stock"
+        android:background="#FFFFFF"
+        android:padding="16dp"
+        android:textSize="16sp"
+        android:inputType="number"
+        android:textColor="#000000"/>
+
+    <!-- Buttons for Save and Cancel -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:paddingTop="24dp">
+
+        <!-- Save Button -->
+        <Button
+            android:id="@+id/btn_save_changes"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Save"
+            android:padding="12dp"
+            android:backgroundTint="#4CAF50"
+            android:textColor="#FFFFFF"/>
+
+        <!-- Cancel Button -->
+        <Button
+            android:id="@+id/btn_cancel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Return"
+            android:padding="12dp"
+            android:backgroundTint="#F44336"
+            android:textColor="#FFFFFF"
+            android:layout_marginStart="16dp"/>
+    </LinearLayout>
+
+</androidx.appcompat.widget.LinearLayoutCompat>

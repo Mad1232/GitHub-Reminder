@@ -7,6 +7,7 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,6 +19,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -27,10 +29,8 @@ import java.util.Map;
 
 public class MedicationActivity extends AppCompatActivity {
     private TextView msgResponse;
-    private static final String URL = "http://coms-3090-038.class.las.iastate.edu:8080/meds???????????";
-
-    private Button btnJsonObjReq;
-
+    private static final String URL = "http://coms-3090-038.class.las.iastate.edu:8080/inventory";
+    private EditText med_input;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -42,17 +42,26 @@ public class MedicationActivity extends AppCompatActivity {
         getJSONData();
 
         findViewById(R.id.btn_add_medication).setOnClickListener(view1 -> {
-            Intent intent = new Intent(LoginActivity.class.toString());
-            startActivity(intent);
+            med_input = findViewById(R.id.et_medication_input);
+            String medicationInput = med_input.getText().toString();
+            postRequest(URL, medicationInput);
+            getJSONData();
         });
 
         findViewById(R.id.btn_edit_medication).setOnClickListener(view1 -> {
-            Intent intent = new Intent(LoginActivity.class.toString());
+            Intent intent = new Intent(MedicationActivity.this, EditMedsActivity.class);
             startActivity(intent);
         });
 
         findViewById(R.id.btn_delete_medication).setOnClickListener(view1 -> {
-            Intent intent = new Intent(LoginActivity.class.toString());
+            med_input = findViewById(R.id.et_medication_input);
+            String medicationInput = med_input.getText().toString();
+            delRequest(URL, medicationInput);
+            getJSONData();
+        });
+
+        findViewById(R.id.btn_return).setOnClickListener(view1 -> {
+            Intent intent = new Intent(MedicationActivity.this, VetNavbarMainActivity.class);
             startActivity(intent);
         });
     }
@@ -71,9 +80,10 @@ public class MedicationActivity extends AppCompatActivity {
                             JSONArray jsonArr = response;
                             for (int i = 0; i < jsonArr.length(); i++) {
                                 JSONObject jObj = jsonArr.getJSONObject(i);
-                                String newLine = "ID: " + jObj.getString("vet_id") + "\n" +
-                                        "Name: " + jObj.getString("vet_name") + "\n" +
-                                        "Specialization: " + jObj.getString("specialization") + "\n";
+                                String newLine = "ID: " + jObj.getString("id") + "\n" +
+                                        "Name: " + jObj.getString("name") + "\n" +
+                                        "Stock: " + jObj.getString("stock") + "\n"
+                                        + "Pet: " + jObj.getString("pet") + "\n";
                                 msgResponse.setText(msgResponse.getText() + newLine);
                             }
                         } catch (Exception e) {
@@ -112,14 +122,12 @@ public class MedicationActivity extends AppCompatActivity {
     }
 
 
-    private void postRequest(String url, String username, String password) {
+    private void postRequest(String url, String medication) {
 
         // Create JSON object for POST request
         JSONObject json = new JSONObject();
         try {
-            json.put("email", username);
-            json.put("password", password);
-            //  json.put("type", type);
+            json.put("name", medication);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -131,9 +139,8 @@ public class MedicationActivity extends AppCompatActivity {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        Toast.makeText(getApplicationContext(), "Signed Up!", Toast.LENGTH_LONG).show();
-                   //     Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
-                    //    startActivity(intent);
+                        Toast.makeText(getApplicationContext(), "Medication Added", Toast.LENGTH_LONG).show();
+                        getJSONData();
                     }
                 },
                 new Response.ErrorListener() {
@@ -161,6 +168,48 @@ public class MedicationActivity extends AppCompatActivity {
         };
 
         // Adding request to request queue
+        VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(request);
+    }
+
+    private void delRequest(String URL, String id){
+
+        StringRequest request = new StringRequest(Request.Method.DELETE, URL + "/" + id,
+                new Response.Listener<String>() {
+                    @Override
+            public void onResponse(String response) {
+                        if ("Ok".equals(response)) {
+                            Toast.makeText(getApplicationContext(), "Medication Deleted", Toast.LENGTH_LONG).show();
+                            getJSONData();
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Unexpected response: " + response, Toast.LENGTH_LONG).show();
+                        }
+                    }
+        },
+                new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Log.e("Volley Error", error.toString());
+                }
+            }
+        ){
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    HashMap<String, String> headers = new HashMap<String, String>();
+                    //                headers.put("Authorization", "Bearer YOUR_ACCESS_TOKEN");
+                    //                headers.put("Content-Type", "application/json");
+                    return headers;
+                }
+
+                @Override
+                protected Map<String, String> getParams() {
+                    Map<String, String> params = new HashMap<String, String>();
+                    //                params.put("param1", "value1");
+                    //                params.put("param2", "value2");
+                    return params;
+                }
+
+            };
+
         VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(request);
     }
 
