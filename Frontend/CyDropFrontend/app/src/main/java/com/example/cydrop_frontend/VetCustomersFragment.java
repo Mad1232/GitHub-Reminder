@@ -29,6 +29,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import android.widget.Button;
 
 
 public class VetCustomersFragment extends Fragment {
@@ -159,7 +160,7 @@ public class VetCustomersFragment extends Fragment {
     void AddCustomerGivenJSON(JSONObject j){
         JsonObjectRequest postReq = new JsonObjectRequest(
                 Request.Method.POST,
-                "http://coms-3090-038.class.las.iastate.edu:8080/vets/1/customers",
+                "http://coms-3090-038.class.las.iastate.edu:8080/vets/" + VolleySingleton.vetIdTEMP + "/customers",
                 j,
                 response -> {
                     ClearCustomers();

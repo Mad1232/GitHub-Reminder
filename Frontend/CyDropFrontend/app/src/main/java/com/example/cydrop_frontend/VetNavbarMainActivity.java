@@ -1,5 +1,6 @@
 package com.example.cydrop_frontend;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.cydrop_frontend.databinding.ActivityAdminNavbarMainBinding;
@@ -52,7 +53,9 @@ public class VetNavbarMainActivity extends AppCompatActivity {
             } else if (itemId == R.id.reminders) {
                 replaceFragment(new VetRemindersFragment());
             } else { // itemId == questions
-                replaceFragment(new VetQuestionsFragment());
+                Intent intent = new Intent(VetNavbarMainActivity.this, VetChatActivity.class);
+                startActivity(intent);
+                //replaceFragment(new VetQuestionsFragment());
             }
 
             return true;

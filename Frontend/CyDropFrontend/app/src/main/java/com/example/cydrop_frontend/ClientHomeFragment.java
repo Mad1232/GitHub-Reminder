@@ -4,8 +4,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -31,12 +29,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
 import java.util.Map;
 
 
@@ -83,7 +76,7 @@ public class ClientHomeFragment extends Fragment {
 
         GetJSONData();
 
-        Button addButton = view.findViewById(R.id.addPetButton);
+        Button addButton = view.findViewById(R.id.meds_btn);
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -105,7 +98,7 @@ public class ClientHomeFragment extends Fragment {
             PostNewPet();
         });
 
-        Button logout = view.findViewById(R.id.client_home_logout_button);
+        Button logout = view.findViewById(R.id.logout_button);
         logout.setOnClickListener(view1 -> {
 
             SharedPreferences sharedPref =  PreferenceManager.getDefaultSharedPreferences(getContext().getApplicationContext());
