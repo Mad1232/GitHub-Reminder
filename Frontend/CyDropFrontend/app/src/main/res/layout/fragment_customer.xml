@@ -66,6 +66,7 @@
             android:id="@+id/card_customer_pet_list_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="13dp"
             android:paddingLeft="15dp"
             android:paddingBottom="10dp"
             android:text="Pets:"
@@ -78,17 +79,26 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="70dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="4dp"
             android:layout_marginEnd="50dp"
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/card_customer_pet_list_text"
-            app:layout_constraintTop_toTopOf="@id/card_customer_pet_list_text"></LinearLayout>
+            app:layout_constraintTop_toTopOf="@id/card_customer_pet_list_text">
+
+            <TextView
+                android:id="@+id/card_customer_pet_list_text_in_linear"
+                android:layout_width="match_parent"
+                android:textSize="25sp"
+                android:layout_height="wrap_content"
+                android:text="TextView" />
+        </LinearLayout>
 
         <Button
             android:id="@+id/card_customer_edit_inspect_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:backgroundTint="#4CAF50"
             android:text="inspect"
             app:layout_constraintBottom_toBottomOf="@id/card_customer_edit_remove_customer_button"
             app:layout_constraintEnd_toStartOf="@id/card_customer_edit_remove_customer_button"
@@ -100,7 +110,7 @@
             android:id="@+id/card_customer_edit_remove_customer_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="20dp"
             android:padding="12dp"
             android:layout_marginEnd="10dp"
             android:backgroundTint="@color/background_red"
@@ -116,7 +126,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:backgroundTint="@color/grey"
             android:text="Collapse"
             app:layout_constraintBottom_toBottomOf="@id/card_customer_edit_remove_customer_button"
             app:layout_constraintStart_toEndOf="@id/card_customer_edit_inspect_button"

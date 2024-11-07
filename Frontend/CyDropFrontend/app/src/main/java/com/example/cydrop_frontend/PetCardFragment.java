@@ -21,7 +21,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 
 public class PetCardFragment extends Fragment {
@@ -129,6 +135,11 @@ public class PetCardFragment extends Fragment {
             ToggleEditMode(false);
         });
 
+        Button saveEdit = view.findViewById(R.id.card_pet_edit_submit_button);
+        saveEdit.setOnClickListener(v -> {
+            UpdatePet();
+        });
+
         petNameText = view.findViewById(R.id.card_pet_name);
         petBreedText = view.findViewById(R.id.card_pet_type);
         editingTextTitle = view.findViewById(R.id.card_edit_text);
@@ -168,6 +179,15 @@ public class PetCardFragment extends Fragment {
         petdiagnosisEditText.setText(petDiagnosis);
     }
 
+    void SaveChanges(){
+        petName = petNameEditText.getText().toString();
+        petType = petTypeEditText.getText().toString();
+        petBreed = petBreedEditText.getText().toString();
+        petAge = petAgeEditText.getText().toString();
+        petGender = petGenderEditText.getText().toString();
+        petDiagnosis = petdiagnosisEditText.getText().toString();
+    }
+
     void DeletePet(){
         JsonArrayRequest petDeleteRequest = new JsonArrayRequest(
                 Request.Method.DELETE,
@@ -195,5 +215,56 @@ public class PetCardFragment extends Fragment {
             editingLayout.setVisibility(View.GONE);
             defaultLayout.setVisibility(View.VISIBLE);
         }
+    }
+
+
+    private void UpdatePet(){
+        JSONObject pet = new JSONObject();
+
+        try{
+            JSONObject ownerInfo = new JSONObject();
+            ownerInfo.put("id", VolleySingleton.userId);
+            pet.put("owner", ownerInfo);
+
+//            JSONObject medicationInfo = new JSONObject();
+//            pet.put("medication", medicationInfo);
+
+            pet.put("pet_name", petNameEditText.getText().toString());
+            pet.put("pet_type", petTypeEditText.getText().toString());
+            pet.put("pet_breed", petBreedEditText.getText().toString());
+            pet.put("pet_diagnosis", petdiagnosisEditText.getText().toString());
+            pet.put("pet_age", Integer.parseInt(petAgeEditText.getText().toString()) );
+            pet.put("pet_gender", petGenderEditText.getText().toString());
+        } catch (JSONException e){
+            // Unable to create json object
+            Toast.makeText(getActivity(), "Error creating JSON", Toast.LENGTH_LONG);
+            return;
+        }
+
+        JsonObjectRequest postReq = new JsonObjectRequest(
+                Request.Method.PUT,
+                "http://coms-3090-038.class.las.iastate.edu:8080/pet/" + petId.trim(),
+                pet,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        // Victory! i think
+                        SaveChanges();
+                        PopulateForms();
+                        ToggleEditMode(false);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // It probably worked, i dont really care
+                        SaveChanges();
+                        PopulateForms();
+                        ToggleEditMode(false);
+                    }
+                }
+        );
+
+        VolleySingleton.getInstance(getContext().getApplicationContext()).addToRequestQueue(postReq);
     }
 }

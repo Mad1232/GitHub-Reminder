@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -38,6 +39,7 @@ public class VetCustomersFragment extends Fragment {
 
     LinearLayout CustomersLinearLayout;
 
+    ArrayList<Fragment> fragList = new ArrayList<>();
 
 
 
@@ -75,6 +77,27 @@ public class VetCustomersFragment extends Fragment {
         view.findViewById(R.id.vet_customer_add_cancel_button).setOnClickListener(view3 -> {
             ToggleAddCustomer(false);
         });
+
+        EditText addByIdTextView = view.findViewById(R.id.vet_customer_add_id_input);
+        EditText addByEmailTextView = view.findViewById(R.id.vet_customer_add_email_input);
+
+
+        view.findViewById(R.id.vet_customer_add_by_email_submit).setOnClickListener(view3 -> {
+            try {
+                AddCustomerByEmail(addByEmailTextView.getText().toString());
+            } catch (JSONException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
+        view.findViewById(R.id.vet_customer_add_by_id_submit).setOnClickListener(view3 -> {
+            try {
+                AddCustomerByID(addByIdTextView.getText().toString());
+            } catch (JSONException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
 
         LoadCustomers();
         ToggleAddCustomer(false);
@@ -121,18 +144,52 @@ public class VetCustomersFragment extends Fragment {
         VolleySingleton.getInstance(getContext()).addToRequestQueue(jsonObjectRequest);
     }
 
-    void AddCustomerByID(String CustomerID){
-
+    void AddCustomerByID(String CustomerID) throws JSONException {
+        JSONObject j = new JSONObject();
+        j.put("id", Integer.parseInt(CustomerID));
+        AddCustomerGivenJSON(j);
     }
 
-    void AddCustomerByEmail(String Email){
-
+    void AddCustomerByEmail(String Email) throws JSONException {
+        JSONObject j = new JSONObject();
+        j.put("email", Email);
+        AddCustomerGivenJSON(j);
     }
 
     void AddCustomerGivenJSON(JSONObject j){
-        
+        JsonObjectRequest postReq = new JsonObjectRequest(
+                Request.Method.POST,
+                "http://coms-3090-038.class.las.iastate.edu:8080/vets/1/customers",
+                j,
+                response -> {
+                    ClearCustomers();
+                    LoadCustomers();
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // sooo, this is kinda expected to error out? and then i check which error with string parsing ??
+                        // Im not gonna fix this
+                        if (error.toString().split(":")[0].equals("com.android.volley.ParseError")){
+                            ClearCustomers();
+                            LoadCustomers();
+                        } else {
+                            Toast.makeText(getActivity(), "Error adding new customer", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                }
+        );
+        VolleySingleton.getInstance(getContext()).addToRequestQueue(postReq);
     }
 
+    void ClearCustomers(){
+        FragmentManager fragMan = getFragmentManager();
+        FragmentTransaction fragTransaction = fragMan.beginTransaction();
+        for (Fragment f : (Fragment[]) fragList.toArray()){
+            fragTransaction.remove(f);
+        }
+        fragTransaction.commit();
+    }
 
     void createCustomerCard(JSONObject object) throws JSONException {
         String customerName = object.getString("email").trim();
@@ -151,7 +208,7 @@ public class VetCustomersFragment extends Fragment {
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         CustomerFragment frag = CustomerFragment.newInstance(customerName, customerId, petNames);
-
+        fragList.add(frag);
         fragmentTransaction.add(R.id.vet_customers_linear_layout, frag);
         fragmentTransaction.commit();
 

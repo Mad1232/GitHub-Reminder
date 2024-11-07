@@ -1,5 +1,6 @@
 package com.example.cydrop_frontend;
 
+import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 
@@ -93,6 +94,19 @@ public class CustomerFragment extends Fragment {
             toggleExpandedView(true);
         });
 
+        view.findViewById(R.id.card_customer_edit_remove_customer_button).setOnClickListener(v -> {
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setMessage("Are you sure you would like to remove " + customerName +" as a customer?").setPositiveButton("Yes", dialogClickListener)
+                        .setNegativeButton("No", dialogClickListener).show();
+        });
+
+        String petListString = "";
+        for (String s : pets){
+            petListString += s + "\n";
+        }
+        TextView petListText = view.findViewById(R.id.card_customer_pet_list_text_in_linear);
+        petListText.setText(petListString);
+
         view.findViewById(R.id.card_customer_edit_inspect_button).setOnClickListener(view3 -> {
 
 
@@ -130,8 +144,9 @@ public class CustomerFragment extends Fragment {
     void RemoveCustomer(){
         JsonArrayRequest petDeleteRequest = new JsonArrayRequest(
                 Request.Method.DELETE,
-                "http://coms-3090-038.class.las.iastate.edu:8080/pet/" + VolleySingleton.vetIdTEMP,
-                null, // Pass null as the request body since it's a GET request
+                "http://coms-3090-038.class.las.iastate.edu:8080/vets/" + VolleySingleton.vetIdTEMP +
+                        "/customers/" + customerId.trim(),
+                null, // Pass null as the request body since it's a DELETE request
                 response -> {
                     // No response
                 },
