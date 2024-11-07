@@ -60,8 +60,6 @@ public class PetCardFragment extends Fragment {
     private EditText petdiagnosisEditText;
 
 
-
-
     // The dialog interface for confirming pet deletion
     DialogInterface.OnClickListener dialogClickListener = (dialog, which) -> {
         switch (which){

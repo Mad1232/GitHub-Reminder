@@ -1,47 +1,61 @@
 package com.example.cydrop_frontend;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link CustomerFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import com.android.volley.Request;
+import com.android.volley.toolbox.JsonArrayRequest;
+
 public class CustomerFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private static final String ARG_PETS = "pets";
+    private static final String ARG_CUSTOMER_NAME = "customerName";
+    private static final String ARG_CUSTOMER_ID = "id";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+
+    private String[] pets;
+    private String customerName;
+    private String customerId;
+
+    private View defaultView;
+    private View expandedView;
+
+
+
+    // The dialog interface for confirming pet deletion
+    DialogInterface.OnClickListener dialogClickListener = (dialog, which) -> {
+        switch (which){
+            case DialogInterface.BUTTON_POSITIVE:
+                RemoveCustomer();
+                break;
+
+            case DialogInterface.BUTTON_NEGATIVE:
+                //No button clicked, no response needed
+                break;
+        }
+    };
+
 
     public CustomerFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment CustomerFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static CustomerFragment newInstance(String param1, String param2) {
+
+    public static CustomerFragment newInstance(String customerName, String customerId, String[] pets) {
         CustomerFragment fragment = new CustomerFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putStringArray (ARG_PETS, pets);
+        args.putString(ARG_CUSTOMER_NAME, customerName);
+        args.putString(ARG_CUSTOMER_ID, customerId);
         fragment.setArguments(args);
         return fragment;
     }
@@ -50,15 +64,85 @@ public class CustomerFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            pets = getArguments().getStringArray(ARG_PETS);
+            customerName = getArguments().getString(ARG_CUSTOMER_NAME);
+            customerId = getArguments().getString(ARG_CUSTOMER_ID);
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_customer, container, false);
+
+        View view = inflater.inflate(R.layout.fragment_customer, container, false);
+
+        TextView name = view.findViewById(R.id.card_customer_name);
+        name.setText(customerName);
+
+        TextView cardEditingName = view.findViewById(R.id.card_customer_editing_title);
+        cardEditingName.setText(customerName);
+
+        expandedView = view.findViewById(R.id.card_customer_expanded_layout);
+        defaultView = view.findViewById(R.id.card_customer_collapsed_layout);
+
+        view.findViewById(R.id.card_customer_edit_collapse_button).setOnClickListener(view3 -> {
+            toggleExpandedView(false);
+        });
+
+        view.findViewById(R.id.card_customer_expand_button).setOnClickListener(view3 -> {
+            toggleExpandedView(true);
+        });
+
+        view.findViewById(R.id.card_customer_edit_inspect_button).setOnClickListener(view3 -> {
+
+
+
+
+
+
+            // TODO: Add code to link to inspect pages here
+
+
+
+
+
+
+
+
+        });
+
+
+        toggleExpandedView(false);
+        return view;
     }
+
+    void toggleExpandedView(boolean isExpanded) {
+        if (isExpanded) {
+            expandedView.setVisibility(View.VISIBLE);
+            defaultView.setVisibility(View.GONE);
+        } else {
+            expandedView.setVisibility(View.GONE);
+            defaultView.setVisibility(View.VISIBLE);
+        }
+    }
+
+
+    void RemoveCustomer(){
+        JsonArrayRequest petDeleteRequest = new JsonArrayRequest(
+                Request.Method.DELETE,
+                "http://coms-3090-038.class.las.iastate.edu:8080/pet/" + VolleySingleton.vetIdTEMP,
+                null, // Pass null as the request body since it's a GET request
+                response -> {
+                    // No response
+                },
+                error -> {
+
+                }
+        );
+        VolleySingleton.getInstance(getContext().getApplicationContext()).addToRequestQueue(petDeleteRequest);
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction trans = fragmentManager.beginTransaction();
+        trans.remove(this).commit();
+    }
+
 }
