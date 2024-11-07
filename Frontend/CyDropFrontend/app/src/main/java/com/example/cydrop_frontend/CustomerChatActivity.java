@@ -46,7 +46,7 @@ public class CustomerChatActivity extends AppCompatActivity implements WebSocket
                 // send message
                 WebSocketManager2.getInstance().sendMessage(msgEtx.getText().toString());
 
-                String message = "user:" + msgEtx.getText().toString();
+                String message = "user: " + msgEtx.getText().toString() + "\n";
 
                 // Create a new TextView and set the message text
                 TextView messageTextView = new TextView(this);

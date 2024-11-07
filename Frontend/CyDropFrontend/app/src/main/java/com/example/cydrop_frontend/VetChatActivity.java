@@ -48,7 +48,7 @@ public class VetChatActivity extends AppCompatActivity implements WebSocketListe
                     // send message
                     WebSocketManager2.getInstance().sendMessage(msgEtx.getText().toString());
 
-                    String message = "vet:" + msgEtx.getText().toString();
+                    String message = "vet: " + msgEtx.getText().toString() + "\n";
 
                     // Create a new TextView and set the message text
                     TextView messageTextView = new TextView(this);
