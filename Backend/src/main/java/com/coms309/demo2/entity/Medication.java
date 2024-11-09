@@ -20,7 +20,7 @@ public class Medication {
     Integer stock;
 
     // One-to-many relationship with Pet
-    @JsonManagedReference
+    @JsonManagedReference("medication-pet")
     @OneToOne(mappedBy = "medication", cascade = CascadeType.ALL, orphanRemoval = true)
     private Pet pet;
 

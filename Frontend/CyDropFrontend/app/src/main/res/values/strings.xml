@@ -10,6 +10,11 @@
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
+    <string name="AddCustomer"><u>Add customer</u></string>
+
+    <string name="AddByID"><u>Add by ID</u></string>
+    <string name="AddByEmail"><u>Add by email</u></string>
+
     <string name="lorem_ipsum">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
         volutpat, dolor id interdum ullamcorper, risus dolor egestas lectus, sit amet mattis purus

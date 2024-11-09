@@ -3,6 +3,8 @@ package com.coms309.demo2.entity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "Pet")
 public class Pet {
@@ -30,16 +32,30 @@ public class Pet {
     @Column(name = "pet_gender")
     private String pet_gender;
 
+//    @Column(name = "vet_recommendation" , nullable = true)
+//    private String vet_recommendation;
+
     // Many-to-one relationship to User (owner)
     @ManyToOne
+    @JsonBackReference("pet-owner")
     @JoinColumn(name = "owner_id", nullable = false)
     private User owner;
 
     //One-to-One relationship to Medications(medicine)
-    @JsonBackReference
+    @JsonBackReference("medication-pet")
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "medication_id", referencedColumnName = "id", nullable = true)
     private Medication medication;
+
+    // Many-to-Many with Vet
+    @JsonBackReference("vet-pet")
+    @ManyToMany
+    @JoinTable(
+            name = "pet_vet",
+            joinColumns = @JoinColumn(name = "pet_id"),
+            inverseJoinColumns = @JoinColumn(name = "vet_id")
+    )
+    private List<Vet> veterinarians;
 
     // Getters and setters
     public int getPet_id() {
@@ -115,6 +131,18 @@ public class Pet {
         this.medication = medication;
     }
 
+    // Getter and Setter for Veterinarians
+    public List<Vet> getVeterinarians() {
+        return veterinarians;
+    }
+
+    public void setVeterinarians(List<Vet> veterinarians) {
+        this.veterinarians = veterinarians;
+    }
+
+    //public String getVet_recommendation() {return vet_recommendation;}
+
+    //public void setVet_recommendation(String vet_recommendation) {this.vet_recommendation = vet_recommendation;}
 }
 
 

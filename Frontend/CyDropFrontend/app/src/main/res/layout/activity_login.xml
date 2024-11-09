@@ -37,8 +37,7 @@
             android:id="@+id/login_username_edt"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:hint="Enter Email Here"
-            android:text="sophia.williams4@example.com"></EditText>
+            android:hint="Email address"></EditText>
 
     </LinearLayout>
 
@@ -59,9 +58,8 @@
             android:id="@+id/login_password_edt"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:hint="Enter Password Here"
-            android:inputType="textPassword"
-            android:text="mynameisSophia4"></EditText>
+            android:hint="Password"
+            android:inputType="textPassword"></EditText>
 
     </LinearLayout>
 

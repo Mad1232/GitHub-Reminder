@@ -71,6 +71,5 @@ public class Message {
     public void setSent(Date sent) {
         this.sent = sent;
     }
-
     
 }

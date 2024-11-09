@@ -21,8 +21,6 @@ import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button simulateAdminLogin;
-    private Button simulateClientLogin;
     private Button signupButton;
 
     @Override
@@ -33,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
             SharedPreferences sharedPref =  PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
             VolleySingleton.userId = sharedPref.getString("userId", "-1");
             VolleySingleton.userType = sharedPref.getString("userType", "none");
+            VolleySingleton.email = sharedPref.getString("userEmail", "none");
             if (!Objects.equals(VolleySingleton.userId, "-1") && !VolleySingleton.userType.equals("none")){
                 Intent intent = new Intent(MainActivity.this, ClientNavbarMainActivity.class);
                 switch (VolleySingleton.userType){
@@ -45,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(intent);  // go to SignupActivity
                         break;
                     case "vet_view":
-                        intent = new Intent(MainActivity.this, VetDetailsActivity.class);
+                        intent = new Intent(MainActivity.this, VetNavbarMainActivity.class);
                         startActivity(intent);  // go to SignupActivity
                         break;
                 }
@@ -67,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
         loginButton.setOnClickListener(view2 -> {
             /* when signup button is pressed, use intent to switch to Signup Activity */
             Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+          //   Intent intent = new Intent(MainActivity.this, ClientNavbarMainActivity.class);
             startActivity(intent);
         });
 

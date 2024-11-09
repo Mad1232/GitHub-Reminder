@@ -5,6 +5,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
@@ -21,12 +23,12 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.JsonRequest;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -48,6 +50,8 @@ public class ClientHomeFragment extends Fragment {
 
     private EditText petDeleteId;
 
+    private ArrayList<Fragment> fragList = new ArrayList<>();
+
     LinearLayout linearLayout;
     TextView petsViewTextView;
 
@@ -64,17 +68,15 @@ public class ClientHomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_client_home, container, false);
+
         regularView = view.findViewById(R.id.regularView);
         overlayView = view.findViewById(R.id.addPetOverlay);
-        petDeleteView = view.findViewById(R.id.deletePetOverlay);
-        petEditView = view.findViewById(R.id.editPetById);
 
         linearLayout = view.findViewById(R.id.petListLinearLayout);
-        petsViewTextView = view.findViewById(R.id.textView2);
 
         GetJSONData();
 
-        Button addButton = view.findViewById(R.id.addPetButton);
+        Button addButton = view.findViewById(R.id.meds_btn);
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -82,7 +84,7 @@ public class ClientHomeFragment extends Fragment {
             }
         });
 
-        Button backButton = view.findViewById(R.id.adminCloseOverlayButton);
+        Button backButton = view.findViewById(R.id.client_home_back_button);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -90,54 +92,59 @@ public class ClientHomeFragment extends Fragment {
             }
         });
 
-        Button deletePetButton = view.findViewById(R.id.removePetByID);
-        deletePetButton.setOnClickListener(view2 -> {
-            TogglePetDelete(true);
-        });
 
-        Button editPetButton = view.findViewById(R.id.editPetById);
-        editPetButton.setOnClickListener(view2 -> {
-            TogglePetEdit(true);
-        });
-
-        Button submit = view.findViewById(R.id.adminInventorySubmitButton);
+        Button submit = view.findViewById(R.id.client_home_submit_button);
         submit.setOnClickListener(view2 -> {
             PostNewPet();
         });
 
-        Button deleteSubmit = view.findViewById(R.id.deletePetSubmitButton);
-        deleteSubmit.setOnClickListener(view2 -> {
-            DeletePet();
-            TogglePetDelete(false);
-            GetJSONData();
-        });
-
-        Button logout = view.findViewById(R.id.adminLogoutButton);
+        Button logout = view.findViewById(R.id.logout_button);
         logout.setOnClickListener(view1 -> {
 
             SharedPreferences sharedPref =  PreferenceManager.getDefaultSharedPreferences(getContext().getApplicationContext());
             SharedPreferences.Editor editor = sharedPref.edit();
             editor.putString("userId", "-1");
             editor.putString("userType", "none");
-            editor.apply();
+            editor.commit();
 
             Intent intent = new Intent(MainActivity.class.toString());
             startActivity(intent);
         });
 
         petType = view.findViewById(R.id.petType);
-        petBreed = view.findViewById(R.id.petBreed);
+        petBreed = view.findViewById(R.id.card_pet_type);
         petAge = view.findViewById(R.id.petAge);
         petName = view.findViewById(R.id.petNameInput);
         petDiagnosis = view.findViewById(R.id.petDiagnosis);
         petGender = view.findViewById(R.id.petGender);
-        petDeleteId = view.findViewById(R.id.petIdToDelete);
 
         ToggleAddPetOverlay(false);
 
         // Inflate the layout for this fragment
         return view;
     }
+
+
+    public void addNewPetCard(String petId, String petName, String petType, String petBreed,
+                              String petAge, String petGender, String petDiagnosis){
+        FragmentManager fragMan = getFragmentManager();
+        FragmentTransaction fragTransaction = fragMan.beginTransaction();
+        Fragment f = PetCardFragment.newInstance(petId, petName, petType,
+                petBreed, petAge, petGender, petDiagnosis );
+        fragList.add(f);
+        fragTransaction.add(linearLayout.getId(), f, "frag");
+        fragTransaction.commit();
+    }
+
+    public void RemoveAllPetFrags(){
+        FragmentManager fragMan = getFragmentManager();
+        FragmentTransaction fragTransaction = fragMan.beginTransaction();
+        for (Fragment f : (Fragment[]) fragList.toArray()){
+            fragTransaction.remove(f);
+        }
+        fragTransaction.commit();
+    }
+
 
 
     private void ToggleAddPetOverlay(boolean addOverlay){
@@ -150,48 +157,28 @@ public class ClientHomeFragment extends Fragment {
         }
     }
 
-    private void TogglePetEdit(boolean addOverlay){
-        if (addOverlay){
-            regularView.setVisibility(View.INVISIBLE);
-            petEditView.setVisibility(View.VISIBLE);
-        } else {
-            regularView.setVisibility(View.VISIBLE);
-            petEditView.setVisibility(View.INVISIBLE);
-        }
-    }
-
-    private void TogglePetDelete(boolean addOverlay){
-        if (addOverlay){
-            regularView.setVisibility(View.INVISIBLE);
-            petDeleteView.setVisibility(View.VISIBLE);
-        } else {
-            regularView.setVisibility(View.VISIBLE);
-            petDeleteView.setVisibility(View.INVISIBLE);
-        }
-    }
-
     private void GetJSONData() {
         JsonArrayRequest jsonArrReq = new JsonArrayRequest(
                 Request.Method.GET,
-                "http://coms-3090-038.class.las.iastate.edu:8080/pets",
+                "http://coms-3090-038.class.las.iastate.edu:8080/user-pet/" + VolleySingleton.userId,
                 null, // Pass null as the request body since it's a GET request
-                new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        try {
-                            petsViewTextView.setText("");
-                            JSONArray jsonArr = response;
-                            for (int i = 0; i < jsonArr.length(); i++){
-                                JSONObject json = jsonArr.getJSONObject(i);
+                response -> {
+                    try {
+                        JSONArray jsonArr = response;
+                        for (int i = 0; i < jsonArr.length(); i++){
+                            JSONObject json = jsonArr.getJSONObject(i);
+                            addNewPetCard(json.getString("pet_id"),
+                                    json.getString("pet_name"),
+                                    json.getString("pet_type"),
+                                    json.getString("pet_breed"),
+                                    json.getString("pet_age"),
+                                    json.getString("pet_gender"),
+                                    json.getString("pet_diagnosis")
 
-                                String newText =  "Pet ID: "+ json.getString("pet_id") +
-                                        "\nPet name: " + json.getString("pet_name") +
-                                        "\nPet Pet type: " + json.getString("pet_type") + "\n\n";
-                                petsViewTextView.setText(petsViewTextView.getText() + newText);
-                            }
-                        } catch (Exception e) {
-                            throw new RuntimeException(e);
+                            );
                         }
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
                     }
                 },
                 new Response.ErrorListener() {
@@ -248,6 +235,7 @@ public class ClientHomeFragment extends Fragment {
                     public void onResponse(JSONObject response) {
                         // Victory! i think
                         ToggleAddPetOverlay(false);
+                        RemoveAllPetFrags();
                         GetJSONData();
                     }
                 },
@@ -261,23 +249,6 @@ public class ClientHomeFragment extends Fragment {
         );
 
         VolleySingleton.getInstance(getContext().getApplicationContext()).addToRequestQueue(postReq);
-    }
-
-    void DeletePet(){
-        JsonArrayRequest petDeleteRequest = new JsonArrayRequest(
-                Request.Method.DELETE,
-                "http://coms-3090-038.class.las.iastate.edu:8080/pet/" + petDeleteId.getText().toString().trim(),
-                null, // Pass null as the request body since it's a GET request
-                response -> {
-                    TogglePetDelete(false);
-                    Toast.makeText(getActivity(), "Pet delete works!", Toast.LENGTH_LONG);
-                },
-                error -> {
-
-                }
-        );
-
-        VolleySingleton.getInstance(getContext().getApplicationContext()).addToRequestQueue(petDeleteRequest);
     }
 
 

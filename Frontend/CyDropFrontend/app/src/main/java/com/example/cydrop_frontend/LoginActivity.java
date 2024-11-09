@@ -66,23 +66,10 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                executorService.execute(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        sendGetRequest(VolleySingleton.backendURL + "/user");
-
-   //             String username = usernameEditText.getText().toString();
-    //            String password = passwordEditText.getText().toString();
-     //           verifyLogin(username, password);
-
-
-//                Intent intent = new Intent(LoginActivity.this, VetDetailsActivity.class);  //only for testing demo2
-//                startActivity(intent);  // go to LoginActivity
-//
-
+                VolleySingleton.email = usernameEditText.getText().toString();
                 SendLoginRequest();
-                    }
-                });
+            }
+        });
 
 
         /* click listener on signup button pressed */
@@ -102,57 +89,13 @@ public class LoginActivity extends AppCompatActivity {
         //sendGetRequest(url);
     }
 
-    // Method to send GET Request
-    private void sendGetRequest(String urlString) {
-        try {
-            URL url = new URL(urlString);
-            HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-            urlConnection.setRequestMethod("GET");
-
-            BufferedReader in = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
-            String inputLine;
-            StringBuilder content = new StringBuilder();
-            while ((inputLine = in.readLine()) != null) {
-                content.append(inputLine);
-            }
-
-            in.close();
-            urlConnection.disconnect();
-
-            String result = content.toString();
-            Log.d("GET RESPONSE", result); // Log the response for debugging
-
-            // Update UI on the main thread
-            new Handler(Looper.getMainLooper()).post(new Runnable() {
-                @Override
-                public void run() {
-
- //                   textGetResponse.setText(result);
-                    if (result.equals("success")) {
-                        Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(LoginActivity.this, ClientHomeFragment.class);
-                        startActivity(intent);
-                    } else {
-                        Toast.makeText(LoginActivity.this, "Invalid username or password", Toast.LENGTH_SHORT).show();
-                    }
-                }
-            });
-
-        } catch (Exception e) {
-            Log.e("GET ERROR", e.getMessage(), e); // Log any errors
-            e.printStackTrace();
-        }
-    }
-
     private void SendLoginRequest(){
-        loginDisplay.setText("Sending req");
-
         JSONObject userLogin = new JSONObject();
         try {
             userLogin.put("email", usernameEditText.getText().toString());
             userLogin.put("password", passwordEditText.getText().toString());
         } catch (Exception e) {
-            loginDisplay.setText("Error creating JSON object");
+            Toast.makeText(LoginActivity.this, "Error creating JSON object", Toast.LENGTH_LONG).show();
             return;
         }
 
@@ -160,10 +103,8 @@ public class LoginActivity extends AppCompatActivity {
                 Request.Method.POST,
                 "http://coms-3090-038.class.las.iastate.edu:8080/login",
                 response -> {
-                    loginDisplay.setText(response.toString());
                     if (response.equals("User not found") || response.equals("Username or password is incorrect")) {
-                        Toast errorMsg = Toast.makeText(getApplicationContext(), "Error, user not found", Toast.LENGTH_LONG);
-                        errorMsg.show();
+                        Toast.makeText(LoginActivity.this, "ERROR: " + response, Toast.LENGTH_LONG).show();
                         return;
                     }
 
@@ -176,6 +117,7 @@ public class LoginActivity extends AppCompatActivity {
                     SharedPreferences.Editor editor = sharedPref.edit();
                     editor.putString("userId", VolleySingleton.userId);
                     editor.putString("userType", userType);
+                    editor.putString("userEmail", VolleySingleton.email);
                     editor.apply();
 
                     Intent intent = new Intent(LoginActivity.this, ClientNavbarMainActivity.class);
@@ -189,7 +131,7 @@ public class LoginActivity extends AppCompatActivity {
                             startActivity(intent);  // go to SignupActivity
                             break;
                         case "vet_view":
-                            intent = new Intent(LoginActivity.this, VetDetailsActivity.class);
+                            intent = new Intent(LoginActivity.this, VetNavbarMainActivity.class);
                             startActivity(intent);  // go to SignupActivity
                             break;
                     }
