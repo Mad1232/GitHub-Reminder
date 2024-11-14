@@ -16,13 +16,38 @@ import android.widget.TextView;
 
 import org.java_websocket.handshake.ServerHandshake;
 
+/**
+ * CustomerChatActivity class manages the chat interface for customers, allowing them to connect to the Websocket server,
+ * send and receive messages, and handle user interface updates.
+ */
 public class CustomerChatActivity extends AppCompatActivity implements WebSocketListener {
-    private Button returnButton;         // define return button variable
+    /**
+     * Button to navigate back to the main client navigation activity.
+     */
+    private Button returnButton;
+
+    /**
+     * Button to send a message in the chat.
+     */
     private Button sendBtn;
+
+    /**
+     * EditText to input the message to be sent.
+     */
     private EditText msgEtx;
+
+    /**
+     * LinearLayout to display the chat messages.
+     */
     private LinearLayout msgTv;
 
-
+    /**
+     * Initializes the chat interface, connects to the websocket, and sets up button listeners for send and return.
+     * Send button captures user input and sends through websocket.
+     * Return button navigates to ClientNavbarMainActivity.
+     *
+     * @param savedInstanceState Bundle containing the saved state of the activity.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,7 +99,12 @@ public class CustomerChatActivity extends AppCompatActivity implements WebSocket
 
     }
 
-
+    /**
+     * Callback method for receiving Websocket messages.
+     * Formats and displays incoming messsages on the chat UI.
+     *
+     * @param message The received WebSocket message.
+     */
     @Override
     public void onWebSocketMessage(String message) {
         /**
@@ -84,8 +114,6 @@ public class CustomerChatActivity extends AppCompatActivity implements WebSocket
          * to occur safely from a background or non-UI thread.
          */
         runOnUiThread(() -> {
-            // String s = msgTv.getText().toString();
-            // msgTv.setText(s + "\n"+message);
             String[] parts = message.split(" ", 3);
 
             // The second part should be the sender, and the rest is the message
@@ -100,16 +128,36 @@ public class CustomerChatActivity extends AppCompatActivity implements WebSocket
         });
     }
 
+    /**
+     * Callback method for Websocket closure.
+     * Handles the closure of Websocket connection.
+     *
+     * @param code   The status code indicating the reason for closure.
+     * @param reason A human-readable explanation for the closure.
+     * @param remote Indicates whether the closure was initiated by the remote endpoint.
+     */
     @Override
     public void onWebSocketClose(int code, String reason, boolean remote) {
 
     }
 
+    /**
+     * Callback method for Websocket opening.
+     * Handles actions when Websocket connection is opened.
+     *
+     * @param handshakedata Information about the server handshake.
+     */
     @Override
     public void onWebSocketOpen(ServerHandshake handshakedata) {
 
     }
 
+    /**
+     * Callback method for Websocket errors.
+     * Logs or handles any errors that occur.
+     *
+     * @param ex The exception that describes the error.
+     */
     @Override
     public void onWebSocketError(Exception ex) {
 

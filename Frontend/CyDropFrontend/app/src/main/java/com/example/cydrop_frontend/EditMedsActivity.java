@@ -27,12 +27,39 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * EditMedsActivity class provides an interface for editing medication details, allowing users to update the name and stock of a specified medication.
+ * It sends a PUT request to update the medication information on the server.
+ */
 public class EditMedsActivity extends AppCompatActivity {
+
+    /**
+     * EditText field for inputting the medication ID.
+     */
     private EditText msgResponse1;
+
+    /**
+     * EditText field for inputting the new medication name.
+     */
     private EditText msgResponse2;
+
+    /**
+     * EditText field for inputting the new stock quantity of the medication.
+     */
     private EditText msgResponse3;
+
+    /**
+     * Base URL for the medication inventory endpoint.
+     */
     private static final String URL = "http://coms-3090-038.class.las.iastate.edu:8080/inventory";
 
+    /**
+     * Initializes the activity layout, sets up listeners for save and return buttons.
+     * The save button captures user input and sends a PUT request to update medication.
+     * The return button navigates to MedicationActivity.
+     *
+     * @param savedInstanceState Bundle containing the saved state of the activity.
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +82,15 @@ public class EditMedsActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Sends a PUT request to the server to update the medication's name and stock quantity.
+     * Constructs a JSON Object with the new data and appends the ID to the URL to identify the correct medication to update.
+     *
+     * @param url Base URL for the medication inventory endpoint.
+     * @param old The current ID of the medication to update.
+     * @param name The new name to update the medication to.
+     * @param stock The new stock quantity to update the medication to.
+     */
     private void putRequest(String url, String old, String name, String stock) {
         String new_url = url + "/" + old;
         JSONObject json = new JSONObject();
@@ -66,7 +102,6 @@ public class EditMedsActivity extends AppCompatActivity {
         }
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.PUT, new_url, json, new Response.Listener<JSONObject>() {
-
             @Override
             public void onResponse(JSONObject response) {
                 Toast.makeText(getApplicationContext(), "Medication Updated", Toast.LENGTH_LONG).show();
@@ -82,16 +117,12 @@ public class EditMedsActivity extends AppCompatActivity {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 HashMap<String, String> headers = new HashMap<String, String>();
-                //                headers.put("Authorization", "Bearer YOUR_ACCESS_TOKEN");
-                //                headers.put("Content-Type", "application/json");
                 return headers;
             }
 
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
-                //                params.put("param1", "value1");
-                //                params.put("param2", "value2");
                 return params;
             }
         };
