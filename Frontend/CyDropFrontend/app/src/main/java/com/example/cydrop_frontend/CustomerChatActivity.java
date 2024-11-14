@@ -1,6 +1,6 @@
 /**
  * CustomerChatActivity class manages the chat interface for customers, allowing them to connect to the Websocket server,
- * send and recieve messages, and handle user interface updates.
+ * send and receive messages, and handle user interface updates.
  *
  */
 package com.example.cydrop_frontend;
