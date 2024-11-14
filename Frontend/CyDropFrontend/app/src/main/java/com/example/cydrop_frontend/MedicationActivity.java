@@ -30,6 +30,8 @@ import java.util.Map;
 /**
  * MedicationActivity manages interactions with the medication inventory,
  * allowing the user to view, add, edit, and delete medications.
+ *
+ * @author Madison Vosburg
  */
 public class MedicationActivity extends AppCompatActivity {
 
