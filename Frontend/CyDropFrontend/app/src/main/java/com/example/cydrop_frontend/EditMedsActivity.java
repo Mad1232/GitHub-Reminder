@@ -102,24 +102,11 @@ public class EditMedsActivity extends AppCompatActivity {
         }
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.PUT, new_url, json, new Response.Listener<JSONObject>() {
-
-            /**
-             * Handles the response from the server after a successful update.
-             * Displays a toast message confirming the update.
-             *
-             * @param response JSONObject response from the server.
-             */
             @Override
             public void onResponse(JSONObject response) {
                 Toast.makeText(getApplicationContext(), "Medication Updated", Toast.LENGTH_LONG).show();
             }
         }, new Response.ErrorListener() {
-
-            /**
-             * Handles any errors that occur during the request.
-             *
-             * @param error VolleyError object containing the error details.
-             */
             @Override
             public void onErrorResponse(VolleyError error) {
                 throw new RuntimeException(error);
@@ -127,30 +114,15 @@ public class EditMedsActivity extends AppCompatActivity {
         }
         ){
 
-            /**
-             * Adds headers to request if needed.
-             *
-             * @return Map of headers to include in the request.
-             * @throws AuthFailureError if authorization fails.
-             */
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 HashMap<String, String> headers = new HashMap<String, String>();
-                //                headers.put("Authorization", "Bearer YOUR_ACCESS_TOKEN");
-                //                headers.put("Content-Type", "application/json");
                 return headers;
             }
 
-            /**
-             * Adds parameters to the request if needed.
-             *
-             * @return Map of parameters to include in the request.
-             */
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
-                //                params.put("param1", "value1");
-                //                params.put("param2", "value2");
                 return params;
             }
         };

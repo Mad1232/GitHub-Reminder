@@ -1,8 +1,3 @@
-/**
- * CustomerChatActivity class manages the chat interface for customers, allowing them to connect to the Websocket server,
- * send and receive messages, and handle user interface updates.
- *
- */
 package com.example.cydrop_frontend;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,6 +16,10 @@ import android.widget.TextView;
 
 import org.java_websocket.handshake.ServerHandshake;
 
+/**
+ * CustomerChatActivity class manages the chat interface for customers, allowing them to connect to the Websocket server,
+ * send and receive messages, and handle user interface updates.
+ */
 public class CustomerChatActivity extends AppCompatActivity implements WebSocketListener {
     /**
      * Button to navigate back to the main client navigation activity.

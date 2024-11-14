@@ -44,7 +44,6 @@ import java.util.concurrent.Executors;
 /**
  * LoginActivity handles user login operations, allowing users to log in with their email and password.
  * It sends a POST request to authenticate the user, and redirects them based on their user role (client, admin, or vet).
- *
  */
 public class LoginActivity extends AppCompatActivity {
 
