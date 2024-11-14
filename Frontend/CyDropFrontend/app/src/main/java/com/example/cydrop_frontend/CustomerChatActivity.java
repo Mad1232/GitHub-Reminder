@@ -43,7 +43,10 @@ public class CustomerChatActivity extends AppCompatActivity implements WebSocket
     private LinearLayout msgTv;
 
     /**
-     * Initializes the chat interface, connects to the websocket, and sets up button listeners.
+     * Initializes the chat interface, connects to the websocket, and sets up button listeners for send and return.
+     * Send button captures user input and sends through websocket.
+     * Return button navigates to ClientNavbarMainActivity.
+     *
      * @param savedInstanceState Bundle containing the saved state of the activity.
      */
     @Override

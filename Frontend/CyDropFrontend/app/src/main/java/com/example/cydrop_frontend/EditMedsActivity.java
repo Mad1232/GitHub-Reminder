@@ -27,12 +27,39 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * EditMedsActivity class provides an interface for editing medication details, allowing users to update the name and stock of a specified medication.
+ * It sends a PUT request to update the medication information on the server.
+ */
 public class EditMedsActivity extends AppCompatActivity {
+
+    /**
+     * EditText field for inputting the medication ID.
+     */
     private EditText msgResponse1;
+
+    /**
+     * EditText field for inputting the new medication name.
+     */
     private EditText msgResponse2;
+
+    /**
+     * EditText field for inputting the new stock quantity of the medication.
+     */
     private EditText msgResponse3;
+
+    /**
+     * Base URL for the medication inventory endpoint.
+     */
     private static final String URL = "http://coms-3090-038.class.las.iastate.edu:8080/inventory";
 
+    /**
+     * Initializes the activity layout, sets up listeners for save and return buttons.
+     * The save button captures user input and sends a PUT request to update medication.
+     * The return button navigates to MedicationActivity.
+     *
+     * @param savedInstanceState Bundle containing the saved state of the activity.
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +82,15 @@ public class EditMedsActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Sends a PUT request to the server to update the medication's name and stock quantity.
+     * Constructs a JSON Object with the new data and appends the ID to the URL to identify the correct medication to update.
+     *
+     * @param url Base URL for the medication inventory endpoint.
+     * @param old The current ID of the medication to update.
+     * @param name The new name to update the medication to.
+     * @param stock The new stock quantity to update the medication to.
+     */
     private void putRequest(String url, String old, String name, String stock) {
         String new_url = url + "/" + old;
         JSONObject json = new JSONObject();
@@ -67,11 +103,23 @@ public class EditMedsActivity extends AppCompatActivity {
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.PUT, new_url, json, new Response.Listener<JSONObject>() {
 
+            /**
+             * Handles the response from the server after a successful update.
+             * Displays a toast message confirming the update.
+             *
+             * @param response JSONObject response from the server.
+             */
             @Override
             public void onResponse(JSONObject response) {
                 Toast.makeText(getApplicationContext(), "Medication Updated", Toast.LENGTH_LONG).show();
             }
         }, new Response.ErrorListener() {
+
+            /**
+             * Handles any errors that occur during the request.
+             *
+             * @param error VolleyError object containing the error details.
+             */
             @Override
             public void onErrorResponse(VolleyError error) {
                 throw new RuntimeException(error);
@@ -79,6 +127,12 @@ public class EditMedsActivity extends AppCompatActivity {
         }
         ){
 
+            /**
+             * Adds headers to request if needed.
+             *
+             * @return Map of headers to include in the request.
+             * @throws AuthFailureError if authorization fails.
+             */
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 HashMap<String, String> headers = new HashMap<String, String>();
@@ -87,6 +141,11 @@ public class EditMedsActivity extends AppCompatActivity {
                 return headers;
             }
 
+            /**
+             * Adds parameters to the request if needed.
+             *
+             * @return Map of parameters to include in the request.
+             */
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
