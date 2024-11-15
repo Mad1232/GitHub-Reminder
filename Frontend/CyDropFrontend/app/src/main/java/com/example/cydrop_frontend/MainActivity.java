@@ -18,11 +18,29 @@ import androidx.core.view.WindowInsetsCompat;
 import java.io.Console;
 import java.util.Objects;
 
-
+/**
+ * MainActivity serves as the entry point of the application.
+ * It checks if the user is already logged in by retrieving saved user data from SharedPreferences.
+ * Based on the saved user type, it redirects the user to the appropriate dashboard (client, admin, or vet).
+ * If no login data is found, the activity displays options to log in or sign up.
+ *
+ * @author Niraj Amin
+ * @author Madison Vosburg
+ */
 public class MainActivity extends AppCompatActivity {
 
+    /**
+     * Button for navigating to the signup screen.
+     */
     private Button signupButton;
 
+    /**
+     * Initializes the activity.
+     * Checks if user login details are saved in SharedPreferences.
+     * If found, redirects the user to appropriate dashboard. If not, it sets up the UI with login and signup buttons.
+     *
+     * @param savedInstanceState Bundle containing the saved state of the activity.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 

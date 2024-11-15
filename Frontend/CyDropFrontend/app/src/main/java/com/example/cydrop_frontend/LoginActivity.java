@@ -41,15 +41,48 @@ import java.net.URL;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+/**
+ * LoginActivity handles user login operations, allowing users to log in with their email and password.
+ * It sends a POST request to authenticate the user, and redirects them based on their user role (client, admin, or vet).
+ *
+ * @author Madison Vosburg
+ * @author Niraj Amin
+ */
 public class LoginActivity extends AppCompatActivity {
 
-    private EditText usernameEditText;  // define username edittext variable
-    private EditText passwordEditText;  // define password edittext variable
-    private Button loginButton;         // define login button variable
-    private Button signupButton;        // define signup button variable
+    /**
+     * EditText field for inputting the user's email.
+     */
+    private EditText usernameEditText;
+
+    /**
+     * EditText field for inputting the user's password.
+     */
+    private EditText passwordEditText;
+
+    /**
+     * Button to initiate login.
+     */
+    private Button loginButton;
+
+    /**
+     * Button to navigate to the Signup page.
+     */
+    private Button signupButton;
+
+    /**
+     * TextView to display login error messages.
+     */
     private TextView loginDisplay;
 
 
+    /**
+     * Initializes the activity, sets up listeners for login and signup buttons.
+     * Login button captures user input and sends a PUT request to verify credentials.
+     * Signup button navigates to the SignupActivity.
+     *
+     * @param savedInstanceState Bundle containing the saved state of the activity.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,11 +117,15 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private void verifyLogin(String username, String password){
-        //String url = VolleySingleton.backendURL + "/user" + "?username=" + username + "&password=" + password;
-        //sendGetRequest(url);
-    }
+//    private void verifyLogin(String username, String password){
+//        //String url = VolleySingleton.backendURL + "/user" + "?username=" + username + "&password=" + password;
+//        //sendGetRequest(url);
+//    }
 
+    /**
+     * Sends a login request to authenticate the user. Constructs a JSON object containing the user's email and password,
+     * then sends it in a POST request. Upon successful login (verification in the backend), saves user information in SharedPreferences and redirects based on user type.
+     */
     private void SendLoginRequest(){
         JSONObject userLogin = new JSONObject();
         try {

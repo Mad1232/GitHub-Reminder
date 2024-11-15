@@ -27,11 +27,38 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * MedicationActivity manages interactions with the medication inventory,
+ * allowing the user to view, add, edit, and delete medications.
+ *
+ * @author Madison Vosburg
+ */
 public class MedicationActivity extends AppCompatActivity {
+
+    /**
+     * Textview displaying the medication list.
+     */
     private TextView msgResponse;
+
+    /**
+     * Base URL for accessing medication inventory endpoint.
+     */
     private static final String URL = "http://coms-3090-038.class.las.iastate.edu:8080/inventory";
+
+    /**
+     * EditText for user input when adding or deleting medication.
+     */
     private EditText med_input;
 
+    /**
+     * Initializes the activity, sets up listeners for add, edit, delete, and return buttons.
+     * Add button captures user input and sends a POST request to add a medication.
+     * Delete button captures user input and sends a DELETE request to delete a medication.
+     * Edit button navigates to the EditMedsActivity.
+     * Return button navigates to the VetNavbarMainActivity.
+     *
+     * @param savedInstanceState Bundle containing the saved state of the activity.
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,7 +93,10 @@ public class MedicationActivity extends AppCompatActivity {
         });
     }
 
-    //get method
+    /**
+     * Retrieves and displays the medication list from the server as a JSON array.
+     * Parses each entry to display the medication details in a clear way.
+     */
     private void getJSONData() {
         JsonArrayRequest jsonObjReq = new JsonArrayRequest(
                 Request.Method.GET,
@@ -103,16 +133,12 @@ public class MedicationActivity extends AppCompatActivity {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 HashMap<String, String> headers = new HashMap<String, String>();
-//                headers.put("Authorization", "Bearer YOUR_ACCESS_TOKEN");
-//                headers.put("Content-Type", "application/json");
                 return headers;
             }
 
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
-//                params.put("param1", "value1");
-//                params.put("param2", "value2");
                 return params;
             }
         };
@@ -121,7 +147,12 @@ public class MedicationActivity extends AppCompatActivity {
         VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(jsonObjReq);
     }
 
-
+    /**
+     * Sends a POST request to add a medication to the inventory.
+     *
+     * @param url Endpoint for adding a medication.
+     * @param medication Name of the medication to be added.
+     */
     private void postRequest(String url, String medication) {
 
         // Create JSON object for POST request
@@ -153,16 +184,12 @@ public class MedicationActivity extends AppCompatActivity {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 HashMap<String, String> headers = new HashMap<String, String>();
-                //                headers.put("Authorization", "Bearer YOUR_ACCESS_TOKEN");
-                //                headers.put("Content-Type", "application/json");
                 return headers;
             }
 
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
-                //                params.put("param1", "value1");
-                //                params.put("param2", "value2");
                 return params;
             }
         };
@@ -171,6 +198,12 @@ public class MedicationActivity extends AppCompatActivity {
         VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(request);
     }
 
+    /**
+     * Sends a DELETE request to remove a medication from the inventory.
+     *
+     * @param URL Endpoint for deleting a medication
+     * @param id ID of the medication to be deleted.
+     */
     private void delRequest(String URL, String id){
 
         StringRequest request = new StringRequest(Request.Method.DELETE, URL + "/" + id,
@@ -195,16 +228,12 @@ public class MedicationActivity extends AppCompatActivity {
                 @Override
                 public Map<String, String> getHeaders() throws AuthFailureError {
                     HashMap<String, String> headers = new HashMap<String, String>();
-                    //                headers.put("Authorization", "Bearer YOUR_ACCESS_TOKEN");
-                    //                headers.put("Content-Type", "application/json");
                     return headers;
                 }
 
                 @Override
                 protected Map<String, String> getParams() {
                     Map<String, String> params = new HashMap<String, String>();
-                    //                params.put("param1", "value1");
-                    //                params.put("param2", "value2");
                     return params;
                 }
 
