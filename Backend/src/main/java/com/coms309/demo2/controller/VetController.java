@@ -7,6 +7,7 @@ import com.coms309.demo2.repository.PetsRepo;
 import com.coms309.demo2.repository.UserRepository;
 import com.coms309.demo2.repository.VetsRepo;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.Getter;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
+@Tag(name = "Vet Controller", description = "Manages veterinarians and their customer assignments")
 public class VetController {
     @Autowired
     private VetsRepo vetsRepo;

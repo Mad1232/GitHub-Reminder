@@ -2,6 +2,7 @@ package com.coms309.demo2.controller;
 
 import com.coms309.demo2.entity.Pet;
 import com.coms309.demo2.repository.PetsRepo;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +13,7 @@ import java.util.List;
 
 
 @RestController
+@Tag(name = "Pet Controller", description = "Handles pet-related operations and user-pet associations")
 public class MyController {
     @Autowired
     PetsRepo petsRepo;

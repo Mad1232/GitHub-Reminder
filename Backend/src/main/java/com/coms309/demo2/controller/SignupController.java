@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 @RestController
-@Tag(name = "Signup Controller", description = "Handles user signup and management operations")
+@Tag(name = "Signup Controller", description = "Handles user registration and signup operations")
 public class SignupController {
 
     @Autowired

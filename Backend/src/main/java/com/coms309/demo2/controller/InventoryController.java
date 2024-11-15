@@ -1,5 +1,6 @@
 package com.coms309.demo2.controller;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.coms309.demo2.entity.Medication;
@@ -21,6 +22,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 
 @RestController
+@Tag(name = "Inventory Controller", description = "Handles inventory management for supplies and resources")
+
 public class InventoryController {
     @Autowired
     MedicationRepository repository;

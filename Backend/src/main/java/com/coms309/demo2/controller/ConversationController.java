@@ -2,6 +2,7 @@ package com.coms309.demo2.controller;
 import java.util.List;
 import java.util.Optional;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.coms309.demo2.entity.Conversation;
@@ -18,6 +19,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 
 @RestController
+@Tag(name = "Conversation Controller", description = "Manages conversations between users and veterinarians")
+
 public class ConversationController {
     //Post, Put, Delete all taken care of by websocket
     @Autowired

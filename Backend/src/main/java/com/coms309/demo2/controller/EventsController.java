@@ -2,6 +2,7 @@ package com.coms309.demo2.controller;
 
 import com.coms309.demo2.entity.Events;
 import com.coms309.demo2.repository.EventsRepository;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@Tag(name = "Events Controller", description = "Manages creation of reminders related to eye drop for pets")
+
 @RequestMapping("/events")
 public class EventsController {
 

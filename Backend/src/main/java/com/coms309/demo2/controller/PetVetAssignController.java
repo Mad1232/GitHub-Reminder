@@ -4,6 +4,7 @@ import com.coms309.demo2.entity.Pet;
 import com.coms309.demo2.entity.Vet;
 import com.coms309.demo2.repository.PetsRepo;
 import com.coms309.demo2.repository.VetsRepo;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +12,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@Tag(name = "Pet-Vet Controller", description = "Allows assignation b/w Pets and Vets")
+
 @RequestMapping("/api/pet-vet")
 public class PetVetAssignController {
 
