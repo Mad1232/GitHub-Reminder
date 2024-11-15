@@ -28,6 +28,7 @@ import java.util.Map;
 
 /**
  * This is a fragment that can be displayed in the AdminNavbarMainActivity
+ * Holds the inventory pages, where an admin can manage medication
  * @author Niraj
  */
 public class AdminInventoryFragment extends Fragment {
