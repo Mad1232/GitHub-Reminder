@@ -19,6 +19,8 @@ import org.java_websocket.handshake.ServerHandshake;
 /**
  * CustomerChatActivity class manages the chat interface for customers, allowing them to connect to the Websocket server,
  * send and receive messages, and handle user interface updates.
+ *
+ * @author Madison Vosburg
  */
 public class CustomerChatActivity extends AppCompatActivity implements WebSocketListener {
     /**

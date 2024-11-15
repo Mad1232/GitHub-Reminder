@@ -28,6 +28,8 @@ import java.util.Map;
 /**
  * SignupActivity provides the functionality for user sign-up, allowing new users to create an account.
  * Users are prompted to enter an email and password, and a POST request is sent to register the new user.
+ *
+ * @author Madison Vosburg
  */
 public class SignupActivity extends AppCompatActivity{
 

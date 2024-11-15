@@ -30,6 +30,8 @@ import java.util.Map;
 /**
  * EditMedsActivity class provides an interface for editing medication details, allowing users to update the name and stock of a specified medication.
  * It sends a PUT request to update the medication information on the server.
+ *
+ * @author Madison Vosburg
  */
 public class EditMedsActivity extends AppCompatActivity {
 
