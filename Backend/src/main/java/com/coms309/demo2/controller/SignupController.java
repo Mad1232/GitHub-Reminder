@@ -5,10 +5,19 @@ import java.util.Optional;
 
 import com.coms309.demo2.entity.User;
 import com.coms309.demo2.repository.UserRepository;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * What's up
+ *
+ *
+ */
+
+
 @RestController
+@Tag(name = "Signup Controller", description = "Handles user signup and management operations")
 public class SignupController {
 
     @Autowired
@@ -26,11 +35,14 @@ public class SignupController {
         return user; // Per REST standards, we return the new object
     }
 
+    /// <summary> My get stuff for user </summary>
     // Get user by ID, handling case if user is not found
     @GetMapping("/users/{id}")
     public User getUser(@PathVariable Long id) {
+        /// <summary>My super duper data</summary>
         Optional<User> user = repository.findById(id);
         if (user.isPresent()) {
+            /// <summary>The unique identifier</summary>
             User foundUser = user.get();
             foundUser.setPassword(null); // Hide password
             return foundUser;
