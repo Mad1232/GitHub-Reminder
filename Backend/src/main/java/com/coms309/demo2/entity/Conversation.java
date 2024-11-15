@@ -17,6 +17,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @IdClass(ConversationKey.class)
+// where's my bros
 public class Conversation {
     // many conversations to one user
     @ManyToOne(cascade = CascadeType.MERGE)
