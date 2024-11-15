@@ -32,7 +32,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-
+/**
+ * This is a fragment that can be displayed in the ClientNavbarMainActivity
+ * Holds the home page, where a user can see their current pets, and edit their details
+ * @author Niraj
+ */
 public class ClientHomeFragment extends Fragment {
 
     private View overlayView;
@@ -52,18 +56,40 @@ public class ClientHomeFragment extends Fragment {
 
     private ArrayList<Fragment> fragList = new ArrayList<>();
 
-    LinearLayout linearLayout;
-    TextView petsViewTextView;
+    private LinearLayout linearLayout;
+    private TextView petsViewTextView;
 
+    /**
+     * Required empty constructor
+     */
     public ClientHomeFragment() {
         // Required empty public constructor
     }
 
+    /**
+     * Generic onCreate
+     * @param savedInstanceState If the fragment is being re-created from
+     * a previous saved state, this is the state.
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
 
+    /**
+     * GET json data for the pets associated with current userId. Populate those into the view on callback.
+     * Add onCLick listeners for all buttons
+     *
+     * @param inflater The LayoutInflater object that can be used to inflate
+     * any views in the fragment,
+     * @param container If non-null, this is the parent view that the fragment's
+     * UI should be attached to.  The fragment should not add the view itself,
+     * but this can be used to generate the LayoutParams of the view.
+     * @param savedInstanceState If non-null, this fragment is being re-constructed
+     * from a previous saved state as given here.
+     *
+     * @return the created view
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -125,6 +151,16 @@ public class ClientHomeFragment extends Fragment {
     }
 
 
+    /**
+     *  Create a new pet card and add it to the linearLayout
+     * @param petId database petId
+     * @param petName name of pet
+     * @param petType type of pet (dog | cat | )
+     * @param petBreed breed of pet (if applicable)
+     * @param petAge age of pet
+     * @param petGender gender of pet (M | F)
+     * @param petDiagnosis medical diagnosis for pet
+     */
     public void addNewPetCard(String petId, String petName, String petType, String petBreed,
                               String petAge, String petGender, String petDiagnosis){
         FragmentManager fragMan = getFragmentManager();
@@ -136,6 +172,9 @@ public class ClientHomeFragment extends Fragment {
         fragTransaction.commit();
     }
 
+    /**
+     * Remove all pet fragments. This function should be used if pets are refreshed or reloaded
+     */
     public void RemoveAllPetFrags(){
         FragmentManager fragMan = getFragmentManager();
         FragmentTransaction fragTransaction = fragMan.beginTransaction();
@@ -146,7 +185,10 @@ public class ClientHomeFragment extends Fragment {
     }
 
 
-
+    /**
+     * Toggle the add pet view.
+     * @param addOverlay if true toggle to add pet view. If false, toggle to default view
+     */
     private void ToggleAddPetOverlay(boolean addOverlay){
         if (addOverlay){
             regularView.setVisibility(View.INVISIBLE);
@@ -157,6 +199,9 @@ public class ClientHomeFragment extends Fragment {
         }
     }
 
+    /**
+     * GET the json data for all pets this user has. create pet cards for each of these on callback
+     */
     private void GetJSONData() {
         JsonArrayRequest jsonArrReq = new JsonArrayRequest(
                 Request.Method.GET,
@@ -203,6 +248,9 @@ public class ClientHomeFragment extends Fragment {
         VolleySingleton.getInstance(getContext().getApplicationContext()).addToRequestQueue(jsonArrReq);
     }
 
+    /**
+     * POST a new pet. Uses the information from the EditText fields contained on the add pet view
+     */
     private void PostNewPet(){
         JSONObject pet = new JSONObject();
 
