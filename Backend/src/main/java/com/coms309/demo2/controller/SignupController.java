@@ -10,9 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * What's up
- *
- *
+ * @author Fury Poudel and Madeleine Carydis
+ * Creates and updates a user
  */
 
 

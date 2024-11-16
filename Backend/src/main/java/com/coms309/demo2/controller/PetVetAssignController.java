@@ -11,6 +11,11 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * @author Fury Poudel and Madeleine Carydis
+ * Assigns pets to vets
+ */
+
 @RestController
 @Tag(name = "Pet-Vet Controller", description = "Allows assignation b/w Pets and Vets")
 

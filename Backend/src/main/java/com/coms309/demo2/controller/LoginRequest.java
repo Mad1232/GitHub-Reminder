@@ -1,5 +1,8 @@
 package com.coms309.demo2.controller;
-
+/**
+ * @author Fury Poudel and Madeleine Carydis
+ * Represents login attempt
+ */
 public class LoginRequest {
 
     private String email;

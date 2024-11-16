@@ -19,6 +19,10 @@ import java.util.Optional;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+/**
+ * @author Fury Poudel and Madeleine Carydis
+ * Creates and updates a vet and allows the vet to link themself to customers
+ */
 @RestController
 @Tag(name = "Vet Controller", description = "Manages veterinarians and their customer assignments")
 public class VetController {

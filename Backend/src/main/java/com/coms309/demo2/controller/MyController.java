@@ -11,7 +11,10 @@ import com.coms309.demo2.repository.MedicationRepository;
 import java.util.List;
 
 
-
+/**
+ * @author Fury Poudel and Madeleine Carydis
+ * Creates and updates pets
+ */
 @RestController
 @Tag(name = "Pet Controller", description = "Handles pet-related operations and user-pet associations")
 public class MyController {

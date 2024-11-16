@@ -10,6 +10,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
+/**
+ * @author Fury Poudel and Madeleine Carydis
+ * Authenticates a log on request from a user
+ */
 @RestController
 @Tag(name = "Login Controller", description = "Handles user authentication and login operations")
 @RequestMapping("/login")
@@ -21,7 +25,11 @@ public class LoginController {
     @Autowired
     private VetsRepo vetsRepo;
 
-
+    /**
+     * Authenticates a login request and logs them in
+     * @param loginRequest username and password (login data)
+     * @return the view to display and the id
+     */
     @PostMapping
     public String login(@RequestBody LoginRequest loginRequest) {
         // Retrieve user by email
