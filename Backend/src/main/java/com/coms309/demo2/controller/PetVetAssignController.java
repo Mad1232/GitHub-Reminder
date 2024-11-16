@@ -11,6 +11,11 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * @author Fury Poudel and Madeleine Carydis
+ * Assigns pets to vets
+ */
+
 @RestController
 @Tag(name = "Pet-Vet Controller", description = "Allows assignation b/w Pets and Vets")
 
@@ -23,7 +28,12 @@ public class PetVetAssignController {
     @Autowired
     private VetsRepo vetRepository;
 
-    // Assign a Vet to a Pet
+    /**
+     * Assign a Vet to a Pet
+     * @param petId id of Pet
+     * @param vetId id of Vet
+     * @return "Vet assigned to pet successfully."
+     */
     @PostMapping("/assign/{petId}/{vetId}")
     public ResponseEntity<String> assignVetToPet(
             @PathVariable int petId, @PathVariable int vetId) {
@@ -36,21 +46,34 @@ public class PetVetAssignController {
         return ResponseEntity.ok("Vet assigned to pet successfully.");
     }
 
-    // Get all Vets for a Pet
+    /**
+     * Get all Vets for a Pet
+     * @param petId id of Pet
+     * @return list of Pet's Vets
+     */
     @GetMapping("/pets/{petId}/vets")
     public List<Vet> getVetsForPet(@PathVariable int petId) {
         Pet pet = petRepository.findById(petId).orElseThrow();
         return pet.getVeterinarians();
     }
 
-    // Get all Pets for a Vet
+    /**
+     * Get all Pets for a Vet
+     * @param vetId id of Vet
+     * @return list of Vet's Pets
+     */
     @GetMapping("/vets/{vetId}/pets")
     public List<Pet> getPetsForVet(@PathVariable int vetId) {
         Vet vet = vetRepository.findById(vetId).orElseThrow();
         return vet.getPets();
     }
 
-    // Remove a Vet from a Pet
+    /**
+     * Remove a Vet from a Pet
+     * @param petId id of Pet
+     * @param vetId id of Vet
+     * @return "Vet removed from pet successfully."
+     */
     @DeleteMapping("/remove/{petId}/{vetId}")
     public ResponseEntity<String> removeVetFromPet(
             @PathVariable int petId, @PathVariable int vetId) {

@@ -10,9 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * What's up
- *
- *
+ * @author Fury Poudel and Madeleine Carydis
+ * Creates and updates a user
  */
 
 
@@ -23,7 +22,11 @@ public class SignupController {
     @Autowired
     UserRepository repository;
 
-    // Signup method with email uniqueness check
+    /**
+     * Signup method; creates a User
+     * @param user  new User
+     * @return new User
+     */
     @PostMapping("/signup")
     public User signup(@RequestBody User user) {
         // Find user by email to avoid loading all users into memory
@@ -35,8 +38,11 @@ public class SignupController {
         return user; // Per REST standards, we return the new object
     }
 
-    /// <summary> My get stuff for user </summary>
-    // Get user by ID, handling case if user is not found
+    /**
+     * Get user by ID, handling case if user is not found
+     * @param id user id
+     * @return user
+     */
     @GetMapping("/users/{id}")
     public User getUser(@PathVariable Long id) {
         /// <summary>My super duper data</summary>
@@ -51,7 +57,10 @@ public class SignupController {
         }
     }
 
-    // Get all users, hiding their passwords
+    /**
+     * Get all users, hiding their passwords
+     * @return a list of all users with passwords obscured
+     */
     @GetMapping("/users")
     public List<User> getAllUsers() {
         List<User> users = repository.findAll();
@@ -77,7 +86,11 @@ public class SignupController {
     //     }
     // }
 
-    // Delete user by ID
+    /**
+     * Delete user by ID
+     * @param id id of user
+     * @return informative message
+     */
     @DeleteMapping("/users/{id}")
     public String removeUser(@PathVariable Long id) {
         if (repository.existsById(id)) {

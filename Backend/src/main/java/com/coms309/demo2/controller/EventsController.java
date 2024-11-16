@@ -10,6 +10,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * @author Fury Poudel and Madeleine Carydis
+ * Creates events
+ */
 @RestController
 @Tag(name = "Events Controller", description = "Manages creation of reminders related to eye drop for pets")
 
@@ -18,7 +22,11 @@ public class EventsController {
 
     @Autowired
     private EventsRepository eventsRepository;
-
+    /**
+     * Creates event
+     * @param event
+     * @return the event that was created
+     */
     @PostMapping
     public ResponseEntity<Events> addNewEvent(@RequestBody Events event) {
         event = eventsRepository.save(event);
