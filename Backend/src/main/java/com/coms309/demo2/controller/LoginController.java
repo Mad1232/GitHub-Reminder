@@ -4,12 +4,18 @@ import com.coms309.demo2.entity.User;
 import com.coms309.demo2.entity.Vet;
 import com.coms309.demo2.repository.UserRepository;
 import com.coms309.demo2.repository.VetsRepo;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
+/**
+ * @author Fury Poudel and Madeleine Carydis
+ * Authenticates a log on request from a user
+ */
 @RestController
+@Tag(name = "Login Controller", description = "Handles user authentication and login operations")
 @RequestMapping("/login")
 public class LoginController {
 
@@ -19,7 +25,11 @@ public class LoginController {
     @Autowired
     private VetsRepo vetsRepo;
 
-
+    /**
+     * Authenticates a login request and logs them in
+     * @param loginRequest username and password (login data)
+     * @return the view to display and the id
+     */
     @PostMapping
     public String login(@RequestBody LoginRequest loginRequest) {
         // Retrieve user by email

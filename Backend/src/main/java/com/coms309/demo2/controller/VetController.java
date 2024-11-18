@@ -7,6 +7,7 @@ import com.coms309.demo2.repository.PetsRepo;
 import com.coms309.demo2.repository.UserRepository;
 import com.coms309.demo2.repository.VetsRepo;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.Getter;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,12 @@ import java.util.Optional;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+/**
+ * @author Fury Poudel and Madeleine Carydis
+ * Creates and updates a vet and allows the vet to link themself to customers
+ */
 @RestController
+@Tag(name = "Vet Controller", description = "Manages veterinarians and their customer assignments")
 public class VetController {
     @Autowired
     private VetsRepo vetsRepo;
@@ -28,17 +34,30 @@ public class VetController {
 
     // Change the return type and method name to reflect that this method retrieves
     // Vets
+    /**
+     * Get all Vets
+     * @return a list of all the Vets
+     */
     @GetMapping("/vets")
     public List<Vet> getAllVets() {
         return vetsRepo.findAll(); // Retrieve all vets from the repository
     }
 
-    // Get a vet by ID
+    /**
+     * Get a vet by ID
+     * @param id id of Vet
+     * @return Vet
+     */
     @GetMapping("/vet/{id}")
     public Vet getVetById(@PathVariable int id) {
         return vetsRepo.findById(id).orElse(null); // Retrieve vet by ID
     }
 
+    /**
+     * Delete Vet by id
+     * @param id id of Vet
+     * @return informative message with id
+     */
     @DeleteMapping("/vet/{id}")
     public String deleteUser(@PathVariable int id) {
         if (vetsRepo.existsById(id)) {
@@ -49,17 +68,29 @@ public class VetController {
         }
     }
 
+    /**
+     * Delete all Vets
+     * @return "All Vets deleted succesfully."
+     */
     @DeleteMapping("/vets")
-    public String deleteAllUsers() {
+    public String deleteAllVets() {
         vetsRepo.deleteAll();
         return "All Vets deleted succesfully.";
     }
 
+    /**
+     * Create a Vet
+     * @param vet new Vet details
+     * @return vet
+     */
     @PostMapping("/vet")
     public Vet saveVet(@RequestBody Vet vet) {
         return vetsRepo.save(vet); // Save the vet object to the repository
     }
 
+    /**
+     * Customer with id or email
+     */
     public static class CustomerID {
         @Getter
         private Long id;
@@ -68,10 +99,18 @@ public class VetController {
         private String email;
     }
 
-    // Create link between vet and customer
-    // Valid bodies:
-    // * { "id": 7 }
-    // * { "email": "foo@bar.baz" }
+    /** 
+     * Create link between vet and customer
+     * Valid bodies:
+     * <ul>
+     *   <li> { "id": 7 }
+     *   <li> { "email": "foo@bar.baz" }
+     * </ul>
+     * 
+     * @param vetID id of vet
+     * @param customerID id or email of customer
+     * @return customer
+     */
     @PostMapping("/vets/{vetID}/customers")
     public User addCustomer(@PathVariable Integer vetID, @RequestBody CustomerID customerID) {
         Optional<Vet> vetOptional = vetsRepo.findById(vetID);
@@ -103,7 +142,12 @@ public class VetController {
         return customer;
     }
 
-    // Remove link between vet and customer
+    /**
+     * Remove link between vet and customer
+     * @param vetID id of vet 
+     * @param customerID id of customer
+     * @return Vet's new list of customers
+     */
     @DeleteMapping("/vets/{vetID}/customers/{customerID}")
     public List<User> removeCustomer(@PathVariable Integer vetID, @PathVariable Long customerID) {
         Optional<Vet> vetOptional = vetsRepo.findById(vetID);

@@ -2,6 +2,7 @@ package com.coms309.demo2.controller;
 
 import com.coms309.demo2.entity.Pet;
 import com.coms309.demo2.repository.PetsRepo;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,8 +11,12 @@ import com.coms309.demo2.repository.MedicationRepository;
 import java.util.List;
 
 
-
+/**
+ * @author Fury Poudel and Madeleine Carydis
+ * Creates and updates Pets
+ */
 @RestController
+@Tag(name = "Pet Controller", description = "Handles pet-related operations and user-pet associations")
 public class MyController {
     @Autowired
     PetsRepo petsRepo;
@@ -19,11 +24,20 @@ public class MyController {
     @Autowired
     MedicationRepository medicationRepo;
 
+    /**
+     * Endpoint used for testing. Should not be used anymore
+     * @return "The API works well"
+     */
     @GetMapping("/mytestapi")
     public String testMyAPI() {
         return "The API works well";
     }
 
+    /**
+     * Create a Pet
+     * @param pet Pet
+     * @return Pet
+     */
     @PostMapping("/pet")
     public ResponseEntity<Pet> savePet(@RequestBody Pet pet) {
 
@@ -55,17 +69,30 @@ public class MyController {
 //        return ResponseEntity.ok(savedPet);
 //    }
 
-
+    /**
+     * Get a list of all Pets
+     * @return list of all Pets
+     */
     @GetMapping("/pets")
     public List<Pet> getAllPets(){
         return petsRepo.findAll(); // Retrieve all pets from the repository
     }
-    // Get a pet by ID
+
+    /**
+     * Get Pet by id
+     * @param id id of Pet
+     * @return Pet
+     */
     @GetMapping("/pet/{id}")
     public Pet getPetById(@PathVariable int id) {
         return petsRepo.findById(id).orElse(null); // Retrieve pet by ID
     }
 
+    /**
+     * Delete Pet by id
+     * @param id id of Pet
+     * @return informative message with id
+     */
     @DeleteMapping("/pet/{id}")
     public String deleteUser(@PathVariable int id) {
         if(petsRepo.existsById(id)) {
@@ -76,21 +103,34 @@ public class MyController {
             return "Pet with ID " + id + "does not exist.";
         }
     }
-    // get user's pets list
+    
+    /**
+     * Get all Pets of a user
+     * @param id id of User
+     * @return list of Pets a User has
+     */
     @GetMapping("/user-pet/{id}")
     public List<Pet> getUserPetsByID(@PathVariable Long id) {
         // Retrieve pets belonging to the user with the given ID
         return petsRepo.findByOwner_Id(id);
     }
 
-
+    /**
+     * Deletes all Pets
+     * @return "All pets deleted succesfully."
+     */
     @DeleteMapping("/pets")
-    public String deleteAllUsers() {
+    public String deleteAllPets() {
         petsRepo.deleteAll();
         return "All pets deleted succesfully.";
     }
 
-    // Update a pet by ID
+    /**
+     * Update a Pet by id
+     * @param id id of Pet
+     * @param petDetails the new Pet information
+     * @return informative message with id
+     */
     @PutMapping("/pet/{id}")
     public String updatePet(@PathVariable int id, @RequestBody Pet petDetails) {
         return petsRepo.findById(id).map(pet -> {
@@ -101,8 +141,4 @@ public class MyController {
             return "Pet with ID " + id + " updated successfully.";
         }).orElse("Pet with ID " + id + " not found.");
     }
-
-
-
-
 }

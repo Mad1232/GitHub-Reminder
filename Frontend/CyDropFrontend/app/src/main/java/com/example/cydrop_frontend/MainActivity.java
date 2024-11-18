@@ -23,6 +23,9 @@ import java.util.Objects;
  * It checks if the user is already logged in by retrieving saved user data from SharedPreferences.
  * Based on the saved user type, it redirects the user to the appropriate dashboard (client, admin, or vet).
  * If no login data is found, the activity displays options to log in or sign up.
+ *
+ * @author Niraj Amin
+ * @author Madison Vosburg
  */
 public class MainActivity extends AppCompatActivity {
 
