@@ -17,11 +17,18 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.cydrop_frontend.databinding.ActivityAdminNavbarMainBinding;
 import com.example.cydrop_frontend.databinding.ActivityClientNavbarMainBinding;
 
-
+/**
+ * @author Niraj
+ * The navbar activity for admin view. Holds the fragments AdminInventoryFragment, AdminQuestionsFragment, AdminUsersFragment
+ */
 public class AdminNavbarMainActivity extends AppCompatActivity {
 
-    @NonNull ActivityAdminNavbarMainBinding binding;
+    private @NonNull ActivityAdminNavbarMainBinding binding;
 
+    /**
+     * Creates the activity. Sets up the binding to allow navbar to control current fragment. Switches current fragment to AdminInventoryFragment
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +59,10 @@ public class AdminNavbarMainActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * A helper function to replace the current fragment
+     * @param fragment the fragment that will be replacing the current frag
+     */
     private void replaceFragment(Fragment fragment){
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

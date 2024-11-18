@@ -17,6 +17,10 @@ import android.widget.TextView;
 import com.android.volley.Request;
 import com.android.volley.toolbox.JsonArrayRequest;
 
+/**
+ * This is a fragment that displays a customers information for vets and admins
+ * @author Niraj
+ */
 public class CustomerFragment extends Fragment {
 
     private static final String ARG_PETS = "pets";

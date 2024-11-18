@@ -9,21 +9,19 @@ import android.view.View;
 import android.view.ViewGroup;
 
 /**
- * A simple {@link Fragment} subclass.
- * Use the {@link ClientRemindersFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * This is a fragment that can be displayed in the ClientNavbarMainActivity
+ * Holds the inventory pages, where an admin can manage medication
+ * @author Niraj
  */
 public class ClientRemindersFragment extends Fragment {
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
+    /**
+     * Required empty constructor
+     */
     public ClientRemindersFragment() {
         // Required empty public constructor
     }
@@ -36,7 +34,6 @@ public class ClientRemindersFragment extends Fragment {
      * @param param2 Parameter 2.
      * @return A new instance of fragment RemindersFragment.
      */
-    // TODO: Rename and change types and number of parameters
     public static ClientRemindersFragment newInstance(String param1, String param2) {
         ClientRemindersFragment fragment = new ClientRemindersFragment();
         Bundle args = new Bundle();
@@ -46,6 +43,11 @@ public class ClientRemindersFragment extends Fragment {
         return fragment;
     }
 
+    /**
+     * Generic onCreate
+     * @param savedInstanceState If the fragment is being re-created from
+     * a previous saved state, this is the state.
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +57,20 @@ public class ClientRemindersFragment extends Fragment {
         }
     }
 
+    /**
+     *
+     *  Unimplemented
+     *
+     * @param inflater The LayoutInflater object that can be used to inflate
+     * any views in the fragment,
+     * @param container If non-null, this is the parent view that the fragment's
+     * UI should be attached to.  The fragment should not add the view itself,
+     * but this can be used to generate the LayoutParams of the view.
+     * @param savedInstanceState If non-null, this fragment is being re-constructed
+     * from a previous saved state as given here.
+     *
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

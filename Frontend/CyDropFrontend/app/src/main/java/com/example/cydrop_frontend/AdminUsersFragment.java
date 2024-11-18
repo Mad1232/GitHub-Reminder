@@ -9,34 +9,31 @@ import android.view.View;
 import android.view.ViewGroup;
 
 /**
- * A simple {@link Fragment} subclass.
- * Use the {@link AdminUsersFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * This is a fragment that can be displayed in the AdminNavbarMainActivity
+ * Holds the users pages, where a admin can manage all other users of the application
+ * @author Niraj
  */
 public class AdminUsersFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
+    /**
+     * Required empty constructor
+     */
     public AdminUsersFragment() {
         // Required empty public constructor
     }
 
     /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment AdminUsersFragment.
+     * Crete an instance of this fragment with bundled params
+     * @param param1 Unimplemented
+     * @param param2 Unimplemented
+     * @return the fragment created
      */
-    // TODO: Rename and change types and number of parameters
     public static AdminUsersFragment newInstance(String param1, String param2) {
         AdminUsersFragment fragment = new AdminUsersFragment();
         Bundle args = new Bundle();
@@ -46,6 +43,12 @@ public class AdminUsersFragment extends Fragment {
         return fragment;
     }
 
+    /**
+     * Unbundle the args and assign them variables in the fragment
+     *
+     * @param savedInstanceState If the fragment is being re-created from
+     * a previous saved state, this is the state.
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +58,19 @@ public class AdminUsersFragment extends Fragment {
         }
     }
 
+    /**
+     * Unimplemented
+     *
+     * @param inflater The LayoutInflater object that can be used to inflate
+     * any views in the fragment,
+     * @param container If non-null, this is the parent view that the fragment's
+     * UI should be attached to.  The fragment should not add the view itself,
+     * but this can be used to generate the LayoutParams of the view.
+     * @param savedInstanceState If non-null, this fragment is being re-constructed
+     * from a previous saved state as given here.
+     *
+     * @return the view created
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

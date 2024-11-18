@@ -26,28 +26,55 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-
+/**
+ * This is a fragment that can be displayed in the AdminNavbarMainActivity
+ * Holds the inventory pages, where an admin can manage medication
+ * @author Niraj
+ */
 public class AdminInventoryFragment extends Fragment {
-    private static final String URL_JSON_ARRAY = "http://coms-3090-038.class.las.iastate.edu:8080/inventory";
+ static final String URL_JSON_ARRAY = "http://coms-3090-038.class.las.iastate.edu:8080/inventory";
 
-    TextView dataText;
-    View regularView;
-    View addInventoryView;
+    private TextView dataText;
+    private View regularView;
+    private View addInventoryView;
 
-    EditText inventoryName;
-    EditText inventoryQuantity;
+    private EditText inventoryName;
+    private EditText inventoryQuantity;
 
+    /**
+     * Empty constructer
+     */
     public AdminInventoryFragment() {
         // Required empty public constructor
     }
 
 
+    /**
+     * Generic onCreate method
+     * @param savedInstanceState If the fragment is being re-created from
+     * a previous saved state, this is the state.
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
+    /**
+     *
+     * When creating the view, setup the regular and inventory views and add them to the fragment.
+     * Setup onClick listeners for all buttons
+     * Send a GET request to get the current inventory information, populating fields on callback
+     *
+     * @param inflater The LayoutInflater object that can be used to inflate
+     * any views in the fragment,
+     * @param container If non-null, this is the parent view that the fragment's
+     * UI should be attached to.  The fragment should not add the view itself,
+     * but this can be used to generate the LayoutParams of the view.
+     * @param savedInstanceState If non-null, this fragment is being re-constructed
+     * from a previous saved state as given here.
+     *
+     * @return the view created
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -95,6 +122,10 @@ public class AdminInventoryFragment extends Fragment {
         return view;
     }
 
+    /**
+     * Toggle between the add overlay view and the regular view
+     * @param addOverlay if true, toggle to the add view. Otherwise, toggle to regular view
+     */
     private void ToggleAddPetOverlay(boolean addOverlay){
         if (addOverlay){
             regularView.setVisibility(View.INVISIBLE);
@@ -105,6 +136,9 @@ public class AdminInventoryFragment extends Fragment {
         }
     }
 
+    /**
+     * Make a GET call to the API to retrieve the medication inventory
+     */
     private void GetJSONData() {
         JsonArrayRequest jsonArrReq = new JsonArrayRequest(
                 Request.Method.GET,
@@ -143,8 +177,10 @@ public class AdminInventoryFragment extends Fragment {
         VolleySingleton.getInstance(getContext().getApplicationContext()).addToRequestQueue(jsonArrReq);
     }
 
-
-    void PostNewInventory(){
+    /**
+     *  Send a POST to add new medication to inventory
+     */
+    private void PostNewInventory(){
 
         JSONObject inventoryObj = new JSONObject();
 
