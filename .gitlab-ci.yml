@@ -1,7 +1,4 @@
 stages:             # these stages (jobs) form the CICD pipeline
-  - build           # your original build stage
-  - test            # your original test stage
-  - deploy          # your original deploy stage
   - mavenbuild      # this is a JOB to build your Springboot application
   - maventest       # this is a JOB to run tests in your Springboot application (it's okay you don't have any tests for now)
   - mavendeploy     # this is a JOB to deploy your Springboot application on your server
@@ -51,4 +48,38 @@ auto-deploy:
       - main            
     changes:
       - Backend/**/*    
+
+android-build:
+  image: afirefly/android-ci:java17
+  stage: androidbuild
+  tags:
+   - android_tag
+  before_script:
+    - export GRADLE_USER_HOME=`pwd`/.gradle
+    - chmod +x ./Frontend/CyDropFrontend/gradlew
+  script:
+    - cd Frontend/CyDropFrontend  
+    - ./gradlew build
+  only:
+    refs:
+      - main
+    changes:
+      - Frontend/**/*
+
+android-test:
+  image: afirefly/android-ci:java17
+  stage: androidtest
+  tags:
+    - android_tag
+  before_script:                   # change 'Frontend' to where you have 'gradlew'
+    - export GRADLE_USER_HOME=`pwd`/.gradle
+    - chmod +x ./Frontend/CyDropFrontend/gradlew
+  script:
+    - cd Frontend/CyDropFrontend                  # change 'Frontend' to where you have 'gradlew' (do not add / in the beginning)
+    - ./gradlew test
+  only:
+    refs:
+      - main
+    changes:
+      - Frontend/**/*
 
