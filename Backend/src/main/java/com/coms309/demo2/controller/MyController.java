@@ -2,6 +2,7 @@ package com.coms309.demo2.controller;
 
 import com.coms309.demo2.entity.Pet;
 import com.coms309.demo2.repository.PetsRepo;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +29,7 @@ public class MyController {
      * Endpoint used for testing. Should not be used anymore
      * @return "The API works well"
      */
+    @Operation(summary = "testapi")
     @GetMapping("/mytestapi")
     public String testMyAPI() {
         return "The API works well";
@@ -38,6 +40,7 @@ public class MyController {
      * @param pet Pet
      * @return Pet
      */
+    @Operation(summary = "Creates a new Pet profile")
     @PostMapping("/pet")
     public ResponseEntity<Pet> savePet(@RequestBody Pet pet) {
 
@@ -73,6 +76,7 @@ public class MyController {
      * Get a list of all Pets
      * @return list of all Pets
      */
+    @Operation(summary = "Returns a list of all pets")
     @GetMapping("/pets")
     public List<Pet> getAllPets(){
         return petsRepo.findAll(); // Retrieve all pets from the repository
@@ -83,6 +87,7 @@ public class MyController {
      * @param id id of Pet
      * @return Pet
      */
+    @Operation(summary = "Gets pet information by ID")
     @GetMapping("/pet/{id}")
     public Pet getPetById(@PathVariable int id) {
         return petsRepo.findById(id).orElse(null); // Retrieve pet by ID
@@ -93,6 +98,7 @@ public class MyController {
      * @param id id of Pet
      * @return informative message with id
      */
+    @Operation(summary = "Deletes a Pet by ID")
     @DeleteMapping("/pet/{id}")
     public String deleteUser(@PathVariable int id) {
         if(petsRepo.existsById(id)) {
@@ -109,6 +115,7 @@ public class MyController {
      * @param id id of User
      * @return list of Pets a User has
      */
+    @Operation(summary = "Returns a list of Pets owner by a User ID ")
     @GetMapping("/user-pet/{id}")
     public List<Pet> getUserPetsByID(@PathVariable Long id) {
         // Retrieve pets belonging to the user with the given ID
@@ -119,6 +126,7 @@ public class MyController {
      * Deletes all Pets
      * @return "All pets deleted succesfully."
      */
+    @Operation(summary = "Deletes all Pets")
     @DeleteMapping("/pets")
     public String deleteAllPets() {
         petsRepo.deleteAll();
@@ -131,6 +139,7 @@ public class MyController {
      * @param petDetails the new Pet information
      * @return informative message with id
      */
+    @Operation(summary = "Update pet information by ID")
     @PutMapping("/pet/{id}")
     public String updatePet(@PathVariable int id, @RequestBody Pet petDetails) {
         return petsRepo.findById(id).map(pet -> {

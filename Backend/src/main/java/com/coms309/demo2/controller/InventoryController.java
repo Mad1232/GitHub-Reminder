@@ -1,5 +1,6 @@
 package com.coms309.demo2.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -36,6 +37,7 @@ public class InventoryController {
      * @param med new medication
      * @return medication that was created
      */
+    @Operation(summary = "Creates a new medication profile")
     @PostMapping("/inventory")
     public ResponseEntity<Medication> addNewMedication(@RequestBody Medication med) {
         List<Medication> allMeds = repository.findAll();
@@ -54,6 +56,7 @@ public class InventoryController {
      * @param med the new medication data
      * @return the new medication data
      */
+    @Operation(summary = "Update/Edit medication details")
     @PutMapping("/inventory/{id}")
     public Medication putMedication(@PathVariable Long id, @RequestBody Medication med) {
         Medication oldMed = repository.findById(id).get();
@@ -67,6 +70,7 @@ public class InventoryController {
      * Get all medications in the inventory and their data
      * @return list of medications in the inventory
      */
+    @Operation(summary = "Get all registered medications")
     @GetMapping("/inventory")
     public List<Medication> getAllMedications() {
         List<Medication> meds = repository.findAll();
@@ -78,6 +82,7 @@ public class InventoryController {
      * @param id id of medication
      * @return medication details
      */
+    @Operation(summary = "Get medication by ID")
     @GetMapping("/inventory/{id}")
     public Medication getMedication(@PathVariable Long id) {
         //screen based on type of user
@@ -90,6 +95,7 @@ public class InventoryController {
      * @param id id of medication
      * @return "ok"
      */
+    @Operation(summary = "Delete a medication by ID")
     @DeleteMapping("/inventory/{id}")
     public String removeMedication(@PathVariable Long id) {
         repository.deleteById(id);

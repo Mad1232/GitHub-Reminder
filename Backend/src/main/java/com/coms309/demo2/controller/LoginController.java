@@ -4,6 +4,7 @@ import com.coms309.demo2.entity.User;
 import com.coms309.demo2.entity.Vet;
 import com.coms309.demo2.repository.UserRepository;
 import com.coms309.demo2.repository.VetsRepo;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -30,6 +31,7 @@ public class LoginController {
      * @param loginRequest username and password (login data)
      * @return the view to display and the id
      */
+    @Operation(summary = "Authenticates the login request and shows appropriate user view")
     @PostMapping
     public String login(@RequestBody LoginRequest loginRequest) {
         // Retrieve user by email

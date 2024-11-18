@@ -4,6 +4,7 @@ import com.coms309.demo2.entity.Pet;
 import com.coms309.demo2.entity.Vet;
 import com.coms309.demo2.repository.PetsRepo;
 import com.coms309.demo2.repository.VetsRepo;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -34,6 +35,7 @@ public class PetVetAssignController {
      * @param vetId id of Vet
      * @return "Vet assigned to pet successfully."
      */
+    @Operation(summary = "Assign a Vet to a Pet")
     @PostMapping("/assign/{petId}/{vetId}")
     public ResponseEntity<String> assignVetToPet(
             @PathVariable int petId, @PathVariable int vetId) {
@@ -51,6 +53,7 @@ public class PetVetAssignController {
      * @param petId id of Pet
      * @return list of Pet's Vets
      */
+    @Operation(summary = "Return list of all Vets for a Pet")
     @GetMapping("/pets/{petId}/vets")
     public List<Vet> getVetsForPet(@PathVariable int petId) {
         Pet pet = petRepository.findById(petId).orElseThrow();
@@ -62,6 +65,7 @@ public class PetVetAssignController {
      * @param vetId id of Vet
      * @return list of Vet's Pets
      */
+    @Operation(summary = "Return a lis of Vet's assigned Pets")
     @GetMapping("/vets/{vetId}/pets")
     public List<Pet> getPetsForVet(@PathVariable int vetId) {
         Vet vet = vetRepository.findById(vetId).orElseThrow();
@@ -74,6 +78,7 @@ public class PetVetAssignController {
      * @param vetId id of Vet
      * @return "Vet removed from pet successfully."
      */
+    @Operation(summary = "Remove a Vet from a Pet")
     @DeleteMapping("/remove/{petId}/{vetId}")
     public ResponseEntity<String> removeVetFromPet(
             @PathVariable int petId, @PathVariable int vetId) {

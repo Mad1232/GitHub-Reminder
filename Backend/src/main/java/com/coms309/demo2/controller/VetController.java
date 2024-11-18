@@ -7,6 +7,7 @@ import com.coms309.demo2.repository.PetsRepo;
 import com.coms309.demo2.repository.UserRepository;
 import com.coms309.demo2.repository.VetsRepo;
 
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.Getter;
 
@@ -38,6 +39,7 @@ public class VetController {
      * Get all Vets
      * @return a list of all the Vets
      */
+    @Operation(summary = "Get all Vets", description = "Returns a list of all the vets")
     @GetMapping("/vets")
     public List<Vet> getAllVets() {
         return vetsRepo.findAll(); // Retrieve all vets from the repository
@@ -48,6 +50,7 @@ public class VetController {
      * @param id id of Vet
      * @return Vet
      */
+    @Operation(summary = "Get vet by ID", description = "Gets vet by ID")
     @GetMapping("/vet/{id}")
     public Vet getVetById(@PathVariable int id) {
         return vetsRepo.findById(id).orElse(null); // Retrieve vet by ID
@@ -58,6 +61,7 @@ public class VetController {
      * @param id id of Vet
      * @return informative message with id
      */
+    @Operation(summary = "Delete Vet by ID", description = "Delete vet by ID")
     @DeleteMapping("/vet/{id}")
     public String deleteUser(@PathVariable int id) {
         if (vetsRepo.existsById(id)) {
@@ -72,6 +76,7 @@ public class VetController {
      * Delete all Vets
      * @return "All Vets deleted succesfully."
      */
+    @Operation(summary = "Delete all vets", description = "Delete all vets")
     @DeleteMapping("/vets")
     public String deleteAllVets() {
         vetsRepo.deleteAll();
@@ -83,6 +88,7 @@ public class VetController {
      * @param vet new Vet details
      * @return vet
      */
+    @Operation(summary = "Create a new Vet profile", description = "Create a new vet")
     @PostMapping("/vet")
     public Vet saveVet(@RequestBody Vet vet) {
         return vetsRepo.save(vet); // Save the vet object to the repository
@@ -111,6 +117,7 @@ public class VetController {
      * @param customerID id or email of customer
      * @return customer
      */
+    @Operation(summary = "Create link between vet and customer")
     @PostMapping("/vets/{vetID}/customers")
     public User addCustomer(@PathVariable Integer vetID, @RequestBody CustomerID customerID) {
         Optional<Vet> vetOptional = vetsRepo.findById(vetID);
@@ -148,6 +155,7 @@ public class VetController {
      * @param customerID id of customer
      * @return Vet's new list of customers
      */
+    @Operation(summary = "Removes a link between vet and customer")
     @DeleteMapping("/vets/{vetID}/customers/{customerID}")
     public List<User> removeCustomer(@PathVariable Integer vetID, @PathVariable Long customerID) {
         Optional<Vet> vetOptional = vetsRepo.findById(vetID);

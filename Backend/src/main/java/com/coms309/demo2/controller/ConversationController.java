@@ -3,6 +3,7 @@ package com.coms309.demo2.controller;
 import java.util.List;
 import java.util.Optional;
 
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -42,6 +43,7 @@ public class ConversationController {
      * @param id user id
      * @return all conversations this user has had
      */
+    @Operation(summary = "Gets a list of prior conversations for a user")
     @GetMapping("/users/{id}/conversations")
     public List<Conversation> getAllConversationsUser(@PathVariable Long id) {
         Optional<User> userOptional = userRepository.findById(id);
@@ -60,6 +62,7 @@ public class ConversationController {
      * @param id vet id
      * @return all conversations this vet has had
      */
+    @Operation(summary = "Gets a list of prior conversations for a vet")
     @GetMapping("/vet/{id}/conversations")
     public List<Conversation> getAllConversationsVet(@PathVariable Integer id) {
         Optional<Vet> vetOptional = vetRepository.findById(id);
@@ -79,6 +82,7 @@ public class ConversationController {
      * @param idVet  id of the vet the user is chatting with
      * @return conversation
      */
+    @Operation(summary = "Get all messages for a conversation with a vet")
     @GetMapping("/users/{idUser}/conversations/{idVet}")
     public Conversation getAllMessagesUser(@PathVariable Long idUser, @PathVariable Integer idVet) {
 
@@ -108,6 +112,7 @@ public class ConversationController {
      * @param idUser id of the user the vet is chatting with
      * @return conversation
      */
+    @Operation(summary = "Gets all messages for a conversation with a user")
     @GetMapping("/vet/{idVet}/conversations/{idUser}")
     public Conversation getAllMessagesVet(@PathVariable Integer idVet, @PathVariable Long idUser) {
         Optional<Vet> vetOptional = vetRepository.findById(idVet);

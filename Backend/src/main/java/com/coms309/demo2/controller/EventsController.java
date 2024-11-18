@@ -2,6 +2,7 @@ package com.coms309.demo2.controller;
 
 import com.coms309.demo2.entity.Events;
 import com.coms309.demo2.repository.EventsRepository;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -27,6 +28,7 @@ public class EventsController {
      * @param event
      * @return the event that was created
      */
+    @Operation(summary = "Creates a new reminder for a user")
     @PostMapping
     public ResponseEntity<Events> addNewEvent(@RequestBody Events event) {
         event = eventsRepository.save(event);

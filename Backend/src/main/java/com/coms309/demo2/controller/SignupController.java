@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import com.coms309.demo2.entity.User;
 import com.coms309.demo2.repository.UserRepository;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -27,6 +28,7 @@ public class SignupController {
      * @param user  new User
      * @return new User
      */
+    @Operation(summary = "Creates a User", description = "allows creation of a user")
     @PostMapping("/signup")
     public User signup(@RequestBody User user) {
         // Find user by email to avoid loading all users into memory
@@ -43,6 +45,7 @@ public class SignupController {
      * @param id user id
      * @return user
      */
+    @Operation(summary = "Get user by ID", description = "Gets user by ID and handles case if user is not found")
     @GetMapping("/users/{id}")
     public User getUser(@PathVariable Long id) {
         /// <summary>My super duper data</summary>
@@ -61,6 +64,7 @@ public class SignupController {
      * Get all users, hiding their passwords
      * @return a list of all users with passwords obscured
      */
+    @Operation(summary = "Get all users", description = "Get all users, hiding their passwords and return a list of all users with passwords obscured")
     @GetMapping("/users")
     public List<User> getAllUsers() {
         List<User> users = repository.findAll();
@@ -91,6 +95,7 @@ public class SignupController {
      * @param id id of user
      * @return informative message
      */
+    @Operation(summary = "Delete user by ID", description = "Delete user by ID")
     @DeleteMapping("/users/{id}")
     public String removeUser(@PathVariable Long id) {
         if (repository.existsById(id)) {
@@ -101,6 +106,7 @@ public class SignupController {
         }
     }
 
+    @Operation(summary = "Delete all users", description = "Delete all users")
     @DeleteMapping("/users")
     public String removeUsers() {
       repository.deleteAll();
