@@ -5,26 +5,27 @@ stages:             # these stages (jobs) form the CICD pipeline
   - androidbuild    # this is a JOB to build your Android application
   - androidtest     # this is a JOB to run tests in your Android application (it's okay you don't have any tests for now)
 
-maven-build:            
-  stage: mavenbuild     
-  tags:                 
+maven-build:
+  stage: mavenbuild
+  tags:
     - backend_tag
   script:
-  - cd Backend
-  - export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
-  - export PATH=$JAVA_HOME/bin:$PATH
-  - java -version
-  - mvn -version
-  - mvn package
- 
-  artifacts:            
+    - cd Backend
+    - export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+    - export PATH=$JAVA_HOME/bin:$PATH
+    - echo $JAVA_HOME
+    - java -version
+    - mvn -version
+    - mvn package
+  artifacts:
     paths:
-      - Backend/target/*.jar 
+      - Backend/target/*.jar
   only:
     refs:
-      - main            
+      - main
     changes:
-      - Backend/**/*    
+      - Backend/**/*
+
 
 maven-test:             
   stage: maventest     
