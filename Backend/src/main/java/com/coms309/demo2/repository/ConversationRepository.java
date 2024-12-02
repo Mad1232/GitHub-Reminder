@@ -11,5 +11,7 @@ import java.util.List;
 
 public interface ConversationRepository extends JpaRepository<Conversation, ConversationKey> {
     List<Conversation> findByUser(User user);
+
+
     List<Conversation> findByVet(Vet vet);
 }
