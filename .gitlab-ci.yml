@@ -11,12 +11,8 @@ maven-build:
     - backend_tag
   script:
     - cd Backend
-    - export JAVA_HOME=$(/usr/libexec/java_home -v 17)  # Use macOS-specific command
+    - export JAVA_HOME=/usr/lib/jvm/jre-17-openjdk-17.0.11.0.9-2.el9.x86_64
     - export PATH=$JAVA_HOME/bin:$PATH
-    - ls -la $JAVA_HOME                                # Verify JAVA_HOME path
-    - java -version                                    # Check Java installation
-    - mvn -version                                     # Ensure Maven finds Java
-    - mvn package                                      # Build the application
   artifacts:
     paths:
       - Backend/target/*.jar
