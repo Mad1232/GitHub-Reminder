@@ -1,0 +1,269 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > MyController</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.coms309.demo2.controller</a>
+</div>
+
+<h1>Coverage Summary for Class: MyController (com.coms309.demo2.controller)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">MyController</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    40%
+  </span>
+  <span class="absValue">
+    (4/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    33.3%
+  </span>
+  <span class="absValue">
+    (2/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    34.8%
+  </span>
+  <span class="absValue">
+    (8/23)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.coms309.demo2.controller;
+&nbsp;
+&nbsp;import com.coms309.demo2.entity.Pet;
+&nbsp;import com.coms309.demo2.repository.PetsRepo;
+&nbsp;import io.swagger.v3.oas.annotations.Operation;
+&nbsp;import io.swagger.v3.oas.annotations.tags.Tag;
+&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+&nbsp;import org.springframework.http.ResponseEntity;
+&nbsp;import org.springframework.web.bind.annotation.*;
+&nbsp;import com.coms309.demo2.entity.Medication;
+&nbsp;import com.coms309.demo2.repository.MedicationRepository;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;
+&nbsp;/**
+&nbsp; * @author Fury Poudel and Madeleine Carydis
+&nbsp; * Creates and updates Pets
+&nbsp; */
+&nbsp;@RestController
+&nbsp;@Tag(name = &quot;Pet Controller&quot;, description = &quot;Handles pet-related operations and user-pet associations&quot;)
+<b class="fc">&nbsp;public class MyController {</b>
+&nbsp;    @Autowired
+&nbsp;    PetsRepo petsRepo;
+&nbsp;
+&nbsp;    @Autowired
+&nbsp;    MedicationRepository medicationRepo;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Endpoint used for testing. Should not be used anymore
+&nbsp;     * @return &quot;The API works well&quot;
+&nbsp;     */
+&nbsp;    @Operation(summary = &quot;testapi&quot;)
+&nbsp;    @GetMapping(&quot;/mytestapi&quot;)
+&nbsp;    public String testMyAPI() {
+<b class="nc">&nbsp;        return &quot;The API works well&quot;;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Create a Pet
+&nbsp;     * @param pet Pet
+&nbsp;     * @return Pet
+&nbsp;     */
+&nbsp;    @Operation(summary = &quot;Creates a new Pet profile&quot;)
+&nbsp;    @PostMapping(&quot;/pet&quot;)
+&nbsp;    public ResponseEntity&lt;Pet&gt; savePet(@RequestBody Pet pet) {
+&nbsp;
+&nbsp;        // Check if the Medication object is included
+<b class="pc">&nbsp;        if (pet.getMedication() != null &amp;&amp; pet.getMedication().getId() != null) {</b>
+&nbsp;            // Retrieve existing Medication by ID
+<b class="nc">&nbsp;            Medication medication = medicationRepo.findById(pet.getMedication().getId())</b>
+<b class="nc">&nbsp;                    .orElseThrow(() -&gt; new RuntimeException(&quot;Medication not found&quot;));</b>
+&nbsp;
+&nbsp;            // Set the retrieved Medication object in the Pet entity
+<b class="nc">&nbsp;            pet.setMedication(medication);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // Save the pet object
+<b class="fc">&nbsp;        Pet savedPet = petsRepo.save(pet);</b>
+&nbsp;
+&nbsp;        // Return a ResponseEntity with the saved pet and 200 OK status
+<b class="fc">&nbsp;        return ResponseEntity.ok(savedPet);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;//    @PostMapping(&quot;/pets&quot;)
+&nbsp;//    public ResponseEntity&lt;Pet&gt; addPet(@RequestBody Pet petRequest) {
+&nbsp;//        Medication medication = MedicationRepository.findById(petRequest.getMedication().getMedicationId())
+&nbsp;//                .orElseThrow(() -&gt; new RuntimeException(&quot;Medication not found&quot;));
+&nbsp;//
+&nbsp;//        petRequest.setMedication(medication);
+&nbsp;//        Pet savedPet = PetsRepo.save(petRequest);
+&nbsp;//
+&nbsp;//        return ResponseEntity.ok(savedPet);
+&nbsp;//    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get a list of all Pets
+&nbsp;     * @return list of all Pets
+&nbsp;     */
+&nbsp;    @Operation(summary = &quot;Returns a list of all pets&quot;)
+&nbsp;    @GetMapping(&quot;/pets&quot;)
+&nbsp;    public List&lt;Pet&gt; getAllPets(){
+<b class="fc">&nbsp;        return petsRepo.findAll(); // Retrieve all pets from the repository</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get Pet by id
+&nbsp;     * @param id id of Pet
+&nbsp;     * @return Pet
+&nbsp;     */
+&nbsp;    @Operation(summary = &quot;Gets pet information by ID&quot;)
+&nbsp;    @GetMapping(&quot;/pet/{id}&quot;)
+&nbsp;    public Pet getPetById(@PathVariable int id) {
+<b class="nc">&nbsp;        return petsRepo.findById(id).orElse(null); // Retrieve pet by ID</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Delete Pet by id
+&nbsp;     * @param id id of Pet
+&nbsp;     * @return informative message with id
+&nbsp;     */
+&nbsp;    @Operation(summary = &quot;Deletes a Pet by ID&quot;)
+&nbsp;    @DeleteMapping(&quot;/pet/{id}&quot;)
+&nbsp;    public String deleteUser(@PathVariable int id) {
+<b class="pc">&nbsp;        if(petsRepo.existsById(id)) {</b>
+<b class="fc">&nbsp;            petsRepo.deleteById(id);</b>
+<b class="fc">&nbsp;            return &quot;Pet with ID &quot; + id + &quot;deleted succesfully.&quot;;</b>
+&nbsp;        }
+&nbsp;        else{
+<b class="nc">&nbsp;            return &quot;Pet with ID &quot; + id + &quot;does not exist.&quot;;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Get all Pets of a user
+&nbsp;     * @param id id of User
+&nbsp;     * @return list of Pets a User has
+&nbsp;     */
+&nbsp;    @Operation(summary = &quot;Returns a list of Pets owner by a User ID &quot;)
+&nbsp;    @GetMapping(&quot;/user-pet/{id}&quot;)
+&nbsp;    public List&lt;Pet&gt; getUserPetsByID(@PathVariable Long id) {
+&nbsp;        // Retrieve pets belonging to the user with the given ID
+<b class="nc">&nbsp;        return petsRepo.findByOwner_Id(id);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Deletes all Pets
+&nbsp;     * @return &quot;All pets deleted succesfully.&quot;
+&nbsp;     */
+&nbsp;    @Operation(summary = &quot;Deletes all Pets&quot;)
+&nbsp;    @DeleteMapping(&quot;/pets&quot;)
+&nbsp;    public String deleteAllPets() {
+<b class="nc">&nbsp;        petsRepo.deleteAll();</b>
+<b class="nc">&nbsp;        return &quot;All pets deleted succesfully.&quot;;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Update a Pet by id
+&nbsp;     * @param id id of Pet
+&nbsp;     * @param petDetails the new Pet information
+&nbsp;     * @return informative message with id
+&nbsp;     */
+&nbsp;    @Operation(summary = &quot;Update pet information by ID&quot;)
+&nbsp;    @PutMapping(&quot;/pet/{id}&quot;)
+&nbsp;    public String updatePet(@PathVariable int id, @RequestBody Pet petDetails) {
+<b class="nc">&nbsp;        return petsRepo.findById(id).map(pet -&gt; {</b>
+&nbsp;            //updates only name &amp; type for now, as only two lines of code for those
+<b class="nc">&nbsp;            pet.setPet_name(petDetails.getPet_name());</b>
+<b class="nc">&nbsp;            pet.setPet_type(petDetails.getPet_type());</b>
+<b class="nc">&nbsp;            petsRepo.save(pet);</b>
+<b class="nc">&nbsp;            return &quot;Pet with ID &quot; + id + &quot; updated successfully.&quot;;</b>
+<b class="nc">&nbsp;        }).orElse(&quot;Pet with ID &quot; + id + &quot; not found.&quot;);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-12-02 14:35</div>
+</div>
+</body>
+</html>

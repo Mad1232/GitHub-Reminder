@@ -1,0 +1,259 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ConversationUserSide</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.coms309.demo2.websocket</a>
+</div>
+
+<h1>Coverage Summary for Class: ConversationUserSide (com.coms309.demo2.websocket)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ConversationUserSide</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    30%
+  </span>
+  <span class="absValue">
+    (3/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/18)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    15.4%
+  </span>
+  <span class="absValue">
+    (8/52)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.coms309.demo2.websocket;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.util.Hashtable;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Map;
+&nbsp;import java.util.Optional;
+&nbsp;
+&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+&nbsp;import org.springframework.stereotype.Controller;
+&nbsp;import org.springframework.web.bind.annotation.PathVariable;
+&nbsp;
+&nbsp;import com.coms309.demo2.entity.Conversation;
+&nbsp;import com.coms309.demo2.entity.ConversationKey;
+&nbsp;import com.coms309.demo2.entity.Message;
+&nbsp;import com.coms309.demo2.entity.User;
+&nbsp;import com.coms309.demo2.entity.Vet;
+&nbsp;import com.coms309.demo2.repository.ConversationRepository;
+&nbsp;import com.coms309.demo2.repository.MessageRepository;
+&nbsp;import com.coms309.demo2.repository.UserRepository;
+&nbsp;import com.coms309.demo2.repository.VetsRepo;
+&nbsp;
+&nbsp;import jakarta.websocket.OnClose;
+&nbsp;import jakarta.websocket.OnError;
+&nbsp;import jakarta.websocket.OnMessage;
+&nbsp;import jakarta.websocket.OnOpen;
+&nbsp;import jakarta.websocket.Session;
+&nbsp;import jakarta.websocket.server.PathParam;
+&nbsp;import jakarta.websocket.server.ServerEndpoint;
+&nbsp;import lombok.NonNull;
+&nbsp;
+&nbsp;@ServerEndpoint(&quot;/users/{userid}/conversations/{vetid}&quot;)
+&nbsp;@Controller
+<b class="fc">&nbsp;public class ConversationUserSide {</b>
+&nbsp;    private static MessageRepository messageRepository;
+&nbsp;    private static ConversationRepository conversationRepository;
+&nbsp;    private static UserRepository userRepository;
+&nbsp;    private static VetsRepo vetRepository;
+&nbsp;
+<b class="fc">&nbsp;    private static Map&lt;Session, ConversationKey&gt; mySessionToConvo = new Hashtable&lt;&gt;();</b>
+<b class="fc">&nbsp;    private static Map&lt;ConversationKey, Session&gt; convoToMySession = new Hashtable&lt;&gt;();</b>
+<b class="fc">&nbsp;    private static Map&lt;ConversationKey, Session&gt; convoToTheirSession = new Hashtable&lt;&gt;();</b>
+&nbsp;
+<b class="nc">&nbsp;    public static Optional&lt;Session&gt; link(@NonNull Session theirSession, @NonNull ConversationKey key) {</b>
+<b class="nc">&nbsp;        Session mySession = convoToMySession.get(key);</b>
+<b class="nc">&nbsp;        if (mySession != null) {</b>
+<b class="nc">&nbsp;            convoToTheirSession.put(key, theirSession);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return Optional.ofNullable(mySession);</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    public static void unlink(@NonNull ConversationKey key) {</b>
+<b class="nc">&nbsp;        convoToTheirSession.remove(key);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Autowired
+&nbsp;    public void setUpRepositories(MessageRepository messageRepository, ConversationRepository conversationRepository,
+&nbsp;            VetsRepo vetRepository, UserRepository userRepository) {
+<b class="fc">&nbsp;        ConversationUserSide.messageRepository = messageRepository;</b>
+<b class="fc">&nbsp;        ConversationUserSide.conversationRepository = conversationRepository;</b>
+<b class="fc">&nbsp;        ConversationUserSide.userRepository = userRepository;</b>
+<b class="fc">&nbsp;        ConversationUserSide.vetRepository = vetRepository;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @OnOpen
+&nbsp;    public void onOpen(Session mySession, @PathParam(&quot;userid&quot;) Long userid, @PathParam(&quot;vetid&quot;) Integer vetid) {
+<b class="nc">&nbsp;        User user = userRepository.findById(userid).get();</b>
+<b class="nc">&nbsp;        Vet vet = vetRepository.findById(vetid).get();</b>
+<b class="nc">&nbsp;        ConversationKey key = new ConversationKey(user, vet);</b>
+&nbsp;
+<b class="nc">&nbsp;        mySessionToConvo.put(mySession, key);</b>
+<b class="nc">&nbsp;        convoToMySession.put(key, mySession);</b>
+&nbsp;
+&nbsp;        // 1. Check for existing conversation in database
+<b class="nc">&nbsp;        Optional&lt;Conversation&gt; conversationOpt = conversationRepository.findById(key);</b>
+&nbsp;        Conversation conversation;
+<b class="nc">&nbsp;        if (conversationOpt.isPresent()) {</b>
+<b class="nc">&nbsp;            conversation = conversationOpt.get();</b>
+&nbsp;        } else {
+&nbsp;            // 1a. Create if it doesn&#39;t exist
+<b class="nc">&nbsp;            Conversation c = new Conversation(key);</b>
+<b class="nc">&nbsp;            user.getConversations().add(c);</b>
+<b class="nc">&nbsp;            vet.getConversations().add(c);</b>
+<b class="nc">&nbsp;            conversation = conversationRepository.save(c);</b>
+&nbsp;        }
+&nbsp;        // 2. Use the conversation key to check with vet side to find an ongoing
+&nbsp;        // conversation
+&nbsp;        // 2a. Call a function, make link (give it session and convo key)
+<b class="nc">&nbsp;        Optional&lt;Session&gt; theirSessionOpt = ConversationVetSide.link(mySession, key);</b>
+&nbsp;        // 3. Make a map to store link between our session and the conversation key
+<b class="nc">&nbsp;        if (theirSessionOpt.isPresent()) {</b>
+<b class="nc">&nbsp;            Session theirSession = theirSessionOpt.get();</b>
+<b class="nc">&nbsp;            convoToTheirSession.put(key, theirSession);</b>
+&nbsp;        }
+&nbsp;        // 4. Send all messages in the conversation
+<b class="nc">&nbsp;        List&lt;Message&gt; messages = messageRepository.findByConversation(conversation);</b>
+<b class="nc">&nbsp;        for (Message m : messages) {</b>
+<b class="nc">&nbsp;            sendToSession(mySession, m);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @OnMessage
+&nbsp;    public void onMessage(Session session, String message) throws IOException {
+&nbsp;        // 1. Save message to repository
+<b class="nc">&nbsp;        Long curTime = System.currentTimeMillis();</b>
+<b class="nc">&nbsp;        ConversationKey key = mySessionToConvo.get(session);</b>
+<b class="nc">&nbsp;        Conversation conversation = conversationRepository.findById(key).get();</b>
+<b class="nc">&nbsp;        Message newMessage = new Message(message, curTime, false, conversation);</b>
+<b class="nc">&nbsp;        messageRepository.save(newMessage);</b>
+&nbsp;        // 2. Relay the message to their side
+<b class="nc">&nbsp;        Session theirSession = convoToTheirSession.get(key);</b>
+<b class="nc">&nbsp;        if (theirSession != null) {</b>
+<b class="nc">&nbsp;            sendToSession(theirSession, newMessage);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @OnClose
+&nbsp;    public void onClose(Session session) throws IOException {
+<b class="nc">&nbsp;        ConversationKey key = mySessionToConvo.get(session);</b>
+&nbsp;        // 1. Tell vet side we are closing session
+<b class="nc">&nbsp;        ConversationVetSide.unlink(key);</b>
+&nbsp;        // 2. Remove session from map
+<b class="nc">&nbsp;        mySessionToConvo.remove(session);</b>
+<b class="nc">&nbsp;        convoToMySession.remove(key);</b>
+<b class="nc">&nbsp;        convoToTheirSession.remove(key);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @OnError
+&nbsp;    public void onError(Session session, Throwable throwable) {
+&nbsp;        // Something went wrong! Print the error
+<b class="nc">&nbsp;        throwable.printStackTrace();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void sendToSession(Session session, Message message) {
+&nbsp;        try {
+<b class="nc">&nbsp;            session.getBasicRemote().sendText(</b>
+<b class="nc">&nbsp;                    message.getTime() + &quot; &quot; + (message.isVetOrUser() ? &quot;vet&quot; : &quot;user&quot;) + &quot; &quot; + message.getContent());</b>
+<b class="nc">&nbsp;        } catch (IOException e) {</b>
+<b class="nc">&nbsp;            System.out.println(&quot;IO Exception&quot;);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-12-02 14:35</div>
+</div>
+</body>
+</html>
