@@ -1,0 +1,183 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > LoginController</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.coms309.demo2.controller</a>
+</div>
+
+<h1>Coverage Summary for Class: LoginController (com.coms309.demo2.controller)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">LoginController</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (4/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    69.2%
+  </span>
+  <span class="absValue">
+    (9/13)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.coms309.demo2.controller;
+&nbsp;
+&nbsp;import com.coms309.demo2.entity.User;
+&nbsp;import com.coms309.demo2.entity.Vet;
+&nbsp;import com.coms309.demo2.repository.UserRepository;
+&nbsp;import com.coms309.demo2.repository.VetsRepo;
+&nbsp;import io.swagger.v3.oas.annotations.Operation;
+&nbsp;import io.swagger.v3.oas.annotations.tags.Tag;
+&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+&nbsp;import org.springframework.web.bind.annotation.*;
+&nbsp;
+&nbsp;import java.util.Optional;
+&nbsp;
+&nbsp;/**
+&nbsp; * @author Fury Poudel and Madeleine Carydis
+&nbsp; * Authenticates a log on request from a user
+&nbsp; */
+&nbsp;@RestController
+&nbsp;@Tag(name = &quot;Login Controller&quot;, description = &quot;Handles user authentication and login operations&quot;)
+&nbsp;@RequestMapping(&quot;/login&quot;)
+<b class="fc">&nbsp;public class LoginController {</b>
+&nbsp;
+&nbsp;    @Autowired
+&nbsp;    private UserRepository userRepository;
+&nbsp;
+&nbsp;    @Autowired
+&nbsp;    private VetsRepo vetsRepo;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Authenticates a login request and logs them in
+&nbsp;     * @param loginRequest username and password (login data)
+&nbsp;     * @return the view to display and the id
+&nbsp;     */
+&nbsp;    @Operation(summary = &quot;Authenticates the login request and shows appropriate user view&quot;)
+&nbsp;    @PostMapping
+&nbsp;    public String login(@RequestBody LoginRequest loginRequest) {
+&nbsp;        // Retrieve user by email
+<b class="fc">&nbsp;        Optional&lt;User&gt; userOptional = userRepository.findByEmail(loginRequest.getEmail());</b>
+&nbsp;
+<b class="pc">&nbsp;        if (userOptional.isPresent()) {</b>
+<b class="fc">&nbsp;            User user = userOptional.get();</b>
+&nbsp;
+&nbsp;            // Check if the password matches
+<b class="pc">&nbsp;            if (user.getPassword().equals(loginRequest.getPassword())) {</b>
+&nbsp;
+&nbsp;                // Check if the user is an Admin
+<b class="pc">&nbsp;                if (loginRequest.getEmail().startsWith(&quot;admin&quot;)) {</b>
+<b class="nc">&nbsp;                    return &quot;admin_view&quot; + &quot;,&quot; + user.getId();  // Admin View</b>
+&nbsp;                }
+&nbsp;
+&nbsp;                // Check if the user is a Vet
+<b class="fc">&nbsp;                Optional&lt;Vet&gt; vetOptional = vetsRepo.findByVetEmail(user.getEmail()); // Update method call</b>
+<b class="pc">&nbsp;                if (vetOptional.isPresent()) {</b>
+<b class="nc">&nbsp;                    return &quot;vet_view&quot; + &quot;,&quot; + user.getId();  // Vet View</b>
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                return &quot;client_view&quot; + &quot;,&quot; + user.getId();  // Client View (default for non-vets, non-admins)</b>
+&nbsp;
+&nbsp;            } else {
+<b class="nc">&nbsp;                return &quot;Username or password is incorrect&quot;;</b>
+&nbsp;            }
+&nbsp;
+&nbsp;        } else {
+<b class="nc">&nbsp;            return &quot;User not found&quot;;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-12-02 14:35</div>
+</div>
+</body>
+</html>

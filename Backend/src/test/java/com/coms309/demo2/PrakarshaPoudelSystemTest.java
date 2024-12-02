@@ -114,13 +114,13 @@ public class PrakarshaPoudelSystemTest {
         // Delete a pet by ID
         Response response = RestAssured.given()
                 .when()
-                .delete("/pet/16"); //delete id that is previously(already added pet, not recently added one)
+                .delete("/pet/18"); //delete id that is previously(already added pet, not recently added one)
         // Check status code
         assertEquals(200, response.getStatusCode());
 
         // Check response body
         String responseString = response.getBody().asString();
         // update this accordingly
-        assertEquals("Pet with ID 16deleted succesfully.", responseString);
+        assertEquals("Pet with ID 18deleted succesfully.", responseString);
     }
 }
