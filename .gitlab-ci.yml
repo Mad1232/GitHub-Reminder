@@ -9,13 +9,14 @@ maven-build:
   stage: mavenbuild     
   tags:                 
     - backend_tag
-  script:               
-    - cd Backend
-    - export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64  # Set path to JDK
-    - export PATH=$JAVA_HOME/bin:$PATH
-    - java -version  # Verify Java is configured correctly
-    - mvn -version    # Verify Maven can find Java
-    - mvn package       
+  script:
+  - cd Backend
+  - export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+  - export PATH=$JAVA_HOME/bin:$PATH
+  - java -version
+  - mvn -version
+  - mvn package
+ 
   artifacts:            
     paths:
       - Backend/target/*.jar 
