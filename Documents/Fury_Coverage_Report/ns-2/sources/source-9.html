@@ -1,0 +1,330 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > VetController</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.coms309.demo2.controller</a>
+</div>
+
+<h1>Coverage Summary for Class: VetController (com.coms309.demo2.controller)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">VetController</td>
+<td class="coverageStat">
+  <span class="percent">
+    12.5%
+  </span>
+  <span class="absValue">
+    (1/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/16)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    2.6%
+  </span>
+  <span class="absValue">
+    (1/39)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">VetController$CustomerID</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    9.1%
+  </span>
+  <span class="absValue">
+    (1/11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/16)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    2.4%
+  </span>
+  <span class="absValue">
+    (1/42)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.coms309.demo2.controller;
+&nbsp;
+&nbsp;import com.coms309.demo2.entity.Pet;
+&nbsp;import com.coms309.demo2.entity.User;
+&nbsp;import com.coms309.demo2.entity.Vet;
+&nbsp;import com.coms309.demo2.repository.PetsRepo;
+&nbsp;import com.coms309.demo2.repository.UserRepository;
+&nbsp;import com.coms309.demo2.repository.VetsRepo;
+&nbsp;
+&nbsp;import io.swagger.v3.oas.annotations.Operation;
+&nbsp;import io.swagger.v3.oas.annotations.tags.Tag;
+&nbsp;import lombok.Getter;
+&nbsp;
+&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+&nbsp;import org.springframework.web.bind.annotation.*;
+&nbsp;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Optional;
+&nbsp;
+&nbsp;import org.springframework.web.bind.annotation.PostMapping;
+&nbsp;import org.springframework.web.bind.annotation.RequestBody;
+&nbsp;
+&nbsp;/**
+&nbsp; * @author Fury Poudel and Madeleine Carydis
+&nbsp; * Creates and updates a vet and allows the vet to link themself to customers
+&nbsp; */
+&nbsp;@RestController
+&nbsp;@Tag(name = &quot;Vet Controller&quot;, description = &quot;Manages veterinarians and their customer assignments&quot;)
+<b class="fc">&nbsp;public class VetController {</b>
+&nbsp;    @Autowired
+&nbsp;    private VetsRepo vetsRepo;
+&nbsp;
+&nbsp;    @Autowired
+&nbsp;    private UserRepository userRepository;
+&nbsp;
+&nbsp;    // Change the return type and method name to reflect that this method retrieves
+&nbsp;    // Vets
+&nbsp;    /**
+&nbsp;     * Get all Vets
+&nbsp;     * @return a list of all the Vets
+&nbsp;     */
+&nbsp;    @Operation(summary = &quot;Get all Vets&quot;, description = &quot;Returns a list of all the vets&quot;)
+&nbsp;    @GetMapping(&quot;/vets&quot;)
+&nbsp;    public List&lt;Vet&gt; getAllVets() {
+<b class="nc">&nbsp;        return vetsRepo.findAll(); // Retrieve all vets from the repository</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get a vet by ID
+&nbsp;     * @param id id of Vet
+&nbsp;     * @return Vet
+&nbsp;     */
+&nbsp;    @Operation(summary = &quot;Get vet by ID&quot;, description = &quot;Gets vet by ID&quot;)
+&nbsp;    @GetMapping(&quot;/vet/{id}&quot;)
+&nbsp;    public Vet getVetById(@PathVariable int id) {
+<b class="nc">&nbsp;        return vetsRepo.findById(id).orElse(null); // Retrieve vet by ID</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Delete Vet by id
+&nbsp;     * @param id id of Vet
+&nbsp;     * @return informative message with id
+&nbsp;     */
+&nbsp;    @Operation(summary = &quot;Delete Vet by ID&quot;, description = &quot;Delete vet by ID&quot;)
+&nbsp;    @DeleteMapping(&quot;/vet/{id}&quot;)
+&nbsp;    public String deleteUser(@PathVariable int id) {
+<b class="nc">&nbsp;        if (vetsRepo.existsById(id)) {</b>
+<b class="nc">&nbsp;            vetsRepo.deleteById(id);</b>
+<b class="nc">&nbsp;            return &quot;Vet with ID &quot; + id + &quot;deleted succesfully.&quot;;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            return &quot;Vet with ID &quot; + id + &quot;does not exist.&quot;;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Delete all Vets
+&nbsp;     * @return &quot;All Vets deleted succesfully.&quot;
+&nbsp;     */
+&nbsp;    @Operation(summary = &quot;Delete all vets&quot;, description = &quot;Delete all vets&quot;)
+&nbsp;    @DeleteMapping(&quot;/vets&quot;)
+&nbsp;    public String deleteAllVets() {
+<b class="nc">&nbsp;        vetsRepo.deleteAll();</b>
+<b class="nc">&nbsp;        return &quot;All Vets deleted succesfully.&quot;;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Create a Vet
+&nbsp;     * @param vet new Vet details
+&nbsp;     * @return vet
+&nbsp;     */
+&nbsp;    @Operation(summary = &quot;Create a new Vet profile&quot;, description = &quot;Create a new vet&quot;)
+&nbsp;    @PostMapping(&quot;/vet&quot;)
+&nbsp;    public Vet saveVet(@RequestBody Vet vet) {
+<b class="nc">&nbsp;        return vetsRepo.save(vet); // Save the vet object to the repository</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Customer with id or email
+&nbsp;     */
+<b class="nc">&nbsp;    public static class CustomerID {</b>
+<b class="nc">&nbsp;        @Getter</b>
+&nbsp;        private Long id;
+&nbsp;        
+<b class="nc">&nbsp;        @Getter</b>
+&nbsp;        private String email;
+&nbsp;    }
+&nbsp;
+&nbsp;    /** 
+&nbsp;     * Create link between vet and customer
+&nbsp;     * Valid bodies:
+&nbsp;     * &lt;ul&gt;
+&nbsp;     *   &lt;li&gt; { &quot;id&quot;: 7 }
+&nbsp;     *   &lt;li&gt; { &quot;email&quot;: &quot;foo@bar.baz&quot; }
+&nbsp;     * &lt;/ul&gt;
+&nbsp;     * 
+&nbsp;     * @param vetID id of vet
+&nbsp;     * @param customerID id or email of customer
+&nbsp;     * @return customer
+&nbsp;     */
+&nbsp;    @Operation(summary = &quot;Create link between vet and customer&quot;)
+&nbsp;    @PostMapping(&quot;/vets/{vetID}/customers&quot;)
+&nbsp;    public User addCustomer(@PathVariable Integer vetID, @RequestBody CustomerID customerID) {
+<b class="nc">&nbsp;        Optional&lt;Vet&gt; vetOptional = vetsRepo.findById(vetID);</b>
+<b class="nc">&nbsp;        if (!vetOptional.isPresent()) {</b>
+<b class="nc">&nbsp;            throw new RuntimeException(&quot;Vet does not exist&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        Vet vet = vetOptional.get();</b>
+&nbsp;
+&nbsp;        Optional&lt;User&gt; customerOptional;
+<b class="nc">&nbsp;        if (customerID.id != null) {</b>
+<b class="nc">&nbsp;            customerOptional = userRepository.findById(customerID.id);</b>
+<b class="nc">&nbsp;        } else if (customerID.email != null) {</b>
+<b class="nc">&nbsp;            customerOptional = userRepository.findByEmail(customerID.email);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            throw new RuntimeException(&quot;Invalid body&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (!customerOptional.isPresent()) {</b>
+<b class="nc">&nbsp;            throw new RuntimeException(&quot;User does not exist&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        User customer = customerOptional.get();</b>
+&nbsp;
+<b class="nc">&nbsp;        List&lt;User&gt; customers = vet.getCustomers();</b>
+<b class="nc">&nbsp;        if (!customers.contains(customer)) { // If it does, exit early; list already contains selected user</b>
+<b class="nc">&nbsp;            customers.add(customer);</b>
+<b class="nc">&nbsp;            vetsRepo.save(vet);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return customer;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Remove link between vet and customer
+&nbsp;     * @param vetID id of vet 
+&nbsp;     * @param customerID id of customer
+&nbsp;     * @return Vet&#39;s new list of customers
+&nbsp;     */
+&nbsp;    @Operation(summary = &quot;Removes a link between vet and customer&quot;)
+&nbsp;    @DeleteMapping(&quot;/vets/{vetID}/customers/{customerID}&quot;)
+&nbsp;    public List&lt;User&gt; removeCustomer(@PathVariable Integer vetID, @PathVariable Long customerID) {
+<b class="nc">&nbsp;        Optional&lt;Vet&gt; vetOptional = vetsRepo.findById(vetID);</b>
+<b class="nc">&nbsp;        if (!vetOptional.isPresent()) {</b>
+<b class="nc">&nbsp;            throw new RuntimeException(&quot;Vet does not exist&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        Vet vet = vetOptional.get();</b>
+&nbsp;
+<b class="nc">&nbsp;        Optional&lt;User&gt; customerOptional = userRepository.findById(customerID);</b>
+<b class="nc">&nbsp;        if (!customerOptional.isPresent()) {</b>
+<b class="nc">&nbsp;            throw new RuntimeException(&quot;User does not exist&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        User customer = customerOptional.get();</b>
+&nbsp;
+<b class="nc">&nbsp;        List&lt;User&gt; customers = vet.getCustomers();</b>
+<b class="nc">&nbsp;        customers.remove(customer);</b>
+&nbsp;        
+<b class="nc">&nbsp;        vetsRepo.save(vet);</b>
+&nbsp;
+<b class="nc">&nbsp;        return customers;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-12-02 14:35</div>
+</div>
+</body>
+</html>
