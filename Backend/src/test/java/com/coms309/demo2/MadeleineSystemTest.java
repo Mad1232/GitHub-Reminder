@@ -39,10 +39,7 @@ public class MadeleineSystemTest {
         String newMedTest = """
                     {
                         "name": "medName",
-                        "stock": "20",
-                        "pet": {
-                            "pet_id": 5
-                        }
+                        "stock": "20"
                     }
                 """;
 
@@ -60,7 +57,7 @@ public class MadeleineSystemTest {
             JSONObject jsonResponse = new JSONObject(response.getBody().asString());
             medicationID = jsonResponse.getInt("id");
             assertEquals("medName", jsonResponse.get("name"));
-            assertEquals("20", jsonResponse.get("stock"));
+            assertEquals(20, jsonResponse.get("stock"));
         } catch (JSONException e) {
             e.printStackTrace();
             fail("Response parsing failed.");
@@ -73,14 +70,14 @@ public class MadeleineSystemTest {
         // Delete a medication
         Response response = RestAssured.given()
                 .when()
-                .delete("/medication/" + medicationID);
+                .delete("/inventory/" + medicationID);
         // Check status code
         assertEquals(200, response.getStatusCode());
 
         // Check response body
         String responseString = response.getBody().asString();
         // update this accordingly
-        assertEquals("Medication with ID " + medicationID + " deleted succesfully.", responseString);
+        assertEquals("Ok", responseString);
     }
 
     @Test
@@ -133,6 +130,6 @@ public class MadeleineSystemTest {
         // Check response body
         String responseString = response.getBody().asString();
         // update this accordingly
-        assertEquals("User with ID " + userID + " deleted succesfully.", responseString);
+        assertEquals("OK", responseString);
     }
 }
