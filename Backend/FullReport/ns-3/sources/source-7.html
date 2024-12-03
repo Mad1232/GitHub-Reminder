@@ -1,0 +1,265 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Pet</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.coms309.demo2.entity</a>
+</div>
+
+<h1>Coverage Summary for Class: Pet (com.coms309.demo2.entity)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Pet</td>
+<td class="coverageStat">
+  <span class="percent">
+    76.2%
+  </span>
+  <span class="absValue">
+    (16/21)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    76.2%
+  </span>
+  <span class="absValue">
+    (16/21)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">Pet$HibernateInstantiator$awioZPrp</td>
+  </tr>
+  <tr>
+    <td class="name">Pet$HibernateProxy$8Y9VU58g</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    76.2%
+  </span>
+  <span class="absValue">
+    (16/21)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    76.2%
+  </span>
+  <span class="absValue">
+    (16/21)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.coms309.demo2.entity;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.annotation.JsonBackReference;
+&nbsp;import jakarta.persistence.*;
+&nbsp;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;@Entity
+&nbsp;@Table(name = &quot;Pet&quot;)
+<b class="fc">&nbsp;public class Pet {</b>
+&nbsp;
+&nbsp;    @Id
+&nbsp;    @GeneratedValue(strategy = GenerationType.IDENTITY) //had to do this to make it work
+&nbsp;    @Column(name = &quot;pet_id&quot;)
+&nbsp;    private int pet_id;
+&nbsp;
+&nbsp;    @Column(name = &quot;pet_name&quot;)
+&nbsp;    private String pet_name;
+&nbsp;
+&nbsp;    @Column(name = &quot;pet_type&quot;)
+&nbsp;    private String pet_type;
+&nbsp;
+&nbsp;    @Column(name = &quot;pet_breed&quot;)
+&nbsp;    private String pet_breed;
+&nbsp;
+&nbsp;    @Column(name = &quot;pet_diagnosis&quot;)
+&nbsp;    private String pet_diagnosis;
+&nbsp;
+&nbsp;    @Column(name = &quot;pet_age&quot;)
+&nbsp;    private Integer pet_age;
+&nbsp;
+&nbsp;    @Column(name = &quot;pet_gender&quot;)
+&nbsp;    private String pet_gender;
+&nbsp;
+&nbsp;//    @Column(name = &quot;vet_recommendation&quot; , nullable = true)
+&nbsp;//    private String vet_recommendation;
+&nbsp;
+&nbsp;    // Many-to-one relationship to User (owner)
+&nbsp;    @ManyToOne
+&nbsp;    @JsonBackReference(&quot;pet-owner&quot;)
+&nbsp;    @JoinColumn(name = &quot;owner_id&quot;, nullable = false)
+&nbsp;    private User owner;
+&nbsp;
+&nbsp;    //One-to-One relationship to Medications(medicine)
+&nbsp;    @JsonBackReference(&quot;medication-pet&quot;)
+&nbsp;    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+&nbsp;    @JoinColumn(name = &quot;medication_id&quot;, referencedColumnName = &quot;id&quot;, nullable = true)
+&nbsp;    private Medication medication;
+&nbsp;
+&nbsp;    // Many-to-Many with Vet
+&nbsp;    @JsonBackReference(&quot;vet-pet&quot;)
+&nbsp;    @ManyToMany
+&nbsp;    @JoinTable(
+&nbsp;            name = &quot;pet_vet&quot;,
+&nbsp;            joinColumns = @JoinColumn(name = &quot;pet_id&quot;),
+&nbsp;            inverseJoinColumns = @JoinColumn(name = &quot;vet_id&quot;)
+&nbsp;    )
+&nbsp;    private List&lt;Vet&gt; veterinarians;
+&nbsp;
+&nbsp;    // Getters and setters
+&nbsp;    public int getPet_id() {
+<b class="fc">&nbsp;        return pet_id;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setPet_id(int pet_id) {
+<b class="nc">&nbsp;        this.pet_id = pet_id;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getPet_name() {
+<b class="fc">&nbsp;        return pet_name;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setPet_name(String pet_name) {
+<b class="fc">&nbsp;        this.pet_name = pet_name;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getPet_type() {
+<b class="fc">&nbsp;        return pet_type;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setPet_type(String pet_type) {
+<b class="fc">&nbsp;        this.pet_type = pet_type;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getPet_breed() {
+<b class="fc">&nbsp;        return pet_breed;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setPet_breed(String pet_breed) {
+<b class="fc">&nbsp;        this.pet_breed = pet_breed;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getPet_diagnosis() {
+<b class="fc">&nbsp;        return pet_diagnosis;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setPet_diagnosis(String pet_diagnosis) {
+<b class="fc">&nbsp;        this.pet_diagnosis = pet_diagnosis;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Integer getPet_age() {
+<b class="fc">&nbsp;        return pet_age;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setPet_age(Integer pet_age) {
+<b class="fc">&nbsp;        this.pet_age = pet_age;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getPet_gender() {
+<b class="fc">&nbsp;        return pet_gender;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setPet_gender(String pet_gender) {
+<b class="fc">&nbsp;        this.pet_gender = pet_gender;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // for getting the users(owners)
+&nbsp;    public User getOwner() {
+<b class="nc">&nbsp;        return owner;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setOwner(User owner) {
+<b class="fc">&nbsp;        this.owner = owner;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Medication getMedication(){
+<b class="fc">&nbsp;        return medication;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setMedication(Medication medication){
+<b class="nc">&nbsp;        this.medication = medication;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // Getter and Setter for Veterinarians
+&nbsp;    public List&lt;Vet&gt; getVeterinarians() {
+<b class="nc">&nbsp;        return veterinarians;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setVeterinarians(List&lt;Vet&gt; veterinarians) {
+<b class="nc">&nbsp;        this.veterinarians = veterinarians;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //public String getVet_recommendation() {return vet_recommendation;}
+&nbsp;
+&nbsp;    //public void setVet_recommendation(String vet_recommendation) {this.vet_recommendation = vet_recommendation;}
+&nbsp;}
+&nbsp;
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-12-03 17:31</div>
+</div>
+</body>
+</html>
