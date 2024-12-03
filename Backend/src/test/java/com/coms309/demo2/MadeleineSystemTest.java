@@ -23,8 +23,8 @@ public class MadeleineSystemTest {
     @LocalServerPort
     int port;
 
-    int medicationID;
-    long userID;
+    static int medicationID;
+    static long userID;
 
     @Before
     public void setUp() {
