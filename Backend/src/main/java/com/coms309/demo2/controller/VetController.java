@@ -157,14 +157,22 @@ public class VetController {
      */
     @Operation(summary = "Removes a link between vet and customer")
     @DeleteMapping("/vets/{vetID}/customers/{customerID}")
-    public List<User> removeCustomer(@PathVariable Long vetID, @PathVariable Long customerID) {
+    public List<User> removeCustomer(@PathVariable Long vetID, @PathVariable CustomerID customerID) {
         Optional<Vet> vetOptional = vetsRepo.findByVetEmail(userRepository.findById(vetID).get().getEmail());
         if (!vetOptional.isPresent()) {
             throw new RuntimeException("Vet does not exist");
         }
         Vet vet = vetOptional.get();
 
-        Optional<User> customerOptional = userRepository.findById(customerID);
+        Optional<User> customerOptional;
+        if (customerID.id != null) {
+            customerOptional = userRepository.findById(customerID.id);
+        } else if (customerID.email != null) {
+            customerOptional = userRepository.findByEmail(customerID.email);
+        } else {
+            throw new RuntimeException("Invalid body");
+        }
+
         if (!customerOptional.isPresent()) {
             throw new RuntimeException("User does not exist");
         }
