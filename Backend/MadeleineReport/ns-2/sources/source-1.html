@@ -1,0 +1,252 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ConversationController</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.coms309.demo2.controller</a>
+</div>
+
+<h1>Coverage Summary for Class: ConversationController (com.coms309.demo2.controller)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ConversationController</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    20%
+  </span>
+  <span class="absValue">
+    (1/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/16)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    2.7%
+  </span>
+  <span class="absValue">
+    (1/37)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.coms309.demo2.controller;
+&nbsp;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Optional;
+&nbsp;
+&nbsp;import io.swagger.v3.oas.annotations.Operation;
+&nbsp;import io.swagger.v3.oas.annotations.tags.Tag;
+&nbsp;import org.springframework.web.bind.annotation.RestController;
+&nbsp;
+&nbsp;import com.coms309.demo2.entity.Conversation;
+&nbsp;import com.coms309.demo2.entity.ConversationKey;
+&nbsp;import com.coms309.demo2.entity.User;
+&nbsp;import com.coms309.demo2.entity.Vet;
+&nbsp;import com.coms309.demo2.repository.ConversationRepository;
+&nbsp;import com.coms309.demo2.repository.UserRepository;
+&nbsp;import com.coms309.demo2.repository.VetsRepo;
+&nbsp;
+&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+&nbsp;import org.springframework.web.bind.annotation.GetMapping;
+&nbsp;import org.springframework.web.bind.annotation.PathVariable;
+&nbsp;
+&nbsp;/**
+&nbsp; * @author Fury Poudel and Madeleine Carydis
+&nbsp; *         Lists conversations and messages
+&nbsp; */
+&nbsp;
+&nbsp;@RestController
+&nbsp;@Tag(name = &quot;Conversation Controller&quot;, description = &quot;Manages conversations between users and veterinarians&quot;)
+<b class="fc">&nbsp;public class ConversationController {</b>
+&nbsp;    // Post, Put, Delete all taken care of by websocket
+&nbsp;    @Autowired
+&nbsp;    ConversationRepository conversationRepository;
+&nbsp;
+&nbsp;    @Autowired
+&nbsp;    UserRepository userRepository;
+&nbsp;
+&nbsp;    @Autowired
+&nbsp;    VetsRepo vetRepository;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * get list of prior conversations for a user
+&nbsp;     * 
+&nbsp;     * @param id user id
+&nbsp;     * @return all conversations this user has had
+&nbsp;     */
+&nbsp;    @Operation(summary = &quot;Gets a list of prior conversations for a user&quot;)
+&nbsp;    @GetMapping(&quot;/users/{id}/conversations&quot;)
+&nbsp;    public List&lt;Conversation&gt; getAllConversationsUser(@PathVariable Long id) {
+<b class="nc">&nbsp;        Optional&lt;User&gt; userOptional = userRepository.findById(id);</b>
+<b class="nc">&nbsp;        if (userOptional.isPresent()) {</b>
+<b class="nc">&nbsp;            User user = userOptional.get();</b>
+<b class="nc">&nbsp;            List&lt;Conversation&gt; conversations = conversationRepository.findByUser(user);</b>
+<b class="nc">&nbsp;            return conversations;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            throw new RuntimeException(&quot;User does not exist :(&quot;);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * get list of prior conversations for a vet
+&nbsp;     * 
+&nbsp;     * @param id vet id
+&nbsp;     * @return all conversations this vet has had
+&nbsp;     */
+&nbsp;    @Operation(summary = &quot;Gets a list of prior conversations for a vet&quot;)
+&nbsp;    @GetMapping(&quot;/vet/{id}/conversations&quot;)
+&nbsp;    public List&lt;Conversation&gt; getAllConversationsVet(@PathVariable Integer id) {
+<b class="nc">&nbsp;        Optional&lt;Vet&gt; vetOptional = vetRepository.findById(id);</b>
+<b class="nc">&nbsp;        if (vetOptional.isPresent()) {</b>
+<b class="nc">&nbsp;            Vet vet = vetOptional.get();</b>
+<b class="nc">&nbsp;            List&lt;Conversation&gt; conversations = conversationRepository.findByVet(vet);</b>
+<b class="nc">&nbsp;            return conversations;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            throw new RuntimeException(&quot;Vet does not exist :(&quot;);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * get all messages for a conversation with a vet
+&nbsp;     * 
+&nbsp;     * @param idUser id of the user
+&nbsp;     * @param idVet  id of the vet the user is chatting with
+&nbsp;     * @return conversation
+&nbsp;     */
+&nbsp;    @Operation(summary = &quot;Get all messages for a conversation with a vet&quot;)
+&nbsp;    @GetMapping(&quot;/users/{idUser}/conversations/{idVet}&quot;)
+&nbsp;    public Conversation getAllMessagesUser(@PathVariable Long idUser, @PathVariable Integer idVet) {
+&nbsp;
+<b class="nc">&nbsp;        Optional&lt;User&gt; userOptional = userRepository.findById(idUser);</b>
+<b class="nc">&nbsp;        Optional&lt;Vet&gt; vetOptional = vetRepository.findById(idVet);</b>
+<b class="nc">&nbsp;        if (userOptional.isPresent() &amp;&amp; vetOptional.isPresent()) {</b>
+<b class="nc">&nbsp;            User user = userOptional.get();</b>
+<b class="nc">&nbsp;            Vet vet = vetOptional.get();</b>
+&nbsp;
+<b class="nc">&nbsp;            Optional&lt;Conversation&gt; conversationOptional = conversationRepository</b>
+<b class="nc">&nbsp;                    .findById(new ConversationKey(user, vet));</b>
+<b class="nc">&nbsp;            if (conversationOptional.isPresent()) {</b>
+<b class="nc">&nbsp;                Conversation conversation = conversationOptional.get();</b>
+<b class="nc">&nbsp;                return conversation;</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                throw new RuntimeException(&quot;Conversation does not exist&quot;);</b>
+&nbsp;            }
+&nbsp;        } else {
+<b class="nc">&nbsp;            throw new RuntimeException(&quot;User and/or Vet does not exist :(&quot;);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * get all messages for a conversation with a user
+&nbsp;     * 
+&nbsp;     * @param idVet  id of the vet
+&nbsp;     * @param idUser id of the user the vet is chatting with
+&nbsp;     * @return conversation
+&nbsp;     */
+&nbsp;    @Operation(summary = &quot;Gets all messages for a conversation with a user&quot;)
+&nbsp;    @GetMapping(&quot;/vet/{idVet}/conversations/{idUser}&quot;)
+&nbsp;    public Conversation getAllMessagesVet(@PathVariable Integer idVet, @PathVariable Long idUser) {
+<b class="nc">&nbsp;        Optional&lt;Vet&gt; vetOptional = vetRepository.findById(idVet);</b>
+<b class="nc">&nbsp;        Optional&lt;User&gt; userOptional = userRepository.findById(idUser);</b>
+<b class="nc">&nbsp;        if (vetOptional.isPresent() &amp;&amp; userOptional.isPresent()) {</b>
+<b class="nc">&nbsp;            Vet vet = vetOptional.get();</b>
+<b class="nc">&nbsp;            User user = userOptional.get();</b>
+<b class="nc">&nbsp;            Optional&lt;Conversation&gt; conversationOptional = conversationRepository</b>
+<b class="nc">&nbsp;                    .findById(new ConversationKey(user, vet));</b>
+<b class="nc">&nbsp;            if (conversationOptional.isPresent()) {</b>
+<b class="nc">&nbsp;                Conversation conversation = conversationOptional.get();</b>
+<b class="nc">&nbsp;                return conversation;</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                throw new RuntimeException(&quot;Conversation does not exist&quot;);</b>
+&nbsp;            }
+&nbsp;        } else {
+<b class="nc">&nbsp;            throw new RuntimeException(&quot;Vet and/or User does not exist :(&quot;);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-12-03 17:29</div>
+</div>
+</body>
+</html>
