@@ -113,14 +113,14 @@ public class VetController {
      *   <li> { "email": "foo@bar.baz" }
      * </ul>
      * 
-     * @param vetID id of vet
+     * @param vetID user id of vet
      * @param customerID id or email of customer
      * @return customer
      */
     @Operation(summary = "Create link between vet and customer")
     @PostMapping("/vets/{vetID}/customers")
-    public User addCustomer(@PathVariable Integer vetID, @RequestBody CustomerID customerID) {
-        Optional<Vet> vetOptional = vetsRepo.findById(vetID);
+    public User addCustomer(@PathVariable Long vetID, @RequestBody CustomerID customerID) {
+        Optional<Vet> vetOptional = vetsRepo.findByVetEmail(userRepository.findById(vetID).get().getEmail());
         if (!vetOptional.isPresent()) {
             throw new RuntimeException("Vet does not exist");
         }
@@ -151,14 +151,14 @@ public class VetController {
 
     /**
      * Remove link between vet and customer
-     * @param vetID id of vet 
+     * @param vetID user id of vet 
      * @param customerID id of customer
      * @return Vet's new list of customers
      */
     @Operation(summary = "Removes a link between vet and customer")
     @DeleteMapping("/vets/{vetID}/customers/{customerID}")
-    public List<User> removeCustomer(@PathVariable Integer vetID, @PathVariable Long customerID) {
-        Optional<Vet> vetOptional = vetsRepo.findById(vetID);
+    public List<User> removeCustomer(@PathVariable Long vetID, @PathVariable Long customerID) {
+        Optional<Vet> vetOptional = vetsRepo.findByVetEmail(userRepository.findById(vetID).get().getEmail());
         if (!vetOptional.isPresent()) {
             throw new RuntimeException("Vet does not exist");
         }
