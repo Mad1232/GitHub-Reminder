@@ -114,13 +114,76 @@ public class PrakarshaPoudelSystemTest {
         // Delete a pet by ID
         Response response = RestAssured.given()
                 .when()
-                .delete("/pet/18"); //delete id that is previously(already added pet, not recently added one)
+                .delete("/pet/21"); //delete id that is previously(already added pet, not recently added one)
         // Check status code
         assertEquals(200, response.getStatusCode());
 
         // Check response body
         String responseString = response.getBody().asString();
         // update this accordingly
-        assertEquals("Pet with ID 18deleted succesfully.", responseString);
+        assertEquals("Pet with ID 21deleted succesfully.", responseString);
+    }
+
+
+    @Test
+    public void testPostVet() {
+        String vetPayload = """
+    {
+        "vet_id": 8,
+        "vet_name": "Suman Shrestha",
+        "specialization": "Heart specialization",
+        "vetEmail": "Suman@gmail.com",
+        "licenseNum": "VET-999-NE",
+        "clinicAddress": "222 Wasinton Lane, Des Moines, IA",
+        "phone": "515-447-2123"
+    }
+    """;
+
+        Response response = RestAssured.given()
+                .header("Content-Type", "application/json")
+                .body(vetPayload)
+                .when()
+                .post("/vet");
+
+        assertEquals(200, response.getStatusCode());
+
+        try {
+            JSONObject jsonResponse = new JSONObject(response.getBody().asString());
+            assertEquals("Suman Shrestha", jsonResponse.get("vet_name"));
+            assertEquals("Heart specialization", jsonResponse.get("specialization"));
+            assertEquals("Suman@gmail.com", jsonResponse.get("vetEmail"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+            fail("Response parsing failed.");
+        }
+    }
+
+    @Test
+    public void testUpdateMedication() {
+        String medicationPayload = """
+    {
+        "name": "Tylenol-updated",
+        "stock": 22
+    }
+    """;
+
+        Response response = RestAssured.given()
+                .header("Content-Type", "application/json")
+                .body(medicationPayload)
+                .when()
+                .put("/inventory/5"); // Update medication with ID 5
+
+        assertEquals(200, response.getStatusCode());
+
+        try {
+            JSONObject jsonResponse = new JSONObject(response.getBody().asString());
+            assertEquals("Tylenol-updated", jsonResponse.get("name"));
+            assertEquals(22, jsonResponse.get("stock"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+            fail("Response parsing failed.");
+        }
     }
 }
+
+
