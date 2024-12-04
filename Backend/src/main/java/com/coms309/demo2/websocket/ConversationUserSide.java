@@ -30,6 +30,7 @@ import jakarta.websocket.server.ServerEndpoint;
 import lombok.NonNull;
 
 @ServerEndpoint("/users/{userid}/conversations/{vetid}")
+// user id of user, then user id of vet
 @Controller
 public class ConversationUserSide {
     private static MessageRepository messageRepository;
@@ -63,9 +64,9 @@ public class ConversationUserSide {
     }
 
     @OnOpen
-    public void onOpen(Session mySession, @PathParam("userid") Long userid, @PathParam("vetid") Integer vetid) {
+    public void onOpen(Session mySession, @PathParam("userid") Long userid, @PathParam("vetid") Long vetid) {
         User user = userRepository.findById(userid).get();
-        Vet vet = vetRepository.findById(vetid).get();
+        Vet vet = vetRepository.findByVetEmail(userRepository.findById(vetid).get().getEmail()).get();
         ConversationKey key = new ConversationKey(user, vet);
 
         mySessionToConvo.put(mySession, key);
