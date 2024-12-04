@@ -3,6 +3,7 @@ package com.coms309.demo2.entity;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity // Add this annotation
 @Table(name = "events") // Optional: specify the table name
