@@ -27,11 +27,13 @@ The project was a collaborative effort between four developers:
 
 ### Key Contributions
 - **Leadership**: Guided the project from ideation to development, production, and deployment.
-- **Backend Development**: Built the backend using Spring Boot, integrating SQL for data storage.
-- **Frontend Design**: Designed the user interface with Android Studio and prototyped ideas using Figma.
+- **Backend Development**: Built the backend using Spring Boot, integrating SQL for data storage, managing.
+- **Frontend Design**: Designed the user interface by prototyping ideas using Figma.
 - **API Development**: Created RESTful APIs for efficient communication between the frontend and backend.
 - **Client Collaboration**: Actively engaged with users to incorporate feedback and add meaningful features.
-- **Testing**: Wrote test cases to maintain quality and reliability.
+- **Testing**: Wrote test cases to maintain quality and reliability, tested API requests using Postman and .
+- **Role-Based Access**: Created different user roles(client, vet, admin), each having a different view and access of the app.
+- **Websockets Implementation**: Worked on creating a global chat feature. 
 
 ---
 
@@ -81,3 +83,12 @@ The project was a collaborative effort between four developers:
 
 ## License
 This project is open for reference purposes. Feel free to copy ideas and structures, but do not modify or directly edit the code in this repository. Fork the repository to make your changes privately or in your own copy.
+
+---
+
+## See it in Action!! 🚀
+
+Explore the live application:  
+[Pet Reminder App](https://www.youtube.com/watch?v=sA_ToiZy51w&ab_channel=NirajAmin)
+
+
