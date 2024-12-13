@@ -20,10 +20,10 @@ The Pet Reminder App is a comprehensive tool designed to help pet owners manage 
 
 ## Development Process
 The project was a collaborative effort between four developers:
-- Niraj
-- Prakarsha
-- Madison
-- Madeleine
+- Niraj(Frontend Integration)
+- Prakarsha(Me)(Backend Integration)
+- Madison(Frontend Integration)
+- Madeleine(Backend Integration)
 
 ### Key Contributions
 - **Leadership**: Guided the project from ideation to development, production, and deployment.
