@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ClientHomeFragment.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=0;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">debug</a> &gt; <a href="index.source.html" class="el_package">com.example.cydrop_frontend</a> &gt; <span class="el_source">ClientHomeFragment.java</span></div><h1>ClientHomeFragment.java</h1><pre class="source lang-java linenums">package com.example.cydrop_frontend;
+
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
+import android.preference.PreferenceManager;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+/**
+ * This is a fragment that can be displayed in the ClientNavbarMainActivity
+ * Holds the home page, where a user can see their current pets, and edit their details
+ * @author Niraj
+ */
+public class ClientHomeFragment extends Fragment {
+
+    private View overlayView;
+    private View regularView;
+    private View petDeleteView;
+    private View petEditView;
+
+    private EditText petId;
+    private EditText petType;
+    private EditText petBreed;
+    private EditText petName;
+    private EditText petDiagnosis;
+    private EditText petAge;
+    private EditText petGender;
+
+    private EditText petDeleteId;
+
+<span class="fc" id="L57">    private ArrayList&lt;Fragment&gt; fragList = new ArrayList&lt;&gt;();</span>
+
+    private LinearLayout linearLayout;
+    private TextView petsViewTextView;
+
+    /**
+     * Required empty constructor
+     */
+<span class="fc" id="L65">    public ClientHomeFragment() {</span>
+        // Required empty public constructor
+<span class="fc" id="L67">    }</span>
+
+    /**
+     * Generic onCreate
+     * @param savedInstanceState If the fragment is being re-created from
+     * a previous saved state, this is the state.
+     */
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+<span class="fc" id="L76">        super.onCreate(savedInstanceState);</span>
+<span class="fc" id="L77">    }</span>
+
+    /**
+     * GET json data for the pets associated with current userId. Populate those into the view on callback.
+     * Add onCLick listeners for all buttons
+     *
+     * @param inflater The LayoutInflater object that can be used to inflate
+     * any views in the fragment,
+     * @param container If non-null, this is the parent view that the fragment's
+     * UI should be attached to.  The fragment should not add the view itself,
+     * but this can be used to generate the LayoutParams of the view.
+     * @param savedInstanceState If non-null, this fragment is being re-constructed
+     * from a previous saved state as given here.
+     *
+     * @return the created view
+     */
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+<span class="fc" id="L96">        View view = inflater.inflate(R.layout.fragment_client_home, container, false);</span>
+
+<span class="fc" id="L98">        regularView = view.findViewById(R.id.regularView);</span>
+<span class="fc" id="L99">        overlayView = view.findViewById(R.id.addPetOverlay);</span>
+
+<span class="fc" id="L101">        linearLayout = view.findViewById(R.id.petListLinearLayout);</span>
+
+<span class="fc" id="L103">        GetJSONData();</span>
+
+<span class="fc" id="L105">        Button addButton = view.findViewById(R.id.meds_btn);</span>
+<span class="fc" id="L106">        addButton.setOnClickListener(new View.OnClickListener() {</span>
+            @Override
+            public void onClick(View view) {
+<span class="nc" id="L109">                ToggleAddPetOverlay(true);</span>
+<span class="nc" id="L110">            }</span>
+        });
+
+<span class="fc" id="L113">        Button backButton = view.findViewById(R.id.client_home_back_button);</span>
+<span class="fc" id="L114">        backButton.setOnClickListener(new View.OnClickListener() {</span>
+            @Override
+            public void onClick(View view) {
+<span class="nc" id="L117">                ToggleAddPetOverlay(false);</span>
+<span class="nc" id="L118">            }</span>
+        });
+
+
+<span class="fc" id="L122">        Button submit = view.findViewById(R.id.client_home_submit_button);</span>
+<span class="fc" id="L123">        submit.setOnClickListener(view2 -&gt; {</span>
+<span class="nc" id="L124">            PostNewPet();</span>
+<span class="nc" id="L125">        });</span>
+
+<span class="fc" id="L127">        Button logout = view.findViewById(R.id.client_logout_button);</span>
+<span class="fc" id="L128">        logout.setOnClickListener(view1 -&gt; {</span>
+
+<span class="fc" id="L130">            SharedPreferences sharedPref =  PreferenceManager.getDefaultSharedPreferences(getContext().getApplicationContext());</span>
+<span class="fc" id="L131">            SharedPreferences.Editor editor = sharedPref.edit();</span>
+<span class="fc" id="L132">            editor.putString(&quot;userId&quot;, &quot;-1&quot;);</span>
+<span class="fc" id="L133">            editor.putString(&quot;userType&quot;, &quot;none&quot;);</span>
+<span class="fc" id="L134">            editor.commit();</span>
+
+<span class="fc" id="L136">            Intent intent = new Intent(getActivity(), MainActivity.class);</span>
+<span class="fc" id="L137">            startActivity(intent);</span>
+<span class="fc" id="L138">        });</span>
+
+<span class="fc" id="L140">        petType = view.findViewById(R.id.petType);</span>
+<span class="fc" id="L141">        petBreed = view.findViewById(R.id.card_pet_type);</span>
+<span class="fc" id="L142">        petAge = view.findViewById(R.id.petAge);</span>
+<span class="fc" id="L143">        petName = view.findViewById(R.id.petNameInput);</span>
+<span class="fc" id="L144">        petDiagnosis = view.findViewById(R.id.petDiagnosis);</span>
+<span class="fc" id="L145">        petGender = view.findViewById(R.id.petGender);</span>
+
+<span class="fc" id="L147">        ToggleAddPetOverlay(false);</span>
+
+        // Inflate the layout for this fragment
+<span class="fc" id="L150">        return view;</span>
+    }
+
+
+    /**
+     *  Create a new pet card and add it to the linearLayout
+     * @param petId database petId
+     * @param petName name of pet
+     * @param petType type of pet (dog | cat | )
+     * @param petBreed breed of pet (if applicable)
+     * @param petAge age of pet
+     * @param petGender gender of pet (M | F)
+     * @param petDiagnosis medical diagnosis for pet
+     */
+    public void addNewPetCard(String petId, String petName, String petType, String petBreed,
+                              String petAge, String petGender, String petDiagnosis){
+<span class="fc" id="L166">        FragmentManager fragMan = getFragmentManager();</span>
+<span class="fc" id="L167">        FragmentTransaction fragTransaction = fragMan.beginTransaction();</span>
+<span class="fc" id="L168">        Fragment f = PetCardFragment.newInstance(petId, petName, petType,</span>
+                petBreed, petAge, petGender, petDiagnosis );
+<span class="fc" id="L170">        fragList.add(f);</span>
+<span class="fc" id="L171">        fragTransaction.add(linearLayout.getId(), f, &quot;frag&quot;);</span>
+<span class="fc" id="L172">        fragTransaction.commit();</span>
+<span class="fc" id="L173">    }</span>
+
+    /**
+     * Remove all pet fragments. This function should be used if pets are refreshed or reloaded
+     */
+    public void RemoveAllPetFrags(){
+<span class="nc" id="L179">        FragmentManager fragMan = getFragmentManager();</span>
+<span class="nc" id="L180">        FragmentTransaction fragTransaction = fragMan.beginTransaction();</span>
+<span class="nc bnc" id="L181" title="All 2 branches missed.">        for (Fragment f : (Fragment[]) fragList.toArray()){</span>
+<span class="nc" id="L182">            fragTransaction.remove(f);</span>
+        }
+<span class="nc" id="L184">        fragTransaction.commit();</span>
+<span class="nc" id="L185">    }</span>
+
+
+    /**
+     * Toggle the add pet view.
+     * @param addOverlay if true toggle to add pet view. If false, toggle to default view
+     */
+    private void ToggleAddPetOverlay(boolean addOverlay){
+<span class="pc bpc" id="L193" title="1 of 2 branches missed.">        if (addOverlay){</span>
+<span class="nc" id="L194">            regularView.setVisibility(View.INVISIBLE);</span>
+<span class="nc" id="L195">            overlayView.setVisibility(View.VISIBLE);</span>
+        } else {
+<span class="fc" id="L197">            regularView.setVisibility(View.VISIBLE);</span>
+<span class="fc" id="L198">            overlayView.setVisibility(View.INVISIBLE);</span>
+        }
+<span class="fc" id="L200">    }</span>
+
+    /**
+     * GET the json data for all pets this user has. create pet cards for each of these on callback
+     */
+    private void GetJSONData() {
+<span class="fc" id="L206">        JsonArrayRequest jsonArrReq = new JsonArrayRequest(</span>
+                Request.Method.GET,
+                &quot;http://coms-3090-038.class.las.iastate.edu:8080/user-pet/&quot; + VolleySingleton.userId,
+                null, // Pass null as the request body since it's a GET request
+                response -&gt; {
+                    try {
+<span class="fc" id="L212">                        JSONArray jsonArr = response;</span>
+<span class="fc bfc" id="L213" title="All 2 branches covered.">                        for (int i = 0; i &lt; jsonArr.length(); i++){</span>
+<span class="fc" id="L214">                            JSONObject json = jsonArr.getJSONObject(i);</span>
+<span class="fc" id="L215">                            addNewPetCard(json.getString(&quot;pet_id&quot;),</span>
+<span class="fc" id="L216">                                    json.getString(&quot;pet_name&quot;),</span>
+<span class="fc" id="L217">                                    json.getString(&quot;pet_type&quot;),</span>
+<span class="fc" id="L218">                                    json.getString(&quot;pet_breed&quot;),</span>
+<span class="fc" id="L219">                                    json.getString(&quot;pet_age&quot;),</span>
+<span class="fc" id="L220">                                    json.getString(&quot;pet_gender&quot;),</span>
+<span class="fc" id="L221">                                    json.getString(&quot;pet_diagnosis&quot;)</span>
+
+                            );
+                        }
+<span class="nc" id="L225">                    } catch (Exception e) {</span>
+<span class="nc" id="L226">                        throw new RuntimeException(e);</span>
+<span class="fc" id="L227">                    }</span>
+<span class="fc" id="L228">                },</span>
+<span class="fc" id="L229">                new Response.ErrorListener() {</span>
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+<span class="nc" id="L233">                    }</span>
+<span class="fc" id="L234">                }) {</span>
+            @Override
+            public Map&lt;String, String&gt; getHeaders() {
+<span class="fc" id="L237">                Map&lt;String, String&gt; headers = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L238">                return headers;</span>
+            }
+
+            @Override
+            protected Map&lt;String, String&gt; getParams() {
+<span class="nc" id="L243">                Map&lt;String, String&gt; params = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L244">                return params;</span>
+            }
+        };
+
+<span class="fc" id="L248">        VolleySingleton.getInstance(getContext().getApplicationContext()).addToRequestQueue(jsonArrReq);</span>
+<span class="fc" id="L249">    }</span>
+
+    /**
+     * POST a new pet. Uses the information from the EditText fields contained on the add pet view
+     */
+    private void PostNewPet(){
+<span class="nc" id="L255">        JSONObject pet = new JSONObject();</span>
+
+        try{
+<span class="nc" id="L258">            JSONObject ownerInfo = new JSONObject();</span>
+<span class="nc" id="L259">            ownerInfo.put(&quot;id&quot;, VolleySingleton.userId);</span>
+<span class="nc" id="L260">            pet.put(&quot;owner&quot;, ownerInfo);</span>
+
+//            JSONObject medicationInfo = new JSONObject();
+//            pet.put(&quot;medication&quot;, medicationInfo);
+
+<span class="nc" id="L265">            pet.put(&quot;pet_name&quot;, petName.getText().toString());</span>
+<span class="nc" id="L266">            pet.put(&quot;pet_type&quot;, petType.getText().toString());</span>
+<span class="nc" id="L267">            pet.put(&quot;pet_breed&quot;, petBreed.getText().toString());</span>
+<span class="nc" id="L268">            pet.put(&quot;pet_diagnosis&quot;, petDiagnosis.getText().toString());</span>
+<span class="nc" id="L269">            pet.put(&quot;pet_age&quot;, Integer.parseInt(petAge.getText().toString()) );</span>
+<span class="nc" id="L270">            pet.put(&quot;pet_gender&quot;, petGender.getText().toString());</span>
+<span class="nc" id="L271">        } catch (JSONException e){</span>
+            // Unable to create json object
+<span class="nc" id="L273">            Toast.makeText(getActivity(), &quot;Error creating JSON&quot;, Toast.LENGTH_LONG);</span>
+<span class="nc" id="L274">            return;</span>
+<span class="nc" id="L275">        }</span>
+
+<span class="nc" id="L277">        JsonObjectRequest postReq = new JsonObjectRequest(</span>
+                Request.Method.POST,
+                &quot;http://coms-3090-038.class.las.iastate.edu:8080/pet&quot;,
+                pet,
+<span class="nc" id="L281">                new Response.Listener&lt;JSONObject&gt;() {</span>
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        // Victory! i think
+<span class="nc" id="L285">                        ToggleAddPetOverlay(false);</span>
+<span class="nc" id="L286">                        RemoveAllPetFrags();</span>
+<span class="nc" id="L287">                        GetJSONData();</span>
+<span class="nc" id="L288">                    }</span>
+                },
+<span class="nc" id="L290">                new Response.ErrorListener() {</span>
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // Oopsie
+<span class="nc" id="L294">                        Toast.makeText(getActivity(), &quot;Error POSTing pet&quot;, Toast.LENGTH_LONG);</span>
+<span class="nc" id="L295">                    }</span>
+                }
+        );
+
+<span class="nc" id="L299">        VolleySingleton.getInstance(getContext().getApplicationContext()).addToRequestQueue(postReq);</span>
+<span class="nc" id="L300">    }</span>
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span>Generated by the Android Gradle plugin 8.7.2</div></body></html>

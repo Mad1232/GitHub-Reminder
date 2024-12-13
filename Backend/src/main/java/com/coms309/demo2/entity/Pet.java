@@ -42,8 +42,13 @@ public class Pet {
     private User owner;
 
     //One-to-One relationship to Medications(medicine)
+//    @JsonBackReference("medication-pet")
+//    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//    @JoinColumn(name = "medication_id", referencedColumnName = "id", nullable = true)
+//    private Medication medication;
+
+    @ManyToOne
     @JsonBackReference("medication-pet")
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "medication_id", referencedColumnName = "id", nullable = true)
     private Medication medication;
 

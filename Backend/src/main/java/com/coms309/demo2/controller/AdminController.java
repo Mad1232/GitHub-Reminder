@@ -4,7 +4,6 @@ import com.coms309.demo2.entity.*;
 import com.coms309.demo2.repository.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jdk.jfr.Event;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -292,7 +291,7 @@ public class AdminController {
     @Operation(summary = "Delete all users", description = "Delete all users")
     @DeleteMapping("/admin/users")
     public String removeUsers() {
-        repository.deleteAll();
+        userRepository.deleteAll();
         return "all users deleted";
     }
 
@@ -304,9 +303,9 @@ public class AdminController {
     @Operation(summary = "Delete user by ID", description = "Delete user by ID")
     @DeleteMapping("/admin/users/{id}")
     public String removeUser(@PathVariable Long id) {
-        if (repository.existsById(id)) {
-            repository.deleteById(id); // Delete user
-            return "User with ID " + id + " deleted succesfully.";
+        if (userRepository.existsById(id)) {
+            userRepository.deleteById(id); // Delete user
+            return "OK";
         } else {
             return "User not found";
         }

@@ -14,7 +14,7 @@
         android:visibility="visible">
 
         <TextView
-            android:id="@+id/addInventoryTextView"
+            android:id="@+id/addInventoryTextView2"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_marginTop="52dp"
@@ -89,8 +89,8 @@
             android:id="@+id/client_home_submit_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Submit"
             android:backgroundTint="#4CAF50"
+            android:text="Submit"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -125,42 +125,39 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/regularView"
         android:layout_width="match_parent"
-        android:visibility="gone"
         android:layout_height="match_parent">
 
         <Button
             android:id="@+id/meds_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="#4CAF50"
+            android:layout_marginTop="5dp"
             android:layout_marginEnd="10dp"
-            android:layout_marginTop="5dp"
             android:layout_marginBottom="15dp"
+            android:backgroundTint="#4CAF50"
             android:text="Add pet"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-        <Button
-            android:id="@+id/logout_button"
-            android:layout_width="wrap_content"
-            android:backgroundTint="@color/grey"
-            android:layout_marginTop="5dp"
-            android:layout_marginStart="10dp"
-            android:layout_height="wrap_content"
-            android:text="Logout"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/customer_text"
+        <Button
+            android:id="@+id/vet_info_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="2dp"
-            android:text="Pets view"
-            android:textColor="@color/black"
-            android:textSize="40dp"
-            app:layout_constraintEnd_toEndOf="@id/meds_btn"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="156dp"
+            android:backgroundTint="#FF9800"
+            android:text="Vet Info"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/client_logout_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:backgroundTint="@color/grey"
+            android:text="Logout"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -171,7 +168,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/customer_text">
+            app:layout_constraintTop_toBottomOf="@+id/vet_info_btn">
 
             <LinearLayout
                 android:id="@+id/petListLinearLayout"

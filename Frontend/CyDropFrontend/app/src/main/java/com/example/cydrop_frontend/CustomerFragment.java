@@ -136,7 +136,7 @@ public class CustomerFragment extends Fragment {
     void RemoveCustomer(){
         JsonArrayRequest petDeleteRequest = new JsonArrayRequest(
                 Request.Method.DELETE,
-                "http://coms-3090-038.class.las.iastate.edu:8080/vets/" + VolleySingleton.vetIdTEMP +
+                "http://coms-3090-038.class.las.iastate.edu:8080/vets/" + VolleySingleton.userId +
                         "/customers/" + customerId.trim(),
                 null, // Pass null as the request body since it's a DELETE request
                 response -> {

@@ -46,7 +46,7 @@ public class VetNavbarMainActivity extends AppCompatActivity {
         replaceFragment(new VetCustomersFragment());
 
         // Switch fragments when an icon is selected
-        binding.bottomNavigationView.setOnItemSelectedListener(item -> {
+        binding.bottomNavigationViewVet.setOnItemSelectedListener(item -> {
             int itemId = item.getItemId();
             if (itemId == R.id.customers){
                 replaceFragment(new VetCustomersFragment());

@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MedicationActivity.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=0;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">debug</a> &gt; <a href="index.source.html" class="el_package">com.example.cydrop_frontend</a> &gt; <span class="el_source">MedicationActivity.java</span></div><h1>MedicationActivity.java</h1><pre class="source lang-java linenums">package com.example.cydrop_frontend;
+
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
+
+/**
+ * MedicationActivity manages interactions with the medication inventory,
+ * allowing the user to view, add, edit, and delete medications.
+ *
+ * @author Madison Vosburg
+ */
+<span class="nc" id="L36">public class MedicationActivity extends AppCompatActivity {</span>
+
+    /**
+     * Textview displaying the medication list.
+     */
+    private TextView msgResponse;
+
+    /**
+     * Base URL for accessing medication inventory endpoint.
+     */
+    private static final String URL = &quot;http://coms-3090-038.class.las.iastate.edu:8080/inventory&quot;;
+
+    /**
+     * EditText for user input when adding or deleting medication.
+     */
+    private EditText med_input;
+
+    /**
+     * Initializes the activity, sets up listeners for add, edit, delete, and return buttons.
+     * Add button captures user input and sends a POST request to add a medication.
+     * Delete button captures user input and sends a DELETE request to delete a medication.
+     * Edit button navigates to the EditMedsActivity.
+     * Return button navigates to the VetNavbarMainActivity.
+     *
+     * @param savedInstanceState Bundle containing the saved state of the activity.
+     */
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+<span class="nc" id="L64">        super.onCreate(savedInstanceState);</span>
+<span class="nc" id="L65">        setContentView(R.layout.activity_meds);</span>
+
+<span class="nc" id="L67">        msgResponse = findViewById(R.id.tv_medication_list);</span>
+
+<span class="nc" id="L69">        getJSONData();</span>
+
+<span class="nc" id="L71">        findViewById(R.id.btn_add_medication).setOnClickListener(view1 -&gt; {</span>
+<span class="nc" id="L72">            med_input = findViewById(R.id.et_medication_input);</span>
+<span class="nc" id="L73">            String medicationInput = med_input.getText().toString();</span>
+<span class="nc" id="L74">            postRequest(URL, medicationInput);</span>
+<span class="nc" id="L75">            getJSONData();</span>
+<span class="nc" id="L76">        });</span>
+
+<span class="nc" id="L78">        findViewById(R.id.btn_edit_medication).setOnClickListener(view1 -&gt; {</span>
+<span class="nc" id="L79">            Intent intent = new Intent(MedicationActivity.this, EditMedsActivity.class);</span>
+<span class="nc" id="L80">            startActivity(intent);</span>
+<span class="nc" id="L81">        });</span>
+
+<span class="nc" id="L83">        findViewById(R.id.btn_delete_medication).setOnClickListener(view1 -&gt; {</span>
+<span class="nc" id="L84">            med_input = findViewById(R.id.et_medication_input);</span>
+<span class="nc" id="L85">            String medicationInput = med_input.getText().toString();</span>
+<span class="nc" id="L86">            delRequest(URL, medicationInput);</span>
+<span class="nc" id="L87">            getJSONData();</span>
+<span class="nc" id="L88">        });</span>
+
+<span class="nc" id="L90">        findViewById(R.id.btn_return).setOnClickListener(view1 -&gt; {</span>
+<span class="nc" id="L91">            Intent intent = new Intent(MedicationActivity.this, VetNavbarMainActivity.class);</span>
+<span class="nc" id="L92">            startActivity(intent);</span>
+<span class="nc" id="L93">        });</span>
+<span class="nc" id="L94">    }</span>
+
+    /**
+     * Retrieves and displays the medication list from the server as a JSON array.
+     * Parses each entry to display the medication details in a clear way.
+     */
+    private void getJSONData() {
+<span class="nc" id="L101">        JsonArrayRequest jsonObjReq = new JsonArrayRequest(</span>
+                Request.Method.GET,
+                URL,
+                null, // Pass null as the request body since it's a GET request
+<span class="nc" id="L105">                new Response.Listener&lt;JSONArray&gt;() {</span>
+                    @Override
+                    public void onResponse(JSONArray response) {
+<span class="nc" id="L108">                        msgResponse.setText(&quot;&quot;); // reset the msg text</span>
+                        try{
+<span class="nc" id="L110">                            JSONArray jsonArr = response;</span>
+<span class="nc bnc" id="L111" title="All 2 branches missed.">                            for (int i = 0; i &lt; jsonArr.length(); i++) {</span>
+<span class="nc" id="L112">                                JSONObject jObj = jsonArr.getJSONObject(i);</span>
+<span class="nc" id="L113">                                String newLine = &quot;ID: &quot; + jObj.getString(&quot;id&quot;) + &quot;\n&quot; +</span>
+<span class="nc" id="L114">                                        &quot;Name: &quot; + jObj.getString(&quot;name&quot;) + &quot;\n&quot; +</span>
+<span class="nc" id="L115">                                        &quot;Stock: &quot; + jObj.getString(&quot;stock&quot;) + &quot;\n&quot;</span>
+<span class="nc" id="L116">                                        + &quot;Pet: &quot; + jObj.getString(&quot;pet&quot;) + &quot;\n&quot;;</span>
+<span class="nc" id="L117">                                msgResponse.setText(msgResponse.getText() + newLine);</span>
+                            }
+<span class="nc" id="L119">                        } catch (Exception e) {</span>
+<span class="nc" id="L120">                            throw new RuntimeException(e);</span>
+<span class="nc" id="L121">                        }</span>
+//                        Log.d(&quot;Volley Response&quot;, response.toString());
+//                        msgResponse.setText(response.toString());
+<span class="nc" id="L124">                    }</span>
+                },
+<span class="nc" id="L126">                new Response.ErrorListener() {</span>
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+<span class="nc" id="L129">                        Log.e(&quot;Volley Error&quot;, error.toString());</span>
+<span class="nc" id="L130">                    }</span>
+                }
+<span class="nc" id="L132">        ) {</span>
+            @Override
+            public Map&lt;String, String&gt; getHeaders() throws AuthFailureError {
+<span class="nc" id="L135">                HashMap&lt;String, String&gt; headers = new HashMap&lt;String, String&gt;();</span>
+<span class="nc" id="L136">                return headers;</span>
+            }
+
+            @Override
+            protected Map&lt;String, String&gt; getParams() {
+<span class="nc" id="L141">                Map&lt;String, String&gt; params = new HashMap&lt;String, String&gt;();</span>
+<span class="nc" id="L142">                return params;</span>
+            }
+        };
+
+        // Adding request to request queue
+<span class="nc" id="L147">        VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(jsonObjReq);</span>
+<span class="nc" id="L148">    }</span>
+
+    /**
+     * Sends a POST request to add a medication to the inventory.
+     *
+     * @param url Endpoint for adding a medication.
+     * @param medication Name of the medication to be added.
+     */
+    private void postRequest(String url, String medication) {
+
+        // Create JSON object for POST request
+<span class="nc" id="L159">        JSONObject json = new JSONObject();</span>
+        try {
+<span class="nc" id="L161">            json.put(&quot;name&quot;, medication);</span>
+<span class="nc" id="L162">        } catch (Exception e) {</span>
+<span class="nc" id="L163">            e.printStackTrace();</span>
+<span class="nc" id="L164">        }</span>
+
+<span class="nc" id="L166">        JsonObjectRequest request = new JsonObjectRequest(</span>
+                Request.Method.POST,
+                url,
+                json,
+<span class="nc" id="L170">                new Response.Listener&lt;JSONObject&gt;() {</span>
+                    @Override
+                    public void onResponse(JSONObject response) {
+<span class="nc" id="L173">                        Toast.makeText(getApplicationContext(), &quot;Medication Added&quot;, Toast.LENGTH_LONG).show();</span>
+<span class="nc" id="L174">                        getJSONData();</span>
+<span class="nc" id="L175">                    }</span>
+                },
+<span class="nc" id="L177">                new Response.ErrorListener() {</span>
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+<span class="nc" id="L180">                        Log.e(&quot;Volley Error&quot;, error.toString());</span>
+<span class="nc" id="L181">                    }</span>
+                }
+<span class="nc" id="L183">        ){</span>
+            @Override
+            public Map&lt;String, String&gt; getHeaders() throws AuthFailureError {
+<span class="nc" id="L186">                HashMap&lt;String, String&gt; headers = new HashMap&lt;String, String&gt;();</span>
+<span class="nc" id="L187">                return headers;</span>
+            }
+
+            @Override
+            protected Map&lt;String, String&gt; getParams() {
+<span class="nc" id="L192">                Map&lt;String, String&gt; params = new HashMap&lt;String, String&gt;();</span>
+<span class="nc" id="L193">                return params;</span>
+            }
+        };
+
+        // Adding request to request queue
+<span class="nc" id="L198">        VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(request);</span>
+<span class="nc" id="L199">    }</span>
+
+    /**
+     * Sends a DELETE request to remove a medication from the inventory.
+     *
+     * @param URL Endpoint for deleting a medication
+     * @param id ID of the medication to be deleted.
+     */
+    private void delRequest(String URL, String id){
+
+<span class="nc" id="L209">        StringRequest request = new StringRequest(Request.Method.DELETE, URL + &quot;/&quot; + id,</span>
+<span class="nc" id="L210">                new Response.Listener&lt;String&gt;() {</span>
+                    @Override
+            public void onResponse(String response) {
+<span class="nc bnc" id="L213" title="All 2 branches missed.">                        if (&quot;Ok&quot;.equals(response)) {</span>
+<span class="nc" id="L214">                            Toast.makeText(getApplicationContext(), &quot;Medication Deleted&quot;, Toast.LENGTH_LONG).show();</span>
+<span class="nc" id="L215">                            getJSONData();</span>
+                        } else {
+<span class="nc" id="L217">                            Toast.makeText(getApplicationContext(), &quot;Unexpected response: &quot; + response, Toast.LENGTH_LONG).show();</span>
+                        }
+<span class="nc" id="L219">                    }</span>
+        },
+<span class="nc" id="L221">                new Response.ErrorListener() {</span>
+                @Override
+                public void onErrorResponse(VolleyError error) {
+<span class="nc" id="L224">                    Log.e(&quot;Volley Error&quot;, error.toString());</span>
+<span class="nc" id="L225">                }</span>
+            }
+<span class="nc" id="L227">        ){</span>
+                @Override
+                public Map&lt;String, String&gt; getHeaders() throws AuthFailureError {
+<span class="nc" id="L230">                    HashMap&lt;String, String&gt; headers = new HashMap&lt;String, String&gt;();</span>
+<span class="nc" id="L231">                    return headers;</span>
+                }
+
+                @Override
+                protected Map&lt;String, String&gt; getParams() {
+<span class="nc" id="L236">                    Map&lt;String, String&gt; params = new HashMap&lt;String, String&gt;();</span>
+<span class="nc" id="L237">                    return params;</span>
+                }
+
+            };
+
+<span class="nc" id="L242">        VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(request);</span>
+<span class="nc" id="L243">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span>Generated by the Android Gradle plugin 8.7.2</div></body></html>

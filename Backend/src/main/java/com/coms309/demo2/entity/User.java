@@ -7,6 +7,7 @@ import lombok.Setter;
 import java.util.List;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
@@ -40,6 +41,12 @@ public class User {
     //user is in conversation.java
     @OneToMany(mappedBy = "user", orphanRemoval = true, fetch = FetchType.EAGER)
     private List<Conversation> conversations;
+
+    // Many-to-Many with Vet (customer-of)
+    @ManyToMany(mappedBy = "customers")
+    @Getter
+    @JsonBackReference
+    private List<Vet> vets;
 
     // Getters and Setters
     public Long getId() {

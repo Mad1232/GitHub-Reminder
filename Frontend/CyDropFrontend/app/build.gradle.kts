@@ -17,6 +17,9 @@ android {
     }
 
     buildTypes {
+        debug{
+            enableAndroidTestCoverage = true
+        }
         release {
             isMinifyEnabled = false
             proguardFiles(
@@ -24,18 +27,23 @@ android {
                 "proguard-rules.pro"
             )
         }
+        debug{
+            enableAndroidTestCoverage = true
+        }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     buildFeatures {
         viewBinding = true
     }
+    buildToolsVersion = "34.0.0"
 }
 
 dependencies {
     implementation("org.java-websocket:Java-WebSocket:1.5.1")
+    implementation("androidx.core:core-ktx:1.12.0")
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
@@ -46,6 +54,20 @@ dependencies {
     implementation(libs.navigation.ui)
     implementation(libs.volley)
     testImplementation(libs.junit)
+    testImplementation(libs.ext.junit)
+    testImplementation(libs.espresso.core)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+
+    // for Android
+    testImplementation ("junit:junit:4.13.2")
+    androidTestImplementation ("com.android.support.test:rules:1.0.2")
+    androidTestImplementation ("com.android.support.test:runner:1.0.2")
+    androidTestImplementation ("androidx.test.ext:junit:1.1.5")
+    androidTestImplementation ("androidx.test.espresso:espresso-core:3.5.1")
+    androidTestImplementation ("androidx.test.espresso:espresso-contrib:3.4.0")
+    androidTestImplementation ("androidx.test.espresso:espresso-intents:3.4.0")
+
+    androidTestImplementation("androidx.fragment:fragment-testing:1.6.0")
+
 }

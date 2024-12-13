@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 public class Medication {
     @Id
@@ -19,24 +21,18 @@ public class Medication {
     @Setter
     Integer stock;
 
-    // One-to-many relationship with Pet
+    // One-to-many relationship with Pet (one medication can be assigned to many pets)
     @JsonManagedReference("medication-pet")
-    @OneToOne(mappedBy = "medication", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Pet pet;
+    @OneToMany(mappedBy = "medication", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Pet> pets; // This will hold all pets assigned to the medication
 
 //    @OneToOne
 //    @JoinColumn(name = "pet_id", referencedColumnName = "pet_id", nullable = true)
 //    @JsonManagedReference
 //    private Pet pet2;
 
+    @OneToMany(mappedBy = "medication", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Events> events;
 
-
-    public Pet getPet() {
-        return pet;
-    }
-
-    public void setPet(Pet pet) {
-        this.pet = pet;
-    }
 
 }

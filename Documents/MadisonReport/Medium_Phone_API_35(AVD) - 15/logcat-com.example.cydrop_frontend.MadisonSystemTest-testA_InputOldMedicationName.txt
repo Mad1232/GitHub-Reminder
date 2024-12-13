@@ -1,0 +1,349 @@
+12-09 13:39:16.065  7990  8003 I TestRunner: started: testA_InputOldMedicationName(com.example.cydrop_frontend.MadisonSystemTest)
+12-09 13:39:16.131  7990  8003 W Settings: Setting always_finish_activities has moved from android.provider.Settings.System to android.provider.Settings.Global, returning read-only value.
+12-09 13:39:16.223   692  1204 V GrammaticalInflectionUtils: AttributionSource: android.content.AttributionSource@922b3bc1 does not have READ_SYSTEM_GRAMMATICAL_GENDER permission.
+12-09 13:39:16.274   404   404 I BpBinder: onLastStrongRef automatically unlinking death recipients:
+12-09 13:39:16.290  5798  5798 W SplitSelectStateCtor: Missing session instanceIds
+12-09 13:39:16.291  5798  5798 D StatsLog: LAUNCHER_SPLIT_SELECTION_EXIT_INTERRUPTED
+12-09 13:39:16.314  5798  5798 I TopTaskTracker: onTaskMovedToFront: (moved taskInfo to front) taskId=267, baseIntent=Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10008000 cmp=com.example.cydrop_frontend/.EditMedsActivity }
+12-09 13:39:16.378  5798  5825 D EGL_emulation: app_time_stats: avg=11737.14ms min=2.38ms max=69458.88ms count=6
+12-09 13:39:16.633  7990  7990 D AppCompatDelegate: Checking for metadata for AppLocalesMetadataHolderService : Service not found
+12-09 13:39:16.701  7990  7990 D LifecycleMonitor: Lifecycle status change: com.example.cydrop_frontend.EditMedsActivity@cdd8af1 in: PRE_ON_CREATE
+12-09 13:39:16.704  7990  7990 V ActivityScenario: Activity lifecycle changed event received but ignored because the reported transition was not ON_CREATE while the last known transition was PRE_ON_CREATE
+12-09 13:39:16.828  5798  5825 D EGL_emulation: app_time_stats: avg=6399.35ms min=2.34ms max=69715.78ms count=11
+12-09 13:39:16.840  1071  1324 D EGL_emulation: app_time_stats: avg=4185.97ms min=4185.97ms max=4185.97ms count=1
+12-09 13:39:17.154  5798  5798 D VRI[NexusLauncherActivity]: visibilityChanged oldVisibility=true newVisibility=false
+12-09 13:39:17.167  5798  5798 D NexusLauncherModelDelegate: notifySmartspaceEvent: SmartspaceTargetEvent{mSmartspaceTarget=null, mSmartspaceActionId='null', mEventType=7}
+12-09 13:39:17.298  7990  7990 W cydrop_frontend: Accessing hidden method Landroid/view/View;->computeFitSystemWindows(Landroid/graphics/Rect;Landroid/graphics/Rect;)Z (unsupported, reflection, allowed)
+12-09 13:39:17.300  7990  7990 W cydrop_frontend: Accessing hidden method Landroid/view/ViewGroup;->makeOptionalFitsSystemWindows()V (unsupported, reflection, allowed)
+12-09 13:39:17.688  7990  7990 D LifecycleMonitor: Lifecycle status change: com.example.cydrop_frontend.EditMedsActivity@cdd8af1 in: CREATED
+12-09 13:39:17.688  7990  7990 V ActivityScenario: Update currentActivityStage to CREATED, currentActivity=com.example.cydrop_frontend.EditMedsActivity@cdd8af1
+12-09 13:39:17.703  7990  7990 D LifecycleMonitor: Lifecycle status change: com.example.cydrop_frontend.EditMedsActivity@cdd8af1 in: STARTED
+12-09 13:39:17.704  7990  7990 V ActivityScenario: Update currentActivityStage to STARTED, currentActivity=com.example.cydrop_frontend.EditMedsActivity@cdd8af1
+12-09 13:39:17.708  7990  7990 D LifecycleMonitor: Lifecycle status change: com.example.cydrop_frontend.EditMedsActivity@cdd8af1 in: RESUMED
+12-09 13:39:17.709  7990  7990 V ActivityScenario: Update currentActivityStage to RESUMED, currentActivity=com.example.cydrop_frontend.EditMedsActivity@cdd8af1
+12-09 13:39:17.714   692   935 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET, states=14
+12-09 13:39:17.724   692   935 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET6, states=14
+12-09 13:39:17.724   692   935 D InetDiagMessage: Destroyed live tcp sockets for uids={10177} in 13ms
+12-09 13:39:17.726  7990  7994 I cydrop_frontend: Compiler allocated 4219KB to compile void android.widget.TextView.<init>(android.content.Context, android.util.AttributeSet, int, int)
+12-09 13:39:17.733  7990  7990 W HWUI    : Unknown dataspace 0
+12-09 13:39:17.936  7990  8005 I EGL_emulation: Opening libGLESv1_CM_emulation.so
+12-09 13:39:17.949  7990  8005 I EGL_emulation: Opening libGLESv2_emulation.so
+12-09 13:39:18.023  7990  8005 W HWUI    : Failed to choose config with EGL_SWAP_BEHAVIOR_PRESERVED, retrying without...
+12-09 13:39:18.024  7990  8005 W HWUI    : Failed to initialize 101010-2 format, error = EGL_SUCCESS
+12-09 13:39:18.237   162   162 I hwservicemanager: getTransport: Cannot find entry android.hardware.graphics.mapper@4.0::IMapper/default in either framework or device VINTF manifest.
+12-09 13:39:18.238  7990  8005 I Gralloc4: mapper 4.x is not supported
+12-09 13:39:18.574  7990  7994 I cydrop_frontend: Compiler allocated 5174KB to compile void android.view.ViewRootImpl.performTraversals()
+12-09 13:39:18.786  7990  7990 I Choreographer: Skipped 59 frames!  The application may be doing too much work on its main thread.
+12-09 13:39:18.803  7990  8000 I HWUI    : Davey! duration=1029ms; Flags=1, FrameTimelineVsyncId=49644, IntendedVsync=2231739780166, Vsync=2231739780166, InputEventId=0, HandleInputStart=2231752970600, AnimationStart=2231752999300, PerformTraversalsStart=2231753097700, DrawStart=2232296774500, FrameDeadline=2231756446832, FrameInterval=2231752940800, FrameStartTime=16666666, SyncQueued=2232357091100, SyncStart=2232370880700, IssueDrawCommandsStart=2232375170700, SwapBuffers=2232739202900, FrameCompleted=2232783464500, DequeueBufferDuration=50300, QueueBufferDuration=29960800, GpuCompleted=2232783089900, SwapBuffersCompleted=2232783464500, DisplayPresentTime=0, CommandSubmissionCompleted=2232739202900,
+12-09 13:39:18.807   692   736 W ziparchive: Unable to open '/data/app/~~6fD4BsPL5BE_t_-0wdIg3Q==/com.example.cydrop_frontend-nMsSY7a7EfgTMUaLdmpF_g==/base.dm': No such file or directory
+12-09 13:39:18.814  7990  7999 I HWUI    : Davey! duration=1018ms; Flags=0, FrameTimelineVsyncId=49667, IntendedVsync=2231789780164, Vsync=2232773113458, InputEventId=0, HandleInputStart=2232787055900, AnimationStart=2232787085300, PerformTraversalsStart=2232787504800, DrawStart=2232788548600, FrameDeadline=2232806446790, FrameInterval=2232786402800, FrameStartTime=16666666, SyncQueued=2232789651000, SyncStart=2232789909500, IssueDrawCommandsStart=2232790115400, SwapBuffers=2232796731000, FrameCompleted=2232808863600, DequeueBufferDuration=32200, QueueBufferDuration=1925100, GpuCompleted=2232808863600, SwapBuffersCompleted=2232801690800, DisplayPresentTime=0, CommandSubmissionCompleted=2232796731000,
+12-09 13:39:18.819   692   736 I ActivityTaskManager: Displayed com.example.cydrop_frontend/.EditMedsActivity for user 0: +2s612ms
+12-09 13:39:18.854  5798  5798 D BaseDepthController: setSurface:
+12-09 13:39:18.854  5798  5798 D BaseDepthController: 	mWaitingOnSurfaceValidity: false
+12-09 13:39:18.854  5798  5798 D BaseDepthController: 	mSurface: null
+12-09 13:39:18.855  5798  5798 D BaseDepthController: mSurface is null and mCurrentBlur is: 0
+12-09 13:39:18.878  5798  5798 D StateManager: goToState - fromState: Normal, toState: Normal, partial trace:
+12-09 13:39:18.878  5798  5798 D StateManager: 	at com.android.launcher3.statemanager.StateManager.moveToRestState(go/retraceme 485d0a63b32755c2e0617651e62706492899977786a56dedfba7c7b896a2ddb7:4)
+12-09 13:39:18.878  5798  5798 D StateManager: 	at com.android.launcher3.statemanager.StateManager.moveToRestState(go/retraceme 485d0a63b32755c2e0617651e62706492899977786a56dedfba7c7b896a2ddb7:1)
+12-09 13:39:18.878  5798  5798 D StateManager: 	at com.android.launcher3.statemanager.StatefulActivity.onStop(go/retraceme 485d0a63b32755c2e0617651e62706492899977786a56dedfba7c7b896a2ddb7:34)
+12-09 13:39:18.882  5798  5798 D StatsLog: LAUNCHER_ONSTOP
+12-09 13:39:18.883   692   889 I ImeTracker: com.example.cydrop_frontend:b57ed4ee: onRequestHide at ORIGIN_SERVER reason HIDE_UNSPECIFIED_WINDOW fromUser false
+12-09 13:39:18.884   692   889 I ImeTracker: com.example.cydrop_frontend:b57ed4ee: onCancelled at PHASE_SERVER_SHOULD_HIDE
+12-09 13:39:18.892  1501  1921 I FontLog : (REDACTED) Received query %s, URI %s
+12-09 13:39:18.899  1501  1921 I FontLog : (REDACTED) Query [%s] resolved to %s
+12-09 13:39:18.902  5798  5850 D OneSearchSuggestProvider: Shut down the binder channel
+12-09 13:39:18.915  7990  7994 I cydrop_frontend: Compiler allocated 5417KB to compile void android.view.ViewRootImpl.performTraversals()
+12-09 13:39:18.943  5798  5798 D StatsLog: LAUNCHER_GOOGLE_SEARCH_RESTORE_LIST_SIZE_AFTER_ACTIVITY_RESTART
+12-09 13:39:18.954  1501  1921 I FontLog : (REDACTED) Fetch %s end status %s
+12-09 13:39:18.972  1501  1921 I FontLog : (REDACTED) Pulling font file for id = %d, cache size = %d
+12-09 13:39:18.979  1657  1657 I GoogleInputMethodService: GoogleInputMethodService.onFinishInput():3122
+12-09 13:39:18.989  1657  1657 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2193 repeatCheckTimes = 0, locked = false
+12-09 13:39:18.989  1657  1657 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1937 onStartInput(EditorInfo{EditorInfo{packageName=com.example.cydrop_frontend, inputType=0, inputTypeString=NULL, enableLearning=false, autoCorrection=false, autoComplete=false, imeOptions=0, privateImeOptions=null, actionName=UNSPECIFIED, actionLabel=null, initialSelStart=-1, initialSelEnd=-1, initialCapsMode=0, label=null, fieldId=0, fieldName=null, extras=null, hintText=null, hintLocales=[]}}, false)
+12-09 13:39:19.004  1657  1657 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2193 repeatCheckTimes = 1, locked = false
+12-09 13:39:19.011  1657  1657 I AndroidIME: InputBundleManager.loadActiveInputBundleId():450 loadActiveInputBundleId: und-Latn-x-password, password
+12-09 13:39:19.049  1501  1921 I FontLog : (REDACTED) Pulling font file for id = %d, cache size = %d
+12-09 13:39:19.064  1657  1657 W NotificationCenter: NotificationCenter$NotificationQueue.notifyOnExecutor():883 Heavy notify work detected on UI thread: [jss->ivl] takes 22ms
+12-09 13:39:19.155  1071  1269 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=android.view.ViewRootImpl$$ExternalSyntheticLambda11@80060d8
+12-09 13:39:19.167   692  1901 W InputManager-JNI: Input channel object '6b12252 Splash Screen com.example.cydrop_frontend (client)' was disposed without first being removed with the input manager!
+12-09 13:39:19.216  7990  8003 W FileTestStorage: Output properties is not supported.
+12-09 13:39:19.219  7990  8003 I Tracing : Tracer added: class androidx.test.platform.tracing.AndroidXTracer
+12-09 13:39:19.247  7990  8003 D CompatChangeReporter: Compat change id reported: 247079863; UID 10200; state: ENABLED
+12-09 13:39:19.266  7990  8003 D EventInjectionStrategy: Creating injection strategy with input manager.
+12-09 13:39:19.267  7990  8003 W cydrop_frontend: Accessing hidden method Landroid/hardware/input/InputManager;->getInstance()Landroid/hardware/input/InputManager; (unsupported, reflection, allowed)
+12-09 13:39:19.274  7990  8003 W cydrop_frontend: Accessing hidden method Landroid/hardware/input/InputManager;->injectInputEvent(Landroid/view/InputEvent;I)Z (unsupported, reflection, allowed)
+12-09 13:39:19.275  7990  8003 W cydrop_frontend: Accessing hidden field Landroid/hardware/input/InputManager;->INJECT_INPUT_EVENT_MODE_WAIT_FOR_FINISH:I (unsupported, reflection, allowed)
+12-09 13:39:19.351  7990  8003 W cydrop_frontend: Accessing hidden method Landroid/view/ViewConfiguration;->getDoubleTapMinTime()I (unsupported, reflection, allowed)
+12-09 13:39:19.386  7990  7990 W cydrop_frontend: Accessing hidden method Landroid/os/MessageQueue;->next()Landroid/os/Message; (unsupported, reflection, allowed)
+12-09 13:39:19.387  7990  7990 W cydrop_frontend: Accessing hidden field Landroid/os/MessageQueue;->mMessages:Landroid/os/Message; (unsupported, reflection, allowed)
+12-09 13:39:19.388  7990  7990 W cydrop_frontend: Accessing hidden method Landroid/os/Message;->recycleUnchecked()V (unsupported, reflection, allowed)
+12-09 13:39:19.405  7990  7990 W cydrop_frontend: Accessing hidden method Landroid/view/WindowManagerGlobal;->getInstance()Landroid/view/WindowManagerGlobal; (unsupported, reflection, allowed)
+12-09 13:39:19.405  7990  7990 W cydrop_frontend: Accessing hidden field Landroid/view/WindowManagerGlobal;->mViews:Ljava/util/ArrayList; (unsupported, reflection, allowed)
+12-09 13:39:19.406  7990  7990 W cydrop_frontend: Accessing hidden field Landroid/view/WindowManagerGlobal;->mParams:Ljava/util/ArrayList; (unsupported, reflection, allowed)
+12-09 13:39:19.426  7990  7990 I ViewInteraction: Performing 'type text(9)' action on view view.getId() is <2131230974/com.example.cydrop_frontend:id/et_medication_name_prev>
+12-09 13:39:19.627  7990  7990 I ImeTracker: com.example.cydrop_frontend:9d6426a: onRequestShow at ORIGIN_CLIENT reason SHOW_SOFT_INPUT fromUser true
+12-09 13:39:19.644  1657  1657 I GoogleInputMethodService: GoogleInputMethodService.onFinishInput():3122
+12-09 13:39:19.648  1657  1657 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2193 repeatCheckTimes = 0, locked = false
+12-09 13:39:19.650  1657  1657 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1937 onStartInput(EditorInfo{EditorInfo{packageName=com.example.cydrop_frontend, inputType=20001, inputTypeString=Normal, enableLearning=true, autoCorrection=true, autoComplete=true, imeOptions=48000005, privateImeOptions=null, actionName=NEXT, actionLabel=null, initialSelStart=0, initialSelEnd=0, initialCapsMode=0, label=null, fieldId=2131230974, fieldName=null, extras=Bundle[mParcelledData.dataSize=168], hintText=non-empty, hintLocales=[]}}, false)
+12-09 13:39:19.652  1657  1657 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2193 repeatCheckTimes = 1, locked = false
+12-09 13:39:19.654  7990  7990 D InputMethodManager: showSoftInput() view=androidx.appcompat.widget.AppCompatEditText{eab449a VFED..CL. .F.P..ID 42,169-1038,310 #7f0800fe app:id/et_medication_name_prev aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT
+12-09 13:39:19.695  7990  7990 I AssistStructure: Flattened final assist data: 2092 bytes, containing 1 windows, 9 views
+12-09 13:39:19.873  1657  1657 I AndroidIME: InputBundleManager.loadActiveInputBundleId():450 loadActiveInputBundleId: en-US, ime_english_united_states
+12-09 13:39:19.970  7990  7990 D UiControllerImpl: Injecting string: "9"
+12-09 13:39:19.993  1657  1657 I DeviceIntelligenceExtension: DeviceIntelligenceExtension.getInlineSuggestionsRequest():280 Inline suggestions disabled in stylus mode or vertical PK/Voice toolbar
+12-09 13:39:20.001  1657  1657 I StylusModule: StylusModule.onUpdateToolType():813 Update tool type = 2
+12-09 13:39:20.094  7990  8005 D EGL_emulation: app_time_stats: avg=98.64ms min=7.76ms max=412.77ms count=13
+12-09 13:39:20.163  1657  1657 I ImeTracker: com.google.android.inputmethod.latin:656c60fb: onRequestShow at ORIGIN_IME reason SHOW_SOFT_INPUT_FROM_IME fromUser false
+12-09 13:39:20.251  1657  1657 I GoogleInputMethodService: GoogleInputMethodService.onCreateInputView():1838 onCreateInputView()
+12-09 13:39:20.341  6704  6704 D BoundBrokerSvc: onBind: Intent { act=com.google.android.mdd.service.START dat=chimera-action:/... cmp=com.google.android.gms/.chimera.GmsBoundBrokerService }
+12-09 13:39:20.342  6704  6704 D BoundBrokerSvc: Loading bound service for intent: Intent { act=com.google.android.mdd.service.START dat=chimera-action:/... cmp=com.google.android.gms/.chimera.GmsBoundBrokerService }
+12-09 13:39:20.600  1657  1657 I KeyboardModeManager: KeyboardModeManager.setInputViewKeyboardViewHolderProvider():623 setInputView() : supportsOneHandedMode=true supportsSplitMode=true
+12-09 13:39:20.634  1657  1657 I AndroidIME: KeyboardViewManager.updateKeyboardBackgroundFrameVisibility():347 Set background frame visibility. old:8, new:8
+12-09 13:39:20.636  1657  1657 I ResizableKeyboardModeController: ResizableKeyboardModeController.getKeyboardBottomOffset():229 currentPrimeKeyboardType:SOFT systemPaddingBottom:0
+12-09 13:39:20.661  1657  1657 I KeyboardHeightUtil: KeyboardHeightUtil.calculateMaxKeyboardBodyHeight():45 leave 281 height for app when ime window height:2274, header height:116 and isFullscreenMode:false, so the max keyboard body height is:1877
+12-09 13:39:20.680  1657  1657 I ResizableKeyboardModeController: ResizableKeyboardModeController.getKeyboardBottomOffset():229 currentPrimeKeyboardType:SOFT systemPaddingBottom:0
+12-09 13:39:20.689  1657  1657 I KeyboardModeManager: KeyboardModeManager.setInputViewKeyboardViewHolderProvider():611 setInputView() : supportsOneHandedMode=true, supportSplitMode=true
+12-09 13:39:20.695  1657  1657 I GoogleInputMethodService: GoogleInputMethodService.onStartInputView():2047 onStartInputView(EditorInfo{EditorInfo{packageName=com.example.cydrop_frontend, inputType=20001, inputTypeString=Normal, enableLearning=true, autoCorrection=true, autoComplete=true, imeOptions=48000005, privateImeOptions=null, actionName=NEXT, actionLabel=null, initialSelStart=0, initialSelEnd=0, initialCapsMode=0, label=null, fieldId=2131230974, fieldName=null, extras=Bundle[{androidx.core.view.inputmethod.EditorInfoCompat.STYLUS_HANDWRITING_ENABLED=true}], hintText=non-empty, hintLocales=[]}}, false)
+12-09 13:39:20.710  1657  1657 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2193 repeatCheckTimes = 1, locked = false
+12-09 13:39:20.825  1657  1657 I KeyboardHeightUtil: KeyboardHeightUtil.getOemKeyboardHeightRatio():175 systemKeyboardHeightRatio:1.000000.
+12-09 13:39:20.913  1397  1397 V InlineSuggestionRenderService: handleDestroySuggestionViews called for 0:1447410324
+12-09 13:39:20.938  1657  1657 I LatinIme: LatinIme.<init>():378 Language = en-US
+12-09 13:39:21.011  1657  1657 I Delight5Facilitator: Delight5Facilitator.initializeForIme():726 initializeForIme() : Locale = [en_US], layout = qwerty
+12-09 13:39:21.050  1657  1657 I Delight5Facilitator: Delight5Facilitator.resetDecoder():898 resetDecoder() : Locale = [en_US]
+12-09 13:39:21.072  1657  1657 I Delight5Decoder: Delight5DecoderWrapper.createOrResetDecoder():376 Decoder reset
+12-09 13:39:21.506  7990  8028 D ProfileInstaller: Installing profile for com.example.cydrop_frontend
+12-09 13:39:21.561  7990  8005 D EGL_emulation: app_time_stats: avg=488.58ms min=468.82ms max=507.19ms count=3
+12-09 13:39:21.629  7990  7995 I cydrop_frontend: Background concurrent mark compact GC freed 3899KB AllocSpace bytes, 0(0B) LOS objects, 49% free, 4263KB/8527KB, paused 1.741ms,1.698ms total 136.278ms
+12-09 13:39:22.575  7990  8005 D EGL_emulation: app_time_stats: avg=505.53ms min=500.99ms max=510.07ms count=2
+12-09 13:39:22.684  7990  7990 W InputMethodManager: Timeout waiting for IME to handle input event after 2500 ms: com.google.android.inputmethod.latin/com.android.inputmethod.latin.LatinIME
+12-09 13:39:22.717   692   882 I InputDispatcher: ec4707c com.example.cydrop_frontend/com.example.cydrop_frontend.EditMedsActivity (server) spent 2535ms processing KeyEvent
+12-09 13:39:22.721  7990  7990 I ViewInteraction: Performing 'close keyboard' action on view view.getId() is <2131230974/com.example.cydrop_frontend:id/et_medication_name_prev>
+12-09 13:39:22.725  7990  7990 D IdlingRegistry: Registering idling resources: [androidx.test.espresso.action.CloseKeyboardAction$CloseKeyboardIdlingResult@dc83aee]
+12-09 13:39:22.726  7990  7990 I ImeTracker: com.example.cydrop_frontend:c0ec709c: onRequestHide at ORIGIN_CLIENT reason HIDE_SOFT_INPUT fromUser false
+12-09 13:39:23.464  1657  2252 I MainLanguageModelLoader: MainLanguageModelLoader.call():139 Running LM loader for [en_US]
+12-09 13:39:23.471  1657  1657 I AndroidIME: AbstractIme.onActivate():90 LatinIme.onActivate() : EditorInfo = EditorInfo{packageName=com.example.cydrop_frontend, inputType=20001, inputTypeString=Normal, enableLearning=true, autoCorrection=true, autoComplete=true, imeOptions=48000005, privateImeOptions=null, actionName=NEXT, actionLabel=null, initialSelStart=0, initialSelEnd=0, initialCapsMode=0, label=null, fieldId=2131230974, fieldName=null, extras=Bundle[{androidx.core.view.inputmethod.EditorInfoCompat.STYLUS_HANDWRITING_ENABLED=true}], hintText=non-empty, hintLocales=[]}, IncognitoMode = false, DeviceLocked = false
+12-09 13:39:23.481  1657  1657 I InputBundle: InputBundle.consumeEvent():908 Skip consuming an event as keyboard status is 0
+12-09 13:39:23.495  1657  2252 I DelightDataFileManagerLanguageModelProvider: DelightDataFileManagerLanguageModelProvider.fetchLanguageModel():76 find data en-840 delight
+12-09 13:39:23.517  1657  2252 I LmManager: LmManager.asyncUpdateEnabledLanguageModels():96 asyncUpdateEnabledLanguageModels()
+12-09 13:39:23.518  1657  2252 I SuperDelight: SuperDelightManager.initializeOverridesSuperpacks():400 initializeOverridesSuperpacks()
+12-09 13:39:23.519  1657  8032 I SuperDelight: SuperDelightManager.initializeBundledDelightSuperpacks():374 initializeBundledDelightSuperpacks()
+12-09 13:39:23.520  1657  2252 I DelightKLPDownloader: DelightKLPDownloader.downloadKLPInternal():186 downloading KLP for en_840
+12-09 13:39:23.523  1657  2252 I ManifestedDataDownloader: ManifestedDataDownloader.download():57 downloading manifest https://www.gstatic.com/android/keyboard/dictionarypack/2024101022/metadata.json-perlang/en-840.json?v=2024110401
+12-09 13:39:23.526  1657  2152 I SP      : Registering bundled_delight.2024081500, url: null, constraints: *:*:*:*, flags: *, requested: 2024081500, current: 2024081500
+12-09 13:39:23.544  1657  1657 I native  : I0000 00:00:1733773163.495356    1657 input-context-store.cc:204] Using roll back input context for operation: [AbortComposing] rolled back operation: [CreateOrResetDecoder] reason: client [-1] vs decoder [0]
+12-09 13:39:23.545  1657  2252 I DelightDataFileManagerLanguageModelProvider: DelightDataFileManagerLanguageModelProvider.fetchLanguageModel():76 find data en-US bundled_delight
+12-09 13:39:23.548  1657  1657 E native  : E0000 00:00:1733773165.087100    1657 input-context-store.cc:242] kNoSpans: num_spans: 0, revertible_span_index: 0
+12-09 13:39:23.548  1657  1657 E native  : composing: (0, 0], selection_start: [0, 0] selection_end: [0, 0]
+12-09 13:39:23.551  1657  1657 I LatinIme: LatinIme.updateEnableInlineSuggestionsOnDecoderSideFlags():1188 inline flag updated to:false
+12-09 13:39:23.562  1657  8031 I SuperDelight: SuperDelightManager.initializeBundledDelightSuperpacks():374 initializeBundledDelightSuperpacks()
+12-09 13:39:23.563  1657  2252 I LmManager: LmManager.asyncUpdateEnabledLanguageModels():96 asyncUpdateEnabledLanguageModels()
+12-09 13:39:23.563  1657  2252 I SuperDelight: SuperDelightManager.initializeOverridesSuperpacks():400 initializeOverridesSuperpacks()
+12-09 13:39:23.563  1657  8032 I SuperDelight: SuperDelightManager.syncOverridesLanguageModels():683 SuperDelightManager#syncOverridesLanguageModels(): Superpack delight_overrides not found or negative version provided
+12-09 13:39:23.568  1657  8031 I SuperDelight: SuperDelightManager.syncOverridesLanguageModels():683 SuperDelightManager#syncOverridesLanguageModels(): Superpack delight_overrides not found or negative version provided
+12-09 13:39:23.571  1657  2252 I DelightKLPDownloader: DelightKLPDownloader.downloadKLPInternal():186 downloading KLP for en_840
+12-09 13:39:23.571  1657  2252 I ManifestedDataDownloader: ManifestedDataDownloader.download():57 downloading manifest https://www.gstatic.com/android/keyboard/dictionarypack/2024101022/metadata.json-perlang/en-840.json?v=2024110401
+12-09 13:39:23.576  1657  2252 I MainLanguageModelLoader: MainLanguageModelLoader.updateLmAvailableState():349 updateLmAvailableState(): locale? en_US prevState? AVAILABLE
+12-09 13:39:23.576  1657  2252 I MainLanguageModelLoader: MainLanguageModelLoader.updateLmAvailableState():385 updateLmAvailableState(): locale? en_US newState? AVAILABLE
+12-09 13:39:23.576  1657  2252 I Delight5Facilitator: BlocklistLoader.call():39 Running blocklist loader
+12-09 13:39:23.578  1657  2252 I Delight5Facilitator: ContactsLanguageModelLoader.call():37 Running contacts language model loader
+12-09 13:39:23.579  1657  2252 I Delight5Facilitator: ContactsLanguageModelLoader.call():49 Contacts language model is unloaded: preferences=false, deviceLocked=false, blockPersonalData=false
+12-09 13:39:23.580  1657  2252 I Delight5Facilitator: PersonalLanguageModelLoader.call():47 Running personal language model loader
+12-09 13:39:23.583  7990  8005 D EGL_emulation: app_time_stats: avg=503.88ms min=503.43ms max=504.32ms count=2
+12-09 13:39:23.587  1657  1657 I InputBundle: InputBundle.consumeEvent():908 Skip consuming an event as keyboard status is 0
+12-09 13:39:23.589  1657  8031 I SuperDelight: SuperDelightManager$2.onSuccess():631 delight_overrides sync success, adding to data file manager
+12-09 13:39:23.589  1657  2152 I SP      : Registering bundled_delight.2024081500, url: null, constraints: *:*:*:*, flags: *, requested: 2024081500, current: 2024081500
+12-09 13:39:23.590  1657  2252 I Delight5Facilitator: UserHistoryLanguageModelLoader.call():84 Running user history language model loader
+12-09 13:39:23.593  1657  2251 I Delight5Decoder: Delight5DecoderWrapper.loadLanguageModel():733 loadLanguageModel() : 1, version [2024092300]
+12-09 13:39:23.596  1657  8032 I SuperDelight: SuperDelightManager.syncBundledLanguageModels():769 SuperDelightManager#syncBundledLanguageModels(): Syncing for version 2024081500
+12-09 13:39:23.601  1657  8031 I SuperDelight: SuperDelightManager$2.onSuccess():631 delight_overrides sync success, adding to data file manager
+12-09 13:39:23.602  1657  1657 I InputBundle: InputBundle.consumeEvent():908 Skip consuming an event as keyboard status is 0
+12-09 13:39:23.617  1657  8032 I SuperDelight: SuperDelightManager.syncBundledLanguageModels():769 SuperDelightManager#syncBundledLanguageModels(): Syncing for version 2024081500
+12-09 13:39:23.624  1657  2152 I SuperDelight: SuperDelightBundledSlicingStrategy.getSlices():41 BundledSlicing#getSlices() : Locale = [en_US]
+12-09 13:39:23.643  1657  2152 I SuperDelight: SuperDelightBundledSlicingStrategy.getSlices():67 BundledSlicing#getSlices(): result {slices=[bundled_delight:main_en_us_2024051500_2], last batch=true, sync metadata=false}
+12-09 13:39:23.644  1657  2152 I SP      : Syncing bundled_delight (2024081500) with slices: [main_en_us_2024051500_2], metadata: false
+12-09 13:39:23.644  1657  1657 I KeyboardWrapper: KeyboardWrapper.activateKeyboard():587 activateKeyboard(): type=accessory, status=0, imeDef=kgq{stringId=ime_english_united_states, language=en-US, languageTag=en-US, processedConditions={enable_number_row=false, device=phone}, className=com.google.android.libraries.inputmethod.ime.experiment.ExperimentImeWrapper, label=0, keyEventInterpreter=null, inlineComposing=true, autoCapital=true, announceAutoSelectedCandidate=true, statusIcon=0, primeKeyboardType=SOFT, indicatorIcon=0, indicatorLabel=US, displayAppCompletions=true, extraValues=kgi{#0x7f0b020b=TypedValue{t=0x3/d=0x0 "writing_helper_enable_by_word_revert=false"}, #0x7f0b0211=TypedValue{t=0x3/d=0x0 "com.google.android.apps.inputmethod.libs.latin5.LatinIme"}, #0x7f0b0212=TypedValue{t=0x3/d=0x0 "com.google.android.apps.inputmethod.libs.edittracker.EditTrackingImeWrapper"}, #0x7f0b0213=TypedValue{t=0x3/d=0x0 "com.google.android.apps.inputmethod.libs.latin5.LatinIme"}}, processors=kij@6b29f67, unacceptableMetaKeys=4098, languageSpecificSettings=0, asciiCapable=true, alwaysShowSuggestions=false, useAsciiPasswordKeyboard=false, secondaryIme=null, keyboardGroupDef=khr@4ea2f99, phenotypeFlagId=0, localizationLanguageTag=null, supportsInlineSuggestion=true}
+12-09 13:39:23.646  1657  1657 I KeyboardManager: KeyboardManager.requestKeyboard():234 Creating keyboard accessory, imeId=ime_english_united_states, cacheKey=theme_border_keyboard_mode_screen_size_5_5_keyboard_mode_screen_width_middle_stylesheet_noshadow_reordertheme_gsans_pillkey_silkpopup_gm3token_sagm3token_newm3_light_phone_bottom4dp
+12-09 13:39:23.650  1657  1657 I KeyboardWrapper: KeyboardWrapper.onKeyboardReady():250 onKeyboardReady(): type=null(accessory), kb=com.google.android.libraries.inputmethod.keyboard.impl.Keyboard@8270c83
+12-09 13:39:23.653  1657  2252 I EmojiShortcutsLoader: EmojiShortcutsLoader.getEmojiShortcuts():135 Reading en_US emoji shortcuts
+12-09 13:39:23.655  1657  1657 I KeyboardWrapper: KeyboardWrapper.doActivateKeyboard():618 doActivateKeyboard(): accessory
+12-09 13:39:23.655  1657  1657 W KeyboardDef: KeyboardDef.getKeyboardViewDef():757 KeyboardViewDef is not found: keyboardDef=khl{processedConditions={}, globalConditions={}, className=com.google.android.libraries.inputmethod.keyboard.impl.Keyboard, resourceIds=[#0x7f170045], initialStates=0, keyboardViewDefs=[], persistentStates=0, persistentStatesPrefKey=null, popupBubbleLayoutId=0, recentKeyLayoutId=0, recentKeyPopupLayoutId=0, recentKeyType=null, rememberRecentKey=NONE, sessionStates=0}, type=HEADER, id=2131427674
+12-09 13:39:23.656  1657  1657 W Keyboard: Keyboard.getKeyboardViewHelper():584 null helper is returned: keyboardDef=khl{processedConditions={}, globalConditions={}, className=com.google.android.libraries.inputmethod.keyboard.impl.Keyboard, resourceIds=[#0x7f170045], initialStates=0, keyboardViewDefs=[], persistentStates=0, persistentStatesPrefKey=null, popupBubbleLayoutId=0, recentKeyLayoutId=0, recentKeyPopupLayoutId=0, recentKeyType=null, rememberRecentKey=NONE, sessionStates=0}, type=HEADER, helpersCreated=[null, null, null, null], context.getResources().getConfiguration(): {1.0 310mcc260mnc [en_US] ldltr sw411dp w411dp h914dp 420dpi nrml long port finger qwerty/v/v dpad/v winConfig={ mBounds=Rect(0, 0 - 1080, 2400) mAppBounds=Rect(0, 0 - 1080, 2400) mMaxBounds=Rect(0, 0 - 1080, 2400) mDisplayRotation=ROTATION_0 mWindowingMode=fullscreen mActivityType=undefined mAlwaysOnTop=undefined mRotation=ROTATION_0} s.11 fontWeightAdjustment=0}
+12-09 13:39:23.656  1657  1657 W KeyboardDef: KeyboardDef.getKeyboardViewDef():757 KeyboardViewDef is not found: keyboardDef=khl{processedConditions={}, globalConditions={}, className=com.google.android.libraries.inputmethod.keyboard.impl.Keyboard, resourceIds=[#0x7f170045], initialStates=0, keyboardViewDefs=[], persistentStates=0, persistentStatesPrefKey=null, popupBubbleLayoutId=0, recentKeyLayoutId=0, recentKeyPopupLayoutId=0, recentKeyType=null, rememberRecentKey=NONE, sessionStates=0}, type=BODY, id=2131427674
+12-09 13:39:23.656  1657  1657 W Keyboard: Keyboard.getKeyboardViewHelper():584 null helper is returned: keyboardDef=khl{processedConditions={}, globalConditions={}, className=com.google.android.libraries.inputmethod.keyboard.impl.Keyboard, resourceIds=[#0x7f170045], initialStates=0, keyboardViewDefs=[], persistentStates=0, persistentStatesPrefKey=null, popupBubbleLayoutId=0, recentKeyLayoutId=0, recentKeyPopupLayoutId=0, recentKeyType=null, rememberRecentKey=NONE, sessionStates=0}, type=BODY, helpersCreated=[null, null, null, null], context.getResources().getConfiguration(): {1.0 310mcc260mnc [en_US] ldltr sw411dp w411dp h914dp 420dpi nrml long port finger qwerty/v/v dpad/v winConfig={ mBounds=Rect(0, 0 - 1080, 2400) mAppBounds=Rect(0, 0 - 1080, 2400) mMaxBounds=Rect(0, 0 - 1080, 2400) mDisplayRotation=ROTATION_0 mWindowingMode=fullscreen mActivityType=undefined mAlwaysOnTop=undefined mRotation=ROTATION_0} s.11 fontWeightAdjustment=0}
+12-09 13:39:23.659  1657  1657 W Keyboard: Keyboard.getKeyboardViewHelper():584 null helper is returned: keyboardDef=khl{processedConditions={}, globalConditions={}, className=com.google.android.libraries.inputmethod.keyboard.impl.Keyboard, resourceIds=[#0x7f170045], initialStates=0, keyboardViewDefs=[], persistentStates=0, persistentStatesPrefKey=null, popupBubbleLayoutId=0, recentKeyLayoutId=0, recentKeyPopupLayoutId=0, recentKeyType=null, rememberRecentKey=NONE, sessionStates=0}, type=HEADER, helpersCreated=[null, null, null, null], context.getResources().getConfiguration(): {1.0 310mcc260mnc [en_US] ldltr sw411dp w411dp h914dp 420dpi nrml long port finger qwerty/v/v dpad/v winConfig={ mBounds=Rect(0, 0 - 1080, 2400) mAppBounds=Rect(0, 0 - 1080, 2400) mMaxBounds=Rect(0, 0 - 1080, 2400) mDisplayRotation=ROTATION_0 mWindowingMode=fullscreen mActivityType=undefined mAlwaysOnTop=undefined mRotation=ROTATION_0} s.11 fontWeightAdjustment=0}
+12-09 13:39:23.660  1657  1657 W Keyboard: Keyboard.getKeyboardViewHelper():584 null helper is returned: keyboardDef=khl{processedConditions={}, globalConditions={}, className=com.google.android.libraries.inputmethod.keyboard.impl.Keyboard, resourceIds=[#0x7f170045], initialStates=0, keyboardViewDefs=[], persistentStates=0, persistentStatesPrefKey=null, popupBubbleLayoutId=0, recentKeyLayoutId=0, recentKeyPopupLayoutId=0, recentKeyType=null, rememberRecentKey=NONE, sessionStates=0}, type=BODY, helpersCreated=[null, null, null, null], context.getResources().getConfiguration(): {1.0 310mcc260mnc [en_US] ldltr sw411dp w411dp h914dp 420dpi nrml long port finger qwerty/v/v dpad/v winConfig={ mBounds=Rect(0, 0 - 1080, 2400) mAppBounds=Rect(0, 0 - 1080, 2400) mMaxBounds=Rect(0, 0 - 1080, 2400) mDisplayRotation=ROTATION_0 mWindowingMode=fullscreen mActivityType=undefined mAlwaysOnTop=undefined mRotation=ROTATION_0} s.11 fontWeightAdjustment=0}
+12-09 13:39:23.662  1657  1657 W KeyboardDef: KeyboardDef.getKeyboardViewDef():757 KeyboardViewDef is not found: keyboardDef=khl{processedConditions={}, globalConditions={}, className=com.google.android.libraries.inputmethod.keyboard.impl.Keyboard, resourceIds=[#0x7f170045], initialStates=0, keyboardViewDefs=[], persistentStates=0, persistentStatesPrefKey=null, popupBubbleLayoutId=0, recentKeyLayoutId=0, recentKeyPopupLayoutId=0, recentKeyType=null, rememberRecentKey=NONE, sessionStates=0}, type=FLOATING_CANDIDATES, id=2131427674
+12-09 13:39:23.662  1657  1657 W Keyboard: Keyboard.getKeyboardViewHelper():584 null helper is returned: keyboardDef=khl{processedConditions={}, globalConditions={}, className=com.google.android.libraries.inputmethod.keyboard.impl.Keyboard, resourceIds=[#0x7f170045], initialStates=0, keyboardViewDefs=[], persistentStates=0, persistentStatesPrefKey=null, popupBubbleLayoutId=0, recentKeyLayoutId=0, recentKeyPopupLayoutId=0, recentKeyType=null, rememberRecentKey=NONE, sessionStates=0}, type=FLOATING_CANDIDATES, helpersCreated=[null, null, null, null], context.getResources().getConfiguration(): {1.0 310mcc260mnc [en_US] ldltr sw411dp w411dp h914dp 420dpi nrml long port finger qwerty/v/v dpad/v winConfig={ mBounds=Rect(0, 0 - 1080, 2400) mAppBounds=Rect(0, 0 - 1080, 2400) mMaxBounds=Rect(0, 0 - 1080, 2400) mDisplayRotation=ROTATION_0 mWindowingMode=fullscreen mActivityType=undefined mAlwaysOnTop=undefined mRotation=ROTATION_0} s.11 fontWeightAdjustment=0}
+12-09 13:39:23.663  1657  1657 W KeyboardDef: KeyboardDef.getKeyboardViewDef():757 KeyboardViewDef is not found: keyboardDef=khl{processedConditions={}, globalConditions={}, className=com.google.android.libraries.inputmethod.keyboard.impl.Keyboard, resourceIds=[#0x7f170045], initialStates=0, keyboardViewDefs=[], persistentStates=0, persistentStatesPrefKey=null, popupBubbleLayoutId=0, recentKeyLayoutId=0, recentKeyPopupLayoutId=0, recentKeyType=null, rememberRecentKey=NONE, sessionStates=0}, type=WIDGET, id=2131427674
+12-09 13:39:23.663  1657  1657 W Keyboard: Keyboard.getKeyboardViewHelper():584 null helper is returned: keyboardDef=khl{processedConditions={}, globalConditions={}, className=com.google.android.libraries.inputmethod.keyboard.impl.Keyboard, resourceIds=[#0x7f170045], initialStates=0, keyboardViewDefs=[], persistentStates=0, persistentStatesPrefKey=null, popupBubbleLayoutId=0, recentKeyLayoutId=0, recentKeyPopupLayoutId=0, recentKeyType=null, rememberRecentKey=NONE, sessionStates=0}, type=WIDGET, helpersCreated=[null, null, null, null], context.getResources().getConfiguration(): {1.0 310mcc260mnc [en_US] ldltr sw411dp w411dp h914dp 420dpi nrml long port finger qwerty/v/v dpad/v winConfig={ mBounds=Rect(0, 0 - 1080, 2400) mAppBounds=Rect(0, 0 - 1080, 2400) mMaxBounds=Rect(0, 0 - 1080, 2400) mDisplayRotation=ROTATION_0 mWindowingMode=fullscreen mActivityType=undefined mAlwaysOnTop=undefined mRotation=ROTATION_0} s.11 fontWeightAdjustment=0}
+12-09 13:39:23.682  1657  2252 I EmojiShortcutsLoader: EmojiShortcutsLoader.getEmojiShortcuts():156 Read en_US emoji shortcuts successfully.
+12-09 13:39:23.696  1657  2252 I EmojiShortcutsLoader: EmojiShortcutsLoader.call():71 1 emoji shortcut maps loaded.
+12-09 13:39:23.702  1657  2252 I EmojiShortcutsLoader: EmojiShortcutsLoader.call():82 Finished loading emoji shortcuts
+12-09 13:39:23.704  1657  2252 I Delight5Facilitator: EmailLanguageModelLoader.call():32 Running email language model loader
+12-09 13:39:23.714  1657  2252 I Delight5Facilitator: KeyCorrectionTfliteModelLoader.call():31 Running Key Correction Tflite Model loader
+12-09 13:39:23.718  1657  2252 I Delight5Facilitator: RankingModelLoader.call():30 Running Ranking Model loader
+12-09 13:39:23.730  1657  1657 I GoogleInputMethodService: GoogleInputMethodService.startInputIfInputViewStarted():3640 startInputIfInputViewStarted(): ACCESSORY
+12-09 13:39:23.733  1657  1657 I KeyboardModeManager: KeyboardModeManager.setInputViewKeyboardViewHolderProvider():623 setInputView() : supportsOneHandedMode=true supportsSplitMode=true
+12-09 13:39:23.733  1657  1657 I ResizableKeyboardModeController: ResizableKeyboardModeController.getKeyboardBottomOffset():229 currentPrimeKeyboardType:SOFT systemPaddingBottom:0
+12-09 13:39:23.734  1657  1657 I KeyboardHeightUtil: KeyboardHeightUtil.calculateMaxKeyboardBodyHeight():45 leave 281 height for app when ime window height:2274, header height:116 and isFullscreenMode:false, so the max keyboard body height is:1877
+12-09 13:39:23.734  1657  1657 I ResizableKeyboardModeController: ResizableKeyboardModeController.getKeyboardBottomOffset():229 currentPrimeKeyboardType:SOFT systemPaddingBottom:0
+12-09 13:39:23.735  1657  1657 I KeyboardModeManager: KeyboardModeManager.setInputViewKeyboardViewHolderProvider():611 setInputView() : supportsOneHandedMode=true, supportSplitMode=true
+12-09 13:39:23.764  1657  1657 I CrowdsourceExtension: CrowdsourceExtension.checkIfDefaultBrowserIsAllowed():109 Failed to get default browser. The default browser may be deactivated.
+12-09 13:39:23.781  1657  1657 I HardKeyTracker: HardKeyTracker.unregisterKeySequence():183 Unregister key sequence lav{labelResId=2132019895, callback=bzm@a5afafa, lastModifier=2, keyCodes=[56], actions=[0]}
+12-09 13:39:23.782  1657  1657 I HardKeyTracker: HardKeyTracker.unregisterKeySequence():183 Unregister key sequence lav{labelResId=2132019895, callback=bzm@5b932a1, lastModifier=0, keyCodes=[317], actions=[0]}
+12-09 13:39:23.785  1657  1657 I HardKeyTracker: HardKeyTracker.registerKeySequence():139 Register key sequence lav{labelResId=2132019895, callback=bzm@82388fb, lastModifier=2, keyCodes=[56], actions=[0]}
+12-09 13:39:23.785  1657  1657 I HardKeyTracker: HardKeyTracker.registerKeySequence():139 Register key sequence lav{labelResId=2132019895, callback=bzm@34b5556, lastModifier=0, keyCodes=[317], actions=[0]}
+12-09 13:39:23.799  1657  1657 I VoiceInputManagerWrapper: VoiceInputManagerWrapper.cancelShutdown():100 cancelShutdown()
+12-09 13:39:23.799  1657  1657 I VoiceInputManagerWrapper: VoiceInputManagerWrapper.syncLanguagePacks():112 syncLanguagePacks()
+12-09 13:39:23.800  1657  2151 I NetworkInfoNotification: NetworkInfoNotification$Listener.onReceive():107 onNetworkAvailable: networkState = NON_METERED, isAirplaneModeOn = false
+12-09 13:39:23.813  1657  1657 I VoiceInputManager: VoiceInputManager.onKeyboardActivated():1065 onKeyboardActivated() [UD]
+12-09 13:39:23.814  1657  3089 I SpeechFactory: SpeechRecognitionFactory.maybeScheduleAutoPackDownloadForFallback():161 maybeScheduleAutoPackDownloadForFallback()
+12-09 13:39:23.814  1657  3089 I FallbackOnDeviceRecognitionProvider: FallbackOnDeviceRecognitionProvider.maybeScheduleAutoPackDownload():198 maybeScheduleAutoPackDownload() for language tag en-US
+12-09 13:39:23.823  1657  1657 I AccessoryInputModeManager: AccessoryInputModeManager.onModeStarted():300 Accessory input mode started: STYLUS
+12-09 13:39:23.857  1657  2152 I SuperDelight: SuperDelightBundledSlicingStrategy.getSlices():41 BundledSlicing#getSlices() : Locale = [en_US]
+12-09 13:39:23.860  1657  2152 I SuperDelight: SuperDelightBundledSlicingStrategy.getSlices():67 BundledSlicing#getSlices(): result {slices=[bundled_delight:main_en_us_2024051500_2], last batch=true, sync metadata=false}
+12-09 13:39:23.860  1657  2152 I SP      : Syncing bundled_delight (2024081500) with slices: [main_en_us_2024051500_2], metadata: false
+12-09 13:39:23.865  1657  2252 I CrankEngineLocales: CrankEngineLocales.getLocaleToUseForCrankEngine():66 Using locale en_US for emoji prediction
+12-09 13:39:23.865  1657  2252 I CrankEngineLocales: CrankEngineLocales.getLocaleToUseForCrankEngine():66 Using locale en_US for emoji prediction
+12-09 13:39:23.865  1657  1657 I KeyboardViewHelper: KeyboardViewHelper.getView():168 Get view with height ratio:1.000000
+12-09 13:39:23.865  1657  2252 I CrankEngineLocales: CrankEngineLocales.getLocaleToUseForCrankEngine():66 Using locale en_US for emoji prediction
+12-09 13:39:23.869  1657  1657 W ExtensionWrapper: ExtensionWrapper.setAllowUpdateNavigationBarStyle():803 class hwy is not activate
+12-09 13:39:23.869  1657  1657 I WidgetViewShowingController: WidgetViewShowingController.showWidgetKeyboardInternal():466 Show companion widget
+12-09 13:39:23.911  1657  1657 W ExtensionWrapper: ExtensionWrapper.setAllowUpdateNavigationBarStyle():803 class hwy is not activate
+12-09 13:39:23.943  1657  1657 I KeyboardManager: KeyboardManager.requestKeyboard():234 Creating keyboard accessory_candidates_consumer, imeId=ime_english_united_states, cacheKey=theme_border_keyboard_mode_screen_size_5_5_keyboard_mode_screen_width_middle_stylesheet_noshadow_reordertheme_gsans_pillkey_silkpopup_gm3token_sagm3token_newm3_light_phone_bottom4dp
+12-09 13:39:23.945  1657  2152 I SP      : GC for 'bundled_delight' (10) with ttl of 0 ms took 0 ms (0/0/0)
+12-09 13:39:23.957  1657  2152 I LmManager: LmManager$1.onFailure():87 Bundled delight sync failed
+12-09 13:39:23.957  1657  2152 I LmManager: java.util.concurrent.CancellationException: Task was cancelled.
+12-09 13:39:23.957  1657  2152 I LmManager: 	at phw.r(PG:33)
+12-09 13:39:23.957  1657  2152 I LmManager: 	at phw.get(PG:3)
+12-09 13:39:23.957  1657  2152 I LmManager: 	at a.j(PG:2)
+12-09 13:39:23.957  1657  2152 I LmManager: 	at oxj.N(PG:10)
+12-09 13:39:23.957  1657  2152 I LmManager: 	at pjo.run(PG:88)
+12-09 13:39:23.957  1657  2152 I LmManager: 	at pix.execute(PG:1)
+12-09 13:39:23.957  1657  2152 I LmManager: 	at phw.h(PG:1)
+12-09 13:39:23.957  1657  2152 I LmManager: 	at phw.k(PG:101)
+12-09 13:39:23.957  1657  2152 I LmManager: 	at phw.p(PG:28)
+12-09 13:39:23.957  1657  2152 I LmManager: 	at pit.c(PG:5)
+12-09 13:39:23.957  1657  2152 I LmManager: 	at piv.e(PG:6)
+12-09 13:39:23.957  1657  2152 I LmManager: 	at pjz.run(PG:73)
+12-09 13:39:23.957  1657  2152 I LmManager: 	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:487)
+12-09 13:39:23.957  1657  2152 I LmManager: 	at java.util.concurrent.FutureTask.run(FutureTask.java:264)
+12-09 13:39:23.957  1657  2152 I LmManager: 	at ind.run(PG:8)
+12-09 13:39:23.957  1657  2152 I LmManager: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+12-09 13:39:23.957  1657  2152 I LmManager: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:644)
+12-09 13:39:23.957  1657  2152 I LmManager: 	at java.lang.Thread.run(Thread.java:1012)
+12-09 13:39:23.957  1657  2152 I LmManager: 	at imn.run(PG:8)
+12-09 13:39:23.958  1657  2152 I AbstractSyncResultCallback: AbstractSyncResultCallback.onFailure():38 onFailure(): bundled_delight.sync cancelled; expected if new request supersedes pending one.
+12-09 13:39:23.966  1657  8031 I SuperDelight: SuperDelightManager$2.onSuccess():631 bundled_delight sync success, adding to data file manager
+12-09 13:39:23.970  1657  8031 I DataFileManager: DataFileManager.addDataWithoutNotify():181 data en-US already exists
+12-09 13:39:23.981  1657  2252 I CrankEngineLocales: CrankEngineLocales.getLocaleToUseForCrankEngine():66 Using locale en_US for emoji prediction
+12-09 13:39:23.981  1657  2252 I CrankEngineLocales: CrankEngineLocales.getLocaleToUseForCrankEngine():66 Using locale en_US for emoji prediction
+12-09 13:39:24.023  1657  2151 W LatinCommonCountersMetricsProcessor: LatinCommonCountersMetricsProcessor$DelightProblemReporter.run():836 Missing LM for 'en'
+12-09 13:39:24.023  1657  1657 W KeyboardDef: KeyboardDef.getKeyboardViewDef():757 KeyboardViewDef is not found: keyboardDef=khl{processedConditions={}, globalConditions={global_theme_key=theme_border_keyboard_mode_screen_size_5_5_keyboard_mode_screen_width_middle_stylesheet_noshadow_reordertheme_gsans_pillkey_silkpopup_gm3token_sagm3token_newm3_light_phone_bottom4dp, global_locale=en_US, global_density_dpi=420, global_orientation=1}, className=.latin.keyboard.AccessoryKeyboard, resourceIds=[#0x7f170044], initialStates=0, keyboardViewDefs=[khz{direction=null, id=#0x7f0b015a, isScalable=false, layoutId=#0x7f0e002c, type=FLOATING_CANDIDATES, touchable=true, defaultShow=false}], persistentStates=0, persistentStatesPrefKey=null, popupBubbleLayoutId=#0x7f0e06aa, recentKeyLayoutId=0, recentKeyPopupLayoutId=0, recentKeyType=null, rememberRecentKey=NONE, sessionStates=0}, type=HEADER, id=2131427674
+12-09 13:39:24.024  1657  1657 W Keyboard: Keyboard.getKeyboardViewHelper():584 null helper is returned: keyboardDef=khl{processedConditions={}, globalConditions={global_theme_key=theme_border_keyboard_mode_screen_size_5_5_keyboard_mode_screen_width_middle_stylesheet_noshadow_reordertheme_gsans_pillkey_silkpopup_gm3token_sagm3token_newm3_light_phone_bottom4dp, global_locale=en_US, global_density_dpi=420, global_orientation=1}, className=.latin.keyboard.AccessoryKeyboard, resourceIds=[#0x7f170044], initialStates=0, keyboardViewDefs=[khz{direction=null, id=#0x7f0b015a, isScalable=false, layoutId=#0x7f0e002c, type=FLOATING_CANDIDATES, touchable=true, defaultShow=false}], persistentStates=0, persistentStatesPrefKey=null, popupBubbleLayoutId=#0x7f0e06aa, recentKeyLayoutId=0, recentKeyPopupLayoutId=0, recentKeyType=null, rememberRecentKey=NONE, sessionStates=0}, type=HEADER, helpersCreated=[null, null, null, null], context.getResources().getConfiguration(): {1.0 310mcc260mnc [en_US] ldltr sw411dp w411dp h914dp 420dpi nrml long port finger qwerty/v/v dpad/v winConfig={ mBounds=Rect(0, 0 - 1080, 2400) mAppBounds=Rect(0, 0 - 1080, 2400) mMaxBounds=Rect(0, 0 - 1080, 2400) mDisplayRotation=ROTATION_0 mWindowingMode=fullscreen mActivityType=undefined mAlwaysOnTop=undefined mRotation=ROTATION_0} s.11 fontWeightAdjustment=0}
+12-09 13:39:24.024  1657  1657 W KeyboardDef: KeyboardDef.getKeyboardViewDef():757 KeyboardViewDef is not found: keyboardDef=khl{processedConditions={}, globalConditions={global_theme_key=theme_border_keyboard_mode_screen_size_5_5_keyboard_mode_screen_width_middle_stylesheet_noshadow_reordertheme_gsans_pillkey_silkpopup_gm3token_sagm3token_newm3_light_phone_bottom4dp, global_locale=en_US, global_density_dpi=420, global_orientation=1}, className=.latin.keyboard.AccessoryKeyboard, resourceIds=[#0x7f170044], initialStates=0, keyboardViewDefs=[khz{direction=null, id=#0x7f0b015a, isScalable=false, layoutId=#0x7f0e002c, type=FLOATING_CANDIDATES, touchable=true, defaultShow=false}], persistentStates=0, persistentStatesPrefKey=null, popupBubbleLayoutId=#0x7f0e06aa, recentKeyLayoutId=0, recentKeyPopupLayoutId=0, recentKeyType=null, rememberRecentKey=NONE, sessionStates=0}, type=BODY, id=2131427674
+12-09 13:39:24.024  1657  1657 W Keyboard: Keyboard.getKeyboardViewHelper():584 null helper is returned: keyboardDef=khl{processedConditions={}, globalConditions={global_theme_key=theme_border_keyboard_mode_screen_size_5_5_keyboard_mode_screen_width_middle_stylesheet_noshadow_reordertheme_gsans_pillkey_silkpopup_gm3token_sagm3token_newm3_light_phone_bottom4dp, global_locale=en_US, global_density_dpi=420, global_orientation=1}, className=.latin.keyboard.AccessoryKeyboard, resourceIds=[#0x7f170044], initialStates=0, keyboardViewDefs=[khz{direction=null, id=#0x7f0b015a, isScalable=false, layoutId=#0x7f0e002c, type=FLOATING_CANDIDATES, touchable=true, defaultShow=false}], persistentStates=0, persistentStatesPrefKey=null, popupBubbleLayoutId=#0x7f0e06aa, recentKeyLayoutId=0, recentKeyPopupLayoutId=0, recentKeyType=null, rememberRecentKey=NONE, sessionStates=0}, type=BODY, helpersCreated=[null, null, null, null], context.getResources().getConfiguration(): {1.0 310mcc260mnc [en_US] ldltr sw411dp w411dp h914dp 420dpi nrml long port finger qwerty/v/v dpad/v winConfig={ mBounds=Rect(0, 0 - 1080, 2400) mAppBounds=Rect(0, 0 - 1080, 2400) mMaxBounds=Rect(0, 0 - 1080, 2400) mDisplayRotation=ROTATION_0 mWindowingMode=fullscreen mActivityType=undefined mAlwaysOnTop=undefined mRotation=ROTATION_0} s.11 fontWeightAdjustment=0}
+12-09 13:39:24.034  1657  1657 W NotificationCenter: NotificationCenter$NotificationQueue.notifyOnExecutor():883 Heavy notify work detected on UI thread: [hyj->hwu] takes 211ms
+12-09 13:39:24.083  1657  1657 I Delight5Decoder: Delight5DecoderWrapper.setKeyboardLayout():514 setKeyboardLayout()
+12-09 13:39:24.100  1657  2152 I SP      : Sync for bundled_delight succeeded in 245 ms: no changes
+12-09 13:39:24.103  1657  2252 I CrankEngineLocales: CrankEngineLocales.getLocaleToUseForCrankEngine():66 Using locale en_US for emoji prediction
+12-09 13:39:24.104  1657  2152 I SP      : GC for 'bundled_delight' (10) with ttl of 0 ms took 4 ms (0/4/0)
+12-09 13:39:24.104  1657  2152 I LmManager: LmManager$1.onSuccess():82 Bundled delight sync success
+12-09 13:39:24.106  1657  8031 I SuperDelight: SuperDelightManager$2.onSuccess():631 bundled_delight sync success, adding to data file manager
+12-09 13:39:24.107  1657  8031 I DataFileManager: DataFileManager.addDataWithoutNotify():181 data en-US already exists
+12-09 13:39:24.206  1657  2252 I CrankEngineLocales: CrankEngineLocales.getLocaleToUseForCrankEngine():66 Using locale en_US for emoji prediction
+12-09 13:39:24.226  1657  1657 I VoiceImeExtension: VoiceImeExtension.shouldStartVoiceInputAutomaticallyInCurrentInputBox():412 No private IME option set to start voice input.
+12-09 13:39:24.251  1657  1657 I StylusModule: StylusModule.onUpdateToolType():813 Update tool type = 2
+12-09 13:39:24.254  1657  1657 I Choreographer: Skipped 242 frames!  The application may be doing too much work on its main thread.
+12-09 13:39:24.256  1657  2251 I Delight5Decoder: Delight5DecoderWrapper.loadLanguageModel():755 Loaded main LM 1.en
+12-09 13:39:24.257  1657  2251 I Delight5Decoder: Delight5DecoderWrapper.loadLanguageModel():733 loadLanguageModel() : 7, version [n/a]
+12-09 13:39:24.258  1657  2251 I native  : I0000 00:00:1733773164.258058    2251 blocklist-assembly.cc:126] LoadBlocklist en
+12-09 13:39:24.259  1657  2251 I Delight5Decoder: Delight5DecoderWrapper.loadLanguageModel():774 Loaded dynamic LM 7.en
+12-09 13:39:24.259  1657  2251 I Delight5Decoder: Delight5DecoderWrapper.loadLanguageModel():733 loadLanguageModel() : 4, version [n/a]
+12-09 13:39:24.268   692  1901 I ImeTracker: com.example.cydrop_frontend:9d6426a: onCancelled at PHASE_WM_SHOW_IME_RUNNER
+12-09 13:39:24.274  1657  2251 I Delight5Decoder: Delight5DecoderWrapper.loadLanguageModel():774 Loaded dynamic LM 4.en
+12-09 13:39:24.283  1657  2251 I Delight5Decoder: Delight5DecoderWrapper.loadLanguageModel():733 loadLanguageModel() : 3, version [n/a]
+12-09 13:39:24.297  6704  6704 D BoundBrokerSvc: onBind: Intent { act=com.google.firebase.dynamiclinks.service.START pkg=com.google.android.gms }
+12-09 13:39:24.298  6704  6704 D BoundBrokerSvc: Loading bound service for intent: Intent { act=com.google.firebase.dynamiclinks.service.START pkg=com.google.android.gms }
+12-09 13:39:24.308  1657  2251 I Delight5Decoder: Delight5DecoderWrapper.loadLanguageModel():774 Loaded dynamic LM 3.en
+12-09 13:39:24.319  1657  1657 I WindowMetricsNotification: WindowMetricsNotification.notifyWithWindow():162
+12-09 13:39:24.322  1657  1657 I WindowMetricsNotification: WindowMetricsNotification.notify():155 WindowMetricsNotification{bounds=Rect(0, 63 - 1080, 2400), insets=Rect(0, 0 - 0, 63), densityDpi=420, smallestScreenWidthDp=411, displayWidth=1080, displayHeight=2400, xdpi=420.0, ydpi=420.0, isTrustable=true}; DisplayMetrics{density=2.625, width=1080, height=2400, scaledDensity=2.625, xdpi=420.0, ydpi=420.0}
+12-09 13:39:24.505  1657  2251 I Delight5Decoder: Delight5DecoderWrapper.loadLanguageModel():733 loadLanguageModel() : 29, version [n/a]
+12-09 13:39:24.506  1657  2251 W Delight5Decoder: Delight5DecoderWrapper.getTimerTypeForLoadLanguageModule():881 Cannot find timer type for loading language model 29
+12-09 13:39:24.518  1657  2251 I Delight5Decoder: Delight5DecoderWrapper.loadLanguageModel():774 Loaded dynamic LM 29.en
+12-09 13:39:24.606  1657  2251 I Delight5Decoder: Delight5DecoderWrapper.setKeyboardLayout():514 setKeyboardLayout()
+12-09 13:39:24.701  7990  7990 D InsetsController: show(ime(), fromIme=true)
+12-09 13:39:24.720  1657  2820 I HWUI    : Davey! duration=4408ms; Flags=1, FrameTimelineVsyncId=50104, IntendedVsync=2234206446734, Vsync=2238239779906, InputEventId=0, HandleInputStart=2238262153600, AnimationStart=2238262377900, PerformTraversalsStart=2238262812800, DrawStart=2238421562900, FrameDeadline=2234223113400, FrameInterval=2238254584600, FrameStartTime=16666666, SyncQueued=2238498075700, SyncStart=2238591331400, IssueDrawCommandsStart=2238594287600, SwapBuffers=2238653051000, FrameCompleted=2238708480900, DequeueBufferDuration=48000, QueueBufferDuration=519100, GpuCompleted=2238708480900, SwapBuffersCompleted=2238694977400, DisplayPresentTime=0, CommandSubmissionCompleted=2238653051000,
+12-09 13:39:24.740  1657  1657 I GoogleInputMethodService: GoogleInputMethodService.onFinishInputView():2383
+12-09 13:39:24.745  1657  1657 I VoiceInputManagerWrapper: VoiceInputManagerWrapper.shutdown():122 shutdown()
+12-09 13:39:24.749  1657  1657 W ExtensionWrapper: ExtensionWrapper.setAllowUpdateNavigationBarStyle():803 class hwy is not activate
+12-09 13:39:24.749  7990  7990 D IdlingRegistry: Unregistering idling resources: [androidx.test.espresso.action.CloseKeyboardAction$CloseKeyboardIdlingResult@dc83aee]
+12-09 13:39:24.749  7990  7990 W CloseKeyboardAction: Caught timeout exception. Retrying.
+12-09 13:39:24.749  7990  7990 D IdlingRegistry: Registering idling resources: [androidx.test.espresso.action.CloseKeyboardAction$CloseKeyboardIdlingResult@e8235d9]
+12-09 13:39:24.753  7990  7990 I ImeTracker: com.example.cydrop_frontend:f9dc93ed: onRequestHide at ORIGIN_CLIENT reason HIDE_SOFT_INPUT fromUser false
+12-09 13:39:24.762  7990  8037 W InteractionJankMonitor: Initializing without READ_DEVICE_CONFIG permission. enabled=false, interval=1, missedFrameThreshold=3, frameTimeThreshold=64, package=com.example.cydrop_frontend
+12-09 13:39:24.764  1657  1657 W ExtensionWrapper: ExtensionWrapper.setAllowUpdateNavigationBarStyle():803 class hwy is not activate
+12-09 13:39:24.767  1657  1657 W TooltipLifecycleManager: TooltipLifecycleManager.dismissTooltips():153 Tooltip with id spell_check_add_to_dictionary not found in tooltipManager.
+12-09 13:39:24.774  1657  1657 I InputBundle: InputBundle.consumeEvent():908 Skip consuming an event as keyboard status is 0
+12-09 13:39:24.796  1657  1657 I AndroidIME: AbstractIme.onDeactivate():203 LatinIme.onDeactivate()
+12-09 13:39:24.808  1657  1657 I GoogleInputMethodService: GoogleInputMethodService$1.onKeyboardViewShown():468 onKeyboardViewShown: keyboardType=accessory, keyboardViewType=HEADER keyboardView=null
+12-09 13:39:24.810  1657  1657 I GoogleInputMethodService: GoogleInputMethodService$1.onKeyboardViewShown():468 onKeyboardViewShown: keyboardType=accessory, keyboardViewType=BODY keyboardView=null
+12-09 13:39:24.816  1657  1657 I WindowMetricsNotification: WindowMetricsNotification.notifyWithWindow():162
+12-09 13:39:24.817  1657  1657 I WindowMetricsNotification: WindowMetricsNotification.notify():155 WindowMetricsNotification{bounds=Rect(0, 63 - 1080, 2400), insets=Rect(0, 0 - 0, 63), densityDpi=420, smallestScreenWidthDp=411, displayWidth=1080, displayHeight=2400, xdpi=420.0, ydpi=420.0, isTrustable=true}; DisplayMetrics{density=2.625, width=1080, height=2400, scaledDensity=2.625, xdpi=420.0, ydpi=420.0}
+12-09 13:39:24.820  7990  7990 D InsetsController: hide(ime(), fromIme=true)
+12-09 13:39:24.830  7990  7990 I ImeTracker: com.google.android.inputmethod.latin:656c60fb: onCancelled at PHASE_CLIENT_ANIMATION_CANCEL
+12-09 13:39:24.851  1657  1657 I WindowMetricsNotification: WindowMetricsNotification.notifyWithWindow():162
+12-09 13:39:24.852  1657  1657 I WindowMetricsNotification: WindowMetricsNotification.notify():155 WindowMetricsNotification{bounds=Rect(0, 63 - 1080, 2400), insets=Rect(0, 0 - 0, 63), densityDpi=420, smallestScreenWidthDp=411, displayWidth=1080, displayHeight=2400, xdpi=420.0, ydpi=420.0, isTrustable=true}; DisplayMetrics{density=2.625, width=1080, height=2400, scaledDensity=2.625, xdpi=420.0, ydpi=420.0}
+12-09 13:39:24.854  1657  1657 I WindowMetricsNotification: WindowMetricsNotification.notifyWithWindow():162
+12-09 13:39:24.855  1657  1657 I WindowMetricsNotification: WindowMetricsNotification.notify():155 WindowMetricsNotification{bounds=Rect(0, 63 - 1080, 2400), insets=Rect(0, 0 - 0, 63), densityDpi=420, smallestScreenWidthDp=411, displayWidth=1080, displayHeight=2400, xdpi=420.0, ydpi=420.0, isTrustable=true}; DisplayMetrics{density=2.625, width=1080, height=2400, scaledDensity=2.625, xdpi=420.0, ydpi=420.0}
+12-09 13:39:24.864  1657  1657 I Choreographer: Skipped 35 frames!  The application may be doing too much work on its main thread.
+12-09 13:39:24.888  1657  1657 W AndroidSpellCheckerService: AndroidSpellCheckerService.initialize():73 initialize...
+12-09 13:39:24.889  1657  1657 I ShortcutsDataManager: ShortcutsDataManager.onContentChanged():72 onContentChanged()
+12-09 13:39:24.891  1657  1657 I ContactsDataManager: ContactsDataManager.onContentChanged():153 onContentChanged()
+12-09 13:39:24.894  1657  1657 W AndroidSpellCheckerService: AndroidSpellCheckerService.initialize():83 initialize...done
+12-09 13:39:24.922  1657  1672 I AndroidSpellCheckerService: AndroidSpellCheckerService.createSession():139 com.google.android.keyboard.client.delight5.LanguageIdentifier@31b080f is created
+12-09 13:39:24.936  7990  7990 D InsetsController: hide(ime(), fromIme=true)
+12-09 13:39:24.937  7990  7990 I ImeTracker: com.example.cydrop_frontend:f9dc93ed: onCancelled at PHASE_CLIENT_APPLY_ANIMATION
+12-09 13:39:24.940  7990  8005 D EGL_emulation: app_time_stats: avg=452.19ms min=375.72ms max=498.94ms count=3
+12-09 13:39:25.084  7990  7990 I ImeTracker: com.example.cydrop_frontend:1d104114: onRequestHide at ORIGIN_CLIENT reason HIDE_SOFT_INPUT_ON_ANIMATION_STATE_CHANGED fromUser false
+12-09 13:39:25.088   692   889 I ImeTracker: com.example.cydrop_frontend:1d104114: onCancelled at PHASE_SERVER_SHOULD_HIDE
+12-09 13:39:25.103  7990  7990 I ImeTracker: com.example.cydrop_frontend:c0ec709c: onHidden
+12-09 13:39:25.117  7990  7990 I IdlingResourceRegistry: Ignoring message from unregistered resource: androidx.test.espresso.action.CloseKeyboardAction$CloseKeyboardIdlingResult@dc83aee
+12-09 13:39:25.119  1657  2251 W Delight5Decoder: Delight5DecoderWrapper.shouldAbandonMessage():2252 Detected old [FetchSuggestions] request in background: 61<62
+12-09 13:39:25.210  7990  7990 D IdlingRegistry: Unregistering idling resources: [androidx.test.espresso.action.CloseKeyboardAction$CloseKeyboardIdlingResult@e8235d9]
+12-09 13:39:25.217  7990  7990 I ViewInteraction: Checking 'MatchesViewAssertion{viewMatcher=an instance of android.widget.TextView and view.getText() with or without transformation to match: is "9"}' assertion on view view.getId() is <2131230974/com.example.cydrop_frontend:id/et_medication_name_prev>
+12-09 13:39:25.237   692  1901 V GrammaticalInflectionUtils: AttributionSource: android.content.AttributionSource@98fe9e3d does not have READ_SYSTEM_GRAMMATICAL_GENDER permission.
+12-09 13:39:25.279   692   739 V GrammaticalInflectionUtils: AttributionSource: android.content.AttributionSource@98fe9e3d does not have READ_SYSTEM_GRAMMATICAL_GENDER permission.
+12-09 13:39:25.290   404   404 I BpBinder: onLastStrongRef automatically unlinking death recipients:
+12-09 13:39:25.294  5798  5798 I TopTaskTracker: onTaskMovedToFront: (moved taskInfo to front) taskId=268, baseIntent=Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10000000 cmp=com.example.cydrop_frontend.test/androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity }
+12-09 13:39:25.301  7990  7990 D LifecycleMonitor: Lifecycle status change: com.example.cydrop_frontend.EditMedsActivity@cdd8af1 in: PAUSED
+12-09 13:39:25.301  7990  7990 V ActivityScenario: Update currentActivityStage to PAUSED, currentActivity=com.example.cydrop_frontend.EditMedsActivity@cdd8af1
+12-09 13:39:25.526   367   367 D Zygote  : Forked child process 8043
+12-09 13:39:25.613  8043  8043 I p_frontend.test: Late-enabling -Xcheck:jni
+12-09 13:39:25.705  7066  7114 W Bugle   : TextClassifierLibManagerImpl: Reclaiming memory at level: 40
+12-09 13:39:25.748  8043  8043 I p_frontend.test: Using CollectorTypeCMC GC.
+12-09 13:39:25.750  8043  8043 W p_frontend.test: Unexpected CPU variant for x86: x86_64.
+12-09 13:39:25.750  8043  8043 W p_frontend.test: Known variants: atom, sandybridge, silvermont, goldmont, goldmont-plus, goldmont-without-sha-xsaves, tremont, kabylake, default
+12-09 13:39:25.769   407   446 I adbd    : jdwp connection from 8043
+12-09 13:39:25.808  8043  8043 D nativeloader: Load libframework-connectivity-tiramisu-jni.so using APEX ns com_android_tethering for caller /apex/com.android.tethering/javalib/framework-connectivity-t.jar: ok
+12-09 13:39:25.869  8043  8043 D CompatChangeReporter: Compat change id reported: 242716250; UID 10204; state: ENABLED
+12-09 13:39:25.923  8043  8043 D ApplicationLoaders: Returning zygote-cached class loader: /system/framework/android.test.base.jar
+12-09 13:39:25.939  8043  8043 D nativeloader: Configuring clns-7 for other apk /system/framework/android.test.mock.jar. target_sdk_version=34, uses_libraries=ALL, library_path=/data/app/~~8kIjCpdnELKikUkUFODKMg==/com.example.cydrop_frontend.test-LZ90xwQiJgoO1xS0bliB-g==/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/com.example.cydrop_frontend.test
+12-09 13:39:25.946  8043  8043 D ApplicationLoaders: Returning zygote-cached class loader: /system/framework/android.test.base.jar
+12-09 13:39:25.953  8043  8043 D nativeloader: Configuring clns-8 for other apk /system/framework/android.test.runner.jar. target_sdk_version=34, uses_libraries=ALL, library_path=/data/app/~~8kIjCpdnELKikUkUFODKMg==/com.example.cydrop_frontend.test-LZ90xwQiJgoO1xS0bliB-g==/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/com.example.cydrop_frontend.test
+12-09 13:39:25.954  8043  8043 W ziparchive: Unable to open '/data/app/~~8kIjCpdnELKikUkUFODKMg==/com.example.cydrop_frontend.test-LZ90xwQiJgoO1xS0bliB-g==/base.dm': No such file or directory
+12-09 13:39:25.954  8043  8043 W ziparchive: Unable to open '/data/app/~~8kIjCpdnELKikUkUFODKMg==/com.example.cydrop_frontend.test-LZ90xwQiJgoO1xS0bliB-g==/base.dm': No such file or directory
+12-09 13:39:26.379  7990  7990 D VRI[EditMedsActivity]: visibilityChanged oldVisibility=true newVisibility=false
+12-09 13:39:26.641  1657  1667 I putmethod.latin: Background concurrent mark compact GC freed 10MB AllocSpace bytes, 46(2036KB) LOS objects, 49% free, 11MB/22MB, paused 30.967ms,35.042ms total 2.528s
+12-09 13:39:26.642  1657  1667 W putmethod.latin: Reducing the number of considered missed Gc histogram windows from 138 to 100
+12-09 13:39:26.785  8043  8043 D nativeloader: Configuring clns-9 for other apk /data/app/~~8kIjCpdnELKikUkUFODKMg==/com.example.cydrop_frontend.test-LZ90xwQiJgoO1xS0bliB-g==/base.apk. target_sdk_version=34, uses_libraries=, library_path=/data/app/~~8kIjCpdnELKikUkUFODKMg==/com.example.cydrop_frontend.test-LZ90xwQiJgoO1xS0bliB-g==/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/com.example.cydrop_frontend.test
+12-09 13:39:26.820  8043  8043 V GraphicsEnvironment: Currently set values for:
+12-09 13:39:26.820  8043  8043 V GraphicsEnvironment:   angle_gl_driver_selection_pkgs=[]
+12-09 13:39:26.820  8043  8043 V GraphicsEnvironment:   angle_gl_driver_selection_values=[]
+12-09 13:39:26.820  8043  8043 V GraphicsEnvironment: Global.Settings values are invalid: number of packages: 0, number of values: 0
+12-09 13:39:26.820  8043  8043 V GraphicsEnvironment: Neither updatable production driver nor prerelease driver is supported.
+12-09 13:39:27.048  8043  8043 W HWUI    : Unknown dataspace 0
+12-09 13:39:27.071  7990  7990 D LifecycleMonitor: Lifecycle status change: com.example.cydrop_frontend.EditMedsActivity@cdd8af1 in: STOPPED
+12-09 13:39:27.075  7990  7990 V ActivityScenario: Update currentActivityStage to STOPPED, currentActivity=com.example.cydrop_frontend.EditMedsActivity@cdd8af1
+12-09 13:39:27.085  7990  7990 D LifecycleMonitor: Lifecycle status change: com.example.cydrop_frontend.EditMedsActivity@cdd8af1 in: DESTROYED
+12-09 13:39:27.086  7990  7990 V ActivityScenario: Update currentActivityStage to DESTROYED, currentActivity=null
+12-09 13:39:27.096  7990  8003 I TestRunner: finished: testA_InputOldMedicationName(com.example.cydrop_frontend.MadisonSystemTest)

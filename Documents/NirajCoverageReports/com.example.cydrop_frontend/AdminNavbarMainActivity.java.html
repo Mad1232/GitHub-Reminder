@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AdminNavbarMainActivity.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=0;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">debug</a> &gt; <a href="index.source.html" class="el_package">com.example.cydrop_frontend</a> &gt; <span class="el_source">AdminNavbarMainActivity.java</span></div><h1>AdminNavbarMainActivity.java</h1><pre class="source lang-java linenums">package com.example.cydrop_frontend;
+
+import android.os.Bundle;
+import android.os.Debug;
+import android.util.Log;
+
+import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
+import com.example.cydrop_frontend.databinding.ActivityAdminNavbarMainBinding;
+import com.example.cydrop_frontend.databinding.ActivityClientNavbarMainBinding;
+
+/**
+ * @author Niraj
+ * The navbar activity for admin view. Holds the fragments AdminInventoryFragment, AdminQuestionsFragment, AdminUsersFragment
+ */
+<span class="fc" id="L24">public class AdminNavbarMainActivity extends AppCompatActivity {</span>
+
+    private @NonNull ActivityAdminNavbarMainBinding binding;
+
+    /**
+     * Creates the activity. Sets up the binding to allow navbar to control current fragment. Switches current fragment to AdminInventoryFragment
+     * @param savedInstanceState
+     */
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+<span class="fc" id="L34">        super.onCreate(savedInstanceState);</span>
+
+<span class="fc" id="L36">        binding = ActivityAdminNavbarMainBinding.inflate(getLayoutInflater());</span>
+<span class="fc" id="L37">        setContentView(binding.getRoot());</span>
+<span class="fc" id="L38">        EdgeToEdge.enable(this);</span>
+<span class="fc" id="L39">        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -&gt; {</span>
+<span class="fc" id="L40">            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());</span>
+<span class="fc" id="L41">            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);</span>
+<span class="fc" id="L42">            return insets;</span>
+        });
+
+<span class="fc" id="L45">        replaceFragment(new AdminInventoryFragment());</span>
+
+        // Switch fragments when an icon is selected
+<span class="fc" id="L48">        binding.bottomNavigationViewAdmin.setOnItemSelectedListener(item -&gt; {</span>
+<span class="nc" id="L49">            int itemId = item.getItemId();</span>
+<span class="nc bnc" id="L50" title="All 2 branches missed.">            if (itemId == R.id.inventory){</span>
+<span class="nc" id="L51">                replaceFragment(new AdminInventoryFragment());</span>
+<span class="nc bnc" id="L52" title="All 2 branches missed.">            } else if (itemId == R.id.users) {</span>
+<span class="nc" id="L53">                replaceFragment(new AdminUsersFragment());</span>
+            } else { // itemId == questions
+<span class="nc" id="L55">                replaceFragment(new AdminQuestionsFragment());</span>
+            }
+
+<span class="nc" id="L58">            return true;</span>
+        });
+<span class="fc" id="L60">    }</span>
+
+    /**
+     * A helper function to replace the current fragment
+     * @param fragment the fragment that will be replacing the current frag
+     */
+    private void replaceFragment(Fragment fragment){
+<span class="fc" id="L67">        FragmentManager fragmentManager = getSupportFragmentManager();</span>
+<span class="fc" id="L68">        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();</span>
+<span class="fc" id="L69">        fragmentTransaction.replace(R.id.frame_layout, fragment);</span>
+<span class="fc" id="L70">        fragmentTransaction.commit();</span>
+<span class="fc" id="L71">    }</span>
+
+
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span>Generated by the Android Gradle plugin 8.7.2</div></body></html>

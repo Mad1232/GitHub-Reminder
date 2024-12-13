@@ -1,245 +1,214 @@
 package com.example.cydrop_frontend;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * MedicationActivity manages interactions with the medication inventory,
- * allowing the user to view, add, edit, and delete medications.
- *
- * @author Madison Vosburg
- */
 public class MedicationActivity extends AppCompatActivity {
 
-    /**
-     * Textview displaying the medication list.
-     */
     private TextView msgResponse;
-
-    /**
-     * Base URL for accessing medication inventory endpoint.
-     */
-    private static final String URL = "http://coms-3090-038.class.las.iastate.edu:8080/inventory";
-
-    /**
-     * EditText for user input when adding or deleting medication.
-     */
+    private Spinner petSpinner, medicationTypeSpinner;
     private EditText med_input;
+    private static final String PETS_URL = "http://coms-3090-038.class.las.iastate.edu:8080/pets";
 
-    /**
-     * Initializes the activity, sets up listeners for add, edit, delete, and return buttons.
-     * Add button captures user input and sends a POST request to add a medication.
-     * Delete button captures user input and sends a DELETE request to delete a medication.
-     * Edit button navigates to the EditMedsActivity.
-     * Return button navigates to the VetNavbarMainActivity.
-     *
-     * @param savedInstanceState Bundle containing the saved state of the activity.
-     */
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_meds);
 
-        msgResponse = findViewById(R.id.tv_medication_list);
+        // Initialize views
+        petSpinner = findViewById(R.id.spinner_pets);
+        medicationTypeSpinner = findViewById(R.id.spinner_medication_type);
+        msgResponse = findViewById(R.id.msgResponse);
 
-        getJSONData();
+        // Load pets and medication types
+        loadPets();
+        loadMedicationTypes();
 
-        findViewById(R.id.btn_add_medication).setOnClickListener(view1 -> {
-            med_input = findViewById(R.id.et_medication_input);
-            String medicationInput = med_input.getText().toString();
-            postRequest(URL, medicationInput);
-            getJSONData();
-        });
-
-        findViewById(R.id.btn_edit_medication).setOnClickListener(view1 -> {
-            Intent intent = new Intent(MedicationActivity.this, EditMedsActivity.class);
-            startActivity(intent);
-        });
-
-        findViewById(R.id.btn_delete_medication).setOnClickListener(view1 -> {
-            med_input = findViewById(R.id.et_medication_input);
-            String medicationInput = med_input.getText().toString();
-            delRequest(URL, medicationInput);
-            getJSONData();
-        });
-
-        findViewById(R.id.btn_return).setOnClickListener(view1 -> {
+        findViewById(R.id.btn_return).setOnClickListener(view -> {
             Intent intent = new Intent(MedicationActivity.this, VetNavbarMainActivity.class);
             startActivity(intent);
         });
+
+        // Button to assign medication
+        findViewById(R.id.btn_assign_medication).setOnClickListener(view -> {
+            String selectedPet = petSpinner.getSelectedItem().toString();
+            String selectedMedicationType = medicationTypeSpinner.getSelectedItem().toString();
+          //  updatePetMedication(selectedPet, selectedMedicationType);
+        });
     }
 
-    /**
-     * Retrieves and displays the medication list from the server as a JSON array.
-     * Parses each entry to display the medication details in a clear way.
-     */
     private void getJSONData() {
-        JsonArrayRequest jsonObjReq = new JsonArrayRequest(
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(
                 Request.Method.GET,
-                URL,
+                "http://coms-3090-038.class.las.iastate.edu:8080/vets/" + VolleySingleton.vetIdTEMP,
                 null, // Pass null as the request body since it's a GET request
-                new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        msgResponse.setText(""); // reset the msg text
-                        try{
-                            JSONArray jsonArr = response;
-                            for (int i = 0; i < jsonArr.length(); i++) {
-                                JSONObject jObj = jsonArr.getJSONObject(i);
-                                String newLine = "ID: " + jObj.getString("id") + "\n" +
-                                        "Name: " + jObj.getString("name") + "\n" +
-                                        "Stock: " + jObj.getString("stock") + "\n"
-                                        + "Pet: " + jObj.getString("pet") + "\n";
-                                msgResponse.setText(msgResponse.getText() + newLine);
+                response -> {
+                    msgResponse.setText(""); // Reset the message text
+                    try {
+                        // Check if 'pets' exists and is not null
+                        if (response.has("pets") && !response.isNull("pets")) {
+                            // Extract the pets array from the response JSONObject
+                            JSONArray petsArray = response.getJSONArray("pets");
+
+                            // Loop through the pets array
+                            for (int i = 0; i < petsArray.length(); i++) {
+                                JSONObject petObj = petsArray.getJSONObject(i);
+
+                                // Extract pet name
+                                String petName = petObj.getString("pet_name");
+
+                                // Extract medication details (check if 'medication' is present)
+                                if (petObj.has("medication") && !petObj.isNull("medication")) {
+                                    JSONObject medicationObj = petObj.getJSONObject("medication");
+
+                                    String medicationId = medicationObj.optString("id", "N/A");
+                                    String medicationName = medicationObj.optString("name", "N/A");
+                                    String medicationStock = medicationObj.optString("stock", "N/A");
+                                    String medicationPet = medicationObj.optString("pet", "N/A");
+
+                                    // Format the display message
+                                    String newLine = "Pet Name: " + petName + "\n" +
+                                            "Medication ID: " + medicationId + "\n" +
+                                            "Medication Name: " + medicationName + "\n" +
+                                            "Stock: " + medicationStock + "\n" +
+                                            "Pet Associated: " + medicationPet + "\n\n";
+
+                                    // Append the information to msgResponse
+                                    msgResponse.append(newLine);
+                                } else {
+                                    msgResponse.append("Pet Name: " + petName + "\nNo medication info available\n\n");
+                                }
                             }
-                        } catch (Exception e) {
-                            throw new RuntimeException(e);
+                        } else {
+                            msgResponse.append("No pets available.");
                         }
-//                        Log.d("Volley Response", response.toString());
-//                        msgResponse.setText(response.toString());
+                    } catch (JSONException e) {
+                        Log.e("JSON Parsing Error", e.toString());
+                        throw new RuntimeException(e);
                     }
                 },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.e("Volley Error", error.toString());
-                    }
-                }
-        ) {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                HashMap<String, String> headers = new HashMap<String, String>();
-                return headers;
-            }
+                error -> Log.e("Volley Error", error.toString())
+        );
 
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<String, String>();
-                return params;
-            }
-        };
-
-        // Adding request to request queue
         VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(jsonObjReq);
     }
 
-    /**
-     * Sends a POST request to add a medication to the inventory.
-     *
-     * @param url Endpoint for adding a medication.
-     * @param medication Name of the medication to be added.
-     */
-    private void postRequest(String url, String medication) {
-
-        // Create JSON object for POST request
-        JSONObject json = new JSONObject();
+    private void updatePetMedication(int vetId, int petId, String medName) {
+        // Create the medication object
+        JSONObject medicationData = new JSONObject();
         try {
-            json.put("name", medication);
-        } catch (Exception e) {
-            e.printStackTrace();
+            medicationData.put("name", medName);
+        } catch (JSONException e) {
+            Log.e("JSON Error", e.toString());
         }
 
-        JsonObjectRequest request = new JsonObjectRequest(
-                Request.Method.POST,
+        // Create the pet object that contains the medication
+        JSONObject petData = new JSONObject();
+        try {
+            petData.put("medication", medicationData);
+        } catch (JSONException e) {
+            Log.e("JSON Error", e.toString());
+        }
+
+        // URL to update a specific pet's medication
+        String url = "http://coms-3090-038.class.las.iastate.edu:8080/vets/" + vetId + "/pets/" + petId;
+
+        // Send PUT request to update the pet's medication
+        JsonObjectRequest updateRequest = new JsonObjectRequest(
+                Request.Method.PUT,
                 url,
-                json,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        Toast.makeText(getApplicationContext(), "Medication Added", Toast.LENGTH_LONG).show();
-                        getJSONData();
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.e("Volley Error", error.toString());
-                    }
-                }
-        ){
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                HashMap<String, String> headers = new HashMap<String, String>();
-                return headers;
-            }
-
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<String, String>();
-                return params;
-            }
-        };
-
-        // Adding request to request queue
-        VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(request);
-    }
-
-    /**
-     * Sends a DELETE request to remove a medication from the inventory.
-     *
-     * @param URL Endpoint for deleting a medication
-     * @param id ID of the medication to be deleted.
-     */
-    private void delRequest(String URL, String id){
-
-        StringRequest request = new StringRequest(Request.Method.DELETE, URL + "/" + id,
-                new Response.Listener<String>() {
-                    @Override
-            public void onResponse(String response) {
-                        if ("Ok".equals(response)) {
-                            Toast.makeText(getApplicationContext(), "Medication Deleted", Toast.LENGTH_LONG).show();
-                            getJSONData();
-                        } else {
-                            Toast.makeText(getApplicationContext(), "Unexpected response: " + response, Toast.LENGTH_LONG).show();
-                        }
-                    }
-        },
-                new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
+                petData,
+                response -> {
+                    Toast.makeText(getApplicationContext(), "Medication Assigned", Toast.LENGTH_LONG).show();                },
+                error -> {
                     Log.e("Volley Error", error.toString());
                 }
-            }
-        ){
-                @Override
-                public Map<String, String> getHeaders() throws AuthFailureError {
-                    HashMap<String, String> headers = new HashMap<String, String>();
-                    return headers;
-                }
+        );
 
-                @Override
-                protected Map<String, String> getParams() {
-                    Map<String, String> params = new HashMap<String, String>();
-                    return params;
-                }
+        VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(updateRequest);
+    }
 
-            };
+    private void loadPets() {
+        JsonArrayRequest request = new JsonArrayRequest(
+                Request.Method.GET,
+                "http://coms-3090-038.class.las.iastate.edu:8080/user-pet/" + VolleySingleton.userId,
+                null,
+                response -> {
+                    try {
+                        JSONArray pets = response;
+                        // Populate the spinner with pet names
+                        String[] petNames = new String[pets.length()];
+                        for (int i = 0; i < pets.length(); i++) {
+                            JSONObject pet = pets.getJSONObject(i);
+                            petNames[i] = pet.getString("name");
+                        }
+
+                        // Populate the Spinner for pets
+                        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, petNames);
+                        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        petSpinner.setAdapter(adapter);
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                },
+                error -> Log.e("Volley Error", error.toString())
+        );
 
         VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(request);
     }
 
+    private void loadMedicationTypes() {
+        JsonArrayRequest request = new JsonArrayRequest(
+                Request.Method.GET,
+                "http://coms-3090-038.class.las.iastate.edu:8080/inventory",
+                null,
+                response -> {
+                    try {
+                        JSONArray types = response;
+                        // Populate the spinner with medication types
+                        String[] medicationTypes = new String[types.length()];
+                        for (int i = 0; i < types.length(); i++) {
+                            JSONObject type = types.getJSONObject(i);
+                            medicationTypes[i] = type.getString("name");
+                        }
+
+                        // Populate the Spinner for medication types
+                        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, medicationTypes);
+                        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        medicationTypeSpinner.setAdapter(adapter);
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                },
+                error -> Log.e("Volley Error", error.toString())
+        );
+
+        VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(request);
+    }
 }

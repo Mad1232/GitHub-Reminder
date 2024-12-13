@@ -1,0 +1,224 @@
+# 2024-12-09T19:39:50.644823600Z:
+test_suite_meta_data {
+  scheduled_test_case_count: 4
+}
+test_status: PASSED
+test_result {
+  test_case {
+    test_class: "MadisonSystemTest"
+    test_package: "com.example.cydrop_frontend"
+    test_method: "testA_InputOldMedicationName"
+    start_time {
+      seconds: 1733773157
+      nanos: 630000000
+    }
+    end_time {
+      seconds: 1733773168
+      nanos: 685000000
+    }
+  }
+  test_status: PASSED
+  output_artifact {
+    label {
+      label: "logcat"
+      namespace: "android"
+    }
+    source_path {
+      path: "C:\\Users\\Madison Vosburg\\Documents\\309_2\\3_mahdi_1\\Frontend\\CyDropFrontend\\app\\build\\outputs\\androidTest-results\\connected\\debug\\Medium_Phone_API_35(AVD) - 15\\logcat-com.example.cydrop_frontend.MadisonSystemTest-testA_InputOldMedicationName.txt"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info"
+      namespace: "android"
+    }
+    source_path {
+      path: "C:\\Users\\Madison Vosburg\\Documents\\309_2\\3_mahdi_1\\Frontend\\CyDropFrontend\\app\\build\\outputs\\androidTest-results\\connected\\debug\\Medium_Phone_API_35(AVD) - 15\\device-info.pb"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info.meminfo"
+      namespace: "android"
+    }
+    source_path {
+      path: "C:\\Users\\Madison Vosburg\\Documents\\309_2\\3_mahdi_1\\Frontend\\CyDropFrontend\\app\\build\\outputs\\androidTest-results\\connected\\debug\\Medium_Phone_API_35(AVD) - 15\\meminfo"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info.cpuinfo"
+      namespace: "android"
+    }
+    source_path {
+      path: "C:\\Users\\Madison Vosburg\\Documents\\309_2\\3_mahdi_1\\Frontend\\CyDropFrontend\\app\\build\\outputs\\androidTest-results\\connected\\debug\\Medium_Phone_API_35(AVD) - 15\\cpuinfo"
+    }
+  }
+}
+test_result {
+  test_case {
+    test_class: "MadisonSystemTest"
+    test_package: "com.example.cydrop_frontend"
+    test_method: "testB_InputNewMedicationName"
+    start_time {
+      seconds: 1733773168
+      nanos: 756000000
+    }
+    end_time {
+      seconds: 1733773178
+      nanos: 256000000
+    }
+  }
+  test_status: PASSED
+  output_artifact {
+    label {
+      label: "logcat"
+      namespace: "android"
+    }
+    source_path {
+      path: "C:\\Users\\Madison Vosburg\\Documents\\309_2\\3_mahdi_1\\Frontend\\CyDropFrontend\\app\\build\\outputs\\androidTest-results\\connected\\debug\\Medium_Phone_API_35(AVD) - 15\\logcat-com.example.cydrop_frontend.MadisonSystemTest-testB_InputNewMedicationName.txt"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info"
+      namespace: "android"
+    }
+    source_path {
+      path: "C:\\Users\\Madison Vosburg\\Documents\\309_2\\3_mahdi_1\\Frontend\\CyDropFrontend\\app\\build\\outputs\\androidTest-results\\connected\\debug\\Medium_Phone_API_35(AVD) - 15\\device-info.pb"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info.meminfo"
+      namespace: "android"
+    }
+    source_path {
+      path: "C:\\Users\\Madison Vosburg\\Documents\\309_2\\3_mahdi_1\\Frontend\\CyDropFrontend\\app\\build\\outputs\\androidTest-results\\connected\\debug\\Medium_Phone_API_35(AVD) - 15\\meminfo"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info.cpuinfo"
+      namespace: "android"
+    }
+    source_path {
+      path: "C:\\Users\\Madison Vosburg\\Documents\\309_2\\3_mahdi_1\\Frontend\\CyDropFrontend\\app\\build\\outputs\\androidTest-results\\connected\\debug\\Medium_Phone_API_35(AVD) - 15\\cpuinfo"
+    }
+  }
+}
+test_result {
+  test_case {
+    test_class: "MadisonSystemTest"
+    test_package: "com.example.cydrop_frontend"
+    test_method: "testC_InputMedicationStock"
+    start_time {
+      seconds: 1733773178
+      nanos: 446000000
+    }
+    end_time {
+      seconds: 1733773183
+      nanos: 148000000
+    }
+  }
+  test_status: PASSED
+  output_artifact {
+    label {
+      label: "logcat"
+      namespace: "android"
+    }
+    source_path {
+      path: "C:\\Users\\Madison Vosburg\\Documents\\309_2\\3_mahdi_1\\Frontend\\CyDropFrontend\\app\\build\\outputs\\androidTest-results\\connected\\debug\\Medium_Phone_API_35(AVD) - 15\\logcat-com.example.cydrop_frontend.MadisonSystemTest-testC_InputMedicationStock.txt"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info"
+      namespace: "android"
+    }
+    source_path {
+      path: "C:\\Users\\Madison Vosburg\\Documents\\309_2\\3_mahdi_1\\Frontend\\CyDropFrontend\\app\\build\\outputs\\androidTest-results\\connected\\debug\\Medium_Phone_API_35(AVD) - 15\\device-info.pb"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info.meminfo"
+      namespace: "android"
+    }
+    source_path {
+      path: "C:\\Users\\Madison Vosburg\\Documents\\309_2\\3_mahdi_1\\Frontend\\CyDropFrontend\\app\\build\\outputs\\androidTest-results\\connected\\debug\\Medium_Phone_API_35(AVD) - 15\\meminfo"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info.cpuinfo"
+      namespace: "android"
+    }
+    source_path {
+      path: "C:\\Users\\Madison Vosburg\\Documents\\309_2\\3_mahdi_1\\Frontend\\CyDropFrontend\\app\\build\\outputs\\androidTest-results\\connected\\debug\\Medium_Phone_API_35(AVD) - 15\\cpuinfo"
+    }
+  }
+}
+test_result {
+  test_case {
+    test_class: "MadisonSystemTest"
+    test_package: "com.example.cydrop_frontend"
+    test_method: "testD_ClickSaveChangesButton"
+    start_time {
+      seconds: 1733773183
+      nanos: 432000000
+    }
+    end_time {
+      seconds: 1733773186
+      nanos: 445000000
+    }
+  }
+  test_status: PASSED
+  output_artifact {
+    label {
+      label: "logcat"
+      namespace: "android"
+    }
+    source_path {
+      path: "C:\\Users\\Madison Vosburg\\Documents\\309_2\\3_mahdi_1\\Frontend\\CyDropFrontend\\app\\build\\outputs\\androidTest-results\\connected\\debug\\Medium_Phone_API_35(AVD) - 15\\logcat-com.example.cydrop_frontend.MadisonSystemTest-testD_ClickSaveChangesButton.txt"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info"
+      namespace: "android"
+    }
+    source_path {
+      path: "C:\\Users\\Madison Vosburg\\Documents\\309_2\\3_mahdi_1\\Frontend\\CyDropFrontend\\app\\build\\outputs\\androidTest-results\\connected\\debug\\Medium_Phone_API_35(AVD) - 15\\device-info.pb"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info.meminfo"
+      namespace: "android"
+    }
+    source_path {
+      path: "C:\\Users\\Madison Vosburg\\Documents\\309_2\\3_mahdi_1\\Frontend\\CyDropFrontend\\app\\build\\outputs\\androidTest-results\\connected\\debug\\Medium_Phone_API_35(AVD) - 15\\meminfo"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info.cpuinfo"
+      namespace: "android"
+    }
+    source_path {
+      path: "C:\\Users\\Madison Vosburg\\Documents\\309_2\\3_mahdi_1\\Frontend\\CyDropFrontend\\app\\build\\outputs\\androidTest-results\\connected\\debug\\Medium_Phone_API_35(AVD) - 15\\cpuinfo"
+    }
+  }
+}
+output_artifact {
+  label {
+    label: "test-results.log"
+    namespace: "com.google.testing.platform.runtime.android.driver.AndroidInstrumentationDriver"
+  }
+  source_path {
+    path: "C:\\Users\\Madison Vosburg\\Documents\\309_2\\3_mahdi_1\\Frontend\\CyDropFrontend\\app\\build\\outputs\\androidTest-results\\connected\\debug\\Medium_Phone_API_35(AVD) - 15\\testlog\\test-results.log"
+  }
+  type: TEST_DATA
+  mime_type: "text/plain"
+}

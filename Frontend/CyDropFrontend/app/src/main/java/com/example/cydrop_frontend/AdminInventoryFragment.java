@@ -7,18 +7,22 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -32,7 +36,7 @@ import java.util.Map;
  * @author Niraj
  */
 public class AdminInventoryFragment extends Fragment {
- static final String URL_JSON_ARRAY = "http://coms-3090-038.class.las.iastate.edu:8080/inventory";
+ static final String URL_JSON_ARRAY = "http://coms-3090-038.class.las.iastate.edu:8080/admin/inventory";
 
     private TextView dataText;
     private View regularView;
@@ -91,6 +95,17 @@ public class AdminInventoryFragment extends Fragment {
         Button submit = view.findViewById(R.id.adminInventorySubmitButton);
         submit.setOnClickListener(view1 -> {
             PostNewInventory();
+            inventoryName.setText("");
+            inventoryQuantity.setText("");
+        });
+
+        Button delete = view.findViewById(R.id.adminInventoryDeleteButton);
+        delete.setOnClickListener(view2 -> {
+            String id = inventoryName.getText().toString();
+            delRequest(id);
+            GetJSONData();
+            inventoryName.setText("");
+            inventoryQuantity.setText("");
         });
 
         Button logout = view.findViewById(R.id.adminLogoutButton);
@@ -102,13 +117,15 @@ public class AdminInventoryFragment extends Fragment {
             editor.putString("userType", "none");
             editor.apply();
 
-            Intent intent = new Intent(MainActivity.class.toString());
+            Intent intent = new Intent(getActivity(), MainActivity.class);
             startActivity(intent);
         });
 
-        Button addInventoryButton = view.findViewById(R.id.deletePetButton);
+        Button addInventoryButton = view.findViewById(R.id.add_inventory_button);
         addInventoryButton.setOnClickListener(view2 -> {
-            ToggleAddPetOverlay(true);
+           // ToggleAddPetOverlay(true);
+            Intent intent = new Intent(getActivity(), EditMedsActivity.class);
+            startActivity(intent);
         });
 
         Button closeOverlay = view.findViewById(R.id.adminCloseOverlayButton);
@@ -150,8 +167,9 @@ public class AdminInventoryFragment extends Fragment {
                         for (int i = 0; i < response.length(); i++){
                             JSONObject obj = response.getJSONObject(i);
 
-                            String newLine = "Medication name: " + obj.getString("name") + "\n"
-                                    + "Medication quantity: " + obj.getString("stock") + "\n";
+                            String newLine = "Medication ID: " + obj.getString("id") + "\n" +
+                                    "Name: " + obj.getString("name") + "\n"
+                                    + "Stock: " + obj.getString("stock") + "\n";
 
 
                             dataText.setText(dataText.getText() + newLine + "\n");
@@ -194,12 +212,12 @@ public class AdminInventoryFragment extends Fragment {
 
         JsonObjectRequest postReq = new JsonObjectRequest(
                 Request.Method.POST,
-                "http://coms-3090-038.class.las.iastate.edu:8080/inventory",
+                "http://coms-3090-038.class.las.iastate.edu:8080/admin/inventory",
                 inventoryObj,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        // Victory! i think
+                        Toast.makeText(getContext().getApplicationContext(), "Medication Added", Toast.LENGTH_LONG).show();
                         GetJSONData();
                         ToggleAddPetOverlay(false);
                     }
@@ -214,4 +232,49 @@ public class AdminInventoryFragment extends Fragment {
 
         VolleySingleton.getInstance(getContext().getApplicationContext()).addToRequestQueue(postReq);
     }
+
+    /**
+     * Sends a DELETE request to remove a medication from the inventory.
+     *
+     * @param id ID of the medication to be deleted.
+     */
+    private void delRequest(String id){
+
+        StringRequest request = new StringRequest(Request.Method.DELETE, "http://coms-3090-038.class.las.iastate.edu:8080/admin/inventory"
+                + "/" + id,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                      //  if ("Ok".equals(response)) {
+                            Toast.makeText(getContext().getApplicationContext(), "Medication Deleted", Toast.LENGTH_LONG).show();
+                            GetJSONData();
+                            ToggleAddPetOverlay(false);
+                       // }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.e("Volley Error", error.toString());
+                    }
+                }
+        ){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                return headers;
+            }
+
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                return params;
+            }
+
+        };
+
+        VolleySingleton.getInstance(getContext().getApplicationContext()).addToRequestQueue(request);
+    }
+
+
 }

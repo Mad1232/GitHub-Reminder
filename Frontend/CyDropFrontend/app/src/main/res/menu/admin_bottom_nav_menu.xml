@@ -13,12 +13,5 @@
         android:id="@+id/users"
         />
 
-    <item
-        android:icon="@drawable/baseline_question_answer_24"
-        android:title="questions"
-        android:id="@+id/questions"
-        />
-
-
 
 </menu>

@@ -8,6 +8,7 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.LifecycleOwner;
 
 import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
@@ -22,6 +23,7 @@ import android.widget.Toast;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 
 import org.json.JSONArray;
@@ -75,6 +77,7 @@ public class VetCustomersFragment extends Fragment {
             startActivity(intent);
         });
 
+
         view.findViewById(R.id.vet_customer_add_cancel_button).setOnClickListener(view3 -> {
             ToggleAddCustomer(false);
         });
@@ -117,15 +120,14 @@ public class VetCustomersFragment extends Fragment {
     }
 
     void LoadCustomers() {
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
+        JsonArrayRequest jsonObjectRequest = new JsonArrayRequest
                 (Request.Method.GET,
-                        "http://coms-3090-038.class.las.iastate.edu:8080/vet/" + VolleySingleton.vetIdTEMP,
+                        "http://coms-3090-038.class.las.iastate.edu:8080/vets/" + VolleySingleton.userId + "/customers",
                         null,
                         response -> {
                             try {
-                                JSONArray customers = response.getJSONArray("customers");
-                                for (int i = 0; i < customers.length(); i++){
-                                    JSONObject customerData = customers.getJSONObject(i);
+                                for (int i = 0; i < response.length(); i++){
+                                    JSONObject customerData = response.getJSONObject(i);
                                     createCustomerCard(customerData);
                                 }
 
@@ -153,18 +155,22 @@ public class VetCustomersFragment extends Fragment {
 
     void AddCustomerByEmail(String Email) throws JSONException {
         JSONObject j = new JSONObject();
-        j.put("email", Email);
+        j.put("email", Email.trim());
         AddCustomerGivenJSON(j);
     }
 
     void AddCustomerGivenJSON(JSONObject j){
         JsonObjectRequest postReq = new JsonObjectRequest(
                 Request.Method.POST,
-                "http://coms-3090-038.class.las.iastate.edu:8080/vets/" + VolleySingleton.vetIdTEMP + "/customers",
+                "http://coms-3090-038.class.las.iastate.edu:8080/vets/" + VolleySingleton.userId + "/customers",
                 j,
                 response -> {
-                    ClearCustomers();
-                    LoadCustomers();
+                    try {
+                        createCustomerCard(response);
+                        ToggleAddCustomer(false);
+                    } catch (JSONException e) {
+                        throw new RuntimeException(e);
+                    }
                 },
                 new Response.ErrorListener() {
                     @Override
@@ -172,8 +178,7 @@ public class VetCustomersFragment extends Fragment {
                         // sooo, this is kinda expected to error out? and then i check which error with string parsing ??
                         // Im not gonna fix this
                         if (error.toString().split(":")[0].equals("com.android.volley.ParseError")){
-                            ClearCustomers();
-                            LoadCustomers();
+                            Toast.makeText(requireContext(), "Volley parse error", Toast.LENGTH_LONG).show();
                         } else {
                             Toast.makeText(getActivity(), "Error adding new customer", Toast.LENGTH_LONG).show();
                         }

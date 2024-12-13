@@ -4,18 +4,263 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_red"
     tools:context=".ClientRemindersFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/client_reminders_add_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <Button
+            android:id="@+id/client_reminders_add_m_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:minHeight="40dp"
+            android:minWidth="40dp"
+
+            android:layout_marginTop="30dp"
+            android:layout_marginHorizontal="4dp"
+
+            android:paddingHorizontal="5dp"
+            android:padding="3dp"
+            android:text="M"
+
+            android:backgroundTint="@color/grey"
+
+
+            app:layout_constraintEnd_toStartOf="@+id/client_reminders_add_t_button"
+            app:layout_constraintTop_toBottomOf="@+id/client_reminders_add_description_input" />
+
+        <Button
+            android:id="@+id/client_reminders_add_t_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:minHeight="40dp"
+            android:minWidth="40dp"
+
+            android:layout_marginTop="30dp"
+            android:layout_marginHorizontal="4dp"
+
+            android:backgroundTint="@color/grey"
+
+            android:paddingHorizontal="13dp"
+            android:padding="3dp"
+            android:text="T"
+
+            app:layout_constraintEnd_toStartOf="@+id/client_reminders_add_w_button"
+            app:layout_constraintTop_toBottomOf="@+id/client_reminders_add_description_input" />
+
+
+        <Button
+            android:id="@+id/client_reminders_add_w_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:minWidth="40dp"
+            android:minHeight="40dp"
+
+            android:layout_marginTop="30dp"
+            android:layout_marginHorizontal="4dp"
+
+            android:backgroundTint="@color/grey"
+
+            android:padding="3dp"
+            android:paddingHorizontal="13dp"
+            android:text="W"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+
+
+            app:layout_constraintTop_toBottomOf="@+id/client_reminders_add_description_input" />
+
+
+        <Button
+            android:id="@+id/client_reminders_add_r_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:minHeight="40dp"
+            android:minWidth="40dp"
+
+            android:layout_marginTop="30dp"
+            android:layout_marginHorizontal="4dp"
+
+            android:backgroundTint="@color/grey"
+
+            android:paddingHorizontal="13dp"
+            android:padding="3dp"
+            android:text="R"
+
+            app:layout_constraintStart_toEndOf="@+id/client_reminders_add_w_button"
+            app:layout_constraintTop_toBottomOf="@+id/client_reminders_add_description_input" />
+
+
+        <Button
+            android:id="@+id/client_reminders_add_f_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:minHeight="40dp"
+            android:minWidth="40dp"
+
+            android:layout_marginTop="30dp"
+            android:layout_marginHorizontal="4dp"
+
+            android:backgroundTint="@color/grey"
+
+            android:paddingHorizontal="13dp"
+            android:padding="3dp"
+            android:text="F"
+
+            app:layout_constraintStart_toEndOf="@+id/client_reminders_add_r_button"
+            app:layout_constraintTop_toBottomOf="@+id/client_reminders_add_description_input" />
+
+
+        <Button
+            android:id="@+id/client_reminders_add_s_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginHorizontal="4dp"
+            android:minWidth="40dp"
+
+            android:minHeight="40dp"
+
+            android:layout_marginStart="26.5dp"
+
+            android:backgroundTint="@color/grey"
+
+            android:padding="3dp"
+            android:paddingHorizontal="13dp"
+            android:text="S"
+
+            app:layout_constraintStart_toEndOf="@+id/client_reminders_add_m_button"
+            app:layout_constraintTop_toBottomOf="@+id/client_reminders_add_w_button" />
+
+        <Button
+            android:id="@+id/client_reminders_add_u_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginHorizontal="4dp"
+            android:minWidth="40dp"
+
+            android:minHeight="40dp"
+
+            android:backgroundTint="@color/grey"
+
+            android:padding="3dp"
+            android:paddingHorizontal="13dp"
+            android:text="U"
+
+            app:layout_constraintStart_toEndOf="@+id/client_reminders_add_s_button"
+            app:layout_constraintTop_toTopOf="@+id/client_reminders_add_s_button" />
+
+
+
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/textView_reminders_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Reminders"
+            android:textSize="30sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Spinner
+            android:id="@+id/client_reminders_add_pet_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:ems="10"
+
+            android:textSize="18dp"
+            app:layout_constraintStart_toStartOf="@+id/client_reminders_add_description_input"
+            app:layout_constraintTop_toBottomOf="@+id/textView_reminders_text" />
+
+        <Spinner
+            android:id="@+id/client_reminders_add_medication_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:ems="10"
+
+            android:textSize="18dp"
+            app:layout_constraintStart_toStartOf="@+id/client_reminders_add_description_input"
+            app:layout_constraintTop_toBottomOf="@+id/client_reminders_add_pet_spinner" />
+
+
+        <EditText
+            android:id="@+id/client_reminders_add_description_input"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="text"
+            android:hint="Description"
+
+            android:layout_marginTop="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/client_reminders_add_time_input" />
+
+
+        <EditText
+            android:id="@+id/client_reminders_add_time_input"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="time"
+            android:ems="10"
+            android:hint="Alert time (24hr)"
+            android:layout_marginTop="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/client_reminders_add_medication_spinner"
+            tools:layout_editor_absoluteX="101dp" />
+
+        <Button
+            android:id="@+id/client_reminders_add_back_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="6dp"
+            android:text="Back"
+
+            tools:layout_editor_absoluteX="5dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="4dp" />
+
+        <Button
+            android:id="@+id/client_reminders_add_save_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="save"
+
+            android:backgroundTint="@color/green"
+
+            android:layout_marginTop="50dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/client_reminders_add_u_button" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/client_reminders_default_layout"
+        android:layout_width="match_parent"
+        android:visibility="gone"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/client_reminders_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Reminders"
+            android:textSize="30sp"
             app:layout_constraintEnd_toEndOf="@+id/client_reminder_add_button"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -27,6 +272,7 @@
             app:layout_constraintTop_toBottomOf="@+id/client_reminder_add_button">
 
             <LinearLayout
+                android:id="@+id/client_reminders_linear_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical" />
@@ -36,6 +282,8 @@
             android:id="@+id/client_reminder_add_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:padding="8dp"
             android:text="Add Reminder"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

@@ -2,22 +2,17 @@ package com.coms309.demo2.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 import com.coms309.demo2.entity.Medication;
 import com.coms309.demo2.repository.MedicationRepository;
 
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
 
 
 /**
@@ -101,4 +96,23 @@ public class InventoryController {
         repository.deleteById(id);
         return "Ok";
     }
+
+    /**
+     * Get medication ID by name
+     * @param name name of the medication
+     * @return medication ID
+     */
+    @Operation(summary = "Get medication ID by name")
+    @GetMapping("/inventory/search/{name}")
+    public ResponseEntity<Long> getMedicationIdByName(@PathVariable String name) {
+        Optional<Medication> medication = repository.findByName(name);
+        if (medication.isPresent()) {
+            return ResponseEntity.ok(medication.get().getId());
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+    }
+
+
+
 }

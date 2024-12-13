@@ -66,6 +66,86 @@ public class ClientHomeFragment extends Fragment {
         // Required empty public constructor
     }
 
+
+    private void getPetData() {
+        VolleySingleton.userPetsToId = new HashMap<>();
+        JsonArrayRequest jsonArrReq = new JsonArrayRequest(
+                Request.Method.GET,
+                "http://coms-3090-038.class.las.iastate.edu:8080/user-pet/" + VolleySingleton.userId,
+                null, // Pass null as the request body since it's a GET request
+                response -> {
+                    try {
+                        JSONArray jsonArr = response;
+                        for (int i = 0; i < jsonArr.length(); i++){
+                            JSONObject json = jsonArr.getJSONObject(i);
+                            VolleySingleton.userPetsToId.put(json.getString("pet_name"), json.getInt("pet_id"));
+                        }
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                }) {
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String> headers = new HashMap<>();
+                return headers;
+            }
+
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                return params;
+            }
+        };
+
+        VolleySingleton.getInstance(getContext().getApplicationContext()).addToRequestQueue(jsonArrReq);
+    }
+
+    private void getMedicationData() {
+        VolleySingleton.medicationToId = new HashMap<>();
+        JsonArrayRequest jsonArrReq = new JsonArrayRequest(
+                Request.Method.GET,
+                "http://coms-3090-038.class.las.iastate.edu:8080/inventory",
+                null, // Pass null as the request body since it's a GET request
+                response -> {
+                    try {
+                        JSONArray jsonArr = response;
+                        for (int i = 0; i < jsonArr.length(); i++){
+                            JSONObject json = jsonArr.getJSONObject(i);
+                            VolleySingleton.medicationToId.put(json.getString("name"), json.getInt("id"));
+                        }
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                }) {
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String> headers = new HashMap<>();
+                return headers;
+            }
+
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                return params;
+            }
+        };
+
+        VolleySingleton.getInstance(requireContext().getApplicationContext()).addToRequestQueue(jsonArrReq);
+    }
+
+
     /**
      * Generic onCreate
      * @param savedInstanceState If the fragment is being re-created from
@@ -102,6 +182,10 @@ public class ClientHomeFragment extends Fragment {
 
         GetJSONData();
 
+        getPetData();
+
+        getMedicationData();
+
         Button addButton = view.findViewById(R.id.meds_btn);
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -118,13 +202,21 @@ public class ClientHomeFragment extends Fragment {
             }
         });
 
+        Button vet_info = view.findViewById(R.id.vet_info_btn);
+        vet_info.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), VetInfoActivity.class);
+                startActivity(intent);
+            }
+        });
 
         Button submit = view.findViewById(R.id.client_home_submit_button);
         submit.setOnClickListener(view2 -> {
             PostNewPet();
         });
 
-        Button logout = view.findViewById(R.id.logout_button);
+        Button logout = view.findViewById(R.id.client_logout_button);
         logout.setOnClickListener(view1 -> {
 
             SharedPreferences sharedPref =  PreferenceManager.getDefaultSharedPreferences(getContext().getApplicationContext());
@@ -133,7 +225,7 @@ public class ClientHomeFragment extends Fragment {
             editor.putString("userType", "none");
             editor.commit();
 
-            Intent intent = new Intent(MainActivity.class.toString());
+            Intent intent = new Intent(getActivity(), MainActivity.class);
             startActivity(intent);
         });
 
@@ -283,6 +375,7 @@ public class ClientHomeFragment extends Fragment {
                     public void onResponse(JSONObject response) {
                         // Victory! i think
                         ToggleAddPetOverlay(false);
+                        //VolleySingleton.refreshData();
                         RemoveAllPetFrags();
                         GetJSONData();
                     }

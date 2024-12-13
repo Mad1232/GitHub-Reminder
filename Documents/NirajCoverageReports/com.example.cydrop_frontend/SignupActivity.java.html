@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SignupActivity.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=0;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">debug</a> &gt; <a href="index.source.html" class="el_package">com.example.cydrop_frontend</a> &gt; <span class="el_source">SignupActivity.java</span></div><h1>SignupActivity.java</h1><pre class="source lang-java linenums">package com.example.cydrop_frontend;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.w3c.dom.Text;
+
+import java.util.HashMap;
+import java.util.Map;
+
+/**
+ * SignupActivity provides the functionality for user sign-up, allowing new users to create an account.
+ * Users are prompted to enter an email and password, and a POST request is sent to register the new user.
+ *
+ * @author Madison Vosburg
+ */
+<span class="nc" id="L34">public class SignupActivity extends AppCompatActivity{</span>
+
+    /**
+     * EditText field for entering the email.
+     */
+    private EditText usernameEditText;
+
+    /**
+     * EditText field for entering the password.
+     */
+    private EditText passwordEditText;
+
+    /**
+     * Button for navigating to the login screen.
+     */
+    private Button loginButton;
+
+    /**
+     * Button for submitting a sign-up request.
+     */
+    private Button signupButton;
+
+    /**
+     * Initializes the activity, sets up listeners for login and signup button.
+     * Signup button captures user input and sends a POST request to add user.
+     * Login button navigates to the LoginActivity.
+     *
+     * @param savedInstanceState Bundle containing the saved state of the activity.
+     */
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+<span class="nc" id="L65">        super.onCreate(savedInstanceState);</span>
+<span class="nc" id="L66">        setContentView(R.layout.activity_signup);</span>
+
+        /* initialize UI elements */
+<span class="nc" id="L69">        usernameEditText = findViewById(R.id.signup_username_edt);  // link to username edtext in the Signup activity XML</span>
+<span class="nc" id="L70">        passwordEditText = findViewById(R.id.signup_password_edt);  // link to password edtext in the Signup activity XML</span>
+<span class="nc" id="L71">        loginButton = findViewById(R.id.signup_login_btn);    // link to login button in the Signup activity XML</span>
+<span class="nc" id="L72">        signupButton = findViewById(R.id.signup_signup_btn);  // link to signup button in the Signup activity XML</span>
+
+        /* click listener on login button pressed */
+<span class="nc" id="L75">        loginButton.setOnClickListener(new View.OnClickListener() {</span>
+            @Override
+            public void onClick(View v) {
+
+                /* when login button is pressed, use intent to switch to Login Activity */
+<span class="nc" id="L80">                Intent intent = new Intent(SignupActivity.this, LoginActivity.class);</span>
+              //  Intent intent = new Intent(SignupActivity.this, VetDetailsActivity.class);  //only for testing demo2
+<span class="nc" id="L82">                startActivity(intent);  // go to LoginActivity</span>
+<span class="nc" id="L83">            }</span>
+        });
+
+        /* click listener on signup button pressed */
+        // Button to send POST request
+<span class="nc" id="L88">        signupButton.setOnClickListener(new View.OnClickListener() {</span>
+            @Override
+            public void onClick(View v) {
+<span class="nc" id="L91">                String username = usernameEditText.getText().toString();</span>
+<span class="nc" id="L92">                String password = passwordEditText.getText().toString();</span>
+                // String type = typeEditText.getText().toString();
+
+<span class="nc" id="L95">                postRequest(&quot;http://coms-3090-038.class.las.iastate.edu:8080/signup&quot;, username, password);</span>
+<span class="nc" id="L96">            }</span>
+        });
+
+<span class="nc" id="L99">    }</span>
+
+    /**
+     * Sends a POST request to the server to register a new user.
+     *
+     * @param url The URL of the endpoint for user sign-up.
+     * @param username The email provided by the user.
+     * @param password The password provided by the user.
+     */
+    private void postRequest(String url, String username, String password) {
+
+        // Create JSON object for POST request
+<span class="nc" id="L111">        JSONObject json = new JSONObject();</span>
+        try {
+<span class="nc" id="L113">            json.put(&quot;email&quot;, username);</span>
+<span class="nc" id="L114">            json.put(&quot;password&quot;, password);</span>
+            //  json.put(&quot;type&quot;, type);
+<span class="nc" id="L116">        } catch (Exception e) {</span>
+<span class="nc" id="L117">            e.printStackTrace();</span>
+<span class="nc" id="L118">        }</span>
+
+<span class="nc" id="L120">        JsonObjectRequest request = new JsonObjectRequest(</span>
+                Request.Method.POST,
+                url,
+                json,
+<span class="nc" id="L124">                new Response.Listener&lt;JSONObject&gt;() {</span>
+                    @Override
+                    public void onResponse(JSONObject response) {
+<span class="nc" id="L127">                        Toast.makeText(getApplicationContext(), &quot;Signed Up!&quot;, Toast.LENGTH_LONG).show();</span>
+<span class="nc" id="L128">                        Intent intent = new Intent(SignupActivity.this, LoginActivity.class);</span>
+<span class="nc" id="L129">                        startActivity(intent);</span>
+<span class="nc" id="L130">                    }</span>
+                },
+<span class="nc" id="L132">                new Response.ErrorListener() {</span>
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+<span class="nc" id="L135">                        Log.e(&quot;Volley Error&quot;, error.toString());</span>
+<span class="nc" id="L136">                    }</span>
+                }
+<span class="nc" id="L138">        ){</span>
+            @Override
+            public Map&lt;String, String&gt; getHeaders() throws AuthFailureError {
+<span class="nc" id="L141">                HashMap&lt;String, String&gt; headers = new HashMap&lt;String, String&gt;();</span>
+<span class="nc" id="L142">                return headers;</span>
+            }
+
+            @Override
+            protected Map&lt;String, String&gt; getParams() {
+<span class="nc" id="L147">                Map&lt;String, String&gt; params = new HashMap&lt;String, String&gt;();</span>
+<span class="nc" id="L148">                return params;</span>
+            }
+        };
+
+        // Adding request to request queue
+<span class="nc" id="L153">        VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(request);</span>
+<span class="nc" id="L154">    }</span>
+
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span>Generated by the Android Gradle plugin 8.7.2</div></body></html>

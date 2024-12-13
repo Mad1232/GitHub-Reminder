@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PetCardFragment.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=0;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">debug</a> &gt; <a href="index.source.html" class="el_package">com.example.cydrop_frontend</a> &gt; <span class="el_source">PetCardFragment.java</span></div><h1>PetCardFragment.java</h1><pre class="source lang-java linenums">package com.example.cydrop_frontend;
+
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.graphics.Typeface;
+import android.os.Bundle;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
+import android.text.SpannableString;
+import android.text.style.StyleSpan;
+import android.text.style.UnderlineSpan;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+
+public class PetCardFragment extends Fragment {
+
+    private static final String ARG_PETNAME = &quot;petName&quot;;
+    private static final String ARG_PETTYPE = &quot;petType&quot;;
+    private static final String ARG_ID = &quot;petId&quot;;
+    private static final String ARG_PETBREED = &quot;petBreed&quot;;
+    private static final String ARG_PETAGE = &quot;petAge&quot;;
+    private static final String ARG_PETGENDER = &quot;petGender&quot;;
+    private static final String ARG_PETDIAGNOSIS = &quot;petDiagnosis&quot;;
+
+
+    private String petName;
+    private String petType;
+    private String petBreed;
+    private String petAge;
+    private String petGender;
+    private String petDiagnosis;
+    private String petId;
+
+    private View editingLayout;
+    private View defaultLayout;
+
+    // Info on collapsed view
+    private TextView petNameText;
+    private TextView petBreedText;
+    private TextView editingTextTitle;
+
+    // Info on editing view
+    private EditText petNameEditText;
+    private EditText petTypeEditText;
+    private EditText petBreedEditText;
+    private EditText petAgeEditText;
+    private EditText petGenderEditText;
+    private EditText petdiagnosisEditText;
+
+
+    // The dialog interface for confirming pet deletion
+<span class="fc" id="L70">    DialogInterface.OnClickListener dialogClickListener = (dialog, which) -&gt; {</span>
+<span class="nc bnc" id="L71" title="All 2 branches missed.">        switch (which){</span>
+            case DialogInterface.BUTTON_POSITIVE:
+<span class="nc" id="L73">                DeletePet();</span>
+<span class="nc" id="L74">                break;</span>
+
+            case DialogInterface.BUTTON_NEGATIVE:
+                //No button clicked, no response needed
+                break;
+        }
+<span class="nc" id="L80">    };</span>
+
+
+<span class="fc" id="L83">    public PetCardFragment() {</span>
+        // Required empty public constructor
+<span class="fc" id="L85">    }</span>
+
+
+    public static PetCardFragment newInstance(String petId, String petName, String petType, String petBreed, String petAge, String petGender, String petDiagnosis) {
+<span class="fc" id="L89">        PetCardFragment fragment = new PetCardFragment();</span>
+<span class="fc" id="L90">        Bundle args = new Bundle();</span>
+<span class="fc" id="L91">        args.putString(ARG_PETNAME, petName);</span>
+<span class="fc" id="L92">        args.putString(ARG_PETTYPE, petType);</span>
+<span class="fc" id="L93">        args.putString(ARG_ID, petId);</span>
+<span class="fc" id="L94">        args.putString(ARG_PETBREED, petBreed);</span>
+<span class="fc" id="L95">        args.putString(ARG_PETAGE, petAge);</span>
+<span class="fc" id="L96">        args.putString(ARG_PETGENDER, petGender);</span>
+<span class="fc" id="L97">        args.putString(ARG_PETDIAGNOSIS, petDiagnosis);</span>
+<span class="fc" id="L98">        fragment.setArguments(args);</span>
+<span class="fc" id="L99">        return fragment;</span>
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+<span class="fc" id="L104">        super.onCreate(savedInstanceState);</span>
+<span class="pc bpc" id="L105" title="1 of 2 branches missed.">        if (getArguments() != null) {</span>
+<span class="fc" id="L106">            petType = getArguments().getString(ARG_PETTYPE);</span>
+<span class="fc" id="L107">            petName = getArguments().getString(ARG_PETNAME);</span>
+<span class="fc" id="L108">            petId = getArguments().getString(ARG_ID);</span>
+<span class="fc" id="L109">            petBreed = getArguments().getString(ARG_PETBREED);</span>
+<span class="fc" id="L110">            petAge = getArguments().getString(ARG_PETAGE);</span>
+<span class="fc" id="L111">            petGender = getArguments().getString(ARG_PETGENDER);</span>
+<span class="fc" id="L112">            petDiagnosis = getArguments().getString(ARG_PETDIAGNOSIS);</span>
+
+        }
+<span class="fc" id="L115">    }</span>
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+<span class="fc" id="L119">        View view = inflater.inflate(R.layout.fragment_pet_card, container, false);</span>
+
+<span class="fc" id="L121">        Button deleteButton = view.findViewById(R.id.card_pet_delete_button);</span>
+<span class="fc" id="L122">        deleteButton.setOnClickListener(view2 -&gt; {</span>
+<span class="nc" id="L123">            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());</span>
+<span class="nc" id="L124">            builder.setMessage(&quot;Are you sure you would like to delete &quot; + petName +&quot;?&quot;).setPositiveButton(&quot;Yes&quot;, dialogClickListener)</span>
+<span class="nc" id="L125">                    .setNegativeButton(&quot;No&quot;, dialogClickListener).show();</span>
+<span class="nc" id="L126">        });</span>
+
+<span class="fc" id="L128">        Button editButton = view.findViewById(R.id.card_pet_edit_button);</span>
+<span class="fc" id="L129">        editButton.setOnClickListener(view3 -&gt; {</span>
+<span class="fc" id="L130">            ToggleEditMode(true);</span>
+<span class="fc" id="L131">        });</span>
+
+<span class="fc" id="L133">        Button cancelEdit = view.findViewById(R.id.card_pet_edit_cancel_button);</span>
+<span class="fc" id="L134">        cancelEdit.setOnClickListener( x -&gt; {</span>
+<span class="fc" id="L135">            ToggleEditMode(false);</span>
+<span class="fc" id="L136">        });</span>
+
+<span class="fc" id="L138">        Button saveEdit = view.findViewById(R.id.card_pet_edit_submit_button);</span>
+<span class="fc" id="L139">        saveEdit.setOnClickListener(v -&gt; {</span>
+<span class="nc" id="L140">            UpdatePet();</span>
+<span class="nc" id="L141">        });</span>
+
+<span class="fc" id="L143">        petNameText = view.findViewById(R.id.card_pet_name);</span>
+<span class="fc" id="L144">        petBreedText = view.findViewById(R.id.card_pet_type);</span>
+<span class="fc" id="L145">        editingTextTitle = view.findViewById(R.id.card_edit_text);</span>
+
+<span class="fc" id="L147">        editingLayout = view.findViewById(R.id.card_pet_expanded_layout);</span>
+<span class="fc" id="L148">        defaultLayout = view.findViewById(R.id.card_pet_collapsed_layout);</span>
+
+<span class="fc" id="L150">        petNameEditText = view.findViewById(R.id.card_pet_edit_name_input);</span>
+<span class="fc" id="L151">        petTypeEditText = view.findViewById(R.id.card_pet_edit_type_input);</span>
+<span class="fc" id="L152">        petBreedEditText = view.findViewById(R.id.card_edit_pet_breed);</span>
+<span class="fc" id="L153">        petAgeEditText = view.findViewById(R.id.card_pet_edit_age_input);</span>
+<span class="fc" id="L154">        petGenderEditText = view.findViewById(R.id.card_pet_edit_gender_input);</span>
+<span class="fc" id="L155">        petdiagnosisEditText = view.findViewById(R.id.card_pet_edit_diagnosis_input);</span>
+
+<span class="fc" id="L157">        PopulateForms();</span>
+
+        // Inflate the layout for this fragment
+<span class="fc" id="L160">        return view;</span>
+    }
+
+    void PopulateForms(){
+<span class="fc" id="L164">        petNameText.setText(petName);</span>
+
+<span class="fc" id="L166">        SpannableString s = new SpannableString(petType);</span>
+<span class="fc" id="L167">        s.setSpan(new StyleSpan(Typeface.ITALIC), 0, s.length(), 0);</span>
+<span class="fc" id="L168">        petBreedText.setText(s);</span>
+
+<span class="fc" id="L170">        s = new SpannableString(&quot;Editing &quot; + petName);</span>
+<span class="fc" id="L171">        s.setSpan(new UnderlineSpan(), 0, s.length(), 0);</span>
+<span class="fc" id="L172">        editingTextTitle.setText(s);</span>
+
+<span class="fc" id="L174">        petNameEditText.setText(petName);</span>
+<span class="fc" id="L175">        petTypeEditText.setText(petType);</span>
+<span class="fc" id="L176">        petBreedEditText.setText(petBreed);</span>
+<span class="fc" id="L177">        petAgeEditText.setText(petAge);</span>
+<span class="fc" id="L178">        petGenderEditText.setText(petGender);</span>
+<span class="fc" id="L179">        petdiagnosisEditText.setText(petDiagnosis);</span>
+<span class="fc" id="L180">    }</span>
+
+    void SaveChanges(){
+<span class="nc" id="L183">        petName = petNameEditText.getText().toString();</span>
+<span class="nc" id="L184">        petType = petTypeEditText.getText().toString();</span>
+<span class="nc" id="L185">        petBreed = petBreedEditText.getText().toString();</span>
+<span class="nc" id="L186">        petAge = petAgeEditText.getText().toString();</span>
+<span class="nc" id="L187">        petGender = petGenderEditText.getText().toString();</span>
+<span class="nc" id="L188">        petDiagnosis = petdiagnosisEditText.getText().toString();</span>
+<span class="nc" id="L189">    }</span>
+
+    void DeletePet(){
+<span class="nc" id="L192">        JsonArrayRequest petDeleteRequest = new JsonArrayRequest(</span>
+                Request.Method.DELETE,
+                &quot;http://coms-3090-038.class.las.iastate.edu:8080/pet/&quot; + petId,
+                null, // Pass null as the request body since it's a GET request
+                response -&gt; {
+                    // No response
+<span class="nc" id="L198">                },</span>
+                error -&gt; {
+
+<span class="nc" id="L201">                }</span>
+        );
+<span class="nc" id="L203">        VolleySingleton.getInstance(getContext().getApplicationContext()).addToRequestQueue(petDeleteRequest);</span>
+<span class="nc" id="L204">        FragmentManager fragmentManager = getFragmentManager();</span>
+<span class="nc" id="L205">        FragmentTransaction trans = fragmentManager.beginTransaction();</span>
+<span class="nc" id="L206">        trans.remove(this).commit();</span>
+<span class="nc" id="L207">    }</span>
+
+
+    void ToggleEditMode(boolean isEditing){
+<span class="fc bfc" id="L211" title="All 2 branches covered.">        if (isEditing){</span>
+<span class="fc" id="L212">            defaultLayout.setVisibility(View.GONE);</span>
+<span class="fc" id="L213">            editingLayout.setVisibility(View.VISIBLE);</span>
+        } else {
+<span class="fc" id="L215">            editingLayout.setVisibility(View.GONE);</span>
+<span class="fc" id="L216">            defaultLayout.setVisibility(View.VISIBLE);</span>
+        }
+<span class="fc" id="L218">    }</span>
+
+
+    private void UpdatePet(){
+<span class="nc" id="L222">        JSONObject pet = new JSONObject();</span>
+
+        try{
+<span class="nc" id="L225">            JSONObject ownerInfo = new JSONObject();</span>
+<span class="nc" id="L226">            ownerInfo.put(&quot;id&quot;, VolleySingleton.userId);</span>
+<span class="nc" id="L227">            pet.put(&quot;owner&quot;, ownerInfo);</span>
+
+//            JSONObject medicationInfo = new JSONObject();
+//            pet.put(&quot;medication&quot;, medicationInfo);
+
+<span class="nc" id="L232">            pet.put(&quot;pet_name&quot;, petNameEditText.getText().toString());</span>
+<span class="nc" id="L233">            pet.put(&quot;pet_type&quot;, petTypeEditText.getText().toString());</span>
+<span class="nc" id="L234">            pet.put(&quot;pet_breed&quot;, petBreedEditText.getText().toString());</span>
+<span class="nc" id="L235">            pet.put(&quot;pet_diagnosis&quot;, petdiagnosisEditText.getText().toString());</span>
+<span class="nc" id="L236">            pet.put(&quot;pet_age&quot;, Integer.parseInt(petAgeEditText.getText().toString()) );</span>
+<span class="nc" id="L237">            pet.put(&quot;pet_gender&quot;, petGenderEditText.getText().toString());</span>
+<span class="nc" id="L238">        } catch (JSONException e){</span>
+            // Unable to create json object
+<span class="nc" id="L240">            Toast.makeText(getActivity(), &quot;Error creating JSON&quot;, Toast.LENGTH_LONG);</span>
+<span class="nc" id="L241">            return;</span>
+<span class="nc" id="L242">        }</span>
+
+<span class="nc" id="L244">        JsonObjectRequest postReq = new JsonObjectRequest(</span>
+                Request.Method.PUT,
+<span class="nc" id="L246">                &quot;http://coms-3090-038.class.las.iastate.edu:8080/pet/&quot; + petId.trim(),</span>
+                pet,
+<span class="nc" id="L248">                new Response.Listener&lt;JSONObject&gt;() {</span>
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        // Victory! i think
+<span class="nc" id="L252">                        SaveChanges();</span>
+<span class="nc" id="L253">                        PopulateForms();</span>
+<span class="nc" id="L254">                        ToggleEditMode(false);</span>
+<span class="nc" id="L255">                    }</span>
+                },
+<span class="nc" id="L257">                new Response.ErrorListener() {</span>
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // It probably worked, i dont really care
+<span class="nc" id="L261">                        SaveChanges();</span>
+<span class="nc" id="L262">                        PopulateForms();</span>
+<span class="nc" id="L263">                        ToggleEditMode(false);</span>
+<span class="nc" id="L264">                    }</span>
+                }
+        );
+
+<span class="nc" id="L268">        VolleySingleton.getInstance(getContext().getApplicationContext()).addToRequestQueue(postReq);</span>
+<span class="nc" id="L269">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span>Generated by the Android Gradle plugin 8.7.2</div></body></html>

@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>VetChatActivity.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=0;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">debug</a> &gt; <a href="index.source.html" class="el_package">com.example.cydrop_frontend</a> &gt; <span class="el_source">VetChatActivity.java</span></div><h1>VetChatActivity.java</h1><pre class="source lang-java linenums">package com.example.cydrop_frontend;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import org.java_websocket.handshake.ServerHandshake;
+
+/**
+ * VetChatActivity manages the chat interface for vets, allowing them to connect to the Websocket server,
+ * send and receive messages, and handle user interface updates.
+ *
+ * @author Madison Vosburg
+ */
+<span class="nc" id="L25">public class VetChatActivity extends AppCompatActivity implements WebSocketListener{</span>
+
+    /**
+     * Button to return to the previous activity.
+     */
+    private Button returnButton;
+
+    /**
+     * Button to send a message.
+     */
+    private Button sendBtn;
+
+    /**
+     * EditText for inputting a message to be sent.
+     */
+    private EditText msgEtx;
+
+    /**
+     * LinearLayout container to display messages in the chat.
+     */
+    private LinearLayout msgTv;
+
+    /**
+     * Initializes the chat interface, connects to the websocket, and sets up button listeners for send and return.
+     * Send button captures user input and sends through websocket.
+     * Return button navigates to VetNavbarMainActivity.
+     *
+     * @param savedInstanceState Bundle containing the saved state of the activity.
+     */
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+<span class="nc" id="L56">        super.onCreate(savedInstanceState);</span>
+<span class="nc" id="L57">        setContentView(R.layout.activity_vet_chat);            // link to Login activity XML</span>
+
+            /* initialize UI elements */
+<span class="nc" id="L60">            returnButton = findViewById(R.id.btn_return);    // link to return button in the Login activity XML</span>
+
+            /* initialize UI elements */
+<span class="nc" id="L63">            sendBtn = (Button) findViewById(R.id.sendBtn);</span>
+<span class="nc" id="L64">            msgEtx = (EditText) findViewById(R.id.msgEdt);</span>
+<span class="nc" id="L65">            msgTv = (LinearLayout) findViewById(R.id.vet_questions_linear_layout);</span>
+
+
+            /* connect this activity to the websocket instance */
+<span class="nc" id="L69">            WebSocketManager2.getInstance().connectWebSocket(&quot;ws://coms-3090-038.class.las.iastate.edu:8080/vet/&quot; + &quot;1&quot; + &quot;/conversations/&quot; + &quot;2&quot;);</span>
+<span class="nc" id="L70">            WebSocketManager2.getInstance().setWebSocketListener(VetChatActivity.this);</span>
+
+            /* send button listener */
+<span class="nc" id="L73">            sendBtn.setOnClickListener(v -&gt; {</span>
+                try {
+                    // send message
+<span class="nc" id="L76">                    WebSocketManager2.getInstance().sendMessage(msgEtx.getText().toString());</span>
+
+<span class="nc" id="L78">                    String message = &quot;vet: &quot; + msgEtx.getText().toString() + &quot;\n&quot;;</span>
+
+                    // Create a new TextView and set the message text
+<span class="nc" id="L81">                    TextView messageTextView = new TextView(this);</span>
+<span class="nc" id="L82">                    messageTextView.setText(message);</span>
+
+                    // Add the TextView to the LinearLayout
+<span class="nc" id="L85">                    msgTv.addView(messageTextView);</span>
+
+                    // Clear the EditText after sending
+<span class="nc" id="L88">                    msgEtx.setText(&quot;&quot;);</span>
+
+<span class="nc" id="L90">                } catch (Exception e) {</span>
+<span class="nc" id="L91">                    Log.d(&quot;ExceptionSendMessage:&quot;, e.getMessage().toString());</span>
+<span class="nc" id="L92">                }</span>
+<span class="nc" id="L93">            });</span>
+
+            // Button to return
+<span class="nc" id="L96">            returnButton.setOnClickListener(new View.OnClickListener() {</span>
+                @Override
+                public void onClick(View v) {
+<span class="nc" id="L99">                    Intent intent = new Intent(VetChatActivity.this, VetNavbarMainActivity.class);</span>
+<span class="nc" id="L100">                    startActivity(intent);</span>
+<span class="nc" id="L101">                }</span>
+            });
+
+<span class="nc" id="L104">        }</span>
+
+    /**
+     * Callback method for receiving Websocket messages.
+     * Formats and displays incoming messsages on the chat UI.
+     *
+     * @param message The received WebSocket message.
+     */
+    @Override
+    public void onWebSocketMessage(String message) {
+        /**
+         * In Android, all UI-related operations must be performed on the main UI thread
+         * to ensure smooth and responsive user interfaces. The 'runOnUiThread' method
+         * is used to post a runnable to the UI thread's message queue, allowing UI updates
+         * to occur safely from a background or non-UI thread.
+         */
+<span class="nc" id="L120">        runOnUiThread(() -&gt; {</span>
+<span class="nc" id="L121">            String[] parts = message.split(&quot; &quot;, 3);</span>
+
+            // The second part should be the sender, and the rest is the message
+<span class="nc" id="L124">            String formattedMessage = parts[1] + &quot;: &quot; + parts[2];</span>
+
+            // Create a new TextView for the formatted message
+<span class="nc" id="L127">            TextView messageTextView = new TextView(this);</span>
+<span class="nc" id="L128">            messageTextView.setText(formattedMessage);</span>
+
+            // Add the TextView to the LinearLayout
+<span class="nc" id="L131">            msgTv.addView(messageTextView);</span>
+<span class="nc" id="L132">        });</span>
+<span class="nc" id="L133">    }</span>
+
+    /**
+     * Callback method for Websocket closure.
+     * Handles the closure of Websocket connection.
+     *
+     * @param code   The status code indicating the reason for closure.
+     * @param reason A human-readable explanation for the closure.
+     * @param remote Indicates whether the closure was initiated by the remote endpoint.
+     */
+    @Override
+    public void onWebSocketClose(int code, String reason, boolean remote) {
+
+<span class="nc" id="L146">    }</span>
+
+    /**
+     * Callback method for Websocket opening.
+     * Handles actions when Websocket connection is opened.
+     *
+     * @param handshakedata Information about the server handshake.
+     */
+    @Override
+    public void onWebSocketOpen(ServerHandshake handshakedata) {
+
+<span class="nc" id="L157">    }</span>
+
+    /**
+     * Callback method for Websocket errors.
+     * Logs or handles any errors that occur.
+     *
+     * @param ex The exception that describes the error.
+     */
+    @Override
+    public void onWebSocketError(Exception ex) {
+
+<span class="nc" id="L168">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span>Generated by the Android Gradle plugin 8.7.2</div></body></html>

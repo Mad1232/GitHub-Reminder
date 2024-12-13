@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CustomerFragment.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=0;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">debug</a> &gt; <a href="index.source.html" class="el_package">com.example.cydrop_frontend</a> &gt; <span class="el_source">CustomerFragment.java</span></div><h1>CustomerFragment.java</h1><pre class="source lang-java linenums">package com.example.cydrop_frontend;
+
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Bundle;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+
+import com.android.volley.Request;
+import com.android.volley.toolbox.JsonArrayRequest;
+
+/**
+ * This is a fragment that displays a customers information for vets and admins
+ * @author Niraj
+ */
+public class CustomerFragment extends Fragment {
+
+    private static final String ARG_PETS = &quot;pets&quot;;
+    private static final String ARG_CUSTOMER_NAME = &quot;customerName&quot;;
+    private static final String ARG_CUSTOMER_ID = &quot;id&quot;;
+
+
+    private String[] pets;
+    private String customerName;
+    private String customerId;
+
+    private View defaultView;
+    private View expandedView;
+
+
+
+    // The dialog interface for confirming pet deletion
+<span class="fc" id="L41">    DialogInterface.OnClickListener dialogClickListener = (dialog, which) -&gt; {</span>
+<span class="nc bnc" id="L42" title="All 2 branches missed.">        switch (which){</span>
+            case DialogInterface.BUTTON_POSITIVE:
+<span class="nc" id="L44">                RemoveCustomer();</span>
+<span class="nc" id="L45">                break;</span>
+
+            case DialogInterface.BUTTON_NEGATIVE:
+                //No button clicked, no response needed
+                break;
+        }
+<span class="nc" id="L51">    };</span>
+
+
+<span class="fc" id="L54">    public CustomerFragment() {</span>
+        // Required empty public constructor
+<span class="fc" id="L56">    }</span>
+
+
+    public static CustomerFragment newInstance(String customerName, String customerId, String[] pets) {
+<span class="fc" id="L60">        CustomerFragment fragment = new CustomerFragment();</span>
+<span class="fc" id="L61">        Bundle args = new Bundle();</span>
+<span class="fc" id="L62">        args.putStringArray (ARG_PETS, pets);</span>
+<span class="fc" id="L63">        args.putString(ARG_CUSTOMER_NAME, customerName);</span>
+<span class="fc" id="L64">        args.putString(ARG_CUSTOMER_ID, customerId);</span>
+<span class="fc" id="L65">        fragment.setArguments(args);</span>
+<span class="fc" id="L66">        return fragment;</span>
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+<span class="fc" id="L71">        super.onCreate(savedInstanceState);</span>
+<span class="pc bpc" id="L72" title="1 of 2 branches missed.">        if (getArguments() != null) {</span>
+<span class="fc" id="L73">            pets = getArguments().getStringArray(ARG_PETS);</span>
+<span class="fc" id="L74">            customerName = getArguments().getString(ARG_CUSTOMER_NAME);</span>
+<span class="fc" id="L75">            customerId = getArguments().getString(ARG_CUSTOMER_ID);</span>
+        }
+<span class="fc" id="L77">    }</span>
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+
+<span class="fc" id="L83">        View view = inflater.inflate(R.layout.fragment_customer, container, false);</span>
+
+<span class="fc" id="L85">        TextView name = view.findViewById(R.id.card_customer_name);</span>
+<span class="fc" id="L86">        name.setText(customerName);</span>
+
+<span class="fc" id="L88">        TextView cardEditingName = view.findViewById(R.id.card_customer_editing_title);</span>
+<span class="fc" id="L89">        cardEditingName.setText(customerName);</span>
+
+<span class="fc" id="L91">        expandedView = view.findViewById(R.id.card_customer_expanded_layout);</span>
+<span class="fc" id="L92">        defaultView = view.findViewById(R.id.card_customer_collapsed_layout);</span>
+
+<span class="fc" id="L94">        view.findViewById(R.id.card_customer_edit_collapse_button).setOnClickListener(view3 -&gt; {</span>
+<span class="nc" id="L95">            toggleExpandedView(false);</span>
+<span class="nc" id="L96">        });</span>
+
+<span class="fc" id="L98">        view.findViewById(R.id.card_customer_expand_button).setOnClickListener(view3 -&gt; {</span>
+<span class="nc" id="L99">            toggleExpandedView(true);</span>
+<span class="nc" id="L100">        });</span>
+
+<span class="fc" id="L102">        view.findViewById(R.id.card_customer_edit_remove_customer_button).setOnClickListener(v -&gt; {</span>
+<span class="nc" id="L103">                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());</span>
+<span class="nc" id="L104">                builder.setMessage(&quot;Are you sure you would like to remove &quot; + customerName +&quot; as a customer?&quot;).setPositiveButton(&quot;Yes&quot;, dialogClickListener)</span>
+<span class="nc" id="L105">                        .setNegativeButton(&quot;No&quot;, dialogClickListener).show();</span>
+<span class="nc" id="L106">        });</span>
+
+<span class="fc" id="L108">        String petListString = &quot;&quot;;</span>
+<span class="fc bfc" id="L109" title="All 2 branches covered.">        for (String s : pets){</span>
+<span class="fc" id="L110">            petListString += s + &quot;\n&quot;;</span>
+        }
+<span class="fc" id="L112">        TextView petListText = view.findViewById(R.id.card_customer_pet_list_text_in_linear);</span>
+<span class="fc" id="L113">        petListText.setText(petListString);</span>
+
+<span class="fc" id="L115">        view.findViewById(R.id.card_customer_edit_inspect_button).setOnClickListener(view3 -&gt; {</span>
+<span class="nc" id="L116">            Intent intent = new Intent(getActivity(), MedicationActivity.class);</span>
+<span class="nc" id="L117">            startActivity(intent);</span>
+<span class="nc" id="L118">        });</span>
+
+
+<span class="fc" id="L121">        toggleExpandedView(false);</span>
+<span class="fc" id="L122">        return view;</span>
+    }
+
+    void toggleExpandedView(boolean isExpanded) {
+<span class="pc bpc" id="L126" title="1 of 2 branches missed.">        if (isExpanded) {</span>
+<span class="nc" id="L127">            expandedView.setVisibility(View.VISIBLE);</span>
+<span class="nc" id="L128">            defaultView.setVisibility(View.GONE);</span>
+        } else {
+<span class="fc" id="L130">            expandedView.setVisibility(View.GONE);</span>
+<span class="fc" id="L131">            defaultView.setVisibility(View.VISIBLE);</span>
+        }
+<span class="fc" id="L133">    }</span>
+
+
+    void RemoveCustomer(){
+<span class="nc" id="L137">        JsonArrayRequest petDeleteRequest = new JsonArrayRequest(</span>
+                Request.Method.DELETE,
+                &quot;http://coms-3090-038.class.las.iastate.edu:8080/vets/&quot; + VolleySingleton.vetIdTEMP +
+<span class="nc" id="L140">                        &quot;/customers/&quot; + customerId.trim(),</span>
+                null, // Pass null as the request body since it's a DELETE request
+                response -&gt; {
+                    // No response
+<span class="nc" id="L144">                },</span>
+                error -&gt; {
+
+<span class="nc" id="L147">                }</span>
+        );
+<span class="nc" id="L149">        VolleySingleton.getInstance(getContext().getApplicationContext()).addToRequestQueue(petDeleteRequest);</span>
+<span class="nc" id="L150">        FragmentManager fragmentManager = getFragmentManager();</span>
+<span class="nc" id="L151">        FragmentTransaction trans = fragmentManager.beginTransaction();</span>
+<span class="nc" id="L152">        trans.remove(this).commit();</span>
+<span class="nc" id="L153">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span>Generated by the Android Gradle plugin 8.7.2</div></body></html>

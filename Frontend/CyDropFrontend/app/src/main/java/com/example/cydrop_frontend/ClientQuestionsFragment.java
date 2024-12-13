@@ -86,9 +86,8 @@ public class ClientQuestionsFragment extends Fragment implements WebSocketListen
         // Button to direct chat
         view.findViewById(R.id.client_questions_direct_chat_button).setOnClickListener(view2 -> {
 
-
-            // TODO: LINK MADISONS DIRECT CHAT HERE
-
+            Intent intent = new Intent(getActivity(), CustomerChatActivity.class);
+            startActivity(intent);
 
 
         });

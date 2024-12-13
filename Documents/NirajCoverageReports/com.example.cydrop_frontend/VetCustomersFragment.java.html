@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>VetCustomersFragment.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=0;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">debug</a> &gt; <a href="index.source.html" class="el_package">com.example.cydrop_frontend</a> &gt; <span class="el_source">VetCustomersFragment.java</span></div><h1>VetCustomersFragment.java</h1><pre class="source lang-java linenums">package com.example.cydrop_frontend;
+
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
+import android.preference.PreferenceManager;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import android.widget.Button;
+
+
+public class VetCustomersFragment extends Fragment {
+
+    View defaultView;
+    View addView;
+    TextView customersTitle;
+
+    LinearLayout CustomersLinearLayout;
+
+<span class="fc" id="L43">    ArrayList&lt;Fragment&gt; fragList = new ArrayList&lt;&gt;();</span>
+
+
+
+
+
+<span class="fc" id="L49">    public VetCustomersFragment() {</span>
+        // Required empty public constructor
+<span class="fc" id="L51">    }</span>
+
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+<span class="fc" id="L56">        View view = inflater.inflate(R.layout.fragment_vet_customers, container, false);</span>
+
+<span class="fc" id="L58">        defaultView = view.findViewById(R.id.vet_customers_regular_layout);</span>
+<span class="fc" id="L59">        addView = view.findViewById(R.id.vet_customers_adding_layout);</span>
+<span class="fc" id="L60">        customersTitle = view.findViewById(R.id.vet_customers_text);</span>
+
+<span class="fc" id="L62">        Button addCustomer = view.findViewById(R.id.add_new_customer_button);</span>
+<span class="fc" id="L63">        addCustomer.setOnClickListener(view2 -&gt; {</span>
+<span class="nc" id="L64">            ToggleAddCustomer(true);</span>
+<span class="nc" id="L65">        });</span>
+
+<span class="fc" id="L67">        view.findViewById(R.id.vet_customers_logout_button).setOnClickListener(view3 -&gt; {</span>
+<span class="fc" id="L68">            SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getContext().getApplicationContext());</span>
+<span class="fc" id="L69">            SharedPreferences.Editor editor = sharedPref.edit();</span>
+<span class="fc" id="L70">            editor.putString(&quot;userId&quot;, &quot;-1&quot;);</span>
+<span class="fc" id="L71">            editor.putString(&quot;userType&quot;, &quot;none&quot;);</span>
+<span class="fc" id="L72">            editor.commit();</span>
+
+<span class="fc" id="L74">            Intent intent = new Intent(getActivity(), MainActivity.class);</span>
+<span class="fc" id="L75">            startActivity(intent);</span>
+<span class="fc" id="L76">        });</span>
+
+<span class="fc" id="L78">        view.findViewById(R.id.vet_customer_add_cancel_button).setOnClickListener(view3 -&gt; {</span>
+<span class="nc" id="L79">            ToggleAddCustomer(false);</span>
+<span class="nc" id="L80">        });</span>
+
+<span class="fc" id="L82">        EditText addByIdTextView = view.findViewById(R.id.vet_customer_add_id_input);</span>
+<span class="fc" id="L83">        EditText addByEmailTextView = view.findViewById(R.id.vet_customer_add_email_input);</span>
+
+
+<span class="fc" id="L86">        view.findViewById(R.id.vet_customer_add_by_email_submit).setOnClickListener(view3 -&gt; {</span>
+            try {
+<span class="nc" id="L88">                AddCustomerByEmail(addByEmailTextView.getText().toString());</span>
+<span class="nc" id="L89">            } catch (JSONException e) {</span>
+<span class="nc" id="L90">                throw new RuntimeException(e);</span>
+<span class="nc" id="L91">            }</span>
+<span class="nc" id="L92">        });</span>
+
+<span class="fc" id="L94">        view.findViewById(R.id.vet_customer_add_by_id_submit).setOnClickListener(view3 -&gt; {</span>
+            try {
+<span class="nc" id="L96">                AddCustomerByID(addByIdTextView.getText().toString());</span>
+<span class="nc" id="L97">            } catch (JSONException e) {</span>
+<span class="nc" id="L98">                throw new RuntimeException(e);</span>
+<span class="nc" id="L99">            }</span>
+<span class="nc" id="L100">        });</span>
+
+
+<span class="fc" id="L103">        LoadCustomers();</span>
+<span class="fc" id="L104">        ToggleAddCustomer(false);</span>
+<span class="fc" id="L105">        return view;</span>
+    }
+
+
+    void ToggleAddCustomer(boolean isAdding) {
+<span class="pc bpc" id="L110" title="1 of 2 branches missed.">        if (isAdding) {</span>
+<span class="nc" id="L111">            addView.setVisibility(View.VISIBLE);</span>
+<span class="nc" id="L112">            defaultView.setVisibility(View.GONE);</span>
+        } else {
+<span class="fc" id="L114">            addView.setVisibility(View.GONE);</span>
+<span class="fc" id="L115">            defaultView.setVisibility(View.VISIBLE);</span>
+        }
+<span class="fc" id="L117">    }</span>
+
+    void LoadCustomers() {
+<span class="fc" id="L120">        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest</span>
+                (Request.Method.GET,
+                        &quot;http://coms-3090-038.class.las.iastate.edu:8080/vet/&quot; + VolleySingleton.vetIdTEMP,
+                        null,
+                        response -&gt; {
+                            try {
+<span class="fc" id="L126">                                JSONArray customers = response.getJSONArray(&quot;customers&quot;);</span>
+<span class="fc bfc" id="L127" title="All 2 branches covered.">                                for (int i = 0; i &lt; customers.length(); i++){</span>
+<span class="fc" id="L128">                                    JSONObject customerData = customers.getJSONObject(i);</span>
+<span class="fc" id="L129">                                    createCustomerCard(customerData);</span>
+                                }
+
+<span class="nc" id="L132">                            } catch (JSONException e) {</span>
+<span class="nc" id="L133">                                throw new RuntimeException(e);</span>
+<span class="fc" id="L134">                            }</span>
+
+
+<span class="fc" id="L137">                        }, new Response.ErrorListener() {</span>
+
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+<span class="nc" id="L142">                    }</span>
+                });
+
+<span class="fc" id="L145">        VolleySingleton.getInstance(getContext()).addToRequestQueue(jsonObjectRequest);</span>
+<span class="fc" id="L146">    }</span>
+
+    void AddCustomerByID(String CustomerID) throws JSONException {
+<span class="nc" id="L149">        JSONObject j = new JSONObject();</span>
+<span class="nc" id="L150">        j.put(&quot;id&quot;, Integer.parseInt(CustomerID));</span>
+<span class="nc" id="L151">        AddCustomerGivenJSON(j);</span>
+<span class="nc" id="L152">    }</span>
+
+    void AddCustomerByEmail(String Email) throws JSONException {
+<span class="nc" id="L155">        JSONObject j = new JSONObject();</span>
+<span class="nc" id="L156">        j.put(&quot;email&quot;, Email);</span>
+<span class="nc" id="L157">        AddCustomerGivenJSON(j);</span>
+<span class="nc" id="L158">    }</span>
+
+    void AddCustomerGivenJSON(JSONObject j){
+<span class="nc" id="L161">        JsonObjectRequest postReq = new JsonObjectRequest(</span>
+                Request.Method.POST,
+                &quot;http://coms-3090-038.class.las.iastate.edu:8080/vets/&quot; + VolleySingleton.vetIdTEMP + &quot;/customers&quot;,
+                j,
+                response -&gt; {
+<span class="nc" id="L166">                    ClearCustomers();</span>
+<span class="nc" id="L167">                    LoadCustomers();</span>
+<span class="nc" id="L168">                },</span>
+<span class="nc" id="L169">                new Response.ErrorListener() {</span>
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // sooo, this is kinda expected to error out? and then i check which error with string parsing ??
+                        // Im not gonna fix this
+<span class="nc bnc" id="L174" title="All 2 branches missed.">                        if (error.toString().split(&quot;:&quot;)[0].equals(&quot;com.android.volley.ParseError&quot;)){</span>
+<span class="nc" id="L175">                            ClearCustomers();</span>
+<span class="nc" id="L176">                            LoadCustomers();</span>
+                        } else {
+<span class="nc" id="L178">                            Toast.makeText(getActivity(), &quot;Error adding new customer&quot;, Toast.LENGTH_LONG).show();</span>
+                        }
+<span class="nc" id="L180">                    }</span>
+                }
+        );
+<span class="nc" id="L183">        VolleySingleton.getInstance(getContext()).addToRequestQueue(postReq);</span>
+<span class="nc" id="L184">    }</span>
+
+    void ClearCustomers(){
+<span class="nc" id="L187">        FragmentManager fragMan = getFragmentManager();</span>
+<span class="nc" id="L188">        FragmentTransaction fragTransaction = fragMan.beginTransaction();</span>
+<span class="nc bnc" id="L189" title="All 2 branches missed.">        for (Fragment f : (Fragment[]) fragList.toArray()){</span>
+<span class="nc" id="L190">            fragTransaction.remove(f);</span>
+        }
+<span class="nc" id="L192">        fragTransaction.commit();</span>
+<span class="nc" id="L193">    }</span>
+
+    void createCustomerCard(JSONObject object) throws JSONException {
+<span class="fc" id="L196">        String customerName = object.getString(&quot;email&quot;).trim();</span>
+        // remove the email addresses from our customer names? IDK if we want this
+        // customerName = customerName.split(&quot;@&quot;)[0].trim();
+
+<span class="fc" id="L200">        String customerId = object.getString(&quot;id&quot;);</span>
+
+
+<span class="fc" id="L203">        JSONArray petArray = object.getJSONArray(&quot;pets&quot;);</span>
+<span class="fc" id="L204">        String[] petNames = new String[petArray.length()];</span>
+<span class="fc bfc" id="L205" title="All 2 branches covered.">        for (int i = 0; i &lt; petArray.length(); i++){</span>
+<span class="fc" id="L206">            petNames[i] = (petArray.getJSONObject(i).getString(&quot;pet_name&quot;));</span>
+        }
+
+<span class="fc" id="L209">        FragmentManager fragmentManager = getFragmentManager();</span>
+<span class="fc" id="L210">        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();</span>
+<span class="fc" id="L211">        CustomerFragment frag = CustomerFragment.newInstance(customerName, customerId, petNames);</span>
+<span class="fc" id="L212">        fragList.add(frag);</span>
+<span class="fc" id="L213">        fragmentTransaction.add(R.id.vet_customers_linear_layout, frag);</span>
+<span class="fc" id="L214">        fragmentTransaction.commit();</span>
+
+<span class="fc" id="L216">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span>Generated by the Android Gradle plugin 8.7.2</div></body></html>

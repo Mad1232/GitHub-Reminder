@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="3dp"
+    android:background="@drawable/rounded_rectangle"
+    android:animateLayoutChanges="true"
+    android:layout_marginTop="10dp"
+    android:paddingBottom="10dp"
+    tools:context=".PetCardFragment">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/card_reminder_expanded_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/card_reminder_pet_name_expanded"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="10dp"
+            android:text="petName"
+            android:textSize="30sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/card_reminder_description_expanded"
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_height="wrap_content"
+            android:text="Reminder description"
+            android:textSize="30sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/card_reminder_pet_name_expanded" />
+
+        <TextView
+            android:id="@+id/card_reminder_medication_expanded"
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_height="wrap_content"
+            android:text="Reminder medication"
+            android:textSize="30sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/card_reminder_description_expanded" />
+
+        <TextView
+            android:id="@+id/card_reminder_time_expanded"
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_marginStart="15dp"
+            android:paddingBottom="10dp"
+            android:layout_height="wrap_content"
+            android:text="Reminder time"
+            android:textSize="30sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/card_reminder_medication_expanded" />
+
+        <TextView
+            android:id="@+id/card_reminder_m_icon_expanded"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingVertical="2.5dp"
+            android:paddingHorizontal="7dp"
+            android:layout_marginBottom="3dp"
+            android:layout_margin="2dp"
+            android:textSize="25sp"
+            android:text="M"
+
+            android:background="@drawable/green_circle_drawable"
+            app:layout_constraintStart_toStartOf="@+id/card_reminder_time_expanded"
+            app:layout_constraintTop_toBottomOf="@+id/card_reminder_time_expanded" />
+
+        <TextView
+            android:id="@+id/card_reminder_t_icon_expanded"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingVertical="2.5dp"
+            android:paddingHorizontal="10dp"
+            android:layout_margin="2dp"
+            android:layout_marginTop="15dp"
+            android:textSize="25sp"
+            android:text="T"
+
+            android:background="@drawable/green_circle_drawable"
+            app:layout_constraintStart_toEndOf="@+id/card_reminder_m_icon_expanded"
+            app:layout_constraintTop_toBottomOf="@+id/card_reminder_time_expanded" />
+        <TextView
+            android:id="@+id/card_reminder_w_icon_expanded"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingVertical="2.5dp"
+            android:paddingHorizontal="10dp"
+            android:layout_marginBottom="3dp"
+            android:layout_margin="2dp"
+            android:textSize="25sp"
+            android:text="W"
+
+            android:background="@drawable/green_circle_drawable"
+            app:layout_constraintStart_toEndOf="@+id/card_reminder_t_icon_expanded"
+            app:layout_constraintTop_toBottomOf="@+id/card_reminder_time_expanded" />
+        <TextView
+            android:id="@+id/card_reminder_r_icon_expanded"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingVertical="2.5dp"
+            android:paddingHorizontal="10dp"
+            android:layout_marginBottom="3dp"
+            android:layout_margin="2dp"
+            android:textSize="25sp"
+            android:text="R"
+
+            android:background="@drawable/green_circle_drawable"
+            app:layout_constraintStart_toEndOf="@+id/card_reminder_w_icon_expanded"
+            app:layout_constraintTop_toBottomOf="@+id/card_reminder_time_expanded" />
+
+        <TextView
+            android:id="@+id/card_reminder_f_icon_expanded"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingVertical="2.5dp"
+            android:paddingHorizontal="10dp"
+            android:layout_marginBottom="3dp"
+            android:layout_margin="2dp"
+            android:textSize="25sp"
+            android:text="F"
+
+            android:background="@drawable/green_circle_drawable"
+            app:layout_constraintStart_toEndOf="@+id/card_reminder_r_icon_expanded"
+            app:layout_constraintTop_toBottomOf="@+id/card_reminder_time_expanded" />
+
+        <TextView
+            android:id="@+id/card_reminder_s_icon_expanded"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingVertical="2.5dp"
+            android:paddingHorizontal="10dp"
+            android:layout_marginBottom="3dp"
+            android:layout_margin="2dp"
+            android:textSize="25sp"
+            android:text="S"
+
+            android:background="@drawable/green_circle_drawable"
+            app:layout_constraintStart_toEndOf="@+id/card_reminder_f_icon_expanded"
+            app:layout_constraintTop_toBottomOf="@+id/card_reminder_time_expanded" />
+
+        <TextView
+            android:id="@+id/card_reminder_u_icon_expanded"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingVertical="2.5dp"
+            android:paddingHorizontal="10dp"
+            android:layout_marginBottom="3dp"
+            android:layout_margin="2dp"
+            android:textSize="25sp"
+            android:text="U"
+
+            android:background="@drawable/green_circle_drawable"
+            app:layout_constraintStart_toEndOf="@+id/card_reminder_s_icon_expanded"
+            app:layout_constraintTop_toBottomOf="@+id/card_reminder_time_expanded" />
+
+        <Button
+            android:id="@+id/card_reminder_less_button_expanded"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="Show less"
+            android:layout_marginStart="30dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/card_reminder_u_icon_expanded"
+            />
+
+
+        <Button
+            android:id="@+id/card_reminder_delete_button_expanded"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:backgroundTint="@color/background_red"
+            android:text="Delete"
+            android:layout_marginEnd="30dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/card_reminder_u_icon_expanded"
+            />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/card_reminder_edit_layout"
+        android:layout_width="match_parent"
+        android:visibility="gone"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/card_reminder_pet_name_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="10dp"
+            android:text="petName"
+            android:textSize="30sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/card_reminder_collapsed_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingRight="2dp"
+        android:paddingBottom="10dp"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/card_reminder_pet_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="10dp"
+            android:text="petName"
+            android:textSize="30sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/card_reminder_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="10dp"
+            android:text="Reminder time"
+            android:textSize="30sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/card_reminder_pet_name" />
+
+
+        <TextView
+            android:id="@+id/card_reminder_m_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            android:layout_marginBottom="3dp"
+            android:background="@drawable/green_circle_drawable"
+            android:paddingHorizontal="7dp"
+            android:paddingVertical="2.5dp"
+            android:text="M"
+
+            android:textSize="25sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/card_reminder_time"
+            app:layout_constraintTop_toBottomOf="@+id/card_reminder_time" />
+
+        <TextView
+            android:id="@+id/card_reminder_t_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/green_circle_drawable"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="2.5dp"
+            android:text="T"
+
+            android:textSize="25sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/card_reminder_m_icon"
+            app:layout_constraintTop_toBottomOf="@+id/card_reminder_time" />
+
+        <TextView
+            android:id="@+id/card_reminder_w_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            android:layout_marginBottom="3dp"
+            android:background="@drawable/green_circle_drawable"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="2.5dp"
+            android:text="W"
+
+            android:textSize="25sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/card_reminder_t_icon"
+            app:layout_constraintTop_toBottomOf="@+id/card_reminder_time" />
+
+        <TextView
+            android:id="@+id/card_reminder_r_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            android:layout_marginBottom="3dp"
+            android:background="@drawable/green_circle_drawable"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="2.5dp"
+            android:text="R"
+
+            android:textSize="25sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/card_reminder_w_icon"
+            app:layout_constraintTop_toBottomOf="@+id/card_reminder_time" />
+
+        <TextView
+            android:id="@+id/card_reminder_f_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            android:layout_marginBottom="3dp"
+            android:background="@drawable/green_circle_drawable"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="2.5dp"
+            android:text="F"
+
+            android:textSize="25sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/card_reminder_r_icon"
+            app:layout_constraintTop_toBottomOf="@+id/card_reminder_time" />
+
+        <TextView
+            android:id="@+id/card_reminder_s_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            android:layout_marginBottom="3dp"
+            android:background="@drawable/green_circle_drawable"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="2.5dp"
+            android:text="S"
+
+            android:textSize="25sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/card_reminder_f_icon"
+            app:layout_constraintTop_toBottomOf="@+id/card_reminder_time" />
+
+        <TextView
+            android:id="@+id/card_reminder_u_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            android:layout_marginBottom="3dp"
+            android:background="@drawable/green_circle_drawable"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="2.5dp"
+            android:text="U"
+
+            android:textSize="25sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/card_reminder_s_icon"
+            app:layout_constraintTop_toBottomOf="@+id/card_reminder_time" />
+
+
+        <Button
+            android:id="@+id/card_reminder_expand_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:paddingVertical="3dp"
+            android:text="View"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/card_reminder_time" />
+
+        <Button
+            android:id="@+id/card_reminder_delete_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:backgroundTint="@color/background_red"
+            android:text="Delete"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/card_reminder_u_icon" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

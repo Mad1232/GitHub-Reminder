@@ -6,8 +6,18 @@ import android.util.LruCache;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.util.Dictionary;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * VolleySingleton class to manage the Volley request queue and image caching.
@@ -61,6 +71,11 @@ public class VolleySingleton {
      */
     public static final String vetIdTEMP = "1";
 
+    public static Map<String, Integer> userPetsToId = new HashMap<>() {
+    };
+
+    public static Map<String, Integer> medicationToId = new HashMap<>();
+
     /**
      * Private constructor to initialize the request queue and image loader.
      *
@@ -86,6 +101,7 @@ public class VolleySingleton {
                     }
                 });
     }
+
 
     /**
      * Provides a synchronized instance of VolleySingleton to ensure a single instance is used.

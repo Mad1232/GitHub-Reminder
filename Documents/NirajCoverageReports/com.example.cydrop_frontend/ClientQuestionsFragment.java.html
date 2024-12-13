@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ClientQuestionsFragment.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=0;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">debug</a> &gt; <a href="index.source.html" class="el_package">com.example.cydrop_frontend</a> &gt; <span class="el_source">ClientQuestionsFragment.java</span></div><h1>ClientQuestionsFragment.java</h1><pre class="source lang-java linenums">package com.example.cydrop_frontend;
+
+import android.content.Intent;
+import android.os.Bundle;
+
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import org.java_websocket.handshake.ServerHandshake;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+/**
+ * This is a fragment that can be displayed in the ClientNavbarMainActivity
+ * Holds the inventory pages, where an admin can manage medication
+ * @author Niraj
+ */
+public class ClientQuestionsFragment extends Fragment implements WebSocketListener{
+    EditText messageInputText;
+    LinearLayout linearLayout;
+<span class="fc" id="L34">    int fragCount = 0;</span>
+    private Button client_questions_direct_chat_button;
+
+    /**
+     * Empty required constructor
+     */
+<span class="fc" id="L40">    public ClientQuestionsFragment() {</span>
+        // Required empty public constructor
+<span class="fc" id="L42">    }</span>
+
+    /**
+     * Generic onCreate
+     * @param savedInstanceState If the fragment is being re-created from
+     * a previous saved state, this is the state.
+     */
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+<span class="fc" id="L51">        super.onCreate(savedInstanceState);</span>
+
+<span class="fc" id="L53">    }</span>
+
+    /**
+     * Connect to the websocket and load the chat. Add onClick listeners to buttons
+     *
+     *
+     * @param inflater The LayoutInflater object that can be used to inflate
+     * any views in the fragment,
+     * @param container If non-null, this is the parent view that the fragment's
+     * UI should be attached to.  The fragment should not add the view itself,
+     * but this can be used to generate the LayoutParams of the view.
+     * @param savedInstanceState If non-null, this fragment is being re-constructed
+     * from a previous saved state as given here.
+     *
+     * @return the created view
+     */
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+<span class="fc" id="L72">        View view = inflater.inflate(R.layout.fragment_client_questions, container, false);</span>
+
+        // Try to connect to websocket
+<span class="fc" id="L75">        WebSocketManager.getInstance().connectWebSocket(&quot;ws://coms-3090-038.class.las.iastate.edu:8080/chat/&quot; + VolleySingleton.email);</span>
+<span class="fc" id="L76">        WebSocketManager.getInstance().setWebSocketListener(ClientQuestionsFragment.this);</span>
+
+
+<span class="fc" id="L79">        linearLayout = view.findViewById(R.id.global_questions_linear_layout);</span>
+<span class="fc" id="L80">        messageInputText = view.findViewById(R.id.client_questions_messagebox);</span>
+
+<span class="fc" id="L82">        view.findViewById(R.id.client_questions_send_button).setOnClickListener(view2 -&gt; {</span>
+<span class="nc" id="L83">            WebSocketManager.getInstance().sendMessage(messageInputText.getText().toString());</span>
+<span class="nc" id="L84">        });</span>
+
+        // Button to direct chat
+<span class="fc" id="L87">        view.findViewById(R.id.client_questions_direct_chat_button).setOnClickListener(view2 -&gt; {</span>
+
+
+            // TODO: LINK MADISONS DIRECT CHAT HERE
+
+
+
+<span class="nc" id="L94">        });</span>
+
+<span class="fc" id="L96">        return view;</span>
+
+    }
+
+    /**
+     * Create a new MessageFragment and populate the username and content params. Add it to the linearLayout of messages.
+     * @param username the username of the message to add
+     * @param content the content of the message to add
+     */
+    public void addMessage(String username, String content){
+<span class="fc" id="L106">        fragCount++;</span>
+<span class="fc" id="L107">       FragmentManager fragMan = getFragmentManager();</span>
+<span class="fc" id="L108">       FragmentTransaction fragTransaction = fragMan.beginTransaction();</span>
+<span class="fc" id="L109">       Fragment f = MessageFragment.newInstance(username + &quot;: &quot;,content);</span>
+<span class="fc" id="L110">       fragTransaction.add(linearLayout.getId(), f, &quot;frag&quot; + fragCount);</span>
+<span class="fc" id="L111">       fragTransaction.commit();</span>
+<span class="fc" id="L112">    }</span>
+
+    /**
+     * Empty, required by interface
+     * @param handshakedata Information about the server handshake.
+     */
+    @Override
+    public void onWebSocketOpen(ServerHandshake handshakedata) {
+
+<span class="fc" id="L121">    }</span>
+
+    /**
+     * Break the message up by user and content. Use string interpolation to cut out email addresses and detect system messages
+     * Call addMessage() with the parsed information
+     * @param message The received WebSocket message.
+     */
+    @Override
+    public void onWebSocketMessage(String message) {
+<span class="fc" id="L130">        String[] messageSplit = message.split(&quot;:&quot;);</span>
+<span class="fc bfc" id="L131" title="All 2 branches covered.">        if (messageSplit.length &gt; 1) {</span>
+<span class="fc" id="L132">            String[] usernameSplit = messageSplit[0].split(&quot;@&quot;);</span>
+<span class="fc" id="L133">            String finalUsername = usernameSplit[0].substring(0,1).toUpperCase() +</span>
+<span class="fc" id="L134">                    usernameSplit[0].substring(1);</span>
+<span class="fc" id="L135">            addMessage(finalUsername, messageSplit[1].trim());</span>
+<span class="fc" id="L136">        } else {</span>
+<span class="fc" id="L137">            String[] systemMessageSplit = message.split(&quot; &quot;);</span>
+<span class="fc" id="L138">            String finalMessage = &quot;&quot;;</span>
+<span class="fc bfc" id="L139" title="All 2 branches covered.">            for (int i = 0; i &lt; systemMessageSplit.length; i++){</span>
+<span class="fc" id="L140">                String[] tempArr = systemMessageSplit[i].split(&quot;@&quot;);</span>
+<span class="fc bfc" id="L141" title="All 2 branches covered.">                if (tempArr.length &gt; 1){</span>
+<span class="fc" id="L142">                    String finalUsername = tempArr[0].substring(0,1).toUpperCase() +</span>
+<span class="fc" id="L143">                            tempArr[0].substring(1);</span>
+<span class="fc" id="L144">                    finalMessage += finalUsername + &quot; &quot;;</span>
+<span class="fc" id="L145">                } else {</span>
+<span class="fc" id="L146">                    finalMessage += tempArr[0] + &quot; &quot;;</span>
+                }
+            }
+<span class="fc" id="L149">            addMessage(&quot;System&quot;, finalMessage.trim());</span>
+        }
+<span class="fc" id="L151">    }</span>
+
+    /**
+     * Empty, required by interface
+     * @param code   The status code indicating the reason for closure.
+     * @param reason A human-readable explanation for the closure.
+     * @param remote Indicates whether the closure was initiated by the remote endpoint.
+     */
+    @Override
+    public void onWebSocketClose(int code, String reason, boolean remote) {
+
+<span class="fc" id="L162">    }</span>
+
+    /**
+     * Empty, required by interface
+     * @param ex The exception that describes the error.
+     */
+    @Override
+    public void onWebSocketError(Exception ex) {
+
+<span class="nc" id="L171">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span>Generated by the Android Gradle plugin 8.7.2</div></body></html>

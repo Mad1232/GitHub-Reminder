@@ -21,12 +21,15 @@ public class Events {
     @Column(name = "reminder_time")
     private LocalDateTime reminderTime;
 
+    @Column(name = "days", nullable = true)
+    private String days;
+
     @Column(name = "reminder_text")
     private String reminderText;
 
-    //One-to-One relationship to Medications(medicine)
+    //Many-to-One relationship to Medications(medicine)
     //@JsonBackReference
-    @OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinColumn(name = "medication_id", referencedColumnName = "id", nullable = false)
     private Medication medication;
 
@@ -76,5 +79,11 @@ public class Events {
     public void setMedication(Medication medication) {
         this.medication = medication;
     }
+
+    public String getDays() {return days;}
+
+    public void setDays(String days) {this.days = days;}
+
+
 
 }

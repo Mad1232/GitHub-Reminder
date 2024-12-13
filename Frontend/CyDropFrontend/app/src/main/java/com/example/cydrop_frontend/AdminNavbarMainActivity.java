@@ -45,14 +45,12 @@ public class AdminNavbarMainActivity extends AppCompatActivity {
         replaceFragment(new AdminInventoryFragment());
 
         // Switch fragments when an icon is selected
-        binding.bottomNavigationView.setOnItemSelectedListener(item -> {
+        binding.bottomNavigationViewAdmin.setOnItemSelectedListener(item -> {
             int itemId = item.getItemId();
             if (itemId == R.id.inventory){
                 replaceFragment(new AdminInventoryFragment());
             } else if (itemId == R.id.users) {
                 replaceFragment(new AdminUsersFragment());
-            } else { // itemId == questions
-                replaceFragment(new AdminQuestionsFragment());
             }
 
             return true;

@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<testsuite name="com.example.cydrop_frontend.MadisonSystemTest" tests="4" failures="0" errors="0" skipped="0" time="32.855" timestamp="2024-12-09T19:39:50" hostname="localhost">
+  <properties>
+    <property name="device" value="Medium_Phone_API_35(AVD) - 15" />
+    <property name="flavor" value="" />
+    <property name="project" value=":app" />
+  </properties>
+  <testcase name="testA_InputOldMedicationName" classname="com.example.cydrop_frontend.MadisonSystemTest" time="10.916" />
+  <testcase name="testB_InputNewMedicationName" classname="com.example.cydrop_frontend.MadisonSystemTest" time="9.499" />
+  <testcase name="testC_InputMedicationStock" classname="com.example.cydrop_frontend.MadisonSystemTest" time="4.699" />
+  <testcase name="testD_ClickSaveChangesButton" classname="com.example.cydrop_frontend.MadisonSystemTest" time="3.013" />
+</testsuite>

@@ -1,14 +1,11 @@
 package com.example.cydrop_frontend;
 
+import static java.security.AccessController.getContext;
+
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,11 +14,10 @@ import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 
-import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
@@ -38,17 +34,19 @@ public class EditMedsActivity extends AppCompatActivity {
     /**
      * EditText field for inputting the medication ID.
      */
-    private EditText msgResponse1;
+    private EditText inventoryID;
 
     /**
      * EditText field for inputting the new medication name.
      */
-    private EditText msgResponse2;
+    private EditText inventoryName;
 
     /**
      * EditText field for inputting the new stock quantity of the medication.
      */
-    private EditText msgResponse3;
+    private EditText inventoryQuantity;
+
+    private EditText med_input;
 
     /**
      * Base URL for the medication inventory endpoint.
@@ -67,18 +65,35 @@ public class EditMedsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_meds);
 
-        findViewById(R.id.btn_save_changes).setOnClickListener(view1 -> {
-            msgResponse1 = findViewById(R.id.et_medication_name_prev);
-            msgResponse2 = findViewById(R.id.et_medication_name_new);
-            msgResponse3 = findViewById(R.id.et_medication_stock);
-            String old_name = msgResponse1.getText().toString();
-            String new_name = msgResponse2.getText().toString();
-            String new_stock = msgResponse3.getText().toString();
+        inventoryID = findViewById(R.id.et_medication_name_prev);
+        inventoryName = findViewById(R.id.et_medication_name_new);
+        inventoryQuantity = findViewById(R.id.et_medication_stock);
+
+        findViewById(R.id.btn_edit).setOnClickListener(view1 -> {
+            String old_name = inventoryID.getText().toString();
+            String new_name = inventoryName.getText().toString();
+            String new_stock = inventoryQuantity.getText().toString();
             putRequest(URL, old_name, new_name, new_stock);
+            inventoryName.setText("");
+            inventoryQuantity.setText("");
+            inventoryID.setText("");
         });
 
-        findViewById(R.id.btn_cancel).setOnClickListener(view1 -> {
-            Intent intent = new Intent(EditMedsActivity.this, MedicationActivity.class);
+        findViewById(R.id.btn_add).setOnClickListener(view1 -> {
+            PostNewInventory();
+            inventoryName.setText("");
+            inventoryQuantity.setText("");
+        });
+
+        findViewById(R.id.btn_delete).setOnClickListener(view1 -> {
+            inventoryID = findViewById(R.id.et_medication_name_prev);
+            String medicationInput = inventoryID.getText().toString();
+            delRequest(medicationInput);
+            inventoryID.setText("");
+        });
+
+        findViewById(R.id.btn_return).setOnClickListener(view1 -> {
+            Intent intent = new Intent(EditMedsActivity.this, AdminNavbarMainActivity.class);
             startActivity(intent);
         });
 
@@ -133,6 +148,80 @@ public class EditMedsActivity extends AppCompatActivity {
         VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(request);
     }
 
+    /**
+     *  Send a POST to add new medication to inventory
+     */
+    private void PostNewInventory(){
 
+        JSONObject inventoryObj = new JSONObject();
+
+        try{
+            inventoryObj.put("name", inventoryName.getText().toString());
+            inventoryObj.put("stock", Integer.parseInt(inventoryQuantity.getText().toString()));
+        } catch (JSONException e){
+            // Unable to create json object
+            return;
+        }
+
+        JsonObjectRequest postReq = new JsonObjectRequest(
+                Request.Method.POST,
+                "http://coms-3090-038.class.las.iastate.edu:8080/admin/inventory",
+                inventoryObj,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Toast.makeText(getApplicationContext(), "Medication Added", Toast.LENGTH_LONG).show();
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // Oopsie
+                    }
+                }
+        );
+
+        VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(postReq);
+    }
+
+    /**
+     * Sends a DELETE request to remove a medication from the inventory.
+     *
+     * @param id ID of the medication to be deleted.
+     */
+    private void delRequest(String id){
+
+        StringRequest request = new StringRequest(Request.Method.DELETE, "http://coms-3090-038.class.las.iastate.edu:8080/admin/inventory"
+                + "/" + id,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                              Toast.makeText(getApplicationContext(), "Medication Deleted", Toast.LENGTH_LONG).show();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.e("Volley Error", error.toString());
+                    }
+                }
+        ){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                return headers;
+            }
+
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                return params;
+            }
+
+        };
+
+        VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(request);
+    }
 
 }

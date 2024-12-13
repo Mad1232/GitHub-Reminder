@@ -5,11 +5,13 @@ import com.coms309.demo2.repository.PetsRepo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.coms309.demo2.entity.Medication;
 import com.coms309.demo2.repository.MedicationRepository;
 import java.util.List;
+import java.util.Optional;
 
 
 /**
@@ -146,8 +148,28 @@ public class MyController {
             //updates only name & type for now, as only two lines of code for those
             pet.setPet_name(petDetails.getPet_name());
             pet.setPet_type(petDetails.getPet_type());
+            pet.setPet_breed(petDetails.getPet_breed());
+            pet.setPet_age(petDetails.getPet_age());
+            pet.setPet_gender(petDetails.getPet_gender());
+            pet.setPet_diagnosis(petDetails.getPet_diagnosis());
             petsRepo.save(pet);
             return "Pet with ID " + id + " updated successfully.";
         }).orElse("Pet with ID " + id + " not found.");
     }
+
+//    /**
+//     * Get Pet ID by name
+//     * @param name name of the Pet
+//     * @return Pet ID
+//     */
+//    @Operation(summary = "Get medication ID by name")
+//    @GetMapping("/pet/search/{name}")
+//    public ResponseEntity<Integer> getPetName(@PathVariable String name) {
+//        Optional<Pet> pet = petsRepo.findByName(name);
+//        if (pet.isPresent()) {
+//            return ResponseEntity.ok(pet.get().getPet_id());
+//        } else {
+//            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+//        }
+//    }
 }

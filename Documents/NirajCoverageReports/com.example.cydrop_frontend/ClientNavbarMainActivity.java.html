@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ClientNavbarMainActivity.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=0;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">debug</a> &gt; <a href="index.source.html" class="el_package">com.example.cydrop_frontend</a> &gt; <span class="el_source">ClientNavbarMainActivity.java</span></div><h1>ClientNavbarMainActivity.java</h1><pre class="source lang-java linenums">package com.example.cydrop_frontend;
+
+import android.os.Bundle;
+import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
+import com.example.cydrop_frontend.databinding.ActivityClientNavbarMainBinding;
+
+import org.java_websocket.handshake.ServerHandshake;
+
+
+/**
+ * @author Niraj
+ * The navbar activity for client view. Holds the fragments ClientHomeFragment, ClientQuestionsFragment, ClientRemindersFragment
+ */
+<span class="fc" id="L22">public class ClientNavbarMainActivity extends AppCompatActivity implements WebSocketListener {</span>
+
+    ActivityClientNavbarMainBinding binding;
+    ClientQuestionsFragment currentFrag;
+
+    /**
+     * Creates the activity. Sets up the binding to allow navbar to control current fragment. Switches current fragment to ClientHomeFragment
+     * @param savedInstanceState
+     */
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+<span class="fc" id="L33">        super.onCreate(savedInstanceState);</span>
+
+
+<span class="fc" id="L36">        EdgeToEdge.enable(this);</span>
+<span class="fc" id="L37">        binding = ActivityClientNavbarMainBinding.inflate(getLayoutInflater());</span>
+<span class="fc" id="L38">        setContentView(binding.getRoot());</span>
+<span class="fc" id="L39">        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -&gt; {</span>
+<span class="fc" id="L40">            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());</span>
+<span class="fc" id="L41">            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);</span>
+<span class="fc" id="L42">            return insets;</span>
+        });
+<span class="fc" id="L44">        replaceFragment(new ClientHomeFragment());</span>
+
+
+        // Switch fragments when an icon is selected
+<span class="fc" id="L48">        binding.bottomNavigationViewClient.setOnItemSelectedListener(item -&gt; {</span>
+<span class="fc" id="L49">            int itemId = item.getItemId();</span>
+<span class="fc" id="L50">            WebSocketManager.getInstance().disconnectWebSocket();</span>
+<span class="fc bfc" id="L51" title="All 2 branches covered.">            if (itemId == R.id.reminders){</span>
+<span class="fc" id="L52">                replaceFragment(new ClientRemindersFragment());</span>
+<span class="fc bfc" id="L53" title="All 2 branches covered.">            } else if (itemId == R.id.customers) {</span>
+<span class="fc" id="L54">                replaceFragment(new ClientHomeFragment());</span>
+            } else { // itemId == questions
+<span class="fc" id="L56">                currentFrag = (ClientQuestionsFragment) replaceFragment(new ClientQuestionsFragment());</span>
+<span class="fc" id="L57">                connectToWebsocket();</span>
+            }
+
+<span class="fc" id="L60">            return true;</span>
+        });
+<span class="fc" id="L62">    }</span>
+
+    /**
+     *  replace the current fragment with provided one
+     * @param fragment the fragment to replace current fragment
+     * @return the fragment that replaced the old fragment
+     */
+    private Fragment replaceFragment(Fragment fragment){
+<span class="fc" id="L70">        FragmentManager fragmentManager = getSupportFragmentManager();</span>
+<span class="fc" id="L71">        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();</span>
+<span class="fc" id="L72">        fragmentTransaction.replace(R.id.frame_layout, fragment);</span>
+<span class="fc" id="L73">        fragmentTransaction.commit();</span>
+<span class="fc" id="L74">        return fragment;</span>
+    }
+
+    /**
+     * Connect to the websocket
+     */
+    private void connectToWebsocket(){
+<span class="fc" id="L81">        WebSocketManager.getInstance().connectWebSocket(VolleySingleton.backendURL);</span>
+<span class="fc" id="L82">        WebSocketManager.getInstance().setWebSocketListener(ClientNavbarMainActivity.this);</span>
+<span class="fc" id="L83">    }</span>
+
+    /**
+     * Empty, required by interface
+     * @param handshakedata Information about the server handshake.
+     */
+    @Override
+    public void onWebSocketOpen(ServerHandshake handshakedata) {
+
+<span class="nc" id="L92">    }</span>
+
+    /**
+     * Empty, required by interface
+     * @param message The received WebSocket message.
+     */
+    @Override
+    public void onWebSocketMessage(String message) {
+
+<span class="nc" id="L101">    }</span>
+
+    /**
+     * Empty, required by interface
+     * @param code   The status code indicating the reason for closure.
+     * @param reason A human-readable explanation for the closure.
+     * @param remote Indicates whether the closure was initiated by the remote endpoint.
+     */
+    @Override
+    public void onWebSocketClose(int code, String reason, boolean remote) {
+
+<span class="nc" id="L112">    }</span>
+
+    /**
+     * Empty, required by interface
+     * @param ex The exception that describes the error.
+     */
+    @Override
+    public void onWebSocketError(Exception ex) {
+
+<span class="nc" id="L121">    }</span>
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span>Generated by the Android Gradle plugin 8.7.2</div></body></html>

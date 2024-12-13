@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.coms309.demo2.entity.User;
+import com.coms309.demo2.entity.Vet;
 import com.coms309.demo2.repository.UserRepository;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -106,10 +107,36 @@ public class SignupController {
         }
     }
 
+    /**
+     * Delete all users
+     * @return informative message
+     */
     @Operation(summary = "Delete all users", description = "Delete all users")
     @DeleteMapping("/users")
     public String removeUsers() {
       repository.deleteAll();
       return "all users deleted";
+    }
+
+    /**
+     * get assigned vets of a user
+     * @param id user id of customer
+     * @return list of vets assigned to user
+     */
+    @Operation(summary = "Get assigned vets", description = "get all assigned vets of a user if they exist")
+    @GetMapping("/users/{id}/vets")
+    public List<Vet> getAssignedVets(@PathVariable Long id){
+        Optional<User> user = repository.findById(id);
+        if (user.isPresent()) {
+            /// <summary>The unique identifier</summary>
+            User foundUser = user.get();
+            List<Vet> vets = foundUser.getVets();
+            for (Vet v : vets) {
+                v.getCustomers().clear(); // it's ok, we're not saving anything, this is just to protect privacy
+            }
+            return vets;
+        } else {
+            throw new RuntimeException("User not found");
+        }
     }
 }

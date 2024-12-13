@@ -40,8 +40,8 @@ public class Vet {
     @ManyToMany(mappedBy = "veterinarians")
     private List<Pet> pets;
 
-    //One-to-many relationship with conversations with users
-    //vet is in conversation.java
+    // One-to-many relationship with conversations with users
+    // vet is in conversation.java
     @JsonBackReference("conversation-vet")
     @OneToMany(mappedBy = "vet", orphanRemoval = true, fetch = FetchType.EAGER)
     @Getter
@@ -49,6 +49,7 @@ public class Vet {
 
     // Many-to-Many with User (customers)
     @ManyToMany
+    @JoinTable(name = "vet_customers", joinColumns = @JoinColumn(name = "vet_id"), inverseJoinColumns = @JoinColumn(name = "customer_id"))
     @Getter
     private List<User> customers;
 
@@ -57,7 +58,7 @@ public class Vet {
         return vet_id;
     }
 
-    public void setVet_id(int vet_id) {  // Fixed setter method
+    public void setVet_id(int vet_id) { // Fixed setter method
         this.vet_id = vet_id;
     }
 
@@ -77,21 +78,37 @@ public class Vet {
         this.specialization = specialization;
     }
 
-    public String getVetEmail() {return vetEmail;}
+    public String getVetEmail() {
+        return vetEmail;
+    }
 
-    public void setVetEmail(String vetEmail) {this.vetEmail = vetEmail;}
+    public void setVetEmail(String vetEmail) {
+        this.vetEmail = vetEmail;
+    }
 
-    public String getLicenseNum() {return licenseNum;}
+    public String getLicenseNum() {
+        return licenseNum;
+    }
 
-    public void setLicenseNum(String licenseNum) {this.licenseNum = licenseNum;}
+    public void setLicenseNum(String licenseNum) {
+        this.licenseNum = licenseNum;
+    }
 
-    public String getClinicAddress() {return clinicAddress;}
+    public String getClinicAddress() {
+        return clinicAddress;
+    }
 
-    public void setClinicAddress(String clinicAddress) {this.clinicAddress = clinicAddress;}
+    public void setClinicAddress(String clinicAddress) {
+        this.clinicAddress = clinicAddress;
+    }
 
-    public String getPhone() {return phone;}
+    public String getPhone() {
+        return phone;
+    }
 
-    public void setPhone(String phone) {this.phone = phone;}
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
 
     // Getter and setter for pets
     public List<Pet> getPets() {

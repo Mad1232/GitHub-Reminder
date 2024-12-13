@@ -14,6 +14,7 @@
         android:id="@+id/adminInventoryAddLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -26,7 +27,7 @@
             android:id="@+id/addInventoryTextView"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
-            android:text="Add Inventory item"
+            android:text="Edit Inventory"
             android:textSize="30sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -38,7 +39,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="88dp"
             android:ems="10"
-            android:hint="Item name"
+            android:hint="Medication"
             android:inputType="text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.497"
@@ -50,7 +51,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Item quantitiy"
+            android:hint="Stock"
             android:inputType="text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.502"
@@ -62,17 +63,29 @@
             android:id="@+id/adminInventorySubmitButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Submit"
+            android:backgroundTint="#4CAF50"
+            android:text="Add"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/adminInventoryDeleteButton"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/addInventoryItemQuantity" />
+
+        <Button
+            android:id="@+id/adminInventoryDeleteButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#F44336"
+            android:text="Delete"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/adminInventorySubmitButton"
+            app:layout_constraintTop_toBottomOf="@+id/addInventoryItemQuantity"  />
 
         <Button
             android:id="@+id/adminCloseOverlayButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Back"
+            android:text="Return"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.049"
@@ -85,22 +98,23 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/adminInventoryRegularLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone">
+        android:layout_height="match_parent">
 
         <Button
             android:id="@+id/adminLogoutButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:backgroundTint="#F44336"
             android:text="Logout"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/deletePetButton"
+            android:id="@+id/add_inventory_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Add inventory item"
+            android:backgroundTint="#673AB7"
+            android:text="Edit Inventory"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -117,15 +131,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Invenetory page!"
+                android:text="Inventory"
                 android:textColor="@color/black"
                 android:textSize="40sp" />
 
-            <TextView
-                android:id="@+id/data_text"
+            <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="25sp" />
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/data_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="25sp"
+                    android:padding="16dp" />
+
+            </ScrollView>
 
         </LinearLayout>
 

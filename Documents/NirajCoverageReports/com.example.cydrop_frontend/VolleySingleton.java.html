@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>VolleySingleton.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=0;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">debug</a> &gt; <a href="index.source.html" class="el_package">com.example.cydrop_frontend</a> &gt; <span class="el_source">VolleySingleton.java</span></div><h1>VolleySingleton.java</h1><pre class="source lang-java linenums">package com.example.cydrop_frontend;
+
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.util.LruCache;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.ImageLoader;
+import com.android.volley.toolbox.Volley;
+
+/**
+ * VolleySingleton class to manage the Volley request queue and image caching.
+ * Provides a centralized way to make HTTP requests and load images within the application.
+ */
+public class VolleySingleton {
+
+    /**
+     * Singleton instance of VolleySingleton.
+     */
+    private static VolleySingleton instance;
+
+    /**
+     * RequestQueue for managing network requests.
+     */
+    private RequestQueue requestQueue;
+
+    /**
+     * ImageLoader for managing image caching.
+     */
+    private ImageLoader imageLoader;
+
+    /**
+     * Application context.
+     */
+    private static Context ctx;
+
+    /**
+     * URL of the backend server.
+     */
+<span class="fc" id="L41">    public static String backendURL = &quot;http://coms-3090-038.class.las.iastate.edu:8080&quot;;</span>
+
+    /**
+     * Logged-in user's email.
+     */
+<span class="fc" id="L46">    public static String email = &quot;&quot;;</span>
+
+    /**
+     * User ID of the logged-in user.
+     */
+<span class="fc" id="L51">    public static String userId = &quot;-1&quot;;</span>
+
+    /**
+     * User type of the logged-in user.
+     */
+<span class="fc" id="L56">    public static String userType = &quot;none&quot;;</span>
+
+    // TODO: I NEED TO REMOVE THIS AND REPLACE ALL INSTANCES WITH VETIDS
+    /**
+     * Temporary vet ID to be removed and replaced with actual vet IDs as necessary.
+     */
+    public static final String vetIdTEMP = &quot;1&quot;;
+
+    /**
+     * Private constructor to initialize the request queue and image loader.
+     *
+     * @param context The application context.
+     */
+<span class="fc" id="L69">    private VolleySingleton(Context context) {</span>
+<span class="fc" id="L70">        ctx = context;</span>
+<span class="fc" id="L71">        requestQueue = getRequestQueue();</span>
+
+<span class="fc" id="L73">        imageLoader = new ImageLoader(requestQueue,</span>
+<span class="fc" id="L74">                new ImageLoader.ImageCache() {</span>
+<span class="fc" id="L75">                    private final LruCache&lt;String, Bitmap&gt;</span>
+                            cache = new LruCache&lt;String, Bitmap&gt;(20);
+
+                    @Override
+                    public Bitmap getBitmap(String url) {
+<span class="nc" id="L80">                        return cache.get(url);</span>
+                    }
+
+                    @Override
+                    public void putBitmap(String url, Bitmap bitmap) {
+<span class="nc" id="L85">                        cache.put(url, bitmap);</span>
+<span class="nc" id="L86">                    }</span>
+                });
+<span class="fc" id="L88">    }</span>
+
+    /**
+     * Provides a synchronized instance of VolleySingleton to ensure a single instance is used.
+     *
+     * @param context The application context.
+     * @return The single instance of VolleySingleton.
+     */
+    public static synchronized VolleySingleton getInstance(Context context) {
+<span class="fc bfc" id="L97" title="All 2 branches covered.">        if (instance == null) {</span>
+<span class="fc" id="L98">            instance = new VolleySingleton(context);</span>
+        }
+<span class="fc" id="L100">        return instance;</span>
+    }
+
+    /**
+     * Provides the RequestQueue, creating it if it does not already exist.
+     *
+     * @return The RequestQueue for making network requests.
+     */
+    public RequestQueue getRequestQueue() {
+<span class="fc bfc" id="L109" title="All 2 branches covered.">        if (requestQueue == null) {</span>
+            // getApplicationContext() is key, it keeps you from leaking the
+            // Activity or BroadcastReceiver if someone passes one in.
+<span class="fc" id="L112">            requestQueue = Volley.newRequestQueue(ctx.getApplicationContext());</span>
+        }
+<span class="fc" id="L114">        return requestQueue;</span>
+    }
+
+    /**
+     * Adds a request to the Volley request queue.
+     *
+     * @param req The request to be added.
+     * @param &lt;T&gt; The type of the request response.
+     */
+    public &lt;T&gt; void addToRequestQueue(Request&lt;T&gt; req) {
+<span class="fc" id="L124">        getRequestQueue().add(req);</span>
+<span class="fc" id="L125">    }</span>
+
+    /**
+     * Provides the ImageLoader for loading and caching images.
+     *
+     * @return The ImageLoader used for image caching.
+     */
+    public ImageLoader getImageLoader() {
+<span class="nc" id="L133">        return imageLoader;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span>Generated by the Android Gradle plugin 8.7.2</div></body></html>
