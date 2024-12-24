@@ -5,6 +5,13 @@ The Pet Reminder App is a comprehensive tool designed to help pet owners manage 
 
 ---
 
+## See it in Action!! 🚀
+
+Explore the live application:  
+[Pet Reminder App](https://www.youtube.com/watch?v=sA_ToiZy51w&ab_channel=NirajAmin)
+
+---
+
 ## Features
 - **Medication Tracking**: Easily log and track your pet's medications and ensure they’re taken on time.
 - **Reminders**: Set up notifications for upcoming treatments, vaccinations, or check-ups.
@@ -83,12 +90,5 @@ The project was a collaborative effort between four developers:
 
 ## License
 This project is open for reference purposes. Feel free to copy ideas and structures, but do not modify or directly edit the code in this repository. Fork the repository to make your changes privately or in your own copy.
-
----
-
-## See it in Action!! 🚀
-
-Explore the live application:  
-[Pet Reminder App](https://www.youtube.com/watch?v=sA_ToiZy51w&ab_channel=NirajAmin)
 
 
